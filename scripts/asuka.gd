@@ -15,7 +15,6 @@ func _ready() -> void:
 
 func _on_area_entered(_area: Area2D) -> void:
 	timer.start()
-	#player.attract_to_asuka()
 	is_zooming_out = false
 	asuka_sprite.z_index = 2
 	game_manager.brain_energy -= game_manager.multitasking_cost
