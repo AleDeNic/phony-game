@@ -16,12 +16,12 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	# Get the current mouse position
-	var current_mouse_pos = get_viewport().get_mouse_position()
+	var current_mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	
 	# Calculate the mouse movement relative to the center
-	var viewport_size = get_viewport().get_visible_rect().size
-	var center_position = viewport_size / 2
-	var mouse_movement = current_mouse_pos - center_position
+	var viewport_size: Vector2   = get_viewport().get_visible_rect().size
+	var center_position: Vector2 = viewport_size / 2
+	var mouse_movement: Vector2  = current_mouse_pos - center_position
 	
 	reset_to_phone()
 	
@@ -29,7 +29,7 @@ func _process(_delta: float) -> void:
 	reset_mouse_to_center()
 	
 	# Calculate the new motion based on mouse movement
-	var motion = mouse_movement * mouse_sensitivity
+	var motion: Vector2 = mouse_movement * mouse_sensitivity
 	velocity = motion
 	move_and_slide()
 	motion = velocity
@@ -37,8 +37,8 @@ func _process(_delta: float) -> void:
 # Function to reset the mouse cursor to the center of the screen
 func reset_mouse_to_center():
 	# Get the center of the viewport
-	var viewport_size = get_viewport().get_visible_rect().size
-	var center_position = viewport_size / 2
+	var viewport_size: Vector2   = get_viewport().get_visible_rect().size
+	var center_position: Vector2 = viewport_size / 2
 	
 	# Set the mouse position to the center of the screen
 	Input.warp_mouse(center_position)
@@ -47,6 +47,7 @@ func reset_to_phone() -> void:
 	if game_manager.attention_span < 0:
 		# TO CHANGE TO MOVE_AND_COLLIDE!!!
 		position = phone.position
+		#move_and_collide(velocity)
 		return  # Early return to avoid further processing
 	
 #func attract_to_phone():

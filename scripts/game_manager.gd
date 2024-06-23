@@ -3,7 +3,7 @@ extends Node
 @onready var brain_energy_bar: ProgressBar = $"../HUD/BrainEnergyBar"
 @onready var attention_span_bar: ProgressBar = $"../HUD/AttentionSpanBar"
 
-var attention_span: float
+@export var attention_span: float
 var brain_energy
 
 @export_group("Tasks values")
@@ -13,8 +13,8 @@ var brain_energy
 
 @export_group("General values")
 @export var max_attention_span: float = 20.0
-@export var max_brain_energy = 20
-@export var multitasking_cost = 1
+@export var max_brain_energy: int = 20
+@export var multitasking_cost: int = 1
 
 func _ready() -> void:
 	attention_span = max_attention_span
