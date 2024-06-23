@@ -1,63 +1,39 @@
 extends Camera2D
 
-@export_group("Camera values")
-@export var zoom_in_speed = 0.1
-@export var zoom_out_speed = 0.15
-@export var reset_zoom_speed = 2.0
-@export var zoom_phone = Vector2(0.5, 0.5)
-@export var zoom_asuka = Vector2(1.6, 1.6)
-@export var zoom_window = Vector2(2.5, 2.5)
-@export var zoom_default = Vector2(1, 1)
+@export_group("Speed values")
+@export var asuka_zoom_speed: float = 0.1
+@export var window_zoom_speed: float = 0.1
+@export var phone_zoom_speed: float = 0.15
+@export var reset_zoom_speed: float = 2.0
+@export_group("Zoom values")
+@export var phone_zoom_value = Vector2(0.5, 0.5)
+@export var asuka_zoom_value = Vector2(1.6, 1.6)
+@export var window_zoom_value = Vector2(2.5, 2.5)
+@export var default_zoom_value = Vector2(1, 1)
 
-# Internal state
 var target_zoom: Vector2
-var is_zooming = false
-var current_zoom_speed = zoom_in_speed  # Variable to control the zoom speed dynamically
+var is_zooming: bool = false
+var current_zoom_speed = asuka_zoom_speed  # Variable to control the zoom speed dynamically
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	zoom = zoom_default
-	target_zoom = zoom_default
+	zoom = default_zoom_value
+	target_zoom = default_zoom_value
 
 func _process(delta: float) -> void:
 	if is_zooming:
 		# Smoothly interpolate the zoom level towards the target zoom using exponential interpolation
 		zoom = zoom.lerp(target_zoom, current_zoom_speed * delta)
-		# Clamp the zoom to avoid over-zooming
-		zoom = clamp(zoom, zoom_phone, zoom_window)
+		# Clamp the zoom to avoid over-zooming (min and max zoom values)
+		zoom = clamp(zoom, phone_zoom_value, window_zoom_value)
 		# Stop zooming if the target zoom is reached within a small tolerance
 		if abs(zoom.x - target_zoom.x) < 0.001 and abs(zoom.y - target_zoom.y) < 0.001:
 			zoom = target_zoom  # Ensure exact final zoom
 			is_zooming = false
 
-func start_zoom_asuka():
-	if target_zoom != zoom_asuka:  # Avoid starting a new zoom if already at target
-		target_zoom = zoom_asuka
-		current_zoom_speed = zoom_in_speed  # Use zoom in speed
+func start_zoom(zoom_value, zoom_speed) -> void:
+	if target_zoom != zoom_value:  # Avoid resetting if already at default
+		target_zoom = zoom_value
+		current_zoom_speed = zoom_speed
 		is_zooming = true
-		print("zoom asuka")
-
-func start_zoom_window():
-	if target_zoom != zoom_window:  # Avoid starting a new zoom if already at target
-		target_zoom = zoom_window
-		current_zoom_speed = zoom_in_speed  # Use zoom in speed
-		is_zooming = true
-		print("zoom window")
-
-func start_zoom_phone():
-	if target_zoom != zoom_phone:  # Avoid starting a new zoom if already at target
-		target_zoom = zoom_phone
-		current_zoom_speed = zoom_out_speed  # Use zoom out speed
-		is_zooming = true
-		print("zoom phone")
-
-func reset_zoom():
-	if target_zoom != zoom_default:  # Avoid resetting if already at default
-		target_zoom = zoom_default
-		current_zoom_speed = reset_zoom_speed  # Set a faster zoom speed for reset
-		is_zooming = true
-		print("zoom reset")
-
-# Function to check if the zoom is in progress
-func is_zooming_in_progress() -> bool:
-	return is_zooming
+		print("zoom complete")

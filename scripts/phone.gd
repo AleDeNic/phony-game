@@ -24,7 +24,7 @@ func _on_area_entered(_area: Area2D) -> void:
 	blur_animation.play("blur")
 	distortion_animation.speed_scale = 0.5
 	distortion_animation.play("distortion")
-	camera.start_zoom_phone()
+	camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
 
 func _on_area_exited(_area: Area2D) -> void:
 	timer.stop()
@@ -34,7 +34,7 @@ func _on_area_exited(_area: Area2D) -> void:
 	blur_animation.speed_scale = 3
 	blur_animation.play_backwards("blur")
 	distortion_animation.play("RESET")
-	camera.reset_zoom()
+	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 
 func _on_phone_timer_timeout() -> void:
 	if game_manager.attention_span < game_manager.max_attention_span:

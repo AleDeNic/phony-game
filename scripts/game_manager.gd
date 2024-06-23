@@ -2,6 +2,8 @@ extends Node
 
 @onready var brain_energy_bar: ProgressBar = $"../HUD/BrainEnergyBar"
 @onready var attention_span_bar: ProgressBar = $"../HUD/AttentionSpanBar"
+@onready var player: CharacterBody2D = %Player
+
 
 @export var attention_span: float
 var brain_energy

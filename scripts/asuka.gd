@@ -21,14 +21,14 @@ func _on_area_entered(_area: Area2D) -> void:
 	game_manager.brain_energy -= game_manager.multitasking_cost
 	asuka_animation.speed_scale = 0.2
 	asuka_animation.play("zoom")
-	camera.start_zoom_asuka()
+	camera.start_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
 
 func _on_area_exited(_area: Area2D) -> void:
 	timer.stop()
 	is_zooming_out = true
 	asuka_animation.speed_scale = 1
 	asuka_animation.play_backwards("zoom")
-	camera.reset_zoom()
+	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 
 func _on_asuka_timer_timeout() -> void:
 	if game_manager.attention_span > 0.0:

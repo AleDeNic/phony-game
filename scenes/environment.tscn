@@ -127,7 +127,7 @@ texture = ExtResource("3_7spc2")
 libraries = {
 "": SubResource("AnimationLibrary_02emw")
 }
-blend_times = [&"distortion", &"RESET", 1.0, &"distortion", &"distortion", 1.0]
+blend_times = [&"distortion", &"distortion", 1.0, &"distortion", &"RESET", 1.0]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_ignore_camera_zoom = true

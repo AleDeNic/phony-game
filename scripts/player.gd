@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var phone: Area2D = $"../Phone"
 @onready var asuka: Area2D = $"../Asuka"
 @onready var window: Area2D = $"../Window"
+@export var move_speed: float = 800.0  # Speed of the player when moving towards a target
 
 @export var mouse_sensitivity: float = 25  # Adjust this to change how much camera moves with mouse
 var last_mouse_pos: Vector2
@@ -32,7 +33,6 @@ func _process(_delta: float) -> void:
 	var motion: Vector2 = mouse_movement * mouse_sensitivity
 	velocity = motion
 	move_and_slide()
-	motion = velocity
 
 # Function to reset the mouse cursor to the center of the screen
 func reset_mouse_to_center():
@@ -49,12 +49,3 @@ func reset_to_phone() -> void:
 		position = phone.position
 		#move_and_collide(velocity)
 		return  # Early return to avoid further processing
-	
-#func attract_to_phone():
-	#position = phone.position
-
-#func attract_to_asuka():
-	#position = asuka.position
-
-#func attract_to_window():
-	#position = window.position
