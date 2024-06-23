@@ -35,5 +35,5 @@ func _on_asuka_timer_timeout() -> void:
 		game_manager.attention_span -= game_manager.asuka_decrease
 
 func _on_asuka_animation_animation_finished(_anim_name: StringName) -> void:
-	if is_zooming_out == true:
+	if is_zooming_out:
 		asuka_sprite.z_index = 0

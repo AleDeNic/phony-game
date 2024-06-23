@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="RoxAle_game"
+config/name="phony-game"
 run/main_scene="res://scenes/world.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
@@ -24,6 +24,12 @@ AudioManager="*res://scripts/audio_manager.gd"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
+
+[file_customization]
+
+folder_colors={
+"res://temp/": "red"
+}
 
 [layer_names]
 

@@ -43,7 +43,7 @@ func _on_phone_timer_timeout() -> void:
 		print("ATTENTION SPAN RESTORED")
 
 func _on_phone_animation_animation_finished(_anim_name: StringName) -> void:
-	if is_zooming_out == true:
+	if is_zooming_out:
 		phone_sprite.z_index = 0
 
 

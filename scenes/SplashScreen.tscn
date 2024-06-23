@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ci52fixnyc6pt"]
+
+[ext_resource type="AudioStream" uid="uid://bk44ea7iyyh0d" path="res://assets/sfx/init_sense_splash.mp3" id="1_4jqum"]
+
+[node name="SplashScreen" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="SplashSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_4jqum")
