@@ -1,8 +1,8 @@
 extends Node
 
-@onready var player: CharacterBody2D = get_node("/root/World/Player")
-@onready var asuka: Area2D = get_node("/root/World/Asuka")
-@onready var window: Area2D = get_node("/root/World/Window")
+@onready var player: CharacterBody2D = $"../Player"
+@onready var asuka: Area2D = $"../Asuka"
+@onready var window: Area2D = $"../Windows"
 
 var asuka_bus_index: int
 var window_bus_index: int
@@ -21,11 +21,19 @@ func _ready() -> void:
 	asuka_bus_index = AudioServer.get_bus_index("Asuka")
 	window_bus_index = AudioServer.get_bus_index("Window")
 
-func _process(_delta: float) -> void:
-	AudioServer.set_bus_volume_db(asuka_bus_index, calculate_volume(asuka, asuka_max_volume, asuka_min_volume, asuka_area))
-	AudioServer.set_bus_volume_db(window_bus_index, calculate_volume(window, window_max_volume, window_min_volume, window_area))
+	if player == null:
+		print("Player node not found!")
+	if asuka == null:
+		print("Asuka node not found!")
+	if window == null:
+		print("Window node not found!")
 
-func calculate_volume(object: Area2D, max_volume: float, min_volume: float, area) -> float:
+func _process(_delta: float) -> void:
+	if player != null and asuka != null and window != null:
+		AudioServer.set_bus_volume_db(asuka_bus_index, calculate_volume(asuka, asuka_max_volume, asuka_min_volume, asuka_area))
+		AudioServer.set_bus_volume_db(window_bus_index, calculate_volume(window, window_max_volume, window_min_volume, window_area))
+
+func calculate_volume(object: Area2D, max_volume: float, min_volume: float, area: float) -> float:
 	var max_distance: float = 1200.0  # Adjust this value based on your game
 	var transition_distance: float = area  # Adjust this value based on when you want the volume to start reaching 0 dB
 
