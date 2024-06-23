@@ -4,8 +4,8 @@ extends CharacterBody2D
 @onready var phone: Area2D = $"../Phone"
 @onready var asuka: Area2D = $"../Asuka"
 @onready var window: Area2D = $"../Window"
-@export var move_speed: float = 800.0  # Speed of the player when moving towards a target
 
+@export var move_speed: float = 800.0  # Speed of the player when moving towards a target
 @export var mouse_sensitivity: float = 25  # Adjust this to change how much camera moves with mouse
 var last_mouse_pos: Vector2
 

@@ -17,10 +17,4 @@ func _on_area_entered(_area: Area2D) -> void:
 
 func _on_area_exited(_area: Area2D) -> void:
 	timer.stop()
-	print("Attention span: ", game_manager.attention_span)
-	print("Brain energy: ", game_manager.brain_energy)
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-
-func _on_window_timer_timeout() -> void:
-	if game_manager.attention_span > 0.0:
-		game_manager.attention_span -= game_manager.window_decrease

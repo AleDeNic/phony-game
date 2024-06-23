@@ -4,9 +4,8 @@ extends Node
 @onready var attention_span_bar: ProgressBar = $"../HUD/AttentionSpanBar"
 @onready var player: CharacterBody2D = %Player
 
-
-@export var attention_span: float
-var brain_energy
+var attention_span: float
+var brain_energy: float
 
 @export_group("Tasks values")
 @export var phone_increase: float = 0.4
@@ -29,5 +28,21 @@ func _process(_delta: float) -> void:
 	attention_span_bar.value = attention_span
 	if brain_energy < 0:
 		print("BRO IT'S GAME OVER")
-	if attention_span < 0:
+
+func _on_phone_timer_timeout() -> void:
+	if attention_span < max_attention_span:
+		attention_span += phone_increase
+	else:
+		print("ATTENTION SPAN RESTORED")
+
+func _on_asuka_timer_timeout() -> void:
+	if attention_span > 0.0:
+		attention_span -= asuka_decrease
+	else:
+		print("LOOK AT YOUR PHONE")
+
+func _on_window_timer_timeout() -> void:
+	if attention_span > 0.0:
+		attention_span -= window_decrease
+	else:
 		print("LOOK AT YOUR PHONE")

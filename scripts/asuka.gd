@@ -10,7 +10,6 @@ extends Area2D
 
 var is_zooming_out: bool
 
-@export_category("Scale values")
 @export var scale_up_speed: float = 0.2
 @export var scale_down_speed: float = 1.0
 
@@ -30,10 +29,6 @@ func _on_area_exited(_area: Area2D) -> void:
 	is_zooming_out = true
 	asuka_scale(scale_down_speed)
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-
-func _on_asuka_timer_timeout() -> void:
-	if game_manager.attention_span > 0.0:
-		game_manager.attention_span -= game_manager.asuka_decrease
 
 func _on_asuka_animation_animation_finished(_anim_name: StringName) -> void:
 	if is_zooming_out:

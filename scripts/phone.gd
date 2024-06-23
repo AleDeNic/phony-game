@@ -10,7 +10,6 @@ extends Area2D
 
 var is_zooming_out: bool
 
-@export_category("Scale values")
 @export var scale_up_speed: float = 0.4
 @export var scale_down_speed: float = 4.0
 
@@ -38,16 +37,10 @@ func _on_area_exited(_area: Area2D) -> void:
 	distortion_animation.play("RESET")
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 
-func _on_phone_timer_timeout() -> void:
-	if game_manager.attention_span < game_manager.max_attention_span:
-		game_manager.attention_span += game_manager.phone_increase
-	else:
-		print("ATTENTION SPAN RESTORED")
-
 func _on_phone_animation_animation_finished(_anim_name: StringName) -> void:
 	if is_zooming_out:
 		phone_sprite.z_index = 0
-		
+
 func phone_scale(scale_speed) -> void:
 	phone_animation.speed_scale = scale_speed
 	if is_zooming_out:
