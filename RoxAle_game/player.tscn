@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://o0205cjoosgq"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_hwf0t"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="2_owyey"]
+[ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="3_2g1n5"]
+[ext_resource type="Texture2D" uid="uid://gmpj3incudd2" path="res://assets/images/white.jpg" id="4_v3bi1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xpx4y"]
+radius = 800.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h1w0k"]
+radius = 300.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_08t4l"]
+shader = ExtResource("3_2g1n5")
+shader_parameter/alpha = 1.0
+shader_parameter/inner_radius = 0.0
+shader_parameter/outer_radius = 1.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_hwf0t")
+
+[node name="MovementCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xpx4y")
+
+[node name="Trigger" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="TriggerCollision" type="CollisionShape2D" parent="Trigger"]
+shape = SubResource("CircleShape2D_h1w0k")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+script = ExtResource("2_owyey")
+
+[node name="Vignette" type="Sprite2D" parent="."]
+visible = false
+z_index = 3
+material = SubResource("ShaderMaterial_08t4l")
+scale = Vector2(1.518, 1.10505)
+texture = ExtResource("4_v3bi1")

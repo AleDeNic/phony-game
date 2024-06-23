@@ -1,0 +1,166 @@
+[gd_scene load_steps=18 format=3 uid="uid://cw0nk6gkudho2"]
+
+[ext_resource type="Texture2D" uid="uid://brfshqyxfujus" path="res://assets/images/hdri_env2.jpg" id="1_cbrwh"]
+[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="2_64nm5"]
+[ext_resource type="Texture2D" uid="uid://boeb1bs4un6cw" path="res://assets/images/train-min.png" id="2_km4sw"]
+[ext_resource type="Texture2D" uid="uid://gmpj3incudd2" path="res://assets/images/white.jpg" id="3_7spc2"]
+[ext_resource type="Shader" path="res://shaders/wave.gdshader" id="4_g6mkh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2r01j"]
+shader = ExtResource("2_64nm5")
+shader_parameter/lod = 0.0
+
+[sub_resource type="Animation" id="Animation_hdg3u"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_er5i6"]
+resource_name = "blur"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.5, 0, 3, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iy63a"]
+_data = {
+"RESET": SubResource("Animation_hdg3u"),
+"blur": SubResource("Animation_er5i6")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dpp2m"]
+shader = ExtResource("4_g6mkh")
+shader_parameter/strength = 0.0
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.0
+shader_parameter/aberration = 0.425
+shader_parameter/width = 0.0917
+shader_parameter/feather = 0.3
+
+[sub_resource type="Animation" id="Animation_8up8j"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_24qli"]
+resource_name = "distortion"
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_02emw"]
+_data = {
+"RESET": SubResource("Animation_8up8j"),
+"distortion": SubResource("Animation_24qli")
+}
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8wvv8"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_neuer"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_674om"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_boryj"]
+normal = Vector2(1, 0)
+
+[node name="Environment" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-73, 35)
+scale = Vector2(3.06852, 3.06852)
+texture = ExtResource("2_km4sw")
+
+[node name="Blur" type="Sprite2D" parent="Background"]
+material = SubResource("ShaderMaterial_2r01j")
+position = Vector2(0.651779, 1.90735e-06)
+texture = ExtResource("2_km4sw")
+
+[node name="BlurAnimation" type="AnimationPlayer" parent="Background/Blur"]
+libraries = {
+"": SubResource("AnimationLibrary_iy63a")
+}
+
+[node name="Distortion" type="Sprite2D" parent="Background"]
+visible = false
+material = SubResource("ShaderMaterial_dpp2m")
+position = Vector2(-298.493, 47.4953)
+scale = Vector2(1.15776, 0.867647)
+texture = ExtResource("3_7spc2")
+
+[node name="DistortionAnimation" type="AnimationPlayer" parent="Background/Distortion"]
+libraries = {
+"": SubResource("AnimationLibrary_02emw")
+}
+blend_times = [&"distortion", &"distortion", 1.0, &"distortion", &"RESET", 1.0]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.3)
+
+[node name="OutsideSprite" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+z_index = -1
+position = Vector2(749, 383)
+scale = Vector2(0.946557, 0.946557)
+texture = ExtResource("1_cbrwh")
+
+[node name="WorldBoundaries" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 8
+
+[node name="TopBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
+visibility_layer = 2
+position = Vector2(0, -1600)
+shape = SubResource("WorldBoundaryShape2D_8wvv8")
+
+[node name="BottomBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
+visibility_layer = 2
+position = Vector2(0, 2000)
+shape = SubResource("WorldBoundaryShape2D_neuer")
+
+[node name="RightBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
+visibility_layer = 2
+position = Vector2(2000, 0)
+shape = SubResource("WorldBoundaryShape2D_674om")
+
+[node name="LeftBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
+visibility_layer = 2
+position = Vector2(-2000, 0)
+shape = SubResource("WorldBoundaryShape2D_boryj")

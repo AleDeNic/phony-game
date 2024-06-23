@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cag4fc4uu0krp"]
+
+[ext_resource type="Script" path="res://scripts/audio_manager.gd" id="1_2livu"]
+[ext_resource type="AudioStream" uid="uid://ci0igyrcmtxbd" path="res://assets/music/soundtrack.mp3" id="2_jikh0"]
+[ext_resource type="AudioStream" uid="uid://bvk87o4ki14rk" path="res://assets/music/asuka.mp3" id="3_i7yuj"]
+[ext_resource type="AudioStream" uid="uid://bc6nj4ltkvjqr" path="res://assets/music/window.mp3" id="4_5yqum"]
+
+[node name="AudioManager" type="Node2D"]
+script = ExtResource("1_2livu")
+
+[node name="Dialogues" type="Node2D" parent="."]
+
+[node name="1_01" type="AudioStreamPlayer2D" parent="Dialogues"]
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="Music" type="Node2D" parent="."]
+
+[node name="Soundtrack" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("2_jikh0")
+autoplay = true
+bus = &"Soundtrack"
+
+[node name="Asuka" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("3_i7yuj")
+autoplay = true
+bus = &"Asuka"
+
+[node name="Window" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("4_5yqum")
+autoplay = true
+bus = &"Window"

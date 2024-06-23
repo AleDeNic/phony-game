@@ -1,0 +1,377 @@
+[gd_scene load_steps=27 format=3 uid="uid://3ngo2fu72k0i"]
+
+[ext_resource type="Texture2D" uid="uid://duid0wf67wdir" path="res://assets/images/hdri_landscape.jpg" id="1_87p66"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_shqgp"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="2_58us1"]
+[ext_resource type="Texture2D" uid="uid://5w7r1g5fwit4" path="res://assets/images/asuka.png" id="2_wtfl7"]
+[ext_resource type="Texture2D" uid="uid://cd73raw5kh70g" path="res://assets/images/phone.png" id="3_sup45"]
+[ext_resource type="Script" path="res://scripts/asuka.gd" id="4_1kcn2"]
+[ext_resource type="Texture2D" uid="uid://cie5cet3ggxf6" path="res://assets/images/cat.png" id="4_y1kmu"]
+[ext_resource type="Script" path="res://scripts/cat.gd" id="5_p0u8t"]
+[ext_resource type="Script" path="res://scripts/phone.gd" id="7_lhypb"]
+[ext_resource type="Texture2D" uid="uid://gmpj3incudd2" path="res://assets/images/white.jpg" id="10_qm14w"]
+[ext_resource type="AudioStream" uid="uid://bhhhm45iu5v2b" path="res://assets/music/Steins;Gate_OST_Explanation.mp3" id="11_b5m6c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4wa7i"]
+radius = 539.534
+
+[sub_resource type="Animation" id="Animation_vl6gu"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1.84514, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1.84514, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_lsmn4"]
+resource_name = "zoom"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1.84514, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1.84514, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d1jnk"]
+_data = {
+"RESET": SubResource("Animation_vl6gu"),
+"zoom": SubResource("Animation_lsmn4")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_klsqp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yuc3a"]
+radius = 6.28753
+
+[sub_resource type="Animation" id="Animation_u6jgi"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_6k6ls"]
+resource_name = "noise"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ye484"]
+_data = {
+"RESET": SubResource("Animation_u6jgi"),
+"noise": SubResource("Animation_6k6ls")
+}
+
+[sub_resource type="Animation" id="Animation_pop2h"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.880952, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.880952, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_8yrve"]
+resource_name = "grow"
+length = 5.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.880952, -0.25, 0, 1.7, -0.00108737, 2.00382, -1.8, 0.00011611, 0.25, 0),
+"times": PackedFloat32Array(0, 5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.880952, -0.25, 0, 1.7, -0.00108737, 2.00382, -1.8, 0.00011611, 0.25, 0),
+"times": PackedFloat32Array(0, 5)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kp4yv"]
+_data = {
+"RESET": SubResource("Animation_pop2h"),
+"grow": SubResource("Animation_8yrve")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h1w0k"]
+radius = 7.38011
+
+[sub_resource type="Animation" id="Animation_gki57"]
+resource_name = "music"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7d6eu"]
+_data = {
+"music": SubResource("Animation_gki57")
+}
+
+[node name="world" type="Node2D"]
+
+[node name="GameManager" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_shqgp")
+
+[node name="Environment" type="Sprite2D" parent="."]
+scale = Vector2(5.02708, 5.02708)
+texture = ExtResource("1_87p66")
+
+[node name="Asuka" type="Area2D" parent="."]
+script = ExtResource("4_1kcn2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Asuka"]
+position = Vector2(-1643, -743)
+shape = SubResource("CircleShape2D_4wa7i")
+debug_color = Color(0.894118, 0, 0.784314, 0.658824)
+
+[node name="AsukaSprite" type="Sprite2D" parent="Asuka"]
+position = Vector2(-1602, -22)
+scale = Vector2(1.84514, 1.84514)
+texture = ExtResource("2_wtfl7")
+
+[node name="AsukaAnimation" type="AnimationPlayer" parent="Asuka/AsukaSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_d1jnk")
+}
+
+[node name="AsukaTimer" type="Timer" parent="Asuka"]
+process_mode = 3
+wait_time = 0.1
+
+[node name="Cat" type="Area2D" parent="."]
+script = ExtResource("5_p0u8t")
+
+[node name="CatCollision" type="CollisionShape2D" parent="Cat"]
+position = Vector2(1568, -308)
+scale = Vector2(47.685, 47.685)
+shape = SubResource("CircleShape2D_klsqp")
+
+[node name="CatSprite" type="Sprite2D" parent="Cat"]
+position = Vector2(1592, -297)
+texture = ExtResource("4_y1kmu")
+
+[node name="CatTimer" type="Timer" parent="Cat"]
+wait_time = 0.1
+
+[node name="Phone" type="Area2D" parent="."]
+position = Vector2(0, 217)
+script = ExtResource("7_lhypb")
+
+[node name="PhoneCollision" type="CollisionShape2D" parent="Phone"]
+position = Vector2(34, 624)
+scale = Vector2(61.09, 61.09)
+shape = SubResource("CircleShape2D_yuc3a")
+
+[node name="Noise" type="Sprite2D" parent="Phone"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-6, -225.5)
+scale = Vector2(7.6964, 5.02121)
+texture = ExtResource("10_qm14w")
+
+[node name="NoiseAnimation" type="AnimationPlayer" parent="Phone/Noise"]
+libraries = {
+"": SubResource("AnimationLibrary_ye484")
+}
+blend_times = [&"noise", &"noise", 0.5]
+
+[node name="PhoneSprite" type="Sprite2D" parent="Phone"]
+position = Vector2(110, 644)
+scale = Vector2(0.880952, 0.880952)
+texture = ExtResource("3_sup45")
+
+[node name="PhoneAnimation" type="AnimationPlayer" parent="Phone/PhoneSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_kp4yv")
+}
+
+[node name="PhoneTimer" type="Timer" parent="Phone"]
+wait_time = 0.1
+
+[node name="Camera" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_58us1")
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="Camera"]
+scale = Vector2(50, 50)
+shape = SubResource("CircleShape2D_h1w0k")
+
+[node name="Camera2D" type="Camera2D" parent="Camera"]
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AttentionSpanBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 43.0
+offset_top = 65.0
+offset_right = 555.0
+offset_bottom = 142.0
+step = 0.1
+show_percentage = false
+
+[node name="BrainEnergyBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 42.0
+offset_top = 25.0
+offset_right = 557.0
+offset_bottom = 55.0
+step = 1.0
+show_percentage = false
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_b5m6c")
+autoplay = true
+bus = &"Music"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Music"]
+libraries = {
+"": SubResource("AnimationLibrary_7d6eu")
+}
+
+[connection signal="body_entered" from="Asuka" to="Asuka" method="_on_body_entered"]
+[connection signal="body_exited" from="Asuka" to="Asuka" method="_on_body_exited"]
+[connection signal="timeout" from="Asuka/AsukaTimer" to="Asuka" method="_on_asuka_timer_timeout"]
+[connection signal="body_entered" from="Cat" to="Cat" method="_on_body_entered"]
+[connection signal="body_exited" from="Cat" to="Cat" method="_on_body_exited"]
+[connection signal="timeout" from="Cat/CatTimer" to="Cat" method="_on_cat_timer_timeout"]
+[connection signal="body_entered" from="Phone" to="Phone" method="_on_body_entered"]
+[connection signal="body_exited" from="Phone" to="Phone" method="_on_body_exited"]
+[connection signal="timeout" from="Phone/PhoneTimer" to="Phone" method="_on_phone_timer_timeout"]
