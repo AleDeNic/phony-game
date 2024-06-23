@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scripts/asuka.gd" id="4_1kcn2"]
 [ext_resource type="Script" path="res://scripts/window.gd" id="5_p0u8t"]
 [ext_resource type="Script" path="res://scripts/phone.gd" id="7_lhypb"]
-[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="9_o22lg"]
+[ext_resource type="PackedScene" uid="uid://o0205cjoosgq" path="res://scenes/player.tscn" id="9_o22lg"]
 [ext_resource type="Script" path="res://scripts/dialogue_manager.gd" id="11_usk0d"]
 [ext_resource type="PackedScene" uid="uid://cag4fc4uu0krp" path="res://scenes/audio_manager.tscn" id="12_3unc5"]
 [ext_resource type="PackedScene" uid="uid://b0afrem73ga7x" path="res://scenes/hud.tscn" id="12_cfln2"]

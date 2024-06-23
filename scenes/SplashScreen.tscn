@@ -1,10 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://ci52fixnyc6pt"]
+[gd_scene load_steps=5 format=3 uid="uid://ci52fixnyc6pt"]
 
+[ext_resource type="Script" path="res://scripts/splash_screen.gd" id="1_3wb5c"]
 [ext_resource type="AudioStream" uid="uid://bk44ea7iyyh0d" path="res://assets/sfx/init_sense_splash.mp3" id="1_4jqum"]
+[ext_resource type="Texture2D" uid="uid://cmoeuyfxpj2la" path="res://assets/images/init_sense_background.png" id="3_m8rcp"]
+
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_mv8gw"]
+file = "res://assets/videos/init_sense_animation.ogg"
 
 [node name="SplashScreen" type="Node2D"]
+script = ExtResource("1_3wb5c")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(1000, 552)
+texture = ExtResource("3_m8rcp")
 
-[node name="SplashSound" type="AudioStreamPlayer" parent="."]
+[node name="InitSenseSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_4jqum")
+autoplay = true
+bus = &"SFX"
+
+[node name="InitSenseAnimation" type="VideoStreamPlayer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+stream = SubResource("VideoStreamTheora_mv8gw")
+autoplay = true
+
+[connection signal="finished" from="InitSenseSound" to="." method="_on_splash_sound_finished"]
+[connection signal="finished" from="InitSenseAnimation" to="." method="_on_video_stream_player_finished"]

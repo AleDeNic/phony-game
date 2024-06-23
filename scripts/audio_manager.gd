@@ -1,8 +1,8 @@
 extends Node
 
-@onready var player: CharacterBody2D = $"../Player"
-@onready var asuka: Area2D = $"../Asuka"
-@onready var window: Area2D = $"../Windows"
+@onready var player: CharacterBody2D = get_node("/root/World/Player")
+@onready var asuka: Area2D = get_node("/root/World/Asuka")
+@onready var window: Area2D = get_node("/root/World/Window")
 
 var asuka_bus_index: int
 var window_bus_index: int
