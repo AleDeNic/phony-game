@@ -10,6 +10,10 @@ extends Area2D
 
 var is_zooming_out: bool
 
+@export_category("Scale values")
+@export var scale_up_speed: float = 0.2
+@export var scale_down_speed: float = 1.0
+
 func _ready() -> void:
 	print("Asuka started")
 
@@ -18,15 +22,13 @@ func _on_area_entered(_area: Area2D) -> void:
 	is_zooming_out = false
 	asuka_sprite.z_index = 2
 	game_manager.brain_energy -= game_manager.multitasking_cost
-	asuka_animation.speed_scale = 0.2
-	asuka_animation.play("zoom")
+	asuka_scale(scale_up_speed)
 	camera.start_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
 
 func _on_area_exited(_area: Area2D) -> void:
 	timer.stop()
 	is_zooming_out = true
-	asuka_animation.speed_scale = 1
-	asuka_animation.play_backwards("zoom")
+	asuka_scale(scale_down_speed)
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 
 func _on_asuka_timer_timeout() -> void:
@@ -36,3 +38,10 @@ func _on_asuka_timer_timeout() -> void:
 func _on_asuka_animation_animation_finished(_anim_name: StringName) -> void:
 	if is_zooming_out:
 		asuka_sprite.z_index = 0
+
+func asuka_scale(scale_speed) -> void:
+	asuka_animation.speed_scale = scale_speed
+	if is_zooming_out:
+		asuka_animation.play_backwards("zoom")
+	else:
+		asuka_animation.play("zoom")
