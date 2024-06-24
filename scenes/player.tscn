@@ -15,20 +15,6 @@ shader = ExtResource("3_qcb8g")
 shader_parameter/lod = 0.0
 shader_parameter/effect_amount = -0.15
 
-[sub_resource type="Animation" id="Animation_olajn"]
-resource_name = "blur"
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/lod")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 3.5, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1)
-}
-
 [sub_resource type="Animation" id="Animation_fioi8"]
 length = 0.001
 tracks/0/type = "bezier"
@@ -41,6 +27,20 @@ tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_olajn"]
+resource_name = "blur"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 3.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vw4tr"]
@@ -68,7 +68,7 @@ shape = SubResource("CircleShape2D_h1w0k")
 position_smoothing_enabled = true
 script = ExtResource("2_owyey")
 
-[node name="BlurFisheyeControl" type="Control" parent="."]
+[node name="EffectsControl" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -78,7 +78,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BlurFisheyeArea" type="ColorRect" parent="BlurFisheyeControl"]
+[node name="BlurFisheyeArea" type="ColorRect" parent="EffectsControl"]
 material = SubResource("ShaderMaterial_mpknl")
 layout_mode = 1
 anchors_preset = 8
@@ -86,14 +86,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -3180.0
-offset_top = -1920.0
-offset_right = 3178.0
-offset_bottom = 1921.0
+offset_left = -2000.0
+offset_top = -1250.0
+offset_right = 2000.0
+offset_bottom = 1250.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BlurFisheyeAnimation" type="AnimationPlayer" parent="BlurFisheyeControl/BlurFisheyeArea"]
+[node name="EffectsAnimation" type="AnimationPlayer" parent="EffectsControl"]
+root_node = NodePath("../BlurFisheyeArea")
 libraries = {
 "": SubResource("AnimationLibrary_vw4tr")
 }

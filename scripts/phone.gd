@@ -4,7 +4,7 @@ extends Area2D
 @onready var timer: Timer = $PhoneTimer
 @onready var phone_sprite: Sprite2D = $PhoneSprite
 @onready var phone_animation: AnimationPlayer = $PhoneSprite/PhoneAnimation
-@onready var blur_fisheye_animation: AnimationPlayer = $"../Player/BlurFisheyeControl/BlurFisheyeArea/BlurFisheyeAnimation"
+@onready var effects_animation: AnimationPlayer = $"../Player/EffectsControl/EffectsAnimation"
 @onready var camera: Camera2D = $"../Player/Camera2D"
 
 var is_zooming_out: bool
@@ -21,16 +21,16 @@ func _on_area_entered(_area: Area2D) -> void:
 	phone_sprite.z_index = 2
 	game_manager.brain_energy -= game_manager.multitasking_cost
 	phone_scale(scale_up_speed)
-	blur_fisheye_animation.speed_scale = 0.2
-	blur_fisheye_animation.play("blur")
+	effects_animation.speed_scale = 0.2
+	effects_animation.play("blur")
 	camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
 
 func _on_area_exited(_area: Area2D) -> void:
 	is_zooming_out = true
 	timer.stop()
 	phone_scale(scale_down_speed)
-	blur_fisheye_animation.speed_scale = 3
-	blur_fisheye_animation.play_backwards("blur")
+	effects_animation.speed_scale = 3
+	effects_animation.play_backwards("blur")
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 
 func _on_phone_animation_animation_finished(_anim_name: StringName) -> void:

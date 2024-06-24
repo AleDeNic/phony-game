@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cw0nk6gkudho2"]
 
+[ext_resource type="Texture2D" uid="uid://dnl0mum6ltimb" path="res://assets/images/train_2.png" id="1_008is"]
 [ext_resource type="Texture2D" uid="uid://brfshqyxfujus" path="res://assets/images/hdri_env2.jpg" id="1_cbrwh"]
-[ext_resource type="Texture2D" uid="uid://boeb1bs4un6cw" path="res://assets/images/train-min.png" id="2_km4sw"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8wvv8"]
 normal = Vector2(0, 1)
@@ -17,8 +17,8 @@ normal = Vector2(1, 0)
 [node name="Environment" type="Node2D"]
 
 [node name="Background" type="Sprite2D" parent="."]
-scale = Vector2(3.06852, 3.06852)
-texture = ExtResource("2_km4sw")
+scale = Vector2(1.26857, 1.26857)
+texture = ExtResource("1_008is")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_ignore_camera_zoom = true
