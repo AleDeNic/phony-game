@@ -3,7 +3,6 @@ extends Area2D
 @onready var game_manager: Node2D = %GameManager
 @onready var timer: Timer = $WindowTimer
 @onready var camera: Camera2D = $"../Player/Camera2D"
-@onready var blur_animation: AnimationPlayer = $"../Environment/Background/Blur/BlurAnimation"
 @onready var player: CharacterBody2D = %Player
 @onready var audio_manager: Node2D = $"../AudioManager"
 

@@ -24,7 +24,6 @@ func handle_mouse_movement() -> void:
 	var current_mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
 	var center_position: Vector2 = viewport_size / 2
-
 	var mouse_movement: Vector2 = current_mouse_pos - center_position
 	reset_mouse_to_center()
 
