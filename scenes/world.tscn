@@ -38,7 +38,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_8yrve"]
-resource_name = "zoom"
+resource_name = "scale"
 length = 5.0
 tracks/0/type = "bezier"
 tracks/0/imported = false
@@ -66,7 +66,7 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kp4yv"]
 _data = {
 "RESET": SubResource("Animation_pop2h"),
-"zoom": SubResource("Animation_8yrve")
+"scale": SubResource("Animation_8yrve")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yuc3a"]
@@ -112,7 +112,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_lsmn4"]
-resource_name = "zoom"
+resource_name = "scale"
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -150,7 +150,7 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d1jnk"]
 _data = {
 "RESET": SubResource("Animation_vl6gu"),
-"zoom": SubResource("Animation_lsmn4")
+"scale": SubResource("Animation_lsmn4")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_klsqp"]
@@ -169,7 +169,7 @@ script = ExtResource("1_shqgp")
 [node name="Environment" parent="." instance=ExtResource("2_scdex")]
 
 [node name="Phone" type="Area2D" parent="."]
-z_index = 3
+z_index = 1
 position = Vector2(0, 1250)
 collision_mask = 4
 script = ExtResource("7_lhypb")
@@ -235,7 +235,6 @@ unique_name_in_owner = true
 
 [connection signal="area_entered" from="Phone" to="Phone" method="_on_area_entered"]
 [connection signal="area_exited" from="Phone" to="Phone" method="_on_area_exited"]
-[connection signal="animation_finished" from="Phone/PhoneSprite/PhoneAnimation" to="Phone" method="_on_phone_animation_animation_finished"]
 [connection signal="timeout" from="Phone/PhoneTimer" to="GameManager" method="_on_phone_timer_timeout"]
 [connection signal="area_entered" from="Asuka" to="Asuka" method="_on_area_entered"]
 [connection signal="area_exited" from="Asuka" to="Asuka" method="_on_area_exited"]

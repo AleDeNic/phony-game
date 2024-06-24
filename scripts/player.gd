@@ -7,7 +7,7 @@ extends CharacterBody2D
 
 @export var move_speed: float = 800.0  # Speed of the player when moving towards a target
 @export var reset_speed: float = 2500.0
-@export var mouse_sensitivity: float = 25  # Adjust this to change how much camera moves with mouse
+@export var mouse_sensitivity: float = 35  # Adjust this to change how much camera moves with mouse
 var last_mouse_pos: Vector2
 
 func _ready() -> void:
