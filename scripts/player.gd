@@ -7,7 +7,8 @@ extends CharacterBody2D
 
 @export var move_speed: float = 800.0  # Speed of the player when moving towards a target
 @export var reset_speed: float = 2500.0
-@export var mouse_sensitivity: float = 35  # Adjust this to change how much camera moves with mouse
+@export var mouse_sensitivity: float = 35.0  # Adjust this to change how much camera moves with mouse
+@export var mouse_phone_sensitivity: float = 0.7
 var last_mouse_pos: Vector2
 
 func _ready() -> void:
@@ -25,10 +26,15 @@ func handle_mouse_movement() -> void:
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
 	var center_position: Vector2 = viewport_size / 2
 	var mouse_movement: Vector2 = current_mouse_pos - center_position
-	reset_mouse_to_center()
-
-	velocity = mouse_movement * mouse_sensitivity
+	calculate_velocity(mouse_movement)
 	move_and_slide()
+
+func calculate_velocity(mouse_movement) -> void:
+	if phone.is_zooming_in == false:
+		velocity = mouse_movement * mouse_sensitivity
+		reset_mouse_to_center()
+	else:
+		velocity = mouse_movement * mouse_phone_sensitivity
 
 func reset_mouse_to_center():
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size

@@ -36,4 +36,3 @@ func start_zoom(zoom_value, zoom_speed) -> void:
 		target_zoom = zoom_value
 		current_zoom_speed = zoom_speed
 		is_zooming = true
-		print("zoom complete")

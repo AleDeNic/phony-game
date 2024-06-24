@@ -1,7 +1,7 @@
 extends Node
 
-@onready var brain_energy_bar: ProgressBar = $"../HUD/BrainEnergyBar"
-@onready var attention_span_bar: ProgressBar = $"../HUD/AttentionSpanBar"
+@onready var brain_energy_bar: ProgressBar = $"../Phone/PhoneSprite/PhoneScreen/HUD/AttentionSpanBar"
+@onready var attention_span_bar: ProgressBar = $"../Phone/PhoneSprite/PhoneScreen/HUD/BrainEnergyBar"
 @onready var player: CharacterBody2D = %Player
 
 var attention_span: float
@@ -32,8 +32,8 @@ func _process(_delta: float) -> void:
 func _on_phone_timer_timeout() -> void:
 	if attention_span < max_attention_span:
 		attention_span += phone_increase
-	else:
-		print("ATTENTION SPAN RESTORED")
+	#else:
+		#print("ATTENTION SPAN RESTORED")
 
 func _on_asuka_timer_timeout() -> void:
 	if attention_span > 0.0:
