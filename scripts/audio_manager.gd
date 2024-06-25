@@ -13,6 +13,7 @@ var sfx_bus_index: int
 var asuka_bus_index: int
 var window_bus_index: int
 var phone_bus_index: int
+var song_01_bus_index: int
 
 @export_group("Max volumes")
 @export var asuka_max_volume: float = -15
@@ -29,6 +30,7 @@ func _ready() -> void:
 	sfx_bus_index = AudioServer.get_bus_index("SFX")
 	asuka_bus_index = AudioServer.get_bus_index("Asuka")
 	window_bus_index = AudioServer.get_bus_index("Window")
+	song_01_bus_index = AudioServer.get_bus_index("Song01")
 	apply_custom_volumes()
 
 func _process(_delta: float) -> void:

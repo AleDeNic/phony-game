@@ -9,11 +9,11 @@ extends Area2D
 var is_zooming_in: bool = false
 
 @export_group("Scale speeds")
-@export var scale_up_speed: float = 0.1
-@export var scale_down_speed: float = 1.0
+@export var scale_up_speed: float = 0.2
+@export var scale_down_speed: float = 0.8
 @export_group("Blur speeds")
-@export var blur_increase_speed: float = 0.2
-@export var blur_decrease_speed: float = 3.0
+@export var blur_increase_speed: float = 0.3
+@export var blur_decrease_speed: float = 2.0
 
 func _ready() -> void:
 	print("Phone started")
