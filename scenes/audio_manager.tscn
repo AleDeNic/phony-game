@@ -16,10 +16,10 @@ script = ExtResource("1_2livu")
 
 [node name="Music" type="Node2D" parent="."]
 
-[node name="Soundtrack" type="AudioStreamPlayer" parent="Music"]
+[node name="Music" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("2_jikh0")
 autoplay = true
-bus = &"Soundtrack"
+bus = &"Music"
 
 [node name="Asuka" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("3_i7yuj")

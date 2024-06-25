@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://3ngo2fu72k0i"]
+[gd_scene load_steps=22 format=3 uid="uid://3ngo2fu72k0i"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_shqgp"]
 [ext_resource type="PackedScene" uid="uid://cw0nk6gkudho2" path="res://scenes/environment.tscn" id="2_scdex"]
@@ -11,56 +11,56 @@
 [ext_resource type="PackedScene" uid="uid://o0205cjoosgq" path="res://scenes/player.tscn" id="9_o22lg"]
 [ext_resource type="Script" path="res://scripts/dialogue_manager.gd" id="11_usk0d"]
 [ext_resource type="PackedScene" uid="uid://cag4fc4uu0krp" path="res://scenes/audio_manager.tscn" id="12_3unc5"]
+[ext_resource type="PackedScene" uid="uid://cark0j8yc0qwy" path="res://scenes/dialogues_hud.tscn" id="12_137tn"]
 
 [sub_resource type="Animation" id="Animation_pop2h"]
 length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale:x")
+tracks/0/path = NodePath("..:scale:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.880952, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale:y")
+tracks/1/path = NodePath("..:scale:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.880952, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 
 [sub_resource type="Animation" id="Animation_8yrve"]
 resource_name = "scale"
-length = 5.0
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale:x")
+tracks/0/path = NodePath("..:scale:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.880952, -0.25, 0, 1.7, -0.00108737, 2.00382, -1.8, 0.00011611, 0.25, 0),
-"times": PackedFloat32Array(0, 5)
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale:y")
+tracks/1/path = NodePath("..:scale:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.880952, -0.25, 0, 1.7, -0.00108737, 2.00382, -1.8, 0.00011611, 0.25, 0),
-"times": PackedFloat32Array(0, 5)
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kp4yv"]
@@ -70,10 +70,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qisob"]
-size = Vector2(4.98045, 8.30365)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_4wa7i"]
-radius = 443.762
+size = Vector2(5.97999, 9.97582)
 
 [sub_resource type="Animation" id="Animation_vl6gu"]
 length = 0.001
@@ -153,16 +150,22 @@ _data = {
 "scale": SubResource("Animation_lsmn4")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4wa7i"]
+radius = 443.762
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_klsqp"]
-radius = 12.1335
+radius = 18.7495
 
 [node name="World" type="Node2D"]
-
-[node name="AudioManager" parent="." instance=ExtResource("12_3unc5")]
 
 [node name="GameManager" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_shqgp")
+
+[node name="DialogueManager" type="Node2D" parent="."]
+script = ExtResource("11_usk0d")
+
+[node name="AudioManager" parent="." instance=ExtResource("12_3unc5")]
 
 [node name="Environment" parent="." instance=ExtResource("2_scdex")]
 
@@ -172,26 +175,28 @@ position = Vector2(0, 1250)
 collision_mask = 4
 script = ExtResource("7_lhypb")
 
+[node name="PhoneAnimation" type="AnimationPlayer" parent="Phone"]
+root_node = NodePath("../PhoneSprite")
+libraries = {
+"": SubResource("AnimationLibrary_kp4yv")
+}
+
+[node name="PhoneTimer" type="Timer" parent="Phone"]
+wait_time = 0.1
+
 [node name="PhoneSprite" type="Sprite2D" parent="Phone"]
 position = Vector2(129, 74)
 scale = Vector2(0.880952, 0.880952)
 texture = ExtResource("3_sup45")
 
-[node name="PhoneAnimation" type="AnimationPlayer" parent="Phone/PhoneSprite"]
-libraries = {
-"": SubResource("AnimationLibrary_kp4yv")
-}
-
-[node name="PhoneScreen" parent="Phone/PhoneSprite" instance=ExtResource("7_g2i3f")]
-offset_left = -725.365
-offset_top = -853.622
-offset_right = -125.365
-offset_bottom = 146.378
+[node name="PhoneScreen" parent="Phone" instance=ExtResource("7_g2i3f")]
+offset_left = -129.0
+offset_top = -271.0
+offset_right = 393.0
+offset_bottom = 598.0
 rotation = 0.0767945
 scale = Vector2(0.590271, 0.590271)
-
-[node name="PhoneTimer" type="Timer" parent="Phone"]
-wait_time = 0.1
+metadata/_edit_use_anchors_ = true
 
 [node name="PhoneCollision" type="CollisionShape2D" parent="Phone"]
 position = Vector2(4.25684, -2.82666)
@@ -203,10 +208,6 @@ shape = SubResource("RectangleShape2D_qisob")
 position = Vector2(-962, -265)
 collision_mask = 4
 script = ExtResource("4_1kcn2")
-
-[node name="AsukaCollision" type="CollisionShape2D" parent="Asuka"]
-shape = SubResource("CircleShape2D_4wa7i")
-debug_color = Color(0.894118, 0, 0.784314, 0.658824)
 
 [node name="AsukaSprite" type="Sprite2D" parent="Asuka"]
 visible = false
@@ -223,28 +224,29 @@ libraries = {
 process_mode = 3
 wait_time = 0.1
 
+[node name="AsukaCollision" type="CollisionShape2D" parent="Asuka"]
+shape = SubResource("CircleShape2D_4wa7i")
+
 [node name="Window" type="Area2D" parent="."]
-position = Vector2(1129, -302)
+position = Vector2(1538, -453)
 collision_mask = 4
 script = ExtResource("5_p0u8t")
+
+[node name="WindowTimer" type="Timer" parent="Window"]
+wait_time = 0.1
 
 [node name="WindowCollision" type="CollisionShape2D" parent="Window"]
 scale = Vector2(47.685, 47.685)
 shape = SubResource("CircleShape2D_klsqp")
 
-[node name="WindowTimer" type="Timer" parent="Window"]
-wait_time = 0.1
-
-[node name="DialogueManager" type="Node2D" parent="."]
-script = ExtResource("11_usk0d")
-
 [node name="Player" parent="." instance=ExtResource("9_o22lg")]
 unique_name_in_owner = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="DialoguesHUD" parent="." instance=ExtResource("12_137tn")]
+visible = false
 
 [connection signal="area_entered" from="Phone" to="Phone" method="_on_area_entered"]
-[connection signal="area_entered" from="Phone" to="Phone/PhoneSprite/PhoneScreen" method="_on_phone_area_entered"]
+[connection signal="area_entered" from="Phone" to="Phone/PhoneScreen" method="_on_phone_area_entered"]
 [connection signal="area_exited" from="Phone" to="Phone" method="_on_area_exited"]
 [connection signal="mouse_entered" from="Phone" to="Phone" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Phone" to="Phone" method="_on_mouse_exited"]

@@ -13,6 +13,7 @@ var last_mouse_pos: Vector2
 
 func _ready() -> void:
 	# Initialize last mouse position
+	position = phone.position
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	reset_mouse_to_center()
 	last_mouse_pos = get_viewport().get_mouse_position()

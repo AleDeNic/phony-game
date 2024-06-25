@@ -57,6 +57,7 @@ script = ExtResource("1_hwf0t")
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xpx4y")
+debug_color = Color(0, 0.636893, 0.399121, 0.42)
 
 [node name="Trigger" type="Area2D" parent="."]
 collision_layer = 4

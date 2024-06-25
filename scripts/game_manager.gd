@@ -1,8 +1,10 @@
 extends Node
 
-@onready var brain_energy_bar: ProgressBar = $"../Phone/PhoneSprite/PhoneScreen/HUD/AttentionSpanBar"
-@onready var attention_span_bar: ProgressBar = $"../Phone/PhoneSprite/PhoneScreen/HUD/BrainEnergyBar"
-@onready var player: CharacterBody2D = %Player
+@onready var brain_energy_bar: ProgressBar = $"../Phone/PhoneScreen/Bars/BarsMargin/BarsVBox/BrainEnergyBar"
+@onready var attention_span_bar: ProgressBar = $"../Phone/PhoneScreen/Bars/BarsMargin/BarsVBox/AttentionSpanBar"
+
+# start, pause, play
+var game_state: String = "start"
 
 var attention_span: float
 var brain_energy: float

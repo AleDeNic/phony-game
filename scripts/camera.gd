@@ -6,7 +6,7 @@ extends Camera2D
 @export var phone_zoom_speed: float = 0.15
 @export var reset_zoom_speed: float = 2.0
 @export_group("Zoom values")
-@export var phone_zoom_value = Vector2(0.5, 0.5)
+@export var phone_zoom_value = Vector2(0.6, 0.6)
 @export var asuka_zoom_value = Vector2(1.6, 1.6)
 @export var window_zoom_value = Vector2(2.5, 2.5)
 @export var default_zoom_value = Vector2(1, 1)

@@ -2,16 +2,15 @@ extends Area2D
 
 @onready var game_manager: Node2D = %GameManager
 @onready var timer: Timer = $PhoneTimer
-@onready var phone_sprite: Sprite2D = $PhoneSprite
-@onready var phone_animation: AnimationPlayer = $PhoneSprite/PhoneAnimation
+@onready var phone_animation: AnimationPlayer = $PhoneAnimation
 @onready var effects_animation: AnimationPlayer = $"../Player/EffectsControl/EffectsAnimation"
 @onready var camera: Camera2D = $"../Player/Camera2D"
 
 var is_zooming_in: bool = false
 
 @export_group("Scale speeds")
-@export var scale_up_speed: float = 0.4
-@export var scale_down_speed: float = 4.0
+@export var scale_up_speed: float = 0.1
+@export var scale_down_speed: float = 1.0
 @export_group("Blur speeds")
 @export var blur_increase_speed: float = 0.2
 @export var blur_decrease_speed: float = 3.0
