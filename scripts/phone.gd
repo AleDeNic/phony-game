@@ -3,7 +3,8 @@ extends Area2D
 @onready var game_manager: Node2D = %GameManager
 @onready var timer: Timer = $PhoneTimer
 @onready var phone_animation: AnimationPlayer = $PhoneAnimation
-@onready var effects_animation: AnimationPlayer = $"../Player/EffectsControl/EffectsAnimation"
+@onready var effects_animation: AnimationPlayer = $"../Effects/EffectsAnimation"
+@onready var effects: Control = $"../Effects"
 @onready var camera: Camera2D = $"../Player/Camera2D"
 @onready var black_screen: ColorRect = $"../Phone/PhoneScreen/BlackScreen"
 
@@ -18,6 +19,7 @@ var is_zooming_in: bool = false
 
 func _ready() -> void:
 	print("Phone started")
+	effects.z_index = 1
 	black_screen.modulate.a = 1.0
 
 func _on_area_entered(_area: Area2D) -> void:

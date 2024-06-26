@@ -49,19 +49,11 @@ grow_horizontal = 2
 [node name="BarsVBox" type="VBoxContainer" parent="Bars/BarsMargin"]
 layout_mode = 2
 
-[node name="TimeBar" type="ProgressBar" parent="Bars/BarsMargin/BarsVBox"]
+[node name="BatteryBar" type="ProgressBar" parent="Bars/BarsMargin/BarsVBox"]
 z_index = 4
 layout_mode = 2
 size_flags_vertical = 3
 max_value = 30.0
-show_percentage = false
-
-[node name="StressBar" type="ProgressBar" parent="Bars/BarsMargin/BarsVBox"]
-z_index = 4
-layout_mode = 2
-size_flags_vertical = 3
-max_value = 20.0
-step = 0.1
 show_percentage = false
 
 [node name="Menu" parent="." instance=ExtResource("2_rspfv")]

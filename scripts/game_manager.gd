@@ -1,8 +1,9 @@
 extends Node
 
-@onready var stress_bar: ProgressBar = $"../Phone/PhoneScreen/Bars/BarsMargin/BarsVBox/TimeBar"
-@onready var time_bar: ProgressBar = $"../Phone/PhoneScreen/Bars/BarsMargin/BarsVBox/StressBar"
+@onready var battery_bar: ProgressBar = $"../Phone/PhoneScreen/Bars/BarsMargin/BarsVBox/BatteryBar"
 @onready var timer: Timer = $GameTimer
+@onready var stress_filter: ColorRect = $"../Effects/StressFilter"
+
 
 # start, pause, play
 var game_state: String = "start"
@@ -10,25 +11,24 @@ var game_state: String = "start"
 var stress_level: float
 
 @export_group("Tasks values")
-@export var phone_stress_heal: float = 0.2
+@export var phone_stress_heal: float = 0.3
 @export var window_stress_increase: float = 0.1
 @export var asuka_stress_increase: float = 0.2
 
 @export_group("General values")
-@export var max_stress: float = 20.0
-@export var max_battery: float = 180
+@export var max_stress: float = 30.0
+@export var max_battery: float = 180.0
 
 func _ready() -> void:
 	stress_level = 0
 	timer.wait_time = max_battery
-	time_bar.max_value = max_battery
-	stress_bar.max_value = max_stress
+	battery_bar.max_value = max_battery
 	timer.start()
 	timer.paused = true
 
 func _process(_delta: float) -> void:
-	time_bar.value = timer.time_left
-	stress_bar.value = stress_level
+	battery_bar.value = timer.time_left
+	stress_filter.modulate.a = clamp(stress_level / max_stress, 0.0, 1.0)
 
 func _on_phone_timer_timeout() -> void:
 	if stress_level > 0:

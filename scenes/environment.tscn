@@ -27,7 +27,6 @@ scroll_ignore_camera_zoom = true
 motion_scale = Vector2(0.5, 0.3)
 
 [node name="OutsideSprite" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-z_index = -1
 position = Vector2(692, 464)
 scale = Vector2(1.04735, 1.04735)
 texture = ExtResource("1_cbrwh")
