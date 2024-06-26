@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://o0205cjoosgq" path="res://scenes/player.tscn" id="9_o22lg"]
 [ext_resource type="Script" path="res://scripts/dialogue_manager.gd" id="11_usk0d"]
 [ext_resource type="PackedScene" uid="uid://cag4fc4uu0krp" path="res://scenes/audio_manager.tscn" id="12_3unc5"]
-[ext_resource type="PackedScene" uid="uid://cark0j8yc0qwy" path="res://scenes/dialogues.tscn" id="12_137tn"]
+[ext_resource type="PackedScene" uid="uid://cark0j8yc0qwy" path="res://scenes/dialogue_display.tscn" id="12_137tn"]
 [ext_resource type="Shader" path="res://shaders/blur_and_fisheye.gdshader" id="13_ng1n6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oe3r7"]
@@ -277,7 +277,7 @@ one_shot = true
 [node name="DialogueManager" type="Node2D" parent="."]
 script = ExtResource("11_usk0d")
 
-[node name="Dialogues" parent="DialogueManager" instance=ExtResource("12_137tn")]
+[node name="DialogueDisplay" parent="DialogueManager" instance=ExtResource("12_137tn")]
 
 [node name="AudioManager" parent="." instance=ExtResource("12_3unc5")]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cark0j8yc0qwy"]
 
-[ext_resource type="Script" path="res://scripts/dialogues.gd" id="1_wl4jf"]
+[ext_resource type="Script" path="res://scripts/dialogue_display.gd" id="1_wl4jf"]
 
 [sub_resource type="Animation" id="Animation_wbbeh"]
 length = 0.001
@@ -36,7 +36,7 @@ _data = {
 "visibility": SubResource("Animation_mj5qd")
 }
 
-[node name="Dialogues" type="Control"]
+[node name="DialogueDisplay" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
