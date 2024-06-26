@@ -30,7 +30,6 @@ func _on_area_entered(_area: Area2D) -> void:
 	phone_scale(scale_up_speed)
 	start_blur(blur_increase_speed)
 	camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
-	
 	black_screen.modulate.a = 0.0
 
 func _on_area_exited(_area: Area2D) -> void:
@@ -42,7 +41,6 @@ func _on_area_exited(_area: Area2D) -> void:
 	phone_scale(scale_down_speed)
 	start_blur(blur_decrease_speed)
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-	
 	black_screen.modulate.a = 1.0
 
 func phone_scale(scale_speed) -> void:

@@ -20,5 +20,3 @@ func _on_area_exited(_area: Area2D) -> void:
 	is_zooming_in = false
 	dialogues.dialogues_visibility(is_zooming_in)
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-
-

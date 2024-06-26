@@ -27,4 +27,3 @@ func _ready():
 					print("Line does not have enough columns: ", fields)
 		file.close()
 	print(dialogue_data)
-
