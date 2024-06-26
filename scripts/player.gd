@@ -3,8 +3,8 @@ extends CharacterBody2D
 #@onready var game_manager: Node2D = %GameManager
 @onready var phone: Area2D = $"../Phone"
 
-@export var reset_speed: float = 2500.0
-@export var mouse_sensitivity: float = 45.0  # Normal sensitivity
+#@export var reset_speed: float = 2500.0
+@export var mouse_sensitivity: float = 65.0  # Normal sensitivity
 @export var mouse_phone_sensitivity: float = 0.7  # Sensitivity when zoomed in
 @export var transition_speed: float = 5.0  # Speed of the sensitivity transition
 

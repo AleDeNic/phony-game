@@ -42,7 +42,7 @@ shape = SubResource("WorldBoundaryShape2D_8wvv8")
 
 [node name="BottomBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
 visibility_layer = 2
-position = Vector2(0, 2000)
+position = Vector2(0, 2200)
 shape = SubResource("WorldBoundaryShape2D_neuer")
 
 [node name="RightBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
