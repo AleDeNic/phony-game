@@ -22,7 +22,6 @@ func _on_area_entered(_area: Area2D) -> void:
 	is_zooming_in = true
 	timer.start()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	game_manager.brain_energy -= game_manager.multitasking_cost
 	phone_scale(scale_up_speed)
 	start_blur(blur_increase_speed)
 	camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)

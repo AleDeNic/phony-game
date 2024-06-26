@@ -20,7 +20,6 @@ func _on_area_entered(_area: Area2D) -> void:
 	timer.start()
 	is_zooming_in = true
 	asuka_sprite.z_index = 2
-	game_manager.brain_energy -= game_manager.multitasking_cost
 	asuka_scale(scale_up_speed)
 	camera.start_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
 

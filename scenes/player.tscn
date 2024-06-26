@@ -89,6 +89,7 @@ shape = SubResource("CircleShape2D_h1w0k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+position_smoothing_speed = 7.0
 script = ExtResource("2_owyey")
 
 [node name="EffectsControl" type="Control" parent="."]
@@ -115,7 +116,7 @@ offset_right = 2500.0
 offset_bottom = 1500.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 1, 0.384314)
+color = Color(0, 2.69532e-06, 0.941457, 0.592157)
 
 [node name="BlurFisheye" type="ColorRect" parent="EffectsControl"]
 material = SubResource("ShaderMaterial_mpknl")

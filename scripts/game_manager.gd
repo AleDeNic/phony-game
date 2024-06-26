@@ -1,50 +1,49 @@
 extends Node
 
-@onready var brain_energy_bar: ProgressBar = $"../Phone/PhoneScreen/Bars/BarsMargin/BarsVBox/BrainEnergyBar"
-@onready var attention_span_bar: ProgressBar = $"../Phone/PhoneScreen/Bars/BarsMargin/BarsVBox/AttentionSpanBar"
+@onready var stress_bar: ProgressBar = $"../Phone/PhoneScreen/Bars/BarsMargin/BarsVBox/TimeBar"
+@onready var time_bar: ProgressBar = $"../Phone/PhoneScreen/Bars/BarsMargin/BarsVBox/StressBar"
+@onready var timer: Timer = $Timer
 
 # start, pause, play
 var game_state: String = "start"
 
-var attention_span: float
-var brain_energy: float
+var stress_level: float
 
 @export_group("Tasks values")
-@export var phone_increase: float = 0.4
-@export var window_decrease: float = 0.1
-@export var asuka_decrease: float = 0.2
+@export var phone_stress_heal: float = 0.2
+@export var window_stress_increase: float = 0.1
+@export var asuka_stress_increase: float = 0.2
 
 @export_group("General values")
-@export var max_attention_span: float = 20.0
-@export var max_brain_energy: int = 20
-@export var multitasking_cost: int = 1
+@export var max_stress: float = 20.0
+@export var max_time: float = 30
 
 func _ready() -> void:
-	attention_span = max_attention_span
-	brain_energy = max_brain_energy
-	brain_energy_bar.max_value = max_brain_energy
-	attention_span_bar.max_value = max_attention_span
+	stress_level = 0
+	time_bar.max_value = max_time
+	stress_bar.max_value = max_stress
 
 func _process(_delta: float) -> void:
-	brain_energy_bar.value = brain_energy
-	attention_span_bar.value = attention_span
-	if brain_energy < 0:
-		print("BRO IT'S GAME OVER")
+	time_bar.value = timer.time_left
+	stress_bar.value = stress_level
 
 func _on_phone_timer_timeout() -> void:
-	if attention_span < max_attention_span:
-		attention_span += phone_increase
+	if stress_level > 0:
+		stress_level -= phone_stress_heal
 	#else:
-		#print("ATTENTION SPAN RESTORED")
+		#print("STRESS RESTORED")
 
 func _on_asuka_timer_timeout() -> void:
-	if attention_span > 0.0:
-		attention_span -= asuka_decrease
+	if stress_level < max_stress:
+		stress_level += asuka_stress_increase
 	else:
 		print("LOOK AT YOUR PHONE")
 
 func _on_window_timer_timeout() -> void:
-	if attention_span > 0.0:
-		attention_span -= window_decrease
+	if stress_level < max_stress:
+		stress_level += window_stress_increase
 	else:
 		print("LOOK AT YOUR PHONE")
+
+func _on_timer_timeout() -> void:
+	print("GAME OVERRRRRR")

@@ -26,7 +26,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	handle_mouse_movement(_delta)
-	reset_to_phone(phone.position)
+	#reset_to_phone(phone.position)
 
 func handle_mouse_movement(delta: float) -> void:
 	# Update current sensitivity towards the target sensitivity
@@ -56,11 +56,11 @@ func reset_mouse_to_center():
 	var center_position: Vector2 = viewport_size / 2
 	Input.warp_mouse(center_position)
 
-func reset_to_phone(phone_position: Vector2):
-	if game_manager.attention_span < 0:
-		var direction: Vector2 = (phone_position - position).normalized()
-		velocity = direction * reset_speed * get_physics_process_delta_time()
-		move_and_collide(velocity)
-
-		if position.distance_to(phone_position) < 1.0:
-			velocity = Vector2.ZERO
+#func reset_to_phone(phone_position: Vector2):
+	#if game_manager.attention_span < 0:
+		#var direction: Vector2 = (phone_position - position).normalized()
+		#velocity = direction * reset_speed * get_physics_process_delta_time()
+		#move_and_collide(velocity)
+#
+		#if position.distance_to(phone_position) < 1.0:
+			#velocity = Vector2.ZERO

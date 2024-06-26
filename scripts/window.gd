@@ -11,7 +11,6 @@ func _ready() -> void:
 
 func _on_area_entered(_area: Area2D) -> void:
 	timer.start()
-	game_manager.brain_energy -= game_manager.multitasking_cost
 	camera.start_zoom(camera.window_zoom_value, camera.window_zoom_speed)
 
 func _on_area_exited(_area: Area2D) -> void:
