@@ -19,14 +19,12 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	reset_mouse_to_center()
 	last_mouse_pos = get_viewport().get_mouse_position()
-	
 	# Initialize sensitivities
 	current_sensitivity = mouse_sensitivity
 	target_sensitivity = mouse_sensitivity
 
 func _process(_delta: float) -> void:
 	handle_mouse_movement(_delta)
-	#reset_to_phone(phone.position)
 
 func handle_mouse_movement(delta: float) -> void:
 	# Update current sensitivity towards the target sensitivity

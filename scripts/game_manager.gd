@@ -2,7 +2,7 @@ extends Node
 
 @onready var stress_bar: ProgressBar = $"../Phone/PhoneScreen/Bars/BarsMargin/BarsVBox/TimeBar"
 @onready var time_bar: ProgressBar = $"../Phone/PhoneScreen/Bars/BarsMargin/BarsVBox/StressBar"
-@onready var timer: Timer = $Timer
+@onready var timer: Timer = $GameTimer
 
 # start, pause, play
 var game_state: String = "start"
@@ -16,12 +16,15 @@ var stress_level: float
 
 @export_group("General values")
 @export var max_stress: float = 20.0
-@export var max_time: float = 30
+@export var max_battery: float = 180
 
 func _ready() -> void:
 	stress_level = 0
-	time_bar.max_value = max_time
+	timer.wait_time = max_battery
+	time_bar.max_value = max_battery
 	stress_bar.max_value = max_stress
+	timer.start()
+	timer.paused = true
 
 func _process(_delta: float) -> void:
 	time_bar.value = timer.time_left
@@ -30,8 +33,6 @@ func _process(_delta: float) -> void:
 func _on_phone_timer_timeout() -> void:
 	if stress_level > 0:
 		stress_level -= phone_stress_heal
-	#else:
-		#print("STRESS RESTORED")
 
 func _on_asuka_timer_timeout() -> void:
 	if stress_level < max_stress:

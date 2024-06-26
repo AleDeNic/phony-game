@@ -162,10 +162,8 @@ radius = 18.7495
 unique_name_in_owner = true
 script = ExtResource("1_shqgp")
 
-[node name="Timer" type="Timer" parent="GameManager"]
-wait_time = 30.0
+[node name="GameTimer" type="Timer" parent="GameManager"]
 one_shot = true
-autostart = true
 
 [node name="DialogueManager" type="Node2D" parent="."]
 script = ExtResource("11_usk0d")
@@ -250,7 +248,7 @@ unique_name_in_owner = true
 [node name="DialoguesHUD" parent="." instance=ExtResource("12_137tn")]
 visible = false
 
-[connection signal="timeout" from="GameManager/Timer" to="GameManager" method="_on_timer_timeout"]
+[connection signal="timeout" from="GameManager/GameTimer" to="GameManager" method="_on_timer_timeout"]
 [connection signal="area_entered" from="Phone" to="Phone" method="_on_area_entered"]
 [connection signal="area_entered" from="Phone" to="Phone/PhoneScreen" method="_on_phone_area_entered"]
 [connection signal="area_exited" from="Phone" to="Phone" method="_on_area_exited"]

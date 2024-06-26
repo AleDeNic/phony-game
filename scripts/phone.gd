@@ -5,6 +5,7 @@ extends Area2D
 @onready var phone_animation: AnimationPlayer = $PhoneAnimation
 @onready var effects_animation: AnimationPlayer = $"../Player/EffectsControl/EffectsAnimation"
 @onready var camera: Camera2D = $"../Player/Camera2D"
+@onready var black_screen: ColorRect = $"../Phone/PhoneScreen/BlackScreen"
 
 var is_zooming_in: bool = false
 
@@ -17,23 +18,30 @@ var is_zooming_in: bool = false
 
 func _ready() -> void:
 	print("Phone started")
+	black_screen.modulate.a = 1.0
 
 func _on_area_entered(_area: Area2D) -> void:
 	is_zooming_in = true
 	timer.start()
+	game_manager.timer.paused = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	phone_scale(scale_up_speed)
 	start_blur(blur_increase_speed)
 	camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
+	
+	black_screen.modulate.a = 0.0
 
 func _on_area_exited(_area: Area2D) -> void:
 	print("area exited")
 	is_zooming_in = false
 	timer.stop()
+	game_manager.timer.paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	phone_scale(scale_down_speed)
 	start_blur(blur_decrease_speed)
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
+	
+	black_screen.modulate.a = 1.0
 
 func phone_scale(scale_speed) -> void:
 	phone_animation.speed_scale = scale_speed
