@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cw0nk6gkudho2"]
+[gd_scene load_steps=14 format=3 uid="uid://cw0nk6gkudho2"]
 
 [ext_resource type="Texture2D" uid="uid://dnl0mum6ltimb" path="res://assets/images/train_2.png" id="1_008is"]
 [ext_resource type="Texture2D" uid="uid://brfshqyxfujus" path="res://assets/images/hdri_env2.jpg" id="1_cbrwh"]
+[ext_resource type="Texture2D" uid="uid://si4a0gnvh6eu" path="res://assets/images/tree.png" id="2_5hejk"]
+[ext_resource type="Shader" path="res://shaders/background_perspective.gdshader" id="3_hljuw"]
+[ext_resource type="PackedScene" uid="uid://dkqgk1ks3u0y" path="res://scenes/background.tscn" id="3_n2egf"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8wvv8"]
 normal = Vector2(0, 1)
@@ -14,22 +17,116 @@ normal = Vector2(-1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_boryj"]
 normal = Vector2(1, 0)
 
+[sub_resource type="Animation" id="Animation_sra3g"]
+resource_name = "tree_scroll"
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TreeSprite:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-1157, -0.25, 0, 0.25, 0, 4475, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TreeSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(126, -0.25, 0, 0.25, 0, 2491, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TreeSprite:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1.53, -0.25, 0, 0.25, 0, 6.48, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TreeSprite:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1.53, -0.25, 0, 0.25, 0, 6.48, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_68xj4"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TreeSprite:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TreeSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TreeSprite:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(2.345, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TreeSprite:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(2.345, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gvs1g"]
+_data = {
+"RESET": SubResource("Animation_68xj4"),
+"tree_scroll": SubResource("Animation_sra3g")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xu728"]
+shader = ExtResource("3_hljuw")
+shader_parameter/fov = 179.0
+shader_parameter/cull_back = false
+shader_parameter/y_rot = -30.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+
 [node name="Environment" type="Node2D"]
-
-[node name="Background" type="Sprite2D" parent="."]
-scale = Vector2(1.26857, 1.26857)
-texture = ExtResource("1_008is")
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_ignore_camera_zoom = true
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.5, 0.3)
-
-[node name="OutsideSprite" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(692, 464)
-scale = Vector2(1.04735, 1.04735)
-texture = ExtResource("1_cbrwh")
 
 [node name="WorldBoundaries" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -54,3 +151,52 @@ shape = SubResource("WorldBoundaryShape2D_674om")
 visibility_layer = 2
 position = Vector2(-2000, 0)
 shape = SubResource("WorldBoundaryShape2D_boryj")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="Background" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.3)
+
+[node name="BackgroundSprite" type="Sprite2D" parent="ParallaxBackground/Background"]
+position = Vector2(692, 464)
+scale = Vector2(1.04735, 1.04735)
+texture = ExtResource("1_cbrwh")
+
+[node name="Tree" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
+motion_scale = Vector2(0.2, 0.1)
+
+[node name="Tree" type="Node2D" parent="ParallaxBackground/Tree"]
+position = Vector2(1209, -828)
+
+[node name="TreeSprite" type="Sprite2D" parent="ParallaxBackground/Tree/Tree"]
+scale = Vector2(2.345, 2.345)
+texture = ExtResource("2_5hejk")
+
+[node name="TreeAnimation" type="AnimationPlayer" parent="ParallaxBackground/Tree/Tree"]
+libraries = {
+"": SubResource("AnimationLibrary_gvs1g")
+}
+autoplay = "tree_scroll"
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.3)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="ParallaxBackground/ParallaxLayer"]
+material = SubResource("ShaderMaterial_xu728")
+offset_left = -6.0
+offset_top = -1792.0
+offset_right = 2994.0
+offset_bottom = 2208.0
+
+[node name="SubViewport" type="SubViewport" parent="ParallaxBackground/ParallaxLayer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(2300, 4000)
+render_target_update_mode = 4
+
+[node name="Background" parent="ParallaxBackground/ParallaxLayer/SubViewportContainer/SubViewport" instance=ExtResource("3_n2egf")]
+
+[node name="Train" type="Sprite2D" parent="."]
+scale = Vector2(1.26857, 1.26857)
+texture = ExtResource("1_008is")
