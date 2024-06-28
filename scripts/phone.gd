@@ -12,10 +12,10 @@ var is_zooming_in: bool = false
 
 @export_group("Scale speeds")
 @export var scale_up_speed: float = 1.0
-@export var scale_down_speed: float = 1.2
-@export_group("Blur speeds")
-@export var blur_increase_speed: float = 0.3
-@export var blur_decrease_speed: float = 2.0
+@export var scale_down_speed: float = 2.0
+@export_group("Effects speeds")
+@export var effects_increase_speed: float = 0.6
+@export var effects_decrease_speed: float = 2.0
 
 func _ready() -> void:
 	print("Phone started")
@@ -28,7 +28,7 @@ func _on_area_entered(_area: Area2D) -> void:
 	game_manager.timer.paused = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	phone_scale(scale_up_speed)
-	start_blur(blur_increase_speed)
+	start_effects(effects_increase_speed)
 	camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
 	black_screen.modulate.a = 0.0
 
@@ -39,7 +39,7 @@ func _on_area_exited(_area: Area2D) -> void:
 	game_manager.timer.paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	phone_scale(scale_down_speed)
-	start_blur(blur_decrease_speed)
+	start_effects(effects_decrease_speed)
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 	black_screen.modulate.a = 1.0
 
@@ -50,8 +50,8 @@ func phone_scale(scale_speed) -> void:
 	else:
 		phone_animation.play_backwards("scale")
 
-func start_blur(blur_speed) -> void:
-	effects_animation.speed_scale = blur_speed
+func start_effects(effects_speed) -> void:
+	effects_animation.speed_scale = effects_speed
 	if is_zooming_in:
 		effects_animation.play("blur")
 	else:

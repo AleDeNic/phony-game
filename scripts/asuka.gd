@@ -5,6 +5,7 @@ extends Area2D
 @onready var asuka_animation: AnimationPlayer = $AsukaSprite/AsukaAnimation
 @onready var camera: Camera2D = $"../Player/Camera2D"
 @onready var dialogue_display: Control = $"../DialogueManager/DialogueDisplay"
+@onready var eyes_sprite: AnimatedSprite2D = $EyesSprite
 
 var is_zooming_in: bool
 
@@ -12,6 +13,7 @@ var is_zooming_in: bool
 @export var scale_down_speed: float = 1.0
 
 func _ready() -> void:
+	eyes_sprite.frame = 0
 	print("Asuka started")
 
 func _on_area_entered(_area: Area2D) -> void:
@@ -21,6 +23,7 @@ func _on_area_entered(_area: Area2D) -> void:
 	asuka_scale(scale_up_speed)
 	camera.start_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
 	dialogue_display.dialogues_visibility(is_zooming_in)
+	eyes_sprite.frame = 1
 
 func _on_area_exited(_area: Area2D) -> void:
 	timer.stop()
@@ -28,6 +31,7 @@ func _on_area_exited(_area: Area2D) -> void:
 	asuka_scale(scale_down_speed)
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 	dialogue_display.dialogues_visibility(is_zooming_in)
+	eyes_sprite.frame = 0
 
 func _on_asuka_animation_animation_finished(_anim_name: StringName) -> void:
 	if is_zooming_in == false:
