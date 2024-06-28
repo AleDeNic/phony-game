@@ -19,7 +19,7 @@ grow_vertical = 2
 size_flags_horizontal = 0
 script = ExtResource("1_4cg5r")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="WhiteBackground" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +27,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Bars" type="Control" parent="."]
+[node name="Battery" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,7 +36,7 @@ offset_bottom = -878.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BarsMargin" type="MarginContainer" parent="Bars"]
+[node name="BatteryMargin" type="MarginContainer" parent="Battery"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -46,15 +46,15 @@ offset_right = -20.0
 offset_bottom = 175.0
 grow_horizontal = 2
 
-[node name="BarsVBox" type="VBoxContainer" parent="Bars/BarsMargin"]
+[node name="BateryVBox" type="VBoxContainer" parent="Battery/BatteryMargin"]
 layout_mode = 2
 
-[node name="BatteryBar" type="ProgressBar" parent="Bars/BarsMargin/BarsVBox"]
+[node name="BatteryBar" type="ProgressBar" parent="Battery/BatteryMargin/BateryVBox"]
 z_index = 4
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 64
 max_value = 30.0
-show_percentage = false
 
 [node name="Menu" parent="." instance=ExtResource("2_rspfv")]
 layout_mode = 1
@@ -66,6 +66,7 @@ anchor_bottom = 0.5
 offset_right = 0.0
 
 [node name="BlackScreen" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

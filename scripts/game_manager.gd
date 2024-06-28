@@ -1,6 +1,6 @@
 extends Node
 
-@onready var battery_bar: ProgressBar = $"../Phone/PhoneScreen/Bars/BarsMargin/BarsVBox/BatteryBar"
+@onready var battery_bar: ProgressBar = $"../Phone/PhoneScreen/Battery/BatteryMargin/BateryVBox/BatteryBar"
 @onready var timer: Timer = $GameTimer
 @onready var stress_filter: ColorRect = $"../Effects/StressFilter"
 
