@@ -304,7 +304,7 @@ script = ExtResource("11_usk0d")
 
 [node name="AudioManager" parent="." instance=ExtResource("12_3unc5")]
 
-[node name="Environment" parent="." instance=ExtResource("2_scdex")]
+[node name="Background" parent="." instance=ExtResource("2_scdex")]
 
 [node name="Asuka" type="Area2D" parent="."]
 position = Vector2(-962, -265)
@@ -383,25 +383,6 @@ shape = SubResource("RectangleShape2D_qisob")
 
 [node name="Player" parent="." instance=ExtResource("9_o22lg")]
 unique_name_in_owner = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [connection signal="timeout" from="GameManager/GameTimer" to="GameManager" method="_on_timer_timeout"]
 [connection signal="area_entered" from="Asuka" to="Asuka" method="_on_area_entered"]
