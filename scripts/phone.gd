@@ -2,11 +2,11 @@ extends Area2D
 
 @onready var game_manager: Node2D = %GameManager
 @onready var timer: Timer = $PhoneTimer
+@onready var black_screen: ColorRect = $"../Phone/PhoneScreen/BlackScreen"
 @onready var phone_animation: AnimationPlayer = $PhoneAnimation
 @onready var effects_animation: AnimationPlayer = $"../Effects/EffectsAnimation"
 @onready var effects: Control = $"../Effects"
 @onready var camera: Camera2D = $"../Player/Camera2D"
-@onready var black_screen: ColorRect = $"../Phone/PhoneScreen/BlackScreen"
 
 var is_zooming_in: bool = false
 
@@ -20,7 +20,7 @@ var is_zooming_in: bool = false
 func _ready() -> void:
 	print("Phone started")
 	effects.z_index = 1
-	black_screen.modulate.a = 1.0
+	black_screen.visible = true
 
 func _on_area_entered(_area: Area2D) -> void:
 	is_zooming_in = true
@@ -30,7 +30,7 @@ func _on_area_entered(_area: Area2D) -> void:
 	phone_scale(scale_up_speed)
 	start_effects(effects_increase_speed)
 	camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
-	black_screen.modulate.a = 0.0
+	black_screen.visible = false
 
 func _on_area_exited(_area: Area2D) -> void:
 	print("area exited")
@@ -41,7 +41,7 @@ func _on_area_exited(_area: Area2D) -> void:
 	phone_scale(scale_down_speed)
 	start_effects(effects_decrease_speed)
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-	black_screen.modulate.a = 1.0
+	black_screen.visible = true
 
 func phone_scale(scale_speed) -> void:
 	phone_animation.speed_scale = scale_speed
@@ -56,10 +56,3 @@ func start_effects(effects_speed) -> void:
 		effects_animation.play("blur")
 	else:
 		effects_animation.play_backwards("blur")
-
-#func _on_mouse_entered() -> void:
-	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-#
-#func _on_mouse_exited() -> void:
-	##Input.set_custom_mouse_cursor(load("res://assets/images/cursor.jpg"))
-	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

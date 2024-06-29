@@ -367,13 +367,19 @@ scale = Vector2(0.880952, 0.880952)
 texture = ExtResource("3_sup45")
 
 [node name="PhoneScreen" parent="Phone" instance=ExtResource("7_g2i3f")]
-offset_left = -129.0
-offset_top = -271.0
-offset_right = 393.0
-offset_bottom = 598.0
-rotation = 0.0767945
-scale = Vector2(0.590271, 0.590271)
-metadata/_edit_use_anchors_ = true
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -119.0
+offset_top = -263.0
+offset_right = 481.0
+offset_bottom = 817.0
+grow_horizontal = 1
+grow_vertical = 1
+rotation = 0.0807059
+scale = Vector2(0.489818, 0.489818)
 
 [node name="PhoneCollision" type="CollisionShape2D" parent="Phone"]
 position = Vector2(4.25684, -2.82666)
@@ -393,8 +399,5 @@ unique_name_in_owner = true
 [connection signal="area_exited" from="Window" to="Window" method="_on_area_exited"]
 [connection signal="timeout" from="Window/WindowTimer" to="GameManager" method="_on_window_timer_timeout"]
 [connection signal="area_entered" from="Phone" to="Phone" method="_on_area_entered"]
-[connection signal="area_entered" from="Phone" to="Phone/PhoneScreen" method="_on_phone_area_entered"]
 [connection signal="area_exited" from="Phone" to="Phone" method="_on_area_exited"]
-[connection signal="mouse_entered" from="Phone" to="Phone" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Phone" to="Phone" method="_on_mouse_exited"]
 [connection signal="timeout" from="Phone/PhoneTimer" to="GameManager" method="_on_phone_timer_timeout"]
