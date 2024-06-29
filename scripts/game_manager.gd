@@ -4,10 +4,6 @@ extends Node
 @onready var timer: Timer = $GameTimer
 @onready var stress_filter: ColorRect = $"../Effects/StressFilter"
 
-
-# start, pause, play
-var game_state: String = "start"
-
 var stress_level: float
 
 @export_group("Tasks values")
@@ -19,8 +15,9 @@ var stress_level: float
 @export var max_stress: float = 30.0
 @export var max_battery: float = 180.0
 
-func _ready() -> void:
+func _ready() -> void:	
 	stress_level = 0
+	start_timeline("asuka")
 	timer.wait_time = max_battery
 	battery_bar.max_value = max_battery
 	timer.start()
@@ -48,3 +45,12 @@ func _on_window_timer_timeout() -> void:
 
 func _on_timer_timeout() -> void:
 	print("GAME OVERRRRRR")
+	
+func start_timeline(timeline) -> void:
+	Dialogic.start(timeline)
+
+func set_timeline_visibility() -> void:
+	if Dialogic.Text.is_textbox_visible():
+		Dialogic.Text.hide_textbox()
+	else:
+		Dialogic.Text.show_textbox()

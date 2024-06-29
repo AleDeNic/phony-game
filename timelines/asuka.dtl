@@ -1,0 +1,4 @@
+asuka: m-ma tu sei...
+[text_input var="player_name"]
+if {player_name} == "bottolo":
+asuka: ti amo {player_name}

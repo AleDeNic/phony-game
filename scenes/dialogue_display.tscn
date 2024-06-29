@@ -1,6 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://cark0j8yc0qwy"]
+[gd_scene load_steps=5 format=3 uid="uid://dpalqk6b3ycw3"]
 
-[ext_resource type="Script" path="res://scripts/dialogue_display.gd" id="1_wl4jf"]
+[sub_resource type="GDScript" id="GDScript_pwgrt"]
+script/source = "extends Control
+
+@onready var dialogues_animation: AnimationPlayer = $DialoguesAnimation
+
+@export_group(\"Speeds\")
+@export var fade_in_speed = 3.0
+@export var fade_out_speed = 8.0
+
+var is_zooming_in: bool
+
+func dialogues_visibility(is_it_visible) -> void:
+	if is_it_visible:
+		dialogues_animation.speed_scale = fade_in_speed
+		dialogues_animation.play(\"visibility\")
+	else:
+		dialogues_animation.speed_scale = fade_out_speed
+		dialogues_animation.play_backwards(\"visibility\")
+"
 
 [sub_resource type="Animation" id="Animation_wbbeh"]
 length = 0.001
@@ -41,7 +59,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
-script = ExtResource("1_wl4jf")
+script = SubResource("GDScript_pwgrt")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
