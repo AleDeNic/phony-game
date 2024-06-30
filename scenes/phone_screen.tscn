@@ -36,6 +36,9 @@ offset_bottom = -878.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="BatteryTimer" type="Timer" parent="Battery"]
+one_shot = true
+
 [node name="BatteryMargin" type="MarginContainer" parent="Battery"]
 layout_mode = 1
 anchors_preset = 10

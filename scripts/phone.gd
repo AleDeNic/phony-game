@@ -7,6 +7,7 @@ extends Area2D
 @onready var effects_animation: AnimationPlayer = $"../Effects/EffectsAnimation"
 @onready var effects: Control = $"../Effects"
 @onready var camera: Camera2D = $"../Player/Camera2D"
+@onready var phone_screen: Control = $PhoneScreen
 
 var is_zooming_in: bool = false
 
@@ -25,10 +26,10 @@ func _ready() -> void:
 func _on_area_entered(_area: Area2D) -> void:
 	is_zooming_in = true
 	timer.start()
-	game_manager.timer.paused = false
+	phone_screen.phone_state = "menu"
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	phone_scale(scale_up_speed)
-	start_effects(effects_increase_speed)
+	effects.start_effects(effects_increase_speed)
 	camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
 	black_screen.visible = false
 
@@ -36,10 +37,11 @@ func _on_area_exited(_area: Area2D) -> void:
 	print("area exited")
 	is_zooming_in = false
 	timer.stop()
-	game_manager.timer.paused = true
+	phone_screen.go_to_screen("home")
+	phone_screen.phone_state = "off"
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	phone_scale(scale_down_speed)
-	start_effects(effects_decrease_speed)
+	effects.start_effects(effects_decrease_speed)
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 	black_screen.visible = true
 
@@ -50,9 +52,4 @@ func phone_scale(scale_speed) -> void:
 	else:
 		phone_animation.play_backwards("scale")
 
-func start_effects(effects_speed) -> void:
-	effects_animation.speed_scale = effects_speed
-	if is_zooming_in:
-		effects_animation.play("blur")
-	else:
-		effects_animation.play_backwards("blur")
+

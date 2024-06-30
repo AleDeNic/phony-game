@@ -1,7 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://3ngo2fu72k0i"]
+[gd_scene load_steps=29 format=3 uid="uid://3ngo2fu72k0i"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_shqgp"]
-[ext_resource type="PackedScene" uid="uid://mei3fh0wa3em" path="res://scenes/effects.tscn" id="1_u37f0"]
 [ext_resource type="PackedScene" uid="uid://cw0nk6gkudho2" path="res://scenes/landscape.tscn" id="2_scdex"]
 [ext_resource type="Texture2D" uid="uid://5w7r1g5fwit4" path="res://assets/images/asuka.png" id="2_wtfl7"]
 [ext_resource type="Texture2D" uid="uid://cd73raw5kh70g" path="res://assets/images/phone.png" id="3_sup45"]
@@ -12,6 +11,68 @@
 [ext_resource type="Texture2D" uid="uid://bvbhrwpow0q30" path="res://assets/images/eyes.png" id="9_fl5a1"]
 [ext_resource type="PackedScene" uid="uid://o0205cjoosgq" path="res://scenes/player.tscn" id="9_o22lg"]
 [ext_resource type="PackedScene" uid="uid://cag4fc4uu0krp" path="res://scenes/audio_manager.tscn" id="12_3unc5"]
+[ext_resource type="Shader" path="res://shaders/blur_and_fisheye.gdshader" id="13_ng1n6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oe3r7"]
+shader = ExtResource("13_ng1n6")
+shader_parameter/lod = 0.0
+shader_parameter/effect_amount = -0.15
+
+[sub_resource type="Animation" id="Animation_fioi8"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BlueFilter:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_olajn"]
+resource_name = "blur"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 3.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BlueFilter:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vw4tr"]
+_data = {
+"RESET": SubResource("Animation_fioi8"),
+"blur": SubResource("Animation_olajn")
+}
 
 [sub_resource type="Animation" id="Animation_vl6gu"]
 length = 0.001
@@ -180,24 +241,63 @@ size = Vector2(5.97999, 9.97582)
 
 [node name="World" type="Node2D"]
 
-[node name="GameManager" type="Node2D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("1_shqgp")
-
-[node name="AudioManager" parent="." instance=ExtResource("12_3unc5")]
-
-[node name="Background" parent="." instance=ExtResource("2_scdex")]
-
-[node name="Effects" parent="." instance=ExtResource("1_u37f0")]
+[node name="Effects" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -5360.0
-offset_top = -2975.0
-offset_right = 5360.0
-offset_bottom = 2975.0
+offset_left = -4962.0
+offset_top = -2950.0
+offset_right = 4962.0
+offset_bottom = 2950.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StressFilter" type="ColorRect" parent="Effects"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BlueFilter" type="ColorRect" parent="Effects"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 2.69532e-06, 0.941457, 0.592157)
+
+[node name="BlurFisheye" type="ColorRect" parent="Effects"]
+material = SubResource("ShaderMaterial_oe3r7")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EffectsAnimation" type="AnimationPlayer" parent="Effects"]
+root_node = NodePath("../BlurFisheye")
+libraries = {
+"": SubResource("AnimationLibrary_vw4tr")
+}
+
+[node name="GameManager" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_shqgp")
+
+[node name="GameTimer" type="Timer" parent="GameManager"]
+one_shot = true
+
+[node name="AudioManager" parent="." instance=ExtResource("12_3unc5")]
+
+[node name="Background" parent="." instance=ExtResource("2_scdex")]
 
 [node name="Asuka" type="Area2D" parent="."]
 position = Vector2(-962, -265)
@@ -283,13 +383,14 @@ shape = SubResource("RectangleShape2D_qisob")
 [node name="Player" parent="." instance=ExtResource("9_o22lg")]
 unique_name_in_owner = true
 
+[connection signal="timeout" from="GameManager/GameTimer" to="GameManager" method="_on_timer_timeout"]
 [connection signal="area_entered" from="Asuka" to="Asuka" method="_on_area_entered"]
 [connection signal="area_exited" from="Asuka" to="Asuka" method="_on_area_exited"]
 [connection signal="animation_finished" from="Asuka/AsukaSprite/AsukaAnimation" to="Asuka" method="_on_asuka_animation_animation_finished"]
-[connection signal="timeout" from="Asuka/AsukaTimer" to="Effects" method="_on_asuka_timer_timeout"]
+[connection signal="timeout" from="Asuka/AsukaTimer" to="GameManager" method="_on_asuka_timer_timeout"]
 [connection signal="area_entered" from="Window" to="Window" method="_on_area_entered"]
 [connection signal="area_exited" from="Window" to="Window" method="_on_area_exited"]
-[connection signal="timeout" from="Window/WindowTimer" to="Effects" method="_on_window_timer_timeout"]
+[connection signal="timeout" from="Window/WindowTimer" to="GameManager" method="_on_window_timer_timeout"]
 [connection signal="area_entered" from="Phone" to="Phone" method="_on_area_entered"]
 [connection signal="area_exited" from="Phone" to="Phone" method="_on_area_exited"]
-[connection signal="timeout" from="Phone/PhoneTimer" to="Effects" method="_on_phone_timer_timeout"]
+[connection signal="timeout" from="Phone/PhoneTimer" to="GameManager" method="_on_phone_timer_timeout"]

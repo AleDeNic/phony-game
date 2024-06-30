@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://mei3fh0wa3em"]
+[gd_scene load_steps=7 format=3 uid="uid://mei3fh0wa3em"]
 
 [ext_resource type="Shader" path="res://shaders/blur_and_fisheye.gdshader" id="1_8svnj"]
+[ext_resource type="Script" path="res://scripts/effects.gd" id="1_jx2xl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nv2ku"]
 shader = ExtResource("1_8svnj")
@@ -83,6 +84,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
+script = ExtResource("1_jx2xl")
 
 [node name="StressFilter" type="ColorRect" parent="."]
 layout_mode = 1

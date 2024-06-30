@@ -14,10 +14,10 @@ var is_zooming_in: bool
 
 func _ready() -> void:
 	eyes_sprite.frame = 0
-	print("Asuka started")
 
 func _on_area_entered(_area: Area2D) -> void:
 	timer.start()
+	game_manager.handle_timeline("asuka")
 	is_zooming_in = true
 	asuka_sprite.z_index = 2
 	asuka_scale(scale_up_speed)
@@ -26,6 +26,7 @@ func _on_area_entered(_area: Area2D) -> void:
 
 func _on_area_exited(_area: Area2D) -> void:
 	timer.stop()
+	game_manager.handle_timeline("asuka")
 	is_zooming_in = false
 	asuka_scale(scale_down_speed)
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)

@@ -1,4 +1,3 @@
 asuka: m-ma tu sei...
-[text_input var="player_name"]
-if {player_name} == "bottolo":
+[text_input text="What's your real name?" var="player_name"]
 asuka: ti amo {player_name}
