@@ -1,7 +1,7 @@
 extends Node
 
+# TODO: Investigate why the fuck this does have to be manual. Thanks
 var timeline_started: bool
-var timeline_paused: bool
 
 @export_group("Tasks values")
 @export var phone_stress_heal: float = 0.3
@@ -17,26 +17,21 @@ func _ready() -> void:
 	
 func handle_timeline(timeline) -> void:
 	if timeline_started:
-		if timeline_paused:
+		if Dialogic.paused:
 			Dialogic.paused = false
-			timeline_paused = false
-			Dialogic.Text.show_textbox()
+			if Dialogic.Styles.get_layout_node():
+				Dialogic.Styles.get_layout_node().show()
 			print("timeline resumed")
 		else:
 			Dialogic.paused = true
-			timeline_paused = true
-			Dialogic.Text.hide_textbox()
+			if Dialogic.Styles.get_layout_node():
+				Dialogic.Styles.get_layout_node().hide()
 			await get_tree().create_timer(1).timeout
-			#Dialogic.end_timeline()
 			print("timeline paused")
 	else:
 		Dialogic.start(timeline)
 		timeline_started = true
-		Dialogic.Text.show_textbox()
+		
+		if Dialogic.Styles.get_layout_node():
+			Dialogic.Styles.get_layout_node().show()
 		print("timeline started")
-
-#func set_timeline_visibility() -> void:
-	#if Dialogic.Text.is_textbox_visible():
-		#Dialogic.Text.hide_textbox()
-	#else:
-		#Dialogic.Text.show_textbox()
