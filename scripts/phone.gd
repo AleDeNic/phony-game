@@ -51,5 +51,3 @@ func phone_scale(scale_speed) -> void:
 		phone_animation.play("scale")
 	else:
 		phone_animation.play_backwards("scale")
-
-

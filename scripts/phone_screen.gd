@@ -31,8 +31,8 @@ func go_to_screen(screen: String) -> void:
 		home.visible = false
 		options.visible = true
 		
-func handle_battery(phone_state) -> void:
-	if phone_state == "menu":
+func handle_battery(state) -> void:
+	if state == "menu":
 		battery_timer.paused = false
 		battery_bar.value = battery_timer.time_left
 	else:

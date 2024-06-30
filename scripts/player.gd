@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 #@onready var game_manager: Node2D = %GameManager
 @onready var phone: Area2D = $"../Phone"
+@onready var asuka: Area2D = $"../Asuka"
 
 #@export var reset_speed: float = 2500.0
 @export var mouse_sensitivity: float = 65.0  # Normal sensitivity

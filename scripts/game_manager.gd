@@ -27,7 +27,7 @@ func handle_timeline(timeline) -> void:
 			timeline_paused = true
 			Dialogic.Text.hide_textbox()
 			await get_tree().create_timer(1).timeout
-			Dialogic.end_timeline()
+			#Dialogic.end_timeline()
 			print("timeline paused")
 	else:
 		Dialogic.start(timeline)

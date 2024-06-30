@@ -4,7 +4,7 @@ extends Node
 @onready var asuka: Area2D = get_node("/root/World/Asuka")
 @onready var window: Area2D = get_node("/root/World/Window")
 
-var master_volume: float = -0.1
+var master_volume: float = -80.0
 var music_volume: float = -0.1
 var sfx_volume: float = -0.1
 
