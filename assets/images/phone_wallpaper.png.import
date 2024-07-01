@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chn5wsvv2dvig"
-path="res://.godot/imported/cursor.jpg-9857706f0489bd15abed1deba2adde9c.ctex"
+uid="uid://djlpmyr2jau2k"
+path="res://.godot/imported/phone_wallpaper.png-4b3cb1cd48a69f55f00fdc136293e1ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/cursor.jpg"
-dest_files=["res://.godot/imported/cursor.jpg-9857706f0489bd15abed1deba2adde9c.ctex"]
+source_file="res://assets/images/phone_wallpaper.png"
+dest_files=["res://.godot/imported/phone_wallpaper.png-4b3cb1cd48a69f55f00fdc136293e1ce.ctex"]
 
 [params]
 

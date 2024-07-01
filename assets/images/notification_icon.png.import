@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmoeuyfxpj2la"
-path="res://.godot/imported/init_sense_background.png-3555b2106138fe008ef0f72a5775871a.ctex"
+uid="uid://cdil1y34s74he"
+path="res://.godot/imported/notification_icon.png-94345ccc80365d27cea846df7d3fd4a3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/init_sense_background.png"
-dest_files=["res://.godot/imported/init_sense_background.png-3555b2106138fe008ef0f72a5775871a.ctex"]
+source_file="res://assets/images/notification_icon.png"
+dest_files=["res://.godot/imported/notification_icon.png-94345ccc80365d27cea846df7d3fd4a3.ctex"]
 
 [params]
 

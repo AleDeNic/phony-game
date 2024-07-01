@@ -1,10 +1,12 @@
 extends Control
 
-@onready var home: Control = $Home
+@onready var apps: Control = $Apps
 @onready var options: Control = $Options
+@onready var camera: Control = $Camera
+@onready var chats: Control = $Chats
 @onready var game_manager: Node2D = %GameManager
-@onready var battery_bar: ProgressBar = $Battery/BatteryMargin/BateryVBox/BatteryBar
-@onready var battery_timer: Timer = $Battery/BatteryTimer
+@onready var battery_bar: ProgressBar = $TopBar/MarginContainer/HBoxContainer/BatteryBar
+@onready var battery_timer: Timer = $TopBar/MarginContainer/HBoxContainer/BatteryBar/BatteryTimer
 
 var phone_state: String
 
@@ -15,7 +17,6 @@ func _ready() -> void:
 	battery_timer.start()
 	battery_bar.value = battery_timer.time_left
 	handle_battery(phone_state)
-	go_to_screen("home")
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -24,15 +25,21 @@ func _process(_delta: float) -> void:
 	handle_battery(phone_state)
 
 func go_to_screen(screen: String) -> void:
-	if screen == "home":
-		home.visible = true
-		options.visible = false
+	apps.visible = false
+	options.visible = false
+	camera.visible = false
+	chats.visible = false
+	if screen == "home" or screen == "off":
+		apps.visible = true
 	elif screen == "options":
-		home.visible = false
 		options.visible = true
+	elif screen == "camera":
+		camera.visible = true
+	elif screen == "chats":
+		chats.visible = true
 		
 func handle_battery(state) -> void:
-	if state == "menu":
+	if state == "home":
 		battery_timer.paused = false
 		battery_bar.value = battery_timer.time_left
 	else:
@@ -43,7 +50,7 @@ func _on_options_pressed() -> void:
 	go_to_screen("options")
 
 func _on_back_pressed() -> void:
-	phone_state = "menu"
+	phone_state = "home"
 	go_to_screen("home")
 
 func _on_quit_pressed() -> void:
@@ -54,3 +61,11 @@ func _on_fullscreen_toggled(toggled_on: bool) -> void:
 		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
+		
+func _on_camera_pressed() -> void:
+	phone_state = "camera"
+	go_to_screen("camera")
+
+func _on_chats_pressed() -> void:
+	phone_state = "chats"
+	go_to_screen("chats")

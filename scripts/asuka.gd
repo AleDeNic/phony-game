@@ -23,6 +23,7 @@ func _on_area_entered(_area: Area2D) -> void:
 	asuka_sprite.z_index = 2
 	asuka_scale(scale_up_speed)
 	camera.start_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
+	await get_tree().create_timer(0.3).timeout
 	eyes_sprite.frame = 1
 
 func _on_area_exited(_area: Area2D) -> void:
@@ -32,6 +33,7 @@ func _on_area_exited(_area: Area2D) -> void:
 	is_zooming_in = false
 	asuka_scale(scale_down_speed)
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
+	await get_tree().create_timer(0.3).timeout
 	eyes_sprite.frame = 0
 
 func _on_asuka_animation_animation_finished(_anim_name: StringName) -> void:

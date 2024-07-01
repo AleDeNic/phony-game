@@ -1,7 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://dg55yu6bit6jt"]
+[gd_scene load_steps=12 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_screen.gd" id="1_4cg5r"]
+[ext_resource type="Texture2D" uid="uid://djlpmyr2jau2k" path="res://assets/images/phone_wallpaper.png" id="2_jepf0"]
+[ext_resource type="StyleBox" uid="uid://duct66cpghgeh" path="res://styles/separator.tres" id="3_7dnor"]
+[ext_resource type="Texture2D" uid="uid://bfg0lk6kvgptl" path="res://assets/images/icons/notification_icon.png" id="3_jnjbr"]
 [ext_resource type="Script" path="res://scripts/volume_slider.gd" id="4_5jmmy"]
+[ext_resource type="Texture2D" uid="uid://dfljetyll4myx" path="res://assets/images/icons/settings_icon.webp" id="4_k6qw4"]
+[ext_resource type="Texture2D" uid="uid://18wyhfnyhjqn" path="res://assets/images/icons/camera_icon.webp" id="5_8pkqu"]
+[ext_resource type="Texture2D" uid="uid://bm2pd3jhn61iq" path="res://assets/images/selfie.png" id="7_7bxb7"]
+[ext_resource type="Texture2D" uid="uid://bh2aodmuhfccj" path="res://assets/images/icons/messages_icon.webp" id="7_rhvqn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oqpi6"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yloim"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_bottom_left = 12
+corner_detail = 6
 
 [node name="PhoneScreen" type="Control"]
 layout_mode = 3
@@ -12,99 +38,144 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -960.0
 offset_top = -540.0
-offset_right = -360.0
-offset_bottom = 540.0
+offset_right = -240.0
+offset_bottom = 740.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 script = ExtResource("1_4cg5r")
 
-[node name="WhiteBackground" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Wallpaper" type="Sprite2D" parent="."]
+scale = Vector2(0.837153, 0.837112)
+texture = ExtResource("2_jepf0")
+centered = false
 
-[node name="Battery" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -878.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="BatteryTimer" type="Timer" parent="Battery"]
-one_shot = true
-
-[node name="BatteryMargin" type="MarginContainer" parent="Battery"]
+[node name="TopBar" type="Control" parent="."]
+z_index = 1
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 18.0
-offset_top = 15.0
-offset_right = -20.0
-offset_bottom = 175.0
+offset_bottom = 96.0
 grow_horizontal = 2
 
-[node name="BateryVBox" type="VBoxContainer" parent="Battery/BatteryMargin"]
-layout_mode = 2
-
-[node name="BatteryBar" type="ProgressBar" parent="Battery/BatteryMargin/BateryVBox"]
-z_index = 4
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 64
-max_value = 30.0
-
-[node name="Home" type="Control" parent="."]
+[node name="ColorRect" type="ColorRect" parent="TopBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0, 0, 0, 0.478431)
 
-[node name="MarginContainer" type="MarginContainer" parent="Home"]
+[node name="MarginContainer" type="MarginContainer" parent="TopBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopBar/MarginContainer"]
+layout_mode = 2
+
+[node name="Time" type="Label" parent="TopBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "10:36"
+
+[node name="VSeparator2" type="VSeparator" parent="TopBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+theme_override_styles/separator = ExtResource("3_7dnor")
+
+[node name="Notification" type="TextureRect" parent="TopBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_jnjbr")
+expand_mode = 3
+
+[node name="VSeparator" type="VSeparator" parent="TopBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = ExtResource("3_7dnor")
+
+[node name="6G" type="Label" parent="TopBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "6G"
+
+[node name="VSeparator3" type="VSeparator" parent="TopBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+theme_override_styles/separator = ExtResource("3_7dnor")
+
+[node name="BatteryBar" type="ProgressBar" parent="TopBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/background = SubResource("StyleBoxFlat_oqpi6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yloim")
+max_value = 30.0
+
+[node name="BatteryTimer" type="Timer" parent="TopBar/MarginContainer/HBoxContainer/BatteryBar"]
+one_shot = true
+
+[node name="ColorRect" type="ColorRect" parent="TopBar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(12, 32)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Apps" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1079.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Apps"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -31.0
+offset_top = -180.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/margin_bottom = 16
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Home/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Apps/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 8
 theme_override_constants/separation = 24
 
-[node name="Options" type="Button" parent="Home/MarginContainer/HBoxContainer"]
+[node name="Options" type="Button" parent="Apps/MarginContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_constants/icon_max_width = 156
 theme_override_font_sizes/font_size = 72
-text = "options"
+icon = ExtResource("4_k6qw4")
+flat = true
 
-[node name="Button2" type="Button" parent="Home/MarginContainer/HBoxContainer"]
+[node name="Camera" type="Button" parent="Apps/MarginContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_constants/icon_max_width = 156
 theme_override_font_sizes/font_size = 32
-text = "app 2"
+icon = ExtResource("5_8pkqu")
+flat = true
 
-[node name="Button3" type="Button" parent="Home/MarginContainer/HBoxContainer"]
+[node name="Chats" type="Button" parent="Apps/MarginContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "app 3
+theme_override_constants/icon_max_width = 156
+text = "
 "
-
-[node name="Button4" type="Button" parent="Home/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "app 4
-"
+icon = ExtResource("7_rhvqn")
+flat = true
 
 [node name="Options" type="Control" parent="."]
 visible = false
@@ -114,6 +185,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Gray" type="ColorRect" parent="Options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.532242, 0.532242, 0.532242, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="Options"]
 layout_mode = 1
@@ -186,7 +266,78 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[connection signal="pressed" from="Home/MarginContainer/HBoxContainer/Options" to="." method="_on_options_pressed"]
+[node name="Camera" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Camera"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera"]
+position = Vector2(360.5, 608.507)
+scale = Vector2(0.958667, 0.958667)
+texture = ExtResource("7_7bxb7")
+region_enabled = true
+region_rect = Rect2(420.241, 0, 750.256, 1040)
+
+[node name="MarginContainer" type="MarginContainer" parent="Camera"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera/MarginContainer"]
+layout_mode = 2
+
+[node name="Back" type="Button" parent="Camera/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "back"
+
+[node name="Chats" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Chats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back" type="Button" parent="Chats"]
+offset_left = 27.0
+offset_top = 120.0
+offset_right = 199.0
+offset_bottom = 227.0
+theme_override_font_sizes/font_size = 72
+text = "back"
+
+[connection signal="pressed" from="Apps/MarginContainer/HBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Apps/MarginContainer/HBoxContainer/Camera" to="." method="_on_camera_pressed"]
+[connection signal="pressed" from="Apps/MarginContainer/HBoxContainer/Chats" to="." method="_on_chats_pressed"]
 [connection signal="pressed" from="Options/MarginContainer/VBoxContainer2/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Options/MarginContainer/VBoxContainer2/Quit" to="." method="_on_quit_pressed"]
 [connection signal="toggled" from="Options/MarginContainer/VBoxContainer2/Fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="pressed" from="Camera/MarginContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Chats/Back" to="." method="_on_back_pressed"]

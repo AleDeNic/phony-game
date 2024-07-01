@@ -19,14 +19,14 @@ var is_zooming_in: bool = false
 @export var effects_decrease_speed: float = 2.0
 
 func _ready() -> void:
-	print("Phone started")
 	effects.z_index = 1
 	black_screen.visible = true
 
 func _on_area_entered(_area: Area2D) -> void:
 	is_zooming_in = true
 	timer.start()
-	phone_screen.phone_state = "menu"
+	phone_screen.phone_state = "home"
+	phone_screen.go_to_screen("home")
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	phone_scale(scale_up_speed)
 	effects.start_effects(effects_increase_speed)
@@ -37,7 +37,6 @@ func _on_area_exited(_area: Area2D) -> void:
 	print("area exited")
 	is_zooming_in = false
 	timer.stop()
-	phone_screen.go_to_screen("home")
 	phone_screen.phone_state = "off"
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	phone_scale(scale_down_speed)

@@ -24,10 +24,13 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 directories/dch_directory={
 "asuka": "res://characters/asuka.dch",
+"self": "res://characters/self.dch",
 "unit_test_character": "res://Tests/Resources/unit_test_character.dch"
 }
 directories/dtl_directory={
-"asuka": "res://timelines/asuka.dtl"
+"asuka": "res://timelines/asuka.dtl",
+"chat_asuka": "res://timelines/chat_asuka.dtl",
+"window": "res://timelines/window.dtl"
 }
 glossary/default_case_sensitive=true
 layout/style_list=[]

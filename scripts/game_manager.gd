@@ -21,17 +21,16 @@ func handle_timeline(timeline) -> void:
 			Dialogic.paused = false
 			if Dialogic.Styles.get_layout_node():
 				Dialogic.Styles.get_layout_node().show()
-			print("timeline resumed")
+				print(timeline + " timeline resumed")
 		else:
 			Dialogic.paused = true
 			if Dialogic.Styles.get_layout_node():
 				Dialogic.Styles.get_layout_node().hide()
-			await get_tree().create_timer(1).timeout
-			print("timeline paused")
+				print(timeline + " timeline paused")
 	else:
 		Dialogic.start(timeline)
+		Dialogic.process_mode = Node.PROCESS_MODE_ALWAYS
 		timeline_started = true
-		
 		if Dialogic.Styles.get_layout_node():
 			Dialogic.Styles.get_layout_node().show()
-		print("timeline started")
+			print(timeline + " timeline started")
