@@ -1,7 +1,5 @@
 extends Node
 
-# TODO: Investigate why the fuck this does have to be manual. Thanks
-
 @export_group("Tasks values")
 @export var phone_stress_heal: float = 0.3
 @export var window_stress_increase: float = 0.1
@@ -39,7 +37,11 @@ func handle_timeline(timeline_name: String, reset: bool = false) -> void:
 					timeline.pause()
 					print(timeline_name + " timeline paused")
 			else:
-				timeline.start()
-				print(timeline_name + " timeline started")
+				if asuka_timeline.started:
+					asuka_timeline.save_state()
+				if window_timeline.started:
+					window_timeline.save_state()
+				timeline.restore_state()
+				print(timeline_name + " timeline started/restored")
 	else:
 		print("Timeline ", timeline_name, " does not exist.")
