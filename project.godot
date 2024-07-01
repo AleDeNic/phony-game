@@ -33,10 +33,16 @@ directories/dtl_directory={
 "window": "res://timelines/window.dtl"
 }
 glossary/default_case_sensitive=true
-layout/style_list=[]
-layout/default_style="Default"
+layout/style_list=["res://scenes/example_style.tres"]
+layout/default_style="res://scenes/example_style.tres"
 variables={
-"player_name": "name"
+"asuka": {
+"chapter": "chapter_0"
+},
+"player_name": "name",
+"window": {
+"chapter": "chapter_0"
+}
 }
 text/letter_speed=0.01
 text/initial_text_reveal_skippable=true
@@ -55,6 +61,10 @@ choices/reveal_by_input=false
 save/autosave_delay=60.0
 save/encryption_on_exports_only=true
 text/autopauses={}
+history/simple_history_enabled=true
+history/full_history_enabled=true
+history/visited_event_history_enabled=true
+history/save_on_save=true
 
 [display]
 
