@@ -29,12 +29,17 @@ func handle_timeline(timeline_name: String, reset: bool = false) -> void:
 	if timeline:
 		if reset:
 			timeline.reset()
-		elif timeline.started:
-			if Dialogic.paused:
-				timeline.resume()
-			else:
-				timeline.pause()
+			print(timeline_name + " timeline reset")
 		else:
-			timeline.start()
+			if timeline.started and not timeline.ended:
+				if Dialogic.paused:
+					timeline.resume()
+					print(timeline_name + " timeline resumed")
+				else:
+					timeline.pause()
+					print(timeline_name + " timeline paused")
+			else:
+				timeline.start()
+				print(timeline_name + " timeline started")
 	else:
 		print("Timeline ", timeline_name, " does not exist.")
