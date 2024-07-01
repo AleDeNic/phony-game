@@ -28,7 +28,6 @@ func _on_area_entered(_area: Area2D) -> void:
 	timer.start()
 	phone_screen.phone_state = "home"
 	phone_screen.go_to_screen("home")
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	phone_scale(scale_up_speed)
 	effects.start_effects(effects_increase_speed)
 	camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
@@ -39,7 +38,6 @@ func _on_area_exited(_area: Area2D) -> void:
 	is_zooming_in = false
 	timer.stop()
 	phone_screen.phone_state = "off"
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	phone_scale(scale_down_speed)
 	effects.start_effects(effects_decrease_speed)
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)

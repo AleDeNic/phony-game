@@ -17,7 +17,6 @@ func _ready() -> void:
 
 func _on_area_entered(_area: Area2D) -> void:
 	timer.start()
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	game_manager.handle_timeline("asuka")
 	is_zooming_in = true
 	asuka_sprite.z_index = 2
@@ -29,7 +28,6 @@ func _on_area_entered(_area: Area2D) -> void:
 
 func _on_area_exited(_area: Area2D) -> void:
 	timer.stop()
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	game_manager.handle_timeline("asuka", true)
 	if Dialogic.Styles.get_layout_node():
 		Dialogic.Styles.get_layout_node().hide()

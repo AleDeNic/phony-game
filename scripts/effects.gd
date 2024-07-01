@@ -14,7 +14,6 @@ func _process(_delta: float) -> void:
 	stress_filter.modulate.a = clamp(stress_level / game_manager.max_stress, 0.0, 1.0)
 
 func start_effects(effects_speed) -> void:
-	print("start effects")
 	effects_animation.speed_scale = effects_speed
 	if phone.is_zooming_in:
 		effects_animation.play("blur")
