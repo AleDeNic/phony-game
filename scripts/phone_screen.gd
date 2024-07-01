@@ -39,11 +39,11 @@ func go_to_screen(screen: String) -> void:
 		chats.visible = true
 		
 func handle_battery(state) -> void:
-	if state == "home":
+	if state == "off" or state == "options":
+		battery_timer.paused = true
+	else:
 		battery_timer.paused = false
 		battery_bar.value = battery_timer.time_left
-	else:
-		battery_timer.paused = true
 
 func _on_options_pressed() -> void:
 	phone_state = "options"

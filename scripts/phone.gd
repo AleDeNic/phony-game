@@ -8,6 +8,7 @@ extends Area2D
 @onready var effects: Control = $"../Effects"
 @onready var camera: Camera2D = $"../Player/Camera2D"
 @onready var phone_screen: Control = $PhoneScreen
+@onready var player: CharacterBody2D = %Player
 
 var is_zooming_in: bool = false
 
@@ -50,3 +51,4 @@ func phone_scale(scale_speed) -> void:
 		phone_animation.play("scale")
 	else:
 		phone_animation.play_backwards("scale")
+	

@@ -24,8 +24,7 @@ position_smoothing_enabled = true
 position_smoothing_speed = 7.0
 script = ExtResource("2_owyey")
 
-[node name="Trigger" type="Area2D" parent="."]
-collision_layer = 4
+[node name="Trigger" type="StaticBody2D" parent="."]
 
 [node name="TriggerCollision" type="CollisionShape2D" parent="Trigger"]
 shape = SubResource("CircleShape2D_h1w0k")
