@@ -13,8 +13,6 @@ extends Node
 
 var timelines: Dictionary = {"asuka": false, "window": false}
 
-#var object: Object = {Object: {started: false}}
-
 func _ready() -> void:
 	for timeline in timelines:
 		timelines[timeline] = false

@@ -64,13 +64,10 @@ func move_towards_phone() -> void:
 	velocity = direction * move_speed
 	move_and_slide()  # Move the player
 
-	print("Moving towards phone... Distance: ", global_position.distance_to(phone_position))
-
 	# Check if close enough to phone to stop movement
 	if global_position.distance_to(phone_position) < 5.0:  # Threshold for snapping to phone
 		is_locked = true
 		velocity = Vector2.ZERO
-		print("Locked to phone position")
 
 func reset_mouse_to_center() -> void:
 	# Warp the mouse cursor to the center of the viewport
