@@ -32,8 +32,9 @@ func phone_scale(scale_speed) -> void:
 		phone_animation.play_backwards("scale")
 
 func enter_phone() -> void:
-	if player.state == "phone_out":
-		player.state = "phone_zooming_in"
+	player.state = "phone_zooming_in"
+	await get_tree().create_timer(0.2).timeout
+	if player.state == "phone_zooming_in":
 		timer.start()
 		phone_screen.phone_state = "home"
 		phone_screen.go_to_screen("home")

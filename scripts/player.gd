@@ -31,7 +31,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	print(state)
 	mouse_movement = get_viewport().get_mouse_position() - center_position
-	
 	if state == "phone_zooming_in":
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		movement_vector = (phone_position - global_position).normalized()
@@ -55,4 +54,3 @@ func _process(delta: float) -> void:
 
 func reset_mouse_to_center() -> void:
 	Input.warp_mouse(center_position)
-	

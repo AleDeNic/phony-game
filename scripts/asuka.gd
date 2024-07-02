@@ -30,6 +30,7 @@ func _on_area_entered(_area: Area2D) -> void:
 
 func _on_area_exited(_area: Area2D) -> void:
 	timer.stop()
+	player.state = "phone_out"
 	game_manager.handle_timeline("asuka", true)
 	if Dialogic.Styles.get_layout_node():
 		Dialogic.Styles.get_layout_node().hide()

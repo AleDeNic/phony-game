@@ -41,7 +41,7 @@ corner_detail = 6
 [node name="PhoneScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 1200.0
+offset_right = 1600.0
 offset_bottom = 1600.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
