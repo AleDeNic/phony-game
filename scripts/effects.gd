@@ -15,7 +15,7 @@ func _process(_delta: float) -> void:
 
 func start_effects(effects_speed) -> void:
 	effects_animation.speed_scale = effects_speed
-	if phone.is_zooming_in:
+	if phone.state == "zooming_in":
 		effects_animation.play("blur")
 	else:
 		effects_animation.play_backwards("blur")

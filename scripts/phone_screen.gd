@@ -7,6 +7,7 @@ extends Control
 @onready var game_manager: Node2D = %GameManager
 @onready var battery_bar: ProgressBar = $TopBar/MarginContainer/HBoxContainer/BatteryBar
 @onready var battery_timer: Timer = $TopBar/MarginContainer/HBoxContainer/BatteryBar/BatteryTimer
+@onready var phone: Area2D = get_node("/root/World/Phone")
 
 var phone_state: String
 
@@ -20,6 +21,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
+		phone.is_zooming_in = true
 		go_to_screen("options")
 	
 	handle_battery(phone_state)
@@ -69,3 +71,6 @@ func _on_camera_pressed() -> void:
 func _on_chats_pressed() -> void:
 	phone_state = "chats"
 	go_to_screen("chats")
+
+func _on_mouse_exited() -> void:
+	phone.exit_phone()

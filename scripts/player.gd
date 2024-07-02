@@ -2,10 +2,11 @@ extends CharacterBody2D
 
 @onready var phone: Area2D = $"../Phone"
 @onready var asuka: Area2D = $"../Asuka"
+@onready var exit_trigger: StaticBody2D = $ExitTrigger
 
-@export var default_speed: float = 65.0  # Normal mouse sensitivity
-@export var transition_speed: float = 5.0  # Speed of sensitivity transition
-@export var towards_phone_speed: float = 800.0  # Speed of movement towards the phone
+@export var default_speed: float = 65.0
+@export var transition_speed: float = 5.0
+@export var towards_phone_speed: float = 800.0
 
 var current_speed: float
 var target_speed: float
@@ -26,14 +27,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	mouse_movement = get_viewport().get_mouse_position() - center_position
 	
-	if phone.is_zooming_in:
+	if phone.state == "zooming_in":
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		movement_vector = (phone_position - global_position).normalized()
-		if global_position.distance_to(phone_position) < 5.0:  # Threshold for snapping to phone
-			target_speed = 0
+		if global_position.distance_to(phone_position) < 5.0:
+			target_speed = 0.0
 		else:
 			target_speed = towards_phone_speed
 	else:
+		if phone.state == "zooming_out":
+			current_speed = 50.0
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		movement_vector = mouse_movement
 		target_speed = default_speed
@@ -45,3 +48,4 @@ func _process(delta: float) -> void:
 
 func reset_mouse_to_center() -> void:
 	Input.warp_mouse(center_position)
+	

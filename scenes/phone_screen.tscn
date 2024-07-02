@@ -40,13 +40,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -960.0
-offset_top = -540.0
-offset_right = -240.0
-offset_bottom = 740.0
+offset_left = -360.0
+offset_top = -640.0
+offset_right = 360.0
+offset_bottom = 640.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 1
 script = ExtResource("1_4cg5r")
 
 [node name="Wallpaper" type="Sprite2D" parent="."]
@@ -63,6 +65,7 @@ anchor_bottom = 1.0
 offset_top = -209.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Apps"]
 layout_mode = 1
@@ -81,6 +84,7 @@ size_flags_horizontal = 4
 
 [node name="Options" type="Button" parent="Apps/MarginContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_constants/icon_max_width = 156
 theme_override_font_sizes/font_size = 72
 icon = ExtResource("4_k6qw4")
@@ -88,6 +92,7 @@ flat = true
 
 [node name="Camera" type="Button" parent="Apps/MarginContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_constants/icon_max_width = 156
 theme_override_font_sizes/font_size = 32
 icon = ExtResource("5_8pkqu")
@@ -95,6 +100,7 @@ flat = true
 
 [node name="Chats" type="Button" parent="Apps/MarginContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_constants/icon_max_width = 156
 text = "
 "
@@ -103,6 +109,7 @@ flat = true
 
 [node name="Video" type="Button" parent="Apps/MarginContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_constants/icon_max_width = 156
 icon = ExtResource("6_vmfnf")
 flat = true
@@ -115,6 +122,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="Gray" type="ColorRect" parent="Options"]
 layout_mode = 1
@@ -123,6 +131,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.532242, 0.532242, 0.532242, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="Options"]
@@ -143,11 +152,13 @@ layout_mode = 2
 
 [node name="Back" type="Button" parent="Options/MarginContainer/VBoxContainer2"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_font_sizes/font_size = 72
 text = "back"
 
 [node name="Quit" type="Button" parent="Options/MarginContainer/VBoxContainer2"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_font_sizes/font_size = 72
 text = "Turn off phone"
 
@@ -157,12 +168,14 @@ alignment = 1
 
 [node name="VolumeLabel" type="Label" parent="Options/MarginContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_font_sizes/font_size = 48
 text = "Volume"
 vertical_alignment = 1
 
 [node name="VSeparator" type="VSeparator" parent="Options/MarginContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_constants/separation = 48
 theme_override_styles/separator = ExtResource("3_7dnor")
 
@@ -170,6 +183,7 @@ theme_override_styles/separator = ExtResource("3_7dnor")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+mouse_filter = 1
 max_value = 1.0
 step = 0.05
 script = ExtResource("4_5jmmy")
@@ -181,6 +195,7 @@ layout_mode = 2
 [node name="Fullscreen" type="Label" parent="Options/MarginContainer/VBoxContainer2/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
 theme_override_font_sizes/font_size = 48
 text = "Fullscreen"
 horizontal_alignment = 3
@@ -188,6 +203,7 @@ vertical_alignment = 1
 
 [node name="FullscreenSwitch" type="CheckButton" parent="Options/MarginContainer/VBoxContainer2/HBoxContainer2"]
 layout_mode = 2
+mouse_filter = 1
 text = "
 "
 alignment = 2
@@ -200,6 +216,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="ColorRect" type="ColorRect" parent="Camera"]
 layout_mode = 1
@@ -208,6 +225,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera"]
@@ -231,6 +249,7 @@ layout_mode = 2
 
 [node name="Back" type="Button" parent="Camera/MarginContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_font_sizes/font_size = 72
 text = "back"
 
@@ -242,6 +261,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="ColorRect" type="ColorRect" parent="Chats"]
 layout_mode = 1
@@ -250,6 +270,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Chats"]
 layout_mode = 1
@@ -270,6 +291,7 @@ theme_override_constants/separation = 32
 
 [node name="Button" type="Button" parent="Chats/MarginContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/h_separation = 16
 theme_override_font_sizes/font_size = 40
@@ -280,6 +302,7 @@ alignment = 0
 
 [node name="Button2" type="Button" parent="Chats/MarginContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/h_separation = 16
 theme_override_font_sizes/font_size = 40
@@ -290,6 +313,7 @@ alignment = 0
 
 [node name="Button3" type="Button" parent="Chats/MarginContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/h_separation = 16
 theme_override_font_sizes/font_size = 40
@@ -304,6 +328,7 @@ offset_left = 27.0
 offset_top = 120.0
 offset_right = 199.0
 offset_bottom = 227.0
+mouse_filter = 1
 theme_override_font_sizes/font_size = 72
 text = "back"
 
@@ -313,6 +338,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 96.0
 grow_horizontal = 2
+mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="TopBar"]
 layout_mode = 1
@@ -321,6 +347,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 0.478431)
 
 [node name="MarginContainer" type="MarginContainer" parent="TopBar"]
@@ -346,6 +373,7 @@ text = "10:36"
 
 [node name="VSeparator2" type="VSeparator" parent="TopBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_constants/separation = 12
 theme_override_styles/separator = ExtResource("3_7dnor")
 
@@ -356,6 +384,7 @@ expand_mode = 3
 
 [node name="VSeparator" type="VSeparator" parent="TopBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_constants/separation = 320
 theme_override_styles/separator = ExtResource("3_7dnor")
 
@@ -363,6 +392,7 @@ theme_override_styles/separator = ExtResource("3_7dnor")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+mouse_filter = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 theme_override_styles/background = SubResource("StyleBoxFlat_oqpi6")
@@ -385,6 +415,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="TurnOff"]
 layout_mode = 1
@@ -393,6 +424,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="TurnOff"]
@@ -433,6 +465,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="Apps/MarginContainer/HBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Apps/MarginContainer/HBoxContainer/Camera" to="." method="_on_camera_pressed"]
 [connection signal="pressed" from="Apps/MarginContainer/HBoxContainer/Chats" to="." method="_on_chats_pressed"]

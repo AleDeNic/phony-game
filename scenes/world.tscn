@@ -176,7 +176,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qisob"]
-size = Vector2(5.97999, 9.97582)
+size = Vector2(5.46524, 9.68707)
 
 [node name="World" type="Node2D"]
 

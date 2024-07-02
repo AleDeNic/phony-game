@@ -10,7 +10,7 @@ extends Area2D
 @onready var phone_screen: Control = $PhoneScreen
 @onready var player: CharacterBody2D = %Player
 
-var is_zooming_in: bool = false
+var state: String
 
 @export_group("Scale speeds")
 @export var scale_up_speed: float = 1.0
@@ -24,7 +24,8 @@ func _ready() -> void:
 	black_screen.visible = true
 
 func _on_area_entered(_area: Area2D) -> void:
-	is_zooming_in = true
+	state = "zooming_in"
+	print(state)
 	timer.start()
 	phone_screen.phone_state = "home"
 	phone_screen.go_to_screen("home")
@@ -33,9 +34,16 @@ func _on_area_entered(_area: Area2D) -> void:
 	camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
 	black_screen.visible = false
 
-func _on_area_exited(_area: Area2D) -> void:
-	print("area exited")
-	is_zooming_in = false
+func phone_scale(scale_speed) -> void:
+	phone_animation.speed_scale = scale_speed
+	if state == "zooming_in":
+		phone_animation.play("scale")
+	elif state == "zooming_out":
+		phone_animation.play_backwards("scale")
+
+func exit_phone() -> void:
+	state = "zooming_out"
+	print(state)
 	timer.stop()
 	phone_screen.phone_state = "off"
 	phone_scale(scale_down_speed)
@@ -43,10 +51,7 @@ func _on_area_exited(_area: Area2D) -> void:
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 	black_screen.visible = true
 
-func phone_scale(scale_speed) -> void:
-	phone_animation.speed_scale = scale_speed
-	if is_zooming_in:
-		phone_animation.play("scale")
-	else:
-		phone_animation.play_backwards("scale")
-	
+
+func _on_area_exited(area: Area2D) -> void:
+	state = "out"
+	print(state)
