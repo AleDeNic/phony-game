@@ -1,12 +1,12 @@
 extends Control
 
-@onready var apps: Control = $Apps
-@onready var options: Control = $Options
-@onready var camera: Control = $Camera
-@onready var chats: Control = $Chats
+@onready var apps: Control = $PhoneSize/Apps
+@onready var options: Control = $PhoneSize/Options
+@onready var camera: Control = $PhoneSize/Camera
+@onready var chats: Control = $PhoneSize/Chats
 @onready var game_manager: Node2D = %GameManager
-@onready var battery_bar: ProgressBar = $TopBar/MarginContainer/HBoxContainer/BatteryBar
-@onready var battery_timer: Timer = $TopBar/MarginContainer/HBoxContainer/BatteryBar/BatteryTimer
+@onready var battery_bar: ProgressBar = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar
+@onready var battery_timer: Timer = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar/BatteryTimer
 @onready var phone: Area2D = get_node("/root/World/Phone")
 
 var phone_state: String
@@ -22,7 +22,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	handle_battery(phone_state)
 	if Input.is_action_just_pressed("ui_cancel"):
-		phone.state = "zooming_in"
+		phone.state = "phone_zooming_in"
 		go_to_screen("options")
 
 func go_to_screen(screen: String) -> void:
@@ -72,4 +72,5 @@ func _on_chats_pressed() -> void:
 	go_to_screen("chats")
 
 func _on_mouse_exited() -> void:
+	print("control_out")
 	phone.exit_phone()

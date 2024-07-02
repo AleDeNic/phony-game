@@ -259,19 +259,19 @@ position = Vector2(129, 74)
 scale = Vector2(0.755, 0.755)
 texture = ExtResource("3_sup45")
 
-[node name="PhoneScreen" parent="Phone" instance=ExtResource("7_g2i3f")]
-offset_left = -217.0
-offset_top = -344.0
-offset_right = 983.0
-offset_bottom = 1256.0
-rotation = 0.081157
-scale = Vector2(0.419138, 0.419138)
-
 [node name="PhoneCollision" type="CollisionShape2D" parent="Phone"]
-position = Vector2(6, 24)
-rotation = 0.0746187
-scale = Vector2(37.2402, 33.1369)
+position = Vector2(4.25684, -2.82666)
+rotation = 0.0767945
+scale = Vector2(65.5462, 61.7709)
 shape = SubResource("RectangleShape2D_qisob")
+
+[node name="PhoneScreen" parent="Phone" instance=ExtResource("7_g2i3f")]
+offset_left = -125.0
+offset_top = -281.0
+offset_right = 595.0
+offset_bottom = 999.0
+rotation = 0.0804719
+scale = Vector2(0.430467, 0.430467)
 
 [node name="Player" parent="." instance=ExtResource("9_o22lg")]
 unique_name_in_owner = true
@@ -284,5 +284,5 @@ unique_name_in_owner = true
 [connection signal="area_exited" from="Window" to="Window" method="_on_area_exited"]
 [connection signal="timeout" from="Window/WindowTimer" to="Effects" method="_on_window_timer_timeout"]
 [connection signal="area_entered" from="Phone" to="Phone" method="_on_area_entered"]
-[connection signal="animation_finished" from="Phone/PhoneAnimation" to="Phone" method="_on_phone_animation_animation_finished"]
+[connection signal="area_exited" from="Phone" to="Phone" method="_on_area_exited"]
 [connection signal="timeout" from="Phone/PhoneTimer" to="Effects" method="_on_phone_timer_timeout"]

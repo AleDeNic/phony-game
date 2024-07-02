@@ -6,7 +6,7 @@ extends CharacterBody2D
 
 @export var default_speed: float = 65.0
 @export var transition_speed: float = 5.0
-@export var towards_phone_speed: float = 800.0
+@export var towards_phone_speed: float = 200.0
 @export var exit_speed: float = 30
 
 var current_speed: float
@@ -26,8 +26,10 @@ func _ready() -> void:
 	reset_mouse_to_center()
 	phone_position = phone.global_position
 	current_speed = default_speed
+	state = "phone_out"
 
 func _process(delta: float) -> void:
+	print(state)
 	mouse_movement = get_viewport().get_mouse_position() - center_position
 	
 	if state == "phone_zooming_in":
@@ -39,7 +41,8 @@ func _process(delta: float) -> void:
 			target_speed = towards_phone_speed
 	else:
 		if state == "phone_zooming_out":
-			current_speed = exit_speed
+			current_speed = 30.0
+			target_speed = default_speed
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		movement_vector = mouse_movement
 		target_speed = default_speed
@@ -48,6 +51,7 @@ func _process(delta: float) -> void:
 	current_speed = lerp(current_speed, target_speed, delta * transition_speed)
 	velocity = movement_vector * current_speed
 	move_and_slide()
+	print(current_speed)
 
 func reset_mouse_to_center() -> void:
 	Input.warp_mouse(center_position)

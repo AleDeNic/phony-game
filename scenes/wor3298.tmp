@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://3ngo2fu72k0i"]
+[gd_scene load_steps=26 format=3 uid="uid://3ngo2fu72k0i"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_shqgp"]
 [ext_resource type="PackedScene" uid="uid://mei3fh0wa3em" path="res://scenes/effects.tscn" id="1_u37f0"]
@@ -178,6 +178,8 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qisob"]
 size = Vector2(5.46524, 9.68707)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7l2rv"]
+
 [node name="World" type="Node2D"]
 
 [node name="GameManager" type="Node2D" parent="."]
@@ -273,6 +275,13 @@ rotation = 0.0746187
 scale = Vector2(37.2402, 33.1369)
 shape = SubResource("RectangleShape2D_qisob")
 
+[node name="ExitArea" type="Area2D" parent="Phone"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Phone/ExitArea"]
+rotation = 0.0834702
+scale = Vector2(27.0451, 35.8661)
+shape = SubResource("RectangleShape2D_7l2rv")
+
 [node name="Player" parent="." instance=ExtResource("9_o22lg")]
 unique_name_in_owner = true
 
@@ -284,5 +293,5 @@ unique_name_in_owner = true
 [connection signal="area_exited" from="Window" to="Window" method="_on_area_exited"]
 [connection signal="timeout" from="Window/WindowTimer" to="Effects" method="_on_window_timer_timeout"]
 [connection signal="area_entered" from="Phone" to="Phone" method="_on_area_entered"]
-[connection signal="animation_finished" from="Phone/PhoneAnimation" to="Phone" method="_on_phone_animation_animation_finished"]
 [connection signal="timeout" from="Phone/PhoneTimer" to="Effects" method="_on_phone_timer_timeout"]
+[connection signal="area_exited" from="Phone/ExitArea" to="Phone" method="_on_exit_area_area_exited"]

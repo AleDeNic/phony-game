@@ -2,7 +2,7 @@ extends Area2D
 
 @onready var game_manager: Node2D = %GameManager
 @onready var timer: Timer = $PhoneTimer
-@onready var black_screen: ColorRect = $"../Phone/PhoneScreen/BlackScreen"
+@onready var black_screen: ColorRect = $"../Phone/PhoneScreen/PhoneSize/BlackScreen"
 @onready var phone_animation: AnimationPlayer = $PhoneAnimation
 @onready var effects_animation: AnimationPlayer = $"../Effects/EffectsAnimation"
 @onready var effects: Control = $"../Effects"
@@ -32,23 +32,27 @@ func phone_scale(scale_speed) -> void:
 		phone_animation.play_backwards("scale")
 
 func enter_phone() -> void:
-	player.state = "phone_zooming_in"
-	timer.start()
-	phone_screen.phone_state = "home"
-	phone_screen.go_to_screen("home")
-	phone_scale(scale_up_speed)
-	effects.start_effects(effects_increase_speed)
-	camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
-	black_screen.visible = false
+	if player.state == "phone_out":
+		player.state = "phone_zooming_in"
+		timer.start()
+		phone_screen.phone_state = "home"
+		phone_screen.go_to_screen("home")
+		phone_scale(scale_up_speed)
+		effects.start_effects(effects_increase_speed)
+		camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
+		black_screen.visible = false
 
 func exit_phone() -> void:
-	player.state = "phone_zooming_out"
-	timer.stop()
-	phone_screen.phone_state = "off"
-	phone_scale(scale_down_speed)
-	effects.start_effects(effects_decrease_speed)
-	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-	black_screen.visible = true
+	if player.state == "phone_zooming_in":
+		player.state = "phone_zooming_out"
+		timer.stop()
+		phone_screen.phone_state = "off"
+		phone_scale(scale_down_speed)
+		effects.start_effects(effects_decrease_speed)
+		camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
+		black_screen.visible = true
 
-func _on_area_exited(_area: Area2D) -> void:
-	player.state = "out"
+func _on_phone_animation_animation_finished(anim_name: StringName) -> void:
+	if player.state != "phone_zooming_in":
+		player.state = "phone_out"
+	print(player.state)

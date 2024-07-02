@@ -284,5 +284,4 @@ unique_name_in_owner = true
 [connection signal="area_exited" from="Window" to="Window" method="_on_area_exited"]
 [connection signal="timeout" from="Window/WindowTimer" to="Effects" method="_on_window_timer_timeout"]
 [connection signal="area_entered" from="Phone" to="Phone" method="_on_area_entered"]
-[connection signal="animation_finished" from="Phone/PhoneAnimation" to="Phone" method="_on_phone_animation_animation_finished"]
 [connection signal="timeout" from="Phone/PhoneTimer" to="Effects" method="_on_phone_timer_timeout"]
