@@ -20,11 +20,10 @@ func _ready() -> void:
 	handle_battery(phone_state)
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ui_cancel"):
-		phone.is_zooming_in = true
-		go_to_screen("options")
-	
 	handle_battery(phone_state)
+	if Input.is_action_just_pressed("ui_cancel"):
+		phone.state = "zooming_in"
+		go_to_screen("options")
 
 func go_to_screen(screen: String) -> void:
 	apps.visible = false
@@ -39,7 +38,7 @@ func go_to_screen(screen: String) -> void:
 		camera.visible = true
 	elif screen == "chats":
 		chats.visible = true
-		
+
 func handle_battery(state) -> void:
 	if state == "off" or state == "options":
 		battery_timer.paused = true
@@ -63,7 +62,7 @@ func _on_fullscreen_toggled(toggled_on: bool) -> void:
 		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
-		
+
 func _on_camera_pressed() -> void:
 	phone_state = "camera"
 	go_to_screen("camera")

@@ -6,6 +6,7 @@ extends Area2D
 @onready var camera: Camera2D = $"../Player/Camera2D"
 @onready var eyes_sprite: AnimatedSprite2D = $EyesSprite
 @onready var game_manager: Node2D = %GameManager
+@onready var player: CharacterBody2D = %Player
 
 var is_zooming_in: bool
 
@@ -17,6 +18,7 @@ func _ready() -> void:
 
 func _on_area_entered(_area: Area2D) -> void:
 	timer.start()
+	player.state = "asuka_zooming_in"
 	game_manager.handle_timeline("asuka")
 	is_zooming_in = true
 	asuka_sprite.z_index = 2

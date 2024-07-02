@@ -4,6 +4,7 @@ extends Control
 @onready var stress_filter: ColorRect = $StressFilter
 @onready var phone: Area2D = $"../Phone"
 @onready var effects_animation: AnimationPlayer = $EffectsAnimation
+@onready var player: CharacterBody2D = %Player
 
 var stress_level: float
 
@@ -15,7 +16,7 @@ func _process(_delta: float) -> void:
 
 func start_effects(effects_speed) -> void:
 	effects_animation.speed_scale = effects_speed
-	if phone.state == "zooming_in":
+	if player.state == "phone_zooming_in":
 		effects_animation.play("blur")
 	else:
 		effects_animation.play_backwards("blur")

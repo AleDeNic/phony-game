@@ -2,9 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dnl0mum6ltimb" path="res://assets/images/train_2.png" id="1_008is"]
 [ext_resource type="Texture2D" uid="uid://brfshqyxfujus" path="res://assets/images/hdri_env2.jpg" id="1_cbrwh"]
-[ext_resource type="Script" path="res://scripts/landscape.gd" id="1_spcxw"]
 [ext_resource type="Texture2D" uid="uid://si4a0gnvh6eu" path="res://assets/images/tree.png" id="2_5hejk"]
-[ext_resource type="PackedScene" uid="uid://dkqgk1ks3u0y" path="res://scenes/background.tscn" id="3_n2egf"]
+[ext_resource type="Shader" path="res://shaders/scroll.gdshader" id="3_wgfjb"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8wvv8"]
 normal = Vector2(0, 1)
@@ -16,6 +15,10 @@ normal = Vector2(-1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_boryj"]
 normal = Vector2(1, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sbnah"]
+shader = ExtResource("3_wgfjb")
+shader_parameter/speed = Vector2(-0.01, 0)
 
 [sub_resource type="Animation" id="Animation_68xj4"]
 length = 0.001
@@ -119,7 +122,6 @@ _data = {
 }
 
 [node name="Landscape" type="Node2D"]
-script = ExtResource("1_spcxw")
 
 [node name="WorldBoundaries" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -137,7 +139,7 @@ shape = SubResource("WorldBoundaryShape2D_neuer")
 
 [node name="RightBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
 visibility_layer = 2
-position = Vector2(2000, 0)
+position = Vector2(3200, 0)
 shape = SubResource("WorldBoundaryShape2D_674om")
 
 [node name="LeftBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
@@ -157,8 +159,14 @@ position = Vector2(692, 464)
 scale = Vector2(1.04735, 1.04735)
 texture = ExtResource("1_cbrwh")
 
-[node name="Background" parent="ParallaxBackground/BackgroundLayer" instance=ExtResource("3_n2egf")]
+[node name="Background" type="Node2D" parent="ParallaxBackground/BackgroundLayer"]
 position = Vector2(-2222, -1599)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/BackgroundLayer/Background"]
+material = SubResource("ShaderMaterial_sbnah")
+position = Vector2(3592, 2020)
+scale = Vector2(0.935486, 0.935486)
+texture = ExtResource("1_cbrwh")
 
 [node name="TreeLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 visible = false

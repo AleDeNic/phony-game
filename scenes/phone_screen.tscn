@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://dg55yu6bit6jt"]
+[gd_scene load_steps=16 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_screen.gd" id="1_4cg5r"]
+[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="2_emvlc"]
 [ext_resource type="Texture2D" uid="uid://djlpmyr2jau2k" path="res://assets/images/phone_wallpaper.png" id="2_jepf0"]
 [ext_resource type="StyleBox" uid="uid://duct66cpghgeh" path="res://styles/separator.tres" id="3_7dnor"]
 [ext_resource type="Texture2D" uid="uid://bfg0lk6kvgptl" path="res://assets/images/icons/notification_icon.png" id="3_jnjbr"]
@@ -11,6 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://bm2pd3jhn61iq" path="res://assets/images/selfie.png" id="7_7bxb7"]
 [ext_resource type="Texture2D" uid="uid://bh2aodmuhfccj" path="res://assets/images/icons/messages_icon.webp" id="7_rhvqn"]
 [ext_resource type="Texture2D" uid="uid://byqi5w8p5ltyq" path="res://assets/images/cursor_48.png" id="9_6xph0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7nucq"]
+shader = ExtResource("2_emvlc")
+shader_parameter/lod = 5.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oqpi6"]
 bg_color = Color(0, 0, 0, 0)
@@ -52,11 +57,14 @@ mouse_filter = 1
 script = ExtResource("1_4cg5r")
 
 [node name="Wallpaper" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.305882)
+material = SubResource("ShaderMaterial_7nucq")
 scale = Vector2(0.837153, 0.837112)
 texture = ExtResource("2_jepf0")
 centered = false
 
 [node name="Apps" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0.611765)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0

@@ -8,7 +8,7 @@ extends Camera2D
 @export_group("Zoom values")
 @export var phone_zoom_value = Vector2(0.8, 0.8)
 @export var asuka_zoom_value = Vector2(1.6, 1.6)
-@export var window_zoom_value = Vector2(2.5, 2.5)
+@export var window_zoom_value = Vector2(2.2, 2.2)
 @export var default_zoom_value = Vector2(1, 1)
 
 var target_zoom: Vector2

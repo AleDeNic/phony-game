@@ -186,7 +186,7 @@ script = ExtResource("1_shqgp")
 
 [node name="AudioManager" parent="." instance=ExtResource("12_3unc5")]
 
-[node name="Background" parent="." instance=ExtResource("2_scdex")]
+[node name="Landscape" parent="." instance=ExtResource("2_scdex")]
 
 [node name="Effects" parent="." instance=ExtResource("1_u37f0")]
 anchors_preset = 8
