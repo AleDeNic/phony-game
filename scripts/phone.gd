@@ -19,12 +19,11 @@ extends Area2D
 
 func _ready() -> void:
 	effects.z_index = 1
-	black_screen.visible = true
+	black_screen.visible = false
 
 func _on_area_entered(_area: Area2D) -> void:
 	if player.state == "free":
 		enter_phone()
-		black_screen.visible = false
 
 func phone_scale(scale_speed) -> void:
 	phone_animation.speed_scale = scale_speed
@@ -52,9 +51,8 @@ func exit_phone() -> void:
 	effects.start_effects(effects_decrease_speed)
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 
-func _on_phone_animation_animation_finished(anim_name: StringName) -> void:
+func _on_phone_animation_animation_finished(_anim_name: StringName) -> void:
 	if player.state == "phone_zooming_in":
 		player.state = "phone"
 	elif player.state == "phone_zooming_out":
 		player.state = "free"
-		black_screen.visible = true

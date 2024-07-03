@@ -346,6 +346,75 @@ mouse_filter = 1
 theme_override_font_sizes/font_size = 72
 text = "back"
 
+[node name="AsukaChat" type="Control" parent="PhoneSize/Chats"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ColorRect" type="ColorRect" parent="PhoneSize/Chats/AsukaChat"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/Chats/AsukaChat"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 274.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="VBoxContainer" parent="PhoneSize/Chats/AsukaChat/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Button" type="Button" parent="PhoneSize/Chats/AsukaChat/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 16
+theme_override_font_sizes/font_size = 40
+text = "message 1"
+icon = ExtResource("9_6xph0")
+flat = true
+alignment = 0
+
+[node name="Button2" type="Button" parent="PhoneSize/Chats/AsukaChat/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 16
+theme_override_font_sizes/font_size = 40
+text = "peppino69"
+icon = ExtResource("9_6xph0")
+flat = true
+alignment = 0
+
+[node name="Button3" type="Button" parent="PhoneSize/Chats/AsukaChat/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 16
+theme_override_font_sizes/font_size = 40
+text = "init.Sense CEO"
+icon = ExtResource("9_6xph0")
+flat = true
+alignment = 0
+
 [node name="TopBar" type="Control" parent="PhoneSize"]
 layout_mode = 1
 anchors_preset = 10
@@ -408,7 +477,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 40
 theme_override_styles/background = SubResource("StyleBoxFlat_oqpi6")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yloim")
 max_value = 30.0

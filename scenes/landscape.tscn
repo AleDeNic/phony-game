@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://cw0nk6gkudho2"]
+[gd_scene load_steps=16 format=3 uid="uid://cw0nk6gkudho2"]
 
 [ext_resource type="Texture2D" uid="uid://dnl0mum6ltimb" path="res://assets/images/train_2.png" id="1_008is"]
 [ext_resource type="Texture2D" uid="uid://brfshqyxfujus" path="res://assets/images/hdri_env2.jpg" id="1_cbrwh"]
 [ext_resource type="Texture2D" uid="uid://si4a0gnvh6eu" path="res://assets/images/tree.png" id="2_5hejk"]
+[ext_resource type="Shader" path="res://shaders/perspective.gdshader" id="3_7s0j3"]
 [ext_resource type="Shader" path="res://shaders/scroll.gdshader" id="3_wgfjb"]
+[ext_resource type="Script" path="res://scripts/landscape.gd" id="4_qx8wk"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8wvv8"]
 normal = Vector2(0, 1)
@@ -19,6 +21,14 @@ normal = Vector2(1, 0)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sbnah"]
 shader = ExtResource("3_wgfjb")
 shader_parameter/speed = Vector2(-0.01, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lb1o2"]
+shader = ExtResource("3_7s0j3")
+shader_parameter/fov = 100.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = -70.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
 
 [sub_resource type="Animation" id="Animation_68xj4"]
 length = 0.001
@@ -163,10 +173,17 @@ texture = ExtResource("1_cbrwh")
 position = Vector2(-2222, -1599)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/BackgroundLayer/Background"]
+visible = false
 material = SubResource("ShaderMaterial_sbnah")
 position = Vector2(3592, 2020)
 scale = Vector2(0.935486, 0.935486)
 texture = ExtResource("1_cbrwh")
+
+[node name="LandscapeDistorted" type="Sprite2D" parent="ParallaxBackground/BackgroundLayer/Background"]
+material = SubResource("ShaderMaterial_lb1o2")
+position = Vector2(3584, 1738)
+texture = ExtResource("1_cbrwh")
+script = ExtResource("4_qx8wk")
 
 [node name="TreeLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 visible = false
