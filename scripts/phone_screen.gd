@@ -8,6 +8,7 @@ extends Control
 @onready var battery_bar: ProgressBar = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar
 @onready var battery_timer: Timer = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar/BatteryTimer
 @onready var phone: Area2D = get_node("/root/World/Phone")
+@onready var player: CharacterBody2D = %Player
 
 var phone_state: String
 
@@ -72,5 +73,5 @@ func _on_chats_pressed() -> void:
 	go_to_screen("chats")
 
 func _on_mouse_exited() -> void:
-	print("control_out")
-	phone.exit_phone()
+	if player.state != "free":
+		phone.exit_phone()

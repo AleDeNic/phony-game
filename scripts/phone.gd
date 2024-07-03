@@ -22,7 +22,9 @@ func _ready() -> void:
 	black_screen.visible = true
 
 func _on_area_entered(_area: Area2D) -> void:
-	enter_phone()
+	if player.state == "free":
+		enter_phone()
+		black_screen.visible = false
 
 func phone_scale(scale_speed) -> void:
 	phone_animation.speed_scale = scale_speed
@@ -33,27 +35,24 @@ func phone_scale(scale_speed) -> void:
 
 func enter_phone() -> void:
 	player.state = "phone_zooming_in"
-	await get_tree().create_timer(0.2).timeout
-	if player.state == "phone_zooming_in":
-		timer.start()
-		phone_screen.phone_state = "home"
-		phone_screen.go_to_screen("home")
-		phone_scale(scale_up_speed)
-		effects.start_effects(effects_increase_speed)
-		camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
-		black_screen.visible = false
+	timer.start()
+	phone_screen.phone_state = "home"
+	phone_screen.go_to_screen("home")
+	phone_scale(scale_up_speed)
+	effects.start_effects(effects_increase_speed)
+	camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
 
 func exit_phone() -> void:
-	if player.state == "phone_zooming_in":
-		player.state = "phone_zooming_out"
-		timer.stop()
-		phone_screen.phone_state = "off"
-		phone_scale(scale_down_speed)
-		effects.start_effects(effects_decrease_speed)
-		camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-		black_screen.visible = true
+	player.state = "phone_zooming_out"
+	timer.stop()
+	phone_screen.phone_state = "off"
+	phone_scale(scale_down_speed)
+	effects.start_effects(effects_decrease_speed)
+	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 
 func _on_phone_animation_animation_finished(anim_name: StringName) -> void:
-	if player.state != "phone_zooming_in":
-		player.state = "phone_out"
-	print(player.state)
+	if player.state == "phone_zooming_in":
+		player.state = "phone"
+	elif player.state == "phone_zooming_out":
+		player.state = "free"
+		black_screen.visible = true

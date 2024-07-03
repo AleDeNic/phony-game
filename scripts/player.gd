@@ -26,12 +26,12 @@ func _ready() -> void:
 	reset_mouse_to_center()
 	phone_position = phone.global_position
 	current_speed = default_speed
-	state = "phone_out"
+	state = "free"
 
 func _process(delta: float) -> void:
 	print(state)
 	mouse_movement = get_viewport().get_mouse_position() - center_position
-	if state == "phone_zooming_in":
+	if state == "phone_zooming_in" or state == "phone":
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		movement_vector = (phone_position - global_position).normalized()
 		if global_position.distance_to(phone_position) < 30.0:
@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 		else:
 			target_speed = towards_phone_speed
 	else:
-		if state == "phone_zooming_out":
+		if state == "phone_zooming_out" or state == "asuka_zooming_out":
 			current_speed = 30.0
 			target_speed = default_speed
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -50,7 +50,7 @@ func _process(delta: float) -> void:
 	current_speed = lerp(current_speed, target_speed, delta * transition_speed)
 	velocity = movement_vector * current_speed
 	move_and_slide()
-	print(current_speed)
+	#print(current_speed)
 
 func reset_mouse_to_center() -> void:
 	Input.warp_mouse(center_position)

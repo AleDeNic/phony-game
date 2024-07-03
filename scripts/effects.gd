@@ -17,8 +17,10 @@ func _process(_delta: float) -> void:
 func start_effects(effects_speed) -> void:
 	effects_animation.speed_scale = effects_speed
 	if player.state == "phone_zooming_in":
+		print("effects_in")
 		effects_animation.play("blur")
-	else:
+	elif player.state == "phone_zooming_out":
+		print("effects_out")
 		effects_animation.play_backwards("blur")
 
 func _on_phone_timer_timeout() -> void:
