@@ -2,29 +2,30 @@ extends Sprite2D
 
 @onready var player: CharacterBody2D = get_node("/root/World/Player")
 
-var y_perspective: float
-
 @export var min_player_x: float = 0.0
 @export var max_player_x: float = 2400.0
-@export var min_value: float = -70.0
-@export var max_value: float = 0.0
+@export var min_value_y_rot: float = -75.0
+@export var max_value_y_rot: float = 0.0
 
-var player_x_position: float = 0.0  # Replace this with actual player position in your game
-var mapped_value: float = 0.0       # This will store the result of the mapping
+@export var min_player_y: float = -1400.0
+@export var max_player_y: float = 1400.0
+@export var min_value_x_rot: float = -40.0
+@export var max_value_x_rot: float = 40.0
 
-# Function to map a value from one range to another
+@export var lerp_speed: float = 10.0
+
+var current_y_rot: float = min_value_y_rot
+var current_x_rot: float = min_value_x_rot
+
 func map_range(value: float, from_min: float, from_max: float, to_min: float, to_max: float) -> float:
 	return (value - from_min) / (from_max - from_min) * (to_max - to_min) + to_min
 
-# Function to update the mapped value based on the player's x position
-func update_mapped_value() -> void:
-	mapped_value = map_range(player.global_position.x, min_player_x, max_player_x, min_value, max_value)
-	print("Mapped Value: ", mapped_value)  # This will print the mapped value for debugging
-	material.set_shader_parameter("y_rot", mapped_value)
-
-# Example _process function that updates the mapped value each frame
 func _process(delta: float) -> void:
-	update_mapped_value()
+	var target_y_rot = map_range(player.global_position.x, min_player_x, max_player_x, min_value_y_rot, max_value_y_rot)
+	current_y_rot = lerp(current_y_rot, target_y_rot, delta * lerp_speed)
+	
+	var target_x_rot = map_range(player.global_position.y, min_player_y, max_player_y, max_value_x_rot, min_value_x_rot)
+	current_x_rot = lerp(current_x_rot, target_x_rot, delta * lerp_speed)
 
-	
-	
+	material.set_shader_parameter("y_rot", current_y_rot)
+	material.set_shader_parameter("x_rot", current_x_rot)

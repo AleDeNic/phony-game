@@ -32,9 +32,6 @@ func _ready() -> void:
 	window_bus_index = AudioServer.get_bus_index("Window")
 	song_01_bus_index = AudioServer.get_bus_index("Song01")
 	apply_custom_volumes()
-	#song_01.play()
-	#asuka_song.play()
-	#window_song.play()
 	
 func _process(_delta: float) -> void:
 	if player != null and asuka != null and window != null:

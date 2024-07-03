@@ -54,7 +54,7 @@ func _process(delta: float) -> void:
 	# DEBUG
 	#print(current_speed)
 	#print(state)
-	print(global_position.x)
+	#print(global_position.x)
 
 func reset_mouse_to_center() -> void:
 	Input.warp_mouse(center_position)

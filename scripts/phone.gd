@@ -36,8 +36,8 @@ func enter_phone() -> void:
 	phone_screen.MOUSE_FILTER_PASS
 	player.state = "phone_zooming_in"
 	timer.start()
-	phone_screen.phone_state = "home"
-	phone_screen.go_to_screen("home")
+	#phone_screen.phone_state = "home"
+	#phone_screen.go_to_screen("home")
 	phone_scale(scale_up_speed)
 	effects.start_effects(effects_increase_speed)
 	camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
@@ -46,7 +46,7 @@ func exit_phone() -> void:
 	phone_screen.MOUSE_FILTER_IGNORE
 	player.state = "phone_zooming_out"
 	timer.stop()
-	phone_screen.phone_state = "off"
+	#phone_screen.phone_state = "off"
 	phone_scale(scale_down_speed)
 	effects.start_effects(effects_decrease_speed)
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
