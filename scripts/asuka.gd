@@ -17,8 +17,16 @@ func _ready() -> void:
 	eyes_sprite.frame = 0
 
 func _on_area_entered(_area: Area2D) -> void:
+	enter_asuka()
+
+func _on_area_exited(_area: Area2D) -> void:
+	exit_asuka()
+
+func enter_asuka() -> void:
 	timer.start()
 	player.state = "asuka_zooming_in"
+	player.object_position = position
+	print("set asuka position")
 	game_manager.handle_timeline("asuka")
 	is_zooming_in = true
 	asuka_sprite.z_index = 2
@@ -28,7 +36,7 @@ func _on_area_entered(_area: Area2D) -> void:
 	eyes_sprite.frame = 1
 	print("Entered Asuka area: ", game_manager.timelines)
 
-func _on_area_exited(_area: Area2D) -> void:
+func exit_asuka() -> void:
 	timer.stop()
 	player.state = "free"
 	game_manager.handle_timeline("asuka", true)
@@ -40,7 +48,7 @@ func _on_area_exited(_area: Area2D) -> void:
 	await get_tree().create_timer(0.3).timeout
 	eyes_sprite.frame = 0
 	print("Exited Asuka area: ", game_manager.timelines)
-
+	
 func _on_asuka_animation_animation_finished(_anim_name: StringName) -> void:
 	if is_zooming_in == false:
 		asuka_sprite.z_index = 0

@@ -10,6 +10,9 @@ extends Area2D
 @onready var phone_screen: Control = $PhoneScreen
 @onready var player: CharacterBody2D = %Player
 
+@export_group("Scale sizes")
+@export var min_scale: float = 1.0
+@export var max_scale: float = 1.7
 @export_group("Scale speeds")
 @export var scale_up_speed: float = 1.0
 @export var scale_down_speed: float = 2.0
@@ -17,9 +20,23 @@ extends Area2D
 @export var effects_increase_speed: float = 1.0
 @export var effects_decrease_speed: float = 2.0
 
+var current_scale_speed: float
+var target_scale: Vector2
+
 func _ready() -> void:
-	effects.z_index = 1
 	black_screen.visible = false
+	#current_scale_speed = min_scale
+	#target_scale = Vector2(current_scale_speed, current_scale_speed)
+	
+#func _process(delta) -> void:
+	#scale = scale.lerp(target_scale, current_scale_speed * delta)
+	#clamp(scale, Vector2(min_scale, min_scale), Vector2(max_scale, max_scale))
+	#if abs(current_scale_speed - min_scale) < 0.01:
+		#player.state = "free"
+	#elif abs(current_scale_speed - max_scale) < 0.01:
+		#player.state = "phone"
+	##print(player.state)
+	#print(current_scale_speed)
 
 func _on_area_entered(_area: Area2D) -> void:
 	if player.state == "free":
@@ -29,15 +46,17 @@ func phone_scale(scale_speed) -> void:
 	phone_animation.speed_scale = scale_speed
 	if player.state == "phone_zooming_in":
 		phone_animation.play("scale")
+		#target_scale = Vector2(max_scale, max_scale)
 	elif player.state == "phone_zooming_out":
 		phone_animation.play_backwards("scale")
+		#target_scale = Vector2(min_scale, min_scale)
 
 func enter_phone() -> void:
 	phone_screen.MOUSE_FILTER_PASS
+	player.object_position = position
 	player.state = "phone_zooming_in"
+	print(player.state)
 	timer.start()
-	#phone_screen.phone_state = "home"
-	#phone_screen.go_to_screen("home")
 	phone_scale(scale_up_speed)
 	effects.start_effects(effects_increase_speed)
 	camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
@@ -45,8 +64,8 @@ func enter_phone() -> void:
 func exit_phone() -> void:
 	phone_screen.MOUSE_FILTER_IGNORE
 	player.state = "phone_zooming_out"
+	print(player.state)
 	timer.stop()
-	#phone_screen.phone_state = "off"
 	phone_scale(scale_down_speed)
 	effects.start_effects(effects_decrease_speed)
 	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)

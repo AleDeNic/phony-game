@@ -9,8 +9,8 @@ extends Sprite2D
 
 @export var min_player_y: float = -1400.0
 @export var max_player_y: float = 1400.0
-@export var min_value_x_rot: float = -40.0
-@export var max_value_x_rot: float = 40.0
+@export var min_value_x_rot: float = -20.0
+@export var max_value_x_rot: float = 20.0
 
 @export var lerp_speed: float = 10.0
 

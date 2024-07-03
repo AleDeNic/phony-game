@@ -15,12 +15,12 @@ var current_speed: float
 var target_speed: float
 var movement_vector: Vector2
 var phone_position: Vector2
-var mouse_movement: Vector2
 
 var state: String
 
 var viewport_size: Vector2
 var center_position: Vector2
+var object_position: Vector2
 
 func _ready() -> void:
 	viewport_size = get_viewport().get_visible_rect().size
@@ -31,30 +31,30 @@ func _ready() -> void:
 	state = "free"
 
 func _process(delta: float) -> void:
-	mouse_movement = get_viewport().get_mouse_position() - center_position
+	handle_speeds(delta)
+	move_and_slide()
+	#print(current_speed)
+	#print(state)
+	#print(global_position.x)
+
+func handle_speeds(delta: float) -> void:
 	if state in ["phone_zooming_in", "phone"]:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		movement_vector = (phone_position - global_position).normalized()
-		if global_position.distance_to(phone_position) < 30.0:
+		movement_vector = (object_position - global_position).normalized()
+		if global_position.distance_to(object_position) < 30.0:
 			target_speed = 0.0
 		else:
 			target_speed = towards_phone_speed
 	else:
-		if state in ["phone_zooming_out", "asuka_zooming_out"]:
+		if state in ["phone_zooming_out"]:
 			current_speed = 30.0
 			target_speed = default_speed
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		movement_vector = mouse_movement
+		movement_vector = get_viewport().get_mouse_position() - center_position
 		target_speed = default_speed
 		reset_mouse_to_center()
-	
 	current_speed = lerp(current_speed, target_speed, delta * transition_speed)
 	velocity = movement_vector * current_speed
-	move_and_slide()
-	# DEBUG
-	#print(current_speed)
-	#print(state)
-	#print(global_position.x)
 
 func reset_mouse_to_center() -> void:
 	Input.warp_mouse(center_position)

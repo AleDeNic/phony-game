@@ -30,11 +30,7 @@ func _on_phone_timer_timeout() -> void:
 func _on_asuka_timer_timeout() -> void:
 	if stress_level < game_manager.max_stress:
 		stress_level += game_manager.asuka_stress_increase
-	else:
-		print("LOOK AT YOUR PHONE")
 
 func _on_window_timer_timeout() -> void:
 	if stress_level < game_manager.max_stress:
 		stress_level += game_manager.window_stress_increase
-	else:
-		print("LOOK AT YOUR PHONE")

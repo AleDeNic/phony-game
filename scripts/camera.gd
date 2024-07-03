@@ -13,26 +13,22 @@ extends Camera2D
 
 var target_zoom: Vector2
 var is_zooming: bool = false
-var current_zoom_speed = asuka_zoom_speed  # Variable to control the zoom speed dynamically
+var current_zoom_speed = asuka_zoom_speed
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	zoom = default_zoom_value
 	target_zoom = default_zoom_value
 
 func _process(delta: float) -> void:
 	if is_zooming:
-		# Smoothly interpolate the zoom level towards the target zoom using exponential interpolation
 		zoom = zoom.lerp(target_zoom, current_zoom_speed * delta)
-		# Clamp the zoom to avoid over-zooming (min and max zoom values)
 		zoom = clamp(zoom, phone_zoom_value, window_zoom_value)
-		# Stop zooming if the target zoom is reached within a small tolerance
 		if abs(zoom.x - target_zoom.x) < 0.001 and abs(zoom.y - target_zoom.y) < 0.001:
-			zoom = target_zoom  # Ensure exact final zoom
+			zoom = target_zoom
 			is_zooming = false
 
 func start_zoom(zoom_value, zoom_speed) -> void:
-	if target_zoom != zoom_value:  # Avoid resetting if already at default
+	if target_zoom != zoom_value:
 		target_zoom = zoom_value
 		current_zoom_speed = zoom_speed
 		is_zooming = true
