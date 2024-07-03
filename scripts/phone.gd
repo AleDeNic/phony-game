@@ -14,7 +14,7 @@ extends Area2D
 @export var scale_up_speed: float = 1.0
 @export var scale_down_speed: float = 2.0
 @export_group("Effects speeds")
-@export var effects_increase_speed: float = 0.6
+@export var effects_increase_speed: float = 1.0
 @export var effects_decrease_speed: float = 2.0
 
 func _ready() -> void:
@@ -34,6 +34,7 @@ func phone_scale(scale_speed) -> void:
 		phone_animation.play_backwards("scale")
 
 func enter_phone() -> void:
+	phone_screen.MOUSE_FILTER_PASS
 	player.state = "phone_zooming_in"
 	timer.start()
 	phone_screen.phone_state = "home"
@@ -43,6 +44,7 @@ func enter_phone() -> void:
 	camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
 
 func exit_phone() -> void:
+	phone_screen.MOUSE_FILTER_IGNORE
 	player.state = "phone_zooming_out"
 	timer.stop()
 	phone_screen.phone_state = "off"

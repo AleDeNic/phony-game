@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+# ISSUE handle the player state with asuka
+
 @onready var phone: Area2D = $"../Phone"
 @onready var asuka: Area2D = $"../Asuka"
 @onready var exit_trigger: StaticBody2D = $ExitTrigger
@@ -29,9 +31,8 @@ func _ready() -> void:
 	state = "free"
 
 func _process(delta: float) -> void:
-	print(state)
 	mouse_movement = get_viewport().get_mouse_position() - center_position
-	if state == "phone_zooming_in" or state == "phone":
+	if state in ["phone_zooming_in", "phone"]:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		movement_vector = (phone_position - global_position).normalized()
 		if global_position.distance_to(phone_position) < 30.0:
@@ -39,7 +40,7 @@ func _process(delta: float) -> void:
 		else:
 			target_speed = towards_phone_speed
 	else:
-		if state == "phone_zooming_out" or state == "asuka_zooming_out":
+		if state in ["phone_zooming_out", "asuka_zooming_out"]:
 			current_speed = 30.0
 			target_speed = default_speed
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -50,7 +51,9 @@ func _process(delta: float) -> void:
 	current_speed = lerp(current_speed, target_speed, delta * transition_speed)
 	velocity = movement_vector * current_speed
 	move_and_slide()
+	# DEBUG
 	#print(current_speed)
+	#print(state)
 
 func reset_mouse_to_center() -> void:
 	Input.warp_mouse(center_position)
