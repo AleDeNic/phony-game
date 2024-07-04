@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bo0v2qmw6t5r3"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5d76e"]
+size = Vector2(2000, 2000)
+subdivide_width = 8
+subdivide_depth = 8
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_5d76e")

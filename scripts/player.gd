@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 	move_and_slide()
 	#print(current_speed)
 	#print(state)
-	#print(global_position.x)
+	#print(global_position)
 
 func handle_speeds(delta: float) -> void:
 	if state in ["phone_zooming_in", "phone"]:

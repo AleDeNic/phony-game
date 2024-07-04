@@ -52,7 +52,6 @@ func phone_scale(scale_speed) -> void:
 		#target_scale = Vector2(min_scale, min_scale)
 
 func enter_phone() -> void:
-	phone_screen.MOUSE_FILTER_PASS
 	player.object_position = position
 	player.state = "phone_zooming_in"
 	print(player.state)
@@ -62,7 +61,6 @@ func enter_phone() -> void:
 	camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
 
 func exit_phone() -> void:
-	phone_screen.MOUSE_FILTER_IGNORE
 	player.state = "phone_zooming_out"
 	print(player.state)
 	timer.stop()

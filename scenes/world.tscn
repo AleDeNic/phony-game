@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_shqgp"]
 [ext_resource type="PackedScene" uid="uid://mei3fh0wa3em" path="res://scenes/effects.tscn" id="1_u37f0"]
-[ext_resource type="PackedScene" uid="uid://cw0nk6gkudho2" path="res://scenes/landscape.tscn" id="2_scdex"]
 [ext_resource type="Texture2D" uid="uid://5w7r1g5fwit4" path="res://assets/images/asuka.png" id="2_wtfl7"]
 [ext_resource type="Texture2D" uid="uid://cd73raw5kh70g" path="res://assets/images/phone.png" id="3_sup45"]
 [ext_resource type="Script" path="res://scripts/asuka.gd" id="4_1kcn2"]
+[ext_resource type="PackedScene" uid="uid://cw0nk6gkudho2" path="res://scenes/landscape.tscn" id="4_u7jec"]
 [ext_resource type="Script" path="res://scripts/window.gd" id="5_p0u8t"]
 [ext_resource type="PackedScene" uid="uid://dg55yu6bit6jt" path="res://scenes/phone_screen.tscn" id="7_g2i3f"]
 [ext_resource type="Script" path="res://scripts/phone.gd" id="7_lhypb"]
@@ -186,18 +186,7 @@ script = ExtResource("1_shqgp")
 
 [node name="AudioManager" parent="." instance=ExtResource("12_3unc5")]
 
-[node name="Landscape" parent="." instance=ExtResource("2_scdex")]
-
-[node name="Effects" parent="." instance=ExtResource("1_u37f0")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5360.0
-offset_top = -2975.0
-offset_right = 5360.0
-offset_bottom = 2975.0
+[node name="Landscape" parent="." instance=ExtResource("4_u7jec")]
 
 [node name="Asuka" type="Area2D" parent="."]
 position = Vector2(-962, -265)
@@ -238,6 +227,17 @@ wait_time = 0.1
 [node name="WindowCollision" type="CollisionShape2D" parent="Window"]
 scale = Vector2(47.685, 47.685)
 shape = SubResource("CircleShape2D_klsqp")
+
+[node name="Effects" parent="." instance=ExtResource("1_u37f0")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5360.0
+offset_top = -2975.0
+offset_right = 5360.0
+offset_bottom = 2975.0
 
 [node name="Phone" type="Area2D" parent="."]
 z_index = 2
