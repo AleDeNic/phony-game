@@ -2,12 +2,12 @@ extends Area2D
 
 @onready var game_manager: Node2D = %GameManager
 @onready var timer: Timer = $PhoneTimer
-@onready var black_screen: ColorRect = $"../Phone/PhoneScreen/PhoneSize/BlackScreen"
+@onready var black_screen: ColorRect = $"../Phone/PhoneOS/PhoneSize/BlackScreen"
 @onready var phone_animation: AnimationPlayer = $PhoneAnimation
 @onready var effects_animation: AnimationPlayer = $"../Effects/EffectsAnimation"
 @onready var effects: Control = $"../Effects"
 @onready var camera: Camera2D = $"../Player/Camera2D"
-@onready var phone_screen: Control = $PhoneScreen
+@onready var phone_os: Control = $PhoneOS
 @onready var player: CharacterBody2D = %Player
 
 @export_group("Scale sizes")
@@ -41,6 +41,7 @@ func _ready() -> void:
 func _on_area_entered(_area: Area2D) -> void:
 	if player.state == "free":
 		enter_phone()
+		phone_os.phone_state = "Apps"
 
 func phone_scale(scale_speed) -> void:
 	phone_animation.speed_scale = scale_speed
