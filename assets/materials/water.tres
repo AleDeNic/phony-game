@@ -7,9 +7,9 @@
 render_priority = 0
 shader = ExtResource("1_uoosd")
 shader_parameter/water_color = Color(0.349847, 0.443339, 1, 1)
-shader_parameter/uv_scale = 12.0
+shader_parameter/uv_scale = 32.0
 shader_parameter/time_scale = 0.0
 shader_parameter/normal = 0.5
 shader_parameter/roughness = 0.3
-shader_parameter/scroll_speed = -0.3
+shader_parameter/scroll_speed = -2.0
 shader_parameter/water_normal_texture = ExtResource("2_bb0rr")

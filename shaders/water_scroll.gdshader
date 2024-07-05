@@ -2,13 +2,13 @@ shader_type spatial;
 render_mode cull_disabled; // Disable face culling to render both sides
 
 uniform vec3 water_color : source_color;
-uniform float uv_scale : hint_range(0.0, 80.0, 1) = 12.0;
+uniform float uv_scale : hint_range(0.0, 80.0, 1) = 32.0;
 uniform float time_scale : hint_range(0.0, 2.0, 0.25) = 0.0;
 uniform sampler2D water_normal_texture;
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable;
 uniform float normal : hint_range(0.0, 1.0, 0.1) = 0.5;
 uniform float roughness : hint_range(0.0, 1.0, 0.1) = 0.3;
-uniform float scroll_speed : hint_range(-1.0, 1.0, 0.1) = -0.3; // New uniform for scrolling speed
+uniform float scroll_speed : hint_range(-3.0, 0.0, 0.1) = -2.0; // New uniform for scrolling speed
 
 void fragment() {
     vec2 _uv = UV * uv_scale;
@@ -16,6 +16,7 @@ void fragment() {
 
     // Add a scrolling offset to the UV coordinates
     _uv.x += TIME * scroll_speed; // Scrolling effect towards the x-axis
+	_uv.y += TIME * scroll_speed;
 
     // Add some sine and cosine waves to UV coordinates for wave effect
     _uv.x += sin(TIME * time_scale + (_uv.x + _uv.y) * 10.0) * 0.02;

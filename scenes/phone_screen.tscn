@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_screen.gd" id="1_4cg5r"]
-[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="2_emvlc"]
+[ext_resource type="Shader" path="res://temp/deprecated/blur.gdshader" id="2_emvlc"]
 [ext_resource type="Texture2D" uid="uid://djlpmyr2jau2k" path="res://assets/images/phone_wallpaper.png" id="2_jepf0"]
 [ext_resource type="StyleBox" uid="uid://duct66cpghgeh" path="res://styles/separator.tres" id="3_7dnor"]
 [ext_resource type="Texture2D" uid="uid://bfg0lk6kvgptl" path="res://assets/images/icons/notification_icon.png" id="3_jnjbr"]
