@@ -132,7 +132,6 @@ icon = ExtResource("6_vmfnf")
 flat = true
 
 [node name="Options" type="Control" parent="PhoneSize"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
