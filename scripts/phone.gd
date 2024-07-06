@@ -13,7 +13,7 @@ extends Area2D
 
 @export_group("Scale sizes")
 @export var min_scale: Vector2 = Vector2(1.0, 1.0)
-@export var max_scale: Vector2 = Vector2(1.7, 1.7)
+@export var max_scale: Vector2 = Vector2(2.0, 2.0)
 @export_group("Scale speeds")
 @export var scale_up_speed: float = 3.0
 @export var scale_down_speed: float = 3.0

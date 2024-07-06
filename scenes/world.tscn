@@ -105,20 +105,20 @@ script = ExtResource("7_lhypb")
 wait_time = 0.1
 
 [node name="PhoneSprite" type="Sprite2D" parent="Phone"]
-position = Vector2(122, 75)
+position = Vector2(122, 65)
 scale = Vector2(0.755, 0.755)
 texture = ExtResource("3_sup45")
 
 [node name="PhoneOS" parent="Phone" instance=ExtResource("7_g2i3f")]
 offset_left = -306.0
-offset_top = -353.0
+offset_top = -366.0
 offset_right = 1294.0
-offset_bottom = 1247.0
+offset_bottom = 1234.0
 rotation = 0.081157
 scale = Vector2(0.419138, 0.419138)
 
 [node name="PhoneCollision" type="CollisionShape2D" parent="Phone"]
-position = Vector2(6, 24)
+position = Vector2(0, -2)
 rotation = 0.0746187
 scale = Vector2(37.2402, 33.1369)
 shape = SubResource("RectangleShape2D_qisob")
