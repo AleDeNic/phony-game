@@ -8,7 +8,7 @@ extends CharacterBody2D
 
 @export var default_speed: float = 65.0
 @export var transition_speed: float = 5.0
-@export var towards_phone_speed: float = 200.0
+@export var towards_phone_speed: float = 400.0
 @export var exit_speed: float = 30
 
 var current_speed: float

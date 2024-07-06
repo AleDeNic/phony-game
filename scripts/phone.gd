@@ -1,5 +1,8 @@
 extends Area2D
 
+# ISSUE: scale and effects are interrupted when you move too fast
+# towards asuka, chenging the player.state
+
 @onready var game_manager: Node2D = %GameManager
 @onready var timer: Timer = $PhoneTimer
 @onready var black_screen: ColorRect = $"../Phone/PhoneOS/PhoneSize/BlackScreen"
@@ -12,11 +15,11 @@ extends Area2D
 @export var min_scale: Vector2 = Vector2(1.0, 1.0)
 @export var max_scale: Vector2 = Vector2(1.7, 1.7)
 @export_group("Scale speeds")
-@export var scale_up_speed: float = 2.0
-@export var scale_down_speed: float = 2.0
+@export var scale_up_speed: float = 3.0
+@export var scale_down_speed: float = 3.0
 @export_group("Effects speeds")
-@export var effects_increase_speed: float = 2.0
-@export var effects_decrease_speed: float = 2.0
+@export var effects_increase_speed: float = 2.5
+@export var effects_decrease_speed: float = 3.5
 
 var current_scale_speed: float = 0.0
 var target_scale: Vector2 = min_scale
