@@ -91,3 +91,11 @@ dialogic_default_action={
 2d_physics/layer_2="boundaries"
 2d_physics/layer_3="player"
 2d_physics/layer_4="movement"
+
+[rendering]
+
+occlusion_culling/bvh_build_quality=0
+environment/ssao/quality=1
+environment/ssil/quality=1
+anti_aliasing/screen_space_roughness_limiter/enabled=false
+environment/glow/upscale_mode=0

@@ -1,17 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://o0205cjoosgq"]
+[gd_scene load_steps=5 format=3 uid="uid://o0205cjoosgq"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_hwf0t"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="2_owyey"]
-[ext_resource type="Texture2D" uid="uid://18wyhfnyhjqn" path="res://assets/images/icons/camera_icon.webp" id="3_qqyu0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xpx4y"]
 radius = 800.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h1w0k"]
 radius = 50.2892
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_dxrvt"]
-radius = 22.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 4
@@ -25,22 +21,12 @@ debug_color = Color(0, 0.636893, 0.399121, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
-position_smoothing_speed = 7.0
+position_smoothing_speed = 12.0
 script = ExtResource("2_owyey")
 
 [node name="Trigger" type="Area2D" parent="."]
 collision_layer = 4
+input_pickable = false
 
 [node name="TriggerCollision" type="CollisionShape2D" parent="Trigger"]
 shape = SubResource("CircleShape2D_h1w0k")
-
-[node name="ExitTrigger" type="StaticBody2D" parent="."]
-visible = false
-
-[node name="ExitCollision" type="CollisionShape2D" parent="ExitTrigger"]
-shape = SubResource("CircleShape2D_dxrvt")
-debug_color = Color(0.759277, 0.193169, 0.990088, 0.42)
-
-[node name="Sprite2D" type="Sprite2D" parent="ExitTrigger"]
-scale = Vector2(0.203125, 0.203125)
-texture = ExtResource("3_qqyu0")

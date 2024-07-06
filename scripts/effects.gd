@@ -3,7 +3,6 @@ extends Control
 @onready var game_manager: Node2D = %GameManager
 @onready var stress_filter: ColorRect = $StressFilter
 @onready var phone: Area2D = $"../Phone"
-@onready var effects_animation: AnimationPlayer = $EffectsAnimation
 @onready var player: CharacterBody2D = %Player
 @onready var blur_fisheye: ShaderMaterial = get_node("BlurFisheye").material as ShaderMaterial
 @onready var blue_filter: ColorRect = $BlueFilter

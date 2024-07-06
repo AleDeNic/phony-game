@@ -16,33 +16,33 @@ var timelines: Dictionary = {"asuka": false, "window": false}
 func _ready() -> void:
 	for timeline in timelines:
 		timelines[timeline] = false
-	print("Timelines initialized: ", timelines)
+	#print("Timelines initialized: ", timelines)
 	
 func handle_timeline(timeline: String, reset: bool = false) -> void:
-	print("Handling timeline: ", timeline)
+	#print("Handling timeline: ", timeline)
 	if timelines.has(timeline):
 		if reset:
 			timelines[timeline] = false
 			if Dialogic.Styles.get_layout_node():
 				Dialogic.Styles.get_layout_node().hide()
-			print(timeline + " timeline reset | Timelines: ", timelines)
+			#print(timeline + " timeline reset | Timelines: ", timelines)
 		elif timelines[timeline]:
 			if Dialogic.paused:
 				Dialogic.paused = false
 				if Dialogic.Styles.get_layout_node():
 					Dialogic.Styles.get_layout_node().show()
-					print(timeline + " timeline resumed | Timelines: ", timelines)
+					#print(timeline + " timeline resumed | Timelines: ", timelines)
 			else:
 				Dialogic.paused = true
 				if Dialogic.Styles.get_layout_node():
 					Dialogic.Styles.get_layout_node().hide()
-					print(timeline + " timeline paused | Timelines: ", timelines)
+					#print(timeline + " timeline paused | Timelines: ", timelines)
 		else:
 			Dialogic.start(timeline)
 			Dialogic.process_mode = Node.PROCESS_MODE_ALWAYS
 			timelines[timeline] = true
 			if Dialogic.Styles.get_layout_node():
 				Dialogic.Styles.get_layout_node().show()
-			print(timeline + " timeline started | Timelines: ", timelines)
+			#print(timeline + " timeline started | Timelines: ", timelines)
 	else:
 		print("Timeline ", timeline, " does not exist in timelines dictionary.")

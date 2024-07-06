@@ -26,7 +26,6 @@ var target_scale: Vector2 = min_scale
 
 func _ready() -> void:
 	black_screen.visible = false
-	target_scale = min_scale
 	current_scale_speed = scale_up_speed
 
 func _process(delta: float) -> void:
@@ -58,16 +57,15 @@ func _on_area_entered(_area: Area2D) -> void:
 		phone_os.phone_state = "Apps"
 
 func enter_phone() -> void:
-	player.object_position = position
 	player.state = "phone_zooming_in"
 	timer.start()
 	set_phone_scale(max_scale, scale_up_speed)
 	effects.set_effects(effects.max_lod, effects_increase_speed)
-	camera.start_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
+	camera.set_camera_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
 
 func exit_phone() -> void:
 	player.state = "phone_zooming_out"
 	timer.stop()
 	set_phone_scale(min_scale, scale_down_speed)
 	effects.set_effects(effects.min_lod, effects_decrease_speed)
-	camera.start_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
+	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)

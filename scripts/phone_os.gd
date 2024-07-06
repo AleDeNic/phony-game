@@ -51,8 +51,8 @@ func setup_battery() -> void:
 	battery_timer.paused = true
 	handle_battery(phone_state)
 
-func handle_battery(phone_state) -> void:
-	if phone_state in ["Off", "Options"]:
+func handle_battery(state) -> void:
+	if state in ["Off", "Options"]:
 		battery_timer.paused = true
 	else:
 		battery_timer.paused = false
