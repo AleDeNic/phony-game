@@ -1,63 +1,54 @@
 extends CharacterBody2D
 
-#@onready var game_manager: Node2D = %GameManager
 @onready var phone: Area2D = $"../Phone"
-@onready var asuka: Area2D = $"../Asuka"
 
-#@export var reset_speed: float = 2500.0
-@export var mouse_sensitivity: float = 65.0  # Normal sensitivity
-@export var mouse_phone_sensitivity: float = 0.7  # Sensitivity when zoomed in
-@export var transition_speed: float = 5.0  # Speed of the sensitivity transition
+@export var default_speed: float = 65.0
+@export var transition_speed: float = 5.0
+@export var towards_phone_speed: float = 400.0
+@export var exit_speed: float = 12.0
+@export var dead_zone_radius: float = 1.0  # Threshold for ignoring small movements
 
-var last_mouse_pos: Vector2
-var current_sensitivity: float  # Current sensitivity being used
-var target_sensitivity: float  # Target sensitivity to transition to
+var current_speed: float = default_speed
+var target_speed: float
+var state: String = "free"
+var viewport: Viewport
 
 func _ready() -> void:
-	# Initialize last mouse position
+	viewport = get_viewport()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	reset_mouse_to_center()
-	last_mouse_pos = get_viewport().get_mouse_position()
-	# Initialize sensitivities
-	current_sensitivity = mouse_sensitivity
-	target_sensitivity = mouse_sensitivity
 
-func _process(_delta: float) -> void:
-	handle_mouse_movement(_delta)
-
-func handle_mouse_movement(delta: float) -> void:
-	# Update current sensitivity towards the target sensitivity
-	current_sensitivity = lerp(current_sensitivity, target_sensitivity, delta * transition_speed)
-	
-	var current_mouse_pos: Vector2 = get_viewport().get_mouse_position()
-	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
-	var center_position: Vector2 = viewport_size / 2
-	var mouse_movement: Vector2 = current_mouse_pos - center_position
-	
-	calculate_velocity(mouse_movement)
+func _process(delta: float) -> void:
+	handle_speeds(delta)
 	move_and_slide()
 
-func calculate_velocity(mouse_movement: Vector2) -> void:
-	if phone.is_zooming_in:
-		transition_speed = 50
-		target_sensitivity = mouse_phone_sensitivity
+func handle_speeds(delta: float) -> void:
+	var movement_vector: Vector2
+	if state in ["phone_zooming_in", "phone"]:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		movement_vector = (phone.global_position - global_position).normalized()
+		if global_position.distance_to(phone.global_position) < 30.0:
+			target_speed = 0.0
+		else:
+			target_speed = towards_phone_speed
 	else:
-		transition_speed = 5
-		target_sensitivity = mouse_sensitivity
+		if state == "phone_zooming_out":
+			current_speed = exit_speed
+			target_speed = default_speed
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		movement_vector = get_movement_input()
+		target_speed = default_speed
 		reset_mouse_to_center()
+	current_speed = lerp(current_speed, target_speed, delta * transition_speed)
+	velocity = movement_vector * current_speed
 
-	velocity = mouse_movement * current_sensitivity
+func get_movement_input() -> Vector2:
+	var mouse_pos = viewport.get_mouse_position()
+	var center = viewport.get_visible_rect().size / 2
+	var movement_vector = mouse_pos - center
+	if movement_vector.length() < dead_zone_radius:
+		movement_vector = Vector2.ZERO
+	return movement_vector
 
-func reset_mouse_to_center():
-	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
-	var center_position: Vector2 = viewport_size / 2
-	Input.warp_mouse(center_position)
-
-#func reset_to_phone(phone_position: Vector2):
-	#if game_manager.attention_span < 0:
-		#var direction: Vector2 = (phone_position - position).normalized()
-		#velocity = direction * reset_speed * get_physics_process_delta_time()
-		#move_and_collide(velocity)
-#
-		#if position.distance_to(phone_position) < 1.0:
-			#velocity = Vector2.ZERO
+func reset_mouse_to_center() -> void:
+	viewport.warp_mouse(viewport.get_visible_rect().size / 2)

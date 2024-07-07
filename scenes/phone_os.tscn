@@ -1,0 +1,561 @@
+[gd_scene load_steps=17 format=3 uid="uid://dg55yu6bit6jt"]
+
+[ext_resource type="Script" path="res://scripts/phone_os.gd" id="1_r0wjl"]
+[ext_resource type="Shader" path="res://temp/deprecated/blur.gdshader" id="2_emvlc"]
+[ext_resource type="Texture2D" uid="uid://djlpmyr2jau2k" path="res://assets/images/phone_wallpaper.png" id="2_jepf0"]
+[ext_resource type="StyleBox" uid="uid://duct66cpghgeh" path="res://styles/separator.tres" id="3_7dnor"]
+[ext_resource type="Texture2D" uid="uid://bfg0lk6kvgptl" path="res://assets/images/icons/notification_icon.png" id="3_jnjbr"]
+[ext_resource type="Script" path="res://scripts/volume_slider.gd" id="4_5jmmy"]
+[ext_resource type="Texture2D" uid="uid://dfljetyll4myx" path="res://assets/images/icons/settings_icon.webp" id="4_k6qw4"]
+[ext_resource type="Texture2D" uid="uid://18wyhfnyhjqn" path="res://assets/images/icons/camera_icon.webp" id="5_8pkqu"]
+[ext_resource type="Texture2D" uid="uid://cjmjkd3h610nf" path="res://assets/images/icons/video_icon.png" id="6_vmfnf"]
+[ext_resource type="Texture2D" uid="uid://bm2pd3jhn61iq" path="res://assets/images/selfie.png" id="7_7bxb7"]
+[ext_resource type="Texture2D" uid="uid://bh2aodmuhfccj" path="res://assets/images/icons/messages_icon.webp" id="7_rhvqn"]
+[ext_resource type="Texture2D" uid="uid://byqi5w8p5ltyq" path="res://assets/images/cursor_48.png" id="9_6xph0"]
+[ext_resource type="StyleBox" uid="uid://bkskyjp3vt3rs" path="res://styles/chat_bubble.tres" id="12_3p8fc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7nucq"]
+shader = ExtResource("2_emvlc")
+shader_parameter/lod = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oqpi6"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yloim"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 6
+
+[node name="PhoneOS" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1600.0
+offset_bottom = 1600.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 1
+script = ExtResource("1_r0wjl")
+
+[node name="PhoneSize" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -640.0
+offset_right = 360.0
+offset_bottom = 640.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Wallpaper" type="Sprite2D" parent="PhoneSize"]
+modulate = Color(1, 1, 1, 0.305882)
+material = SubResource("ShaderMaterial_7nucq")
+scale = Vector2(0.837153, 0.837112)
+texture = ExtResource("2_jepf0")
+centered = false
+
+[node name="Apps" type="Control" parent="PhoneSize"]
+visible = false
+modulate = Color(1, 1, 1, 0.611765)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -214.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/Apps"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -180.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/Apps/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Options" type="Button" parent="PhoneSize/Apps/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/icon_max_width = 156
+theme_override_font_sizes/font_size = 72
+icon = ExtResource("4_k6qw4")
+flat = true
+
+[node name="Camera" type="Button" parent="PhoneSize/Apps/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/icon_max_width = 156
+theme_override_font_sizes/font_size = 32
+icon = ExtResource("5_8pkqu")
+flat = true
+
+[node name="Chats" type="Button" parent="PhoneSize/Apps/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/icon_max_width = 156
+text = "
+"
+icon = ExtResource("7_rhvqn")
+flat = true
+
+[node name="Video" type="Button" parent="PhoneSize/Apps/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/icon_max_width = 156
+icon = ExtResource("6_vmfnf")
+flat = true
+
+[node name="Options" type="Control" parent="PhoneSize"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Gray" type="ColorRect" parent="PhoneSize/Options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.532242, 0.532242, 0.532242, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/Options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PhoneSize/Options/MarginContainer"]
+layout_mode = 2
+
+[node name="Quit" type="Button" parent="PhoneSize/Options/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 72
+text = "Turn off phone"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/Options/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="VolumeLabel" type="Label" parent="PhoneSize/Options/MarginContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 48
+text = "Volume"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="PhoneSize/Options/MarginContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/separation = 48
+theme_override_styles/separator = ExtResource("3_7dnor")
+
+[node name="VolumeSlider" type="HSlider" parent="PhoneSize/Options/MarginContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 1
+max_value = 1.0
+step = 0.05
+script = ExtResource("4_5jmmy")
+bus_name = "Master"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PhoneSize/Options/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Fullscreen" type="Label" parent="PhoneSize/Options/MarginContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_font_sizes/font_size = 48
+text = "Fullscreen"
+horizontal_alignment = 3
+vertical_alignment = 1
+
+[node name="FullscreenSwitch" type="CheckButton" parent="PhoneSize/Options/MarginContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+mouse_filter = 1
+text = "
+"
+alignment = 2
+
+[node name="Camera" type="Control" parent="PhoneSize"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ColorRect" type="ColorRect" parent="PhoneSize/Camera"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="PhoneSize/Camera"]
+position = Vector2(360.5, 608.507)
+scale = Vector2(0.958667, 0.958667)
+texture = ExtResource("7_7bxb7")
+region_enabled = true
+region_rect = Rect2(420.241, 0, 750.256, 1040)
+
+[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/Camera"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/Camera/MarginContainer"]
+layout_mode = 2
+
+[node name="Chats" type="Control" parent="PhoneSize"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ColorRect" type="ColorRect" parent="PhoneSize/Chats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/Chats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 274.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="VBoxContainer" parent="PhoneSize/Chats/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Asuka" type="Button" parent="PhoneSize/Chats/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 16
+theme_override_font_sizes/font_size = 40
+text = "Asuka"
+icon = ExtResource("9_6xph0")
+flat = true
+alignment = 0
+
+[node name="Button2" type="Button" parent="PhoneSize/Chats/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 16
+theme_override_font_sizes/font_size = 40
+text = "peppino69"
+icon = ExtResource("9_6xph0")
+flat = true
+alignment = 0
+
+[node name="Button3" type="Button" parent="PhoneSize/Chats/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 16
+theme_override_font_sizes/font_size = 40
+text = "init.Sense CEO"
+icon = ExtResource("9_6xph0")
+flat = true
+alignment = 0
+
+[node name="AsukaChat" type="Control" parent="PhoneSize"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Background" type="ColorRect" parent="PhoneSize/AsukaChat"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.439216)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PhoneSize/AsukaChat"]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 306.0
+offset_right = 688.0
+offset_bottom = 1248.0
+
+[node name="HBoxContainer" type="VBoxContainer" parent="PhoneSize/AsukaChat/ScrollContainer"]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="Button" type="Button" parent="PhoneSize/AsukaChat/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 16
+theme_override_font_sizes/font_size = 40
+text = "message 1"
+icon = ExtResource("9_6xph0")
+flat = true
+alignment = 0
+
+[node name="Label" type="Label" parent="PhoneSize/AsukaChat/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = ExtResource("12_3p8fc")
+text = "message message message message message message message message message "
+autowrap_mode = 3
+
+[node name="TopBar" type="Control" parent="PhoneSize"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 96.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="PhoneSize/TopBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.478431)
+
+[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/TopBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/TopBar/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Time" type="Label" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "10:36"
+
+[node name="VSeparator2" type="VSeparator" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/separation = 12
+theme_override_styles/separator = ExtResource("3_7dnor")
+
+[node name="Notification" type="TextureRect" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_jnjbr")
+expand_mode = 3
+
+[node name="VSeparator" type="VSeparator" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/separation = 320
+theme_override_styles/separator = ExtResource("3_7dnor")
+
+[node name="BatteryBar" type="ProgressBar" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/background = SubResource("StyleBoxFlat_oqpi6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yloim")
+max_value = 30.0
+
+[node name="BatteryTimer" type="Timer" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar"]
+one_shot = true
+
+[node name="ColorRect" type="ColorRect" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(12, 32)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="BottomBar" type="Control" parent="PhoneSize"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/BottomBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/BottomBar/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 128
+
+[node name="Back" type="Button" parent="PhoneSize/BottomBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 72
+text = "back"
+
+[node name="Home" type="Button" parent="PhoneSize/BottomBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 40
+text = "home"
+
+[node name="TurnOff" type="Control" parent="PhoneSize"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="PhoneSize/TurnOff"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/TurnOff"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PhoneSize/TurnOff/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 48
+
+[node name="Label" type="Label" parent="PhoneSize/TurnOff/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "You are going to turn off the phone. You will lose all save files."
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="PhoneSize/TurnOff/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Continue?"
+autowrap_mode = 2
+
+[node name="BlackScreen" type="ColorRect" parent="PhoneSize"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 1)
+
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/HBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/HBoxContainer/Camera" to="." method="_on_camera_pressed"]
+[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/HBoxContainer/Chats" to="." method="_on_chats_pressed"]
+[connection signal="pressed" from="PhoneSize/Options/MarginContainer/VBoxContainer2/Quit" to="." method="_on_quit_pressed"]
+[connection signal="toggled" from="PhoneSize/Options/MarginContainer/VBoxContainer2/HBoxContainer2/FullscreenSwitch" to="." method="_on_fullscreen_toggled"]
+[connection signal="pressed" from="PhoneSize/Chats/MarginContainer/HBoxContainer/Asuka" to="." method="_on_asuka_pressed"]
+[connection signal="pressed" from="PhoneSize/BottomBar/MarginContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="PhoneSize/BottomBar/MarginContainer/HBoxContainer/Home" to="." method="_on_home_pressed"]
