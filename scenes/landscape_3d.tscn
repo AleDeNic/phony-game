@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://by7o55vpuajra"]
+[gd_scene load_steps=8 format=3 uid="uid://c7j5d8r5sk27h"]
 
-[ext_resource type="Environment" uid="uid://dxbvhdedysqfa" path="res://shaders/environment_3d.tres" id="1_7wr4h"]
+[ext_resource type="Environment" uid="uid://0mwu8qw6e2x0" path="res://shaders/environment_3d.tres" id="1_7wr4h"]
 [ext_resource type="Material" uid="uid://4agj4rvs7qeo" path="res://assets/materials/water.tres" id="2_ofr4l"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2wcyk"]

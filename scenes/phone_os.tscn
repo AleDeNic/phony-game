@@ -20,7 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://dhc8q2h36kxwr" path="res://assets/images/icons/home.png" id="16_hax3j"]
 [ext_resource type="Texture2D" uid="uid://cewdbxx36id1s" path="res://assets/images/icons/settings.png" id="17_26q5e"]
 
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7nucq"]
 shader = ExtResource("2_emvlc")
 shader_parameter/lod = 2.0
