@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var game_manager: Node2D = %GameManager
+@onready var game_manager: Node = $"../GameManager"
 @onready var timer: Timer = $PhoneTimer
 @onready var black_screen: ColorRect = $"../Phone/PhoneOS/PhoneSize/BlackScreen"
 @onready var effects: Control = $"../Effects"
@@ -30,10 +30,10 @@ extends Area2D
 
 var current_scale_speed: float = 0.0
 var target_scale: Vector2 = min_scale
-
 var current_rotation_speed: float = 0.0
 var target_rotation: float = min_rotation
 
+# ----- INITIALIZATION AND PHYSICS -----
 func _ready() -> void:
 	black_screen.visible = false
 	current_scale_speed = scale_up_speed
@@ -41,10 +41,21 @@ func _ready() -> void:
 	rotation_degrees = min_rotation
 
 func _process(delta: float) -> void:
-	if player.state in ["phone_zooming_in", "phone_zooming_out"]:
+	if game_manager.player_state in [game_manager.PlayerState.ZOOMING_IN, game_manager.PlayerState.ZOOMING_OUT]:
 		update_scale(delta)
 		update_rotation(delta)
 		update_player_state()
+
+# ----- PHONE ANIMATIONS -----
+func set_phone_scale(scale_value: Vector2, scale_speed: float) -> void:
+	if target_scale != scale_value:
+		target_scale = scale_value
+		current_scale_speed = scale_speed
+
+func set_phone_rotation(rotation_value: float, rotation_speed: float) -> void:
+	if target_rotation != rotation_value:
+		target_rotation = rotation_value
+		current_rotation_speed = rotation_speed
 
 func update_scale(delta: float) -> void:
 	var new_scale = scale.slerp(target_scale, current_scale_speed * delta)
@@ -59,42 +70,32 @@ func update_rotation(delta: float) -> void:
 		var new_rotation = rotation_degrees + sign(angle_difference) * rotation_step
 		new_rotation = clamp(new_rotation, min_rotation, max_rotation)
 		rotation_degrees = new_rotation
+		
+# ----- STATE MANAGEMENT -----
+func _on_area_entered(_area: Area2D) -> void:
+	if game_manager.player_state == game_manager.PlayerState.FREE:
+		enter_phone()
+		game_manager.set_phone_state(game_manager.PhoneState.APPS)
 
 func update_player_state() -> void:
 	if abs(scale.x - target_scale.x) < 0.1:
-		if player.state == "phone_zooming_in":
-			player.state = "phone"
-		elif player.state == "phone_zooming_out":
-			player.state = "free"
-
-func set_phone_scale(scale_value: Vector2, scale_speed: float) -> void:
-	if target_scale != scale_value:
-		target_scale = scale_value
-		current_scale_speed = scale_speed
-
-func set_phone_rotation(rotation_value: float, rotation_speed: float) -> void:
-	if target_rotation != rotation_value:
-		target_rotation = rotation_value
-		current_rotation_speed = rotation_speed
-
-func _on_area_entered(_area: Area2D) -> void:
-	if player.state == "free":
-		enter_phone()
-		phone_os.phone_state = "Apps"
+		if game_manager.player_state == game_manager.PlayerState.ZOOMING_IN:
+			game_manager.set_player_state(game_manager.PlayerState.IN_DIALOGUE)
+		elif game_manager.player_state == game_manager.PlayerState.ZOOMING_OUT:
+			game_manager.set_player_state(game_manager.PlayerState.FREE)
 
 func enter_phone() -> void:
-	player.state = "phone_zooming_in"
+	game_manager.set_player_state(game_manager.PlayerState.ZOOMING_IN)
 	timer.start()
 	set_phone_scale(max_scale, scale_up_speed)
 	set_phone_rotation(max_rotation, rotation_up_speed)
-	effects.set_effects(effects.max_lod, effects_increase_speed)
+	effects.set_effects(effects.MAX_LOD, effects_increase_speed)
 	camera.set_camera_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
 
 func exit_phone() -> void:
-	player.state = "phone_zooming_out"
+	game_manager.set_player_state(game_manager.PlayerState.ZOOMING_OUT)
 	timer.stop()
 	set_phone_scale(min_scale, scale_down_speed)
 	set_phone_rotation(min_rotation, rotation_down_speed)
-	effects.set_effects(effects.min_lod, effects_decrease_speed)
+	effects.set_effects(effects.MIN_LOD, effects_decrease_speed)
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-

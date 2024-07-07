@@ -17,7 +17,8 @@ Asuka: We're here.
 - I'm not sure.
 	Asuka: I am.
 - We are here, indeed.
-	Asuka: Wrong answer. => asuka_intro
+	Asuka: Wrong answer. 
+	=> asuka_intro
 - Not anymore. => END
 
 => END

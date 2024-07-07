@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://byqi5w8p5ltyq" path="res://assets/images/cursor_48.png" id="9_6xph0"]
 [ext_resource type="StyleBox" path="res://styles/chat_bubble.tres" id="12_3p8fc"]
 
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7nucq"]
 shader = ExtResource("2_emvlc")
 shader_parameter/lod = 2.0
