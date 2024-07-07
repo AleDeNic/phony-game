@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var dialogue_resource: Resource = preload("res://dialogues/window.dialogue")
+@export var dialogue_resource: Resource = load("res://dialogues/window.dialogue")
 @export var dialogue_start: String = "window_intro"
 
 @onready var timer: Timer = $WindowTimer

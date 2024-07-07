@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var dialogue_resource: Resource = preload("res://dialogues/asuka.dialogue")
+@export var dialogue_resource: Resource = load("res://dialogues/asuka.dialogue")
 @export var dialogue_start: String = "asuka_intro"
 
 @onready var timer: Timer = $AsukaTimer
