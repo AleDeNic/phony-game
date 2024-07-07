@@ -7,19 +7,21 @@ extends Area2D
 @onready var camera: Camera2D = $"../Player/Camera2D"
 @onready var eyes_sprite: AnimatedSprite2D = $EyesSprite
 @onready var game_manager: Node = $"../GameManager"
+@onready var player: CharacterBody2D = %Player
+
 
 # ----- INITIALIZATION AND PHYSICS -----
 func _ready() -> void:
 	eyes_sprite.frame = 0
 	
 func _process(_delta: float) -> void:
-	if game_manager.current_dialogue_area == self and not overlaps_body(game_manager.player):
+	if game_manager.current_dialogue_area == self and not overlaps_body(player):
 		game_manager.end_dialogue()
 
 # ----- STATE MANAGEMENT -----
-func _on_area_entered(area: Area2D) -> void:
+func _on_area_entered(_area: Area2D) -> void:
 		game_manager.set_player_state(game_manager.PlayerState.ZOOMING_IN)
-		game_manager.player.start_zoom(global_position)
+		player.start_zoom(global_position)
 		
 		timer.start()
 		
@@ -29,12 +31,12 @@ func _on_area_entered(area: Area2D) -> void:
 		
 		game_manager.start_dialogue(dialogue_resource, dialogue_start, self)
 
-func _on_area_exited(area: Area2D) -> void:
+func _on_area_exited(_area: Area2D) -> void:
 		if game_manager.current_dialogue_area == self:
 			game_manager.end_dialogue()
 		
 		game_manager.set_player_state(game_manager.PlayerState.ZOOMING_OUT)
-		game_manager.player.end_zoom()
+		player.end_zoom()
 		
 		timer.stop()
 		camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)

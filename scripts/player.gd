@@ -2,13 +2,13 @@ extends CharacterBody2D
 
 enum State { FREE, ZOOMING_IN, ZOOMING_OUT, IN_DIALOGUE }
 
+@onready var game_manager: Node = $"../GameManager"
+
 @export var default_speed: float = 65.0
 @export var transition_speed: float = 5.0
 @export var zoom_speed: float = 400.0
 @export var exit_speed: float = 12.0
 @export var dead_zone_radius: float = 1.0
-
-@onready var game_manager: Node = $"../GameManager"
 
 var current_speed: float = default_speed
 var target_speed: float
@@ -30,7 +30,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = Vector2.ZERO
 	move_and_slide()
+	#print(current_speed)
 
+# ------------- INPUT & MOVEMENT -----------------
 func handle_movement(delta: float) -> void:
 	var movement_vector: Vector2
 	
@@ -44,21 +46,13 @@ func handle_movement(delta: float) -> void:
 			movement_vector = get_movement_input()
 			current_speed = exit_speed
 			target_speed = default_speed
-			reset_mouse_to_center()
 		State.FREE:
 			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 			movement_vector = get_movement_input()
 			target_speed = default_speed
-			reset_mouse_to_center()
 
+	reset_mouse_to_center()
 	current_speed = lerp(current_speed, target_speed, delta * transition_speed)
-	
-	if movement_vector != Vector2.ZERO:
-		last_movement = movement_vector
-	elif last_movement != Vector2.ZERO:
-		movement_vector = last_movement
-		last_movement = last_movement.move_toward(Vector2.ZERO, delta * transition_speed)
-
 	velocity = movement_vector * current_speed
 
 func get_movement_input() -> Vector2:
@@ -70,10 +64,12 @@ func get_movement_input() -> Vector2:
 func reset_mouse_to_center() -> void:
 	viewport.warp_mouse(viewport.get_visible_rect().size / 2)
 
-func start_zoom(position: Vector2) -> void:
+
+# ------------ HANDLE ZOOM ------------------
+func start_zoom(mov_position: Vector2) -> void:
 	state = State.ZOOMING_IN
 	game_manager.set_player_state(state)
-	target_position = position
+	target_position = mov_position
 	last_movement = Vector2.ZERO
 
 func end_zoom() -> void:

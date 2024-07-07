@@ -12,7 +12,7 @@ func _process(_delta: float) -> void:
 	if game_manager.current_dialogue_area == self and not overlaps_body(game_manager.player):
 		game_manager.end_dialogue()
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_area_entered(_area: Area2D) -> void:
 		game_manager.set_player_state(game_manager.PlayerState.ZOOMING_IN)
 		game_manager.player.start_zoom(global_position)
 		
@@ -22,7 +22,7 @@ func _on_area_entered(area: Area2D) -> void:
 		game_manager.start_dialogue(dialogue_resource, dialogue_start, self)
 
 # ----- STATE MANAGEMENT -----
-func _on_area_exited(area: Area2D) -> void:
+func _on_area_exited(_area: Area2D) -> void:
 		if game_manager.current_dialogue_area == self:
 			game_manager.end_dialogue()
 		

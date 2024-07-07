@@ -6,7 +6,7 @@ extends Control
 @onready var options: Control = $PhoneSize/Options
 @onready var camera: Control = $PhoneSize/Camera
 @onready var chats: Control = $PhoneSize/Chats
-@onready var asuka_chat: Control = $PhoneSize/AsukaChat
+@onready var asukachat: Control = $PhoneSize/AsukaChat
 @onready var game_manager: Node = $"../../GameManager"
 @onready var battery_bar: ProgressBar = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar
 @onready var battery_timer: Timer = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar/BatteryTimer
@@ -40,7 +40,7 @@ func reset_screens() -> void:
 	options.visible = false
 	camera.visible = false
 	chats.visible = false
-	asuka_chat.visible = false
+	asukachat.visible = false
 
 func setup_battery() -> void:
 	battery_bar.max_value = game_manager.max_battery
@@ -57,7 +57,7 @@ func _on_options_pressed() -> void:
 	go_to_screen(options)
 
 func _on_back_pressed() -> void:
-	if game_manager.phone_state == game_manager.PhoneState.ASUKA_CHAT:
+	if game_manager.phone_state == game_manager.PhoneState.ASUKACHAT:
 		go_to_screen(chats)
 	else:
 		go_to_screen(apps)
@@ -78,8 +78,4 @@ func _on_chats_pressed() -> void:
 	go_to_screen(chats)
 
 func _on_asuka_pressed() -> void:
-	go_to_screen(asuka_chat)
-
-func _on_mouse_exited() -> void:
-	if game_manager.player_state != game_manager.PlayerState.FREE:
-		game_manager.exit_phone()
+	go_to_screen(asukachat)

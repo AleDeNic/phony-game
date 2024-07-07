@@ -2,7 +2,6 @@ extends Area2D
 
 @onready var game_manager: Node = $"../GameManager"
 @onready var timer: Timer = $PhoneTimer
-@onready var black_screen: ColorRect = $"../Phone/PhoneOS/PhoneSize/BlackScreen"
 @onready var effects: Control = $"../Effects"
 @onready var camera: Camera2D = $"../Player/Camera2D"
 @onready var phone_os: Control = $PhoneOS
@@ -21,8 +20,8 @@ extends Area2D
 @export var effects_decrease_speed: float = 3.5
 
 @export_group("Rotation angles")
-@export var min_rotation: float = -12.0
-@export var max_rotation: float = -4.6
+@export var min_rotation: float = -6.0
+@export var max_rotation: float = 0.0
 
 @export_group("Rotation speeds")
 @export var rotation_up_speed: float = 16.0
@@ -35,7 +34,6 @@ var target_rotation: float = min_rotation
 
 # ----- INITIALIZATION AND PHYSICS -----
 func _ready() -> void:
-	black_screen.visible = false
 	current_scale_speed = scale_up_speed
 	current_rotation_speed = rotation_up_speed
 	rotation_degrees = min_rotation
@@ -63,29 +61,26 @@ func update_scale(delta: float) -> void:
 		scale = clamp(new_scale, min_scale, max_scale)
 
 func update_rotation(delta: float) -> void:
-	var angle_difference = wrapf(target_rotation - rotation_degrees, -180.0, 180.0)
+	var rotation_difference = wrapf(target_rotation - rotation_degrees, -180.0, 180.0)
 	var rotation_step = current_rotation_speed * delta
 	
-	if abs(angle_difference) > 0.1:
-		var new_rotation = rotation_degrees + sign(angle_difference) * rotation_step
+	if abs(rotation_difference) > 0.1:
+		var new_rotation = rotation_degrees + sign(rotation_difference) * rotation_step
 		new_rotation = clamp(new_rotation, min_rotation, max_rotation)
 		rotation_degrees = new_rotation
-		
-# ----- STATE MANAGEMENT -----
+
+# --------- PHONE INTERACTIONS -----------
 func _on_area_entered(_area: Area2D) -> void:
 	if game_manager.player_state == game_manager.PlayerState.FREE:
 		enter_phone()
-		game_manager.set_phone_state(game_manager.PhoneState.APPS)
 
-func update_player_state() -> void:
-	if abs(scale.x - target_scale.x) < 0.1:
-		if game_manager.player_state == game_manager.PlayerState.ZOOMING_IN:
-			game_manager.set_player_state(game_manager.PlayerState.IN_DIALOGUE)
-		elif game_manager.player_state == game_manager.PlayerState.ZOOMING_OUT:
-			game_manager.set_player_state(game_manager.PlayerState.FREE)
+func _on_phone_os_mouse_exited() -> void:
+	if game_manager.player_state != game_manager.PlayerState.FREE:
+		exit_phone()
 
 func enter_phone() -> void:
 	game_manager.set_player_state(game_manager.PlayerState.ZOOMING_IN)
+	game_manager.set_phone_state(game_manager.PhoneState.APPS)
 	timer.start()
 	set_phone_scale(max_scale, scale_up_speed)
 	set_phone_rotation(max_rotation, rotation_up_speed)
@@ -99,3 +94,11 @@ func exit_phone() -> void:
 	set_phone_rotation(min_rotation, rotation_down_speed)
 	effects.set_effects(effects.MIN_LOD, effects_decrease_speed)
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
+
+# ----- STATE MANAGEMENT -----
+func update_player_state() -> void:
+	if abs(scale.x - target_scale.x) < 0.1:
+		if game_manager.player_state == game_manager.PlayerState.ZOOMING_IN:
+			game_manager.set_player_state(game_manager.PlayerState.IN_DIALOGUE)
+		elif game_manager.player_state == game_manager.PlayerState.ZOOMING_OUT:
+			game_manager.set_player_state(game_manager.PlayerState.FREE)

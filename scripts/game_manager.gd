@@ -1,7 +1,7 @@
 extends Node
 
 enum PlayerState { FREE, ZOOMING_IN, ZOOMING_OUT, IN_DIALOGUE }
-enum PhoneState { OFF, APPS, OPTIONS, CAMERA, CHATS, ASUKA_CHAT }
+enum PhoneState { OFF, APPS, OPTIONS, CAMERA, CHATS, ASUKACHAT }
 
 @export var max_battery: float = 100.0
 @export var max_stress: float = 100.0
@@ -20,6 +20,15 @@ var phone_state: PhoneState = PhoneState.OFF
 var active_balloon: Node = null
 var current_dialogue_area: Area2D = null
 
+func _ready() -> void:
+	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
+	
+func process(_delta: float) -> void:
+	if player_state == PlayerState.IN_DIALOGUE and current_dialogue_area:
+		if not current_dialogue_area.overlaps_body(player):
+			end_dialogue()
+
+# ---------- DIALOGUES -----------
 func start_dialogue(dialogue_resource: Resource, start_from: String, dialogue_area: Area2D) -> void:
 	set_player_state(PlayerState.IN_DIALOGUE)
 	player.set_dialogue()
@@ -33,14 +42,7 @@ func end_dialogue() -> void:
 	current_dialogue_area = null
 	set_player_state(PlayerState.ZOOMING_OUT)
 	player.end_dialogue()  
-	
-func process(delta: float) -> void:
-	if player_state == PlayerState.IN_DIALOGUE and current_dialogue_area:
-		if not current_dialogue_area.overlaps_body(player):
-			end_dialogue()
-			
-func _ready() -> void:
-	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
+
 
 func pause_dialogue() -> void:
 	if active_balloon and is_instance_valid(active_balloon):
@@ -62,7 +64,10 @@ func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	end_dialogue()
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 	player.set_free()
-	
+
+
+
+# ---------- PLAYER AND PHONE STATE -----------
 func set_player_state(new_state: PlayerState) -> void:
 	player_state = new_state
 	match player_state:
@@ -70,13 +75,9 @@ func set_player_state(new_state: PlayerState) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		PlayerState.ZOOMING_OUT, PlayerState.FREE:
 			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-			
+
 func set_phone_state(new_state: PhoneState) -> void:
 	phone_state = new_state
-	
-func exit_phone() -> void:
-	set_phone_state(PhoneState.OFF)
-	set_player_state(PlayerState.ZOOMING_OUT)
-	
+
 func is_battery_active() -> bool:
 	return phone_state not in [PhoneState.OFF, PhoneState.OPTIONS]
