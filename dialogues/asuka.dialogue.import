@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://l4dmulj4jhqv"
+path="res://.godot/imported/asuka.dialogue-968b124b6d09dbcd35174e3d531ff65d.tres"
+
+[deps]
+
+source_file="res://dialogues/asuka.dialogue"
+dest_files=["res://.godot/imported/asuka.dialogue-968b124b6d09dbcd35174e3d531ff65d.tres"]
+
+[params]
+
+defaults=true

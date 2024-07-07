@@ -1,0 +1,23 @@
+~ asuka_intro
+
+Asuka: I'm now reborn. Remember...
+Asuka: You[speed=0.4].[speed=0.2].[speed=0.1].
+- Cannot.
+	Asuka: Redo.
+- Are not.
+	Asuka: Alone.
+- Will be reborn. => asuka_intro
+- Will continue. Together as one.
+- Will die. => END
+Asuka: Reach for me.
+
+~ asuka_intermezzo
+
+Asuka: We're here.
+- I'm not sure.
+	Asuka: I am.
+- We are here, indeed.
+	Asuka: Wrong answer. => asuka_intro
+- Not anymore. => END
+
+=> END

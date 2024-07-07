@@ -1,38 +1,37 @@
 extends Control
 
-@onready var game_manager: Node2D = %GameManager
+@onready var game_manager: Node = $"../GameManager"
 @onready var stress_filter: ColorRect = $StressFilter
-@onready var phone: Area2D = $"../Phone"
-@onready var player: CharacterBody2D = %Player
-@onready var blur_fisheye: ShaderMaterial = get_node("BlurFisheye").material as ShaderMaterial
+@onready var blur_fisheye: ShaderMaterial = $BlurFisheye.material as ShaderMaterial
 @onready var blue_filter: ColorRect = $BlueFilter
 
 var stress_level: float = 0.0
 var target_lod: float = 3.5
-
 var current_lod: float = 0.0
 var current_lod_speed: float = 0.0
-
 var current_blue: float = 0.0
-const min_blue: float = 0.0
-const max_blue: float = 1.0
 
-const min_lod: float = 0.0
-const max_lod: float = 3.5
+const MIN_BLUE: float = 0.0
+const MAX_BLUE: float = 1.0
+const MIN_LOD: float = 0.0
+const MAX_LOD: float = 3.5
 
 func _ready() -> void:
-	current_lod_speed = phone.effects_increase_speed
+	if not game_manager.is_node_ready():
+		await game_manager.ready
+	
+	current_lod_speed = game_manager.effects_increase_speed
 	current_lod = blur_fisheye.get_shader_parameter("lod")
-	target_lod = min_lod
+	target_lod = MIN_LOD
 
 func _process(delta: float) -> void:
-	if player.state in ["phone_zooming_in", "phone_zooming_out", "phone", "free"]:
+	if game_manager.player_state in [game_manager.PlayerState.ZOOMING_IN, game_manager.PlayerState.ZOOMING_OUT, game_manager.PlayerState.FREE]:
 		var new_lod = lerp(current_lod, target_lod, current_lod_speed * delta)
 		if abs(new_lod - current_lod) > 0.001:
-			new_lod = clamp(new_lod, min_lod, max_lod)
+			new_lod = clamp(new_lod, MIN_LOD, MAX_LOD)
 			current_lod = new_lod
 			blur_fisheye.set_shader_parameter("lod", current_lod)
-			current_blue = map_range(current_lod, min_lod, max_lod, min_blue, max_blue)
+			current_blue = map_range(current_lod, MIN_LOD, MAX_LOD, MIN_BLUE, MAX_BLUE)
 			blue_filter.modulate.a = current_blue
 
 func set_effects(lod_value: float, lod_speed: float) -> void:

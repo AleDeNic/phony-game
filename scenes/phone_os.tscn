@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_os.gd" id="1_r0wjl"]
-[ext_resource type="Shader" path="res://temp/deprecated/blur.gdshader" id="2_emvlc"]
+[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="2_emvlc"]
 [ext_resource type="Texture2D" uid="uid://djlpmyr2jau2k" path="res://assets/images/phone_wallpaper.png" id="2_jepf0"]
 [ext_resource type="StyleBox" uid="uid://duct66cpghgeh" path="res://styles/separator.tres" id="3_7dnor"]
 [ext_resource type="Texture2D" uid="uid://bfg0lk6kvgptl" path="res://assets/images/icons/notification_icon.png" id="3_jnjbr"]
@@ -12,7 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://bm2pd3jhn61iq" path="res://assets/images/selfie.png" id="7_7bxb7"]
 [ext_resource type="Texture2D" uid="uid://bh2aodmuhfccj" path="res://assets/images/icons/messages_icon.webp" id="7_rhvqn"]
 [ext_resource type="Texture2D" uid="uid://byqi5w8p5ltyq" path="res://assets/images/cursor_48.png" id="9_6xph0"]
-[ext_resource type="StyleBox" uid="uid://bkskyjp3vt3rs" path="res://styles/chat_bubble.tres" id="12_3p8fc"]
+[ext_resource type="StyleBox" path="res://styles/chat_bubble.tres" id="12_3p8fc"]
+
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7nucq"]
 shader = ExtResource("2_emvlc")

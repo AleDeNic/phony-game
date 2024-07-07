@@ -2,22 +2,27 @@ extends Area2D
 
 @onready var timer: Timer = $WindowTimer
 @onready var camera: Camera2D = $"../Player/Camera2D"
-@onready var game_manager: Node2D = %GameManager
-
-var is_zooming_in: bool
+@onready var game_manager: Node = $"../GameManager"
+@onready var dialogue_resource = preload("res://dialogues/window.dialogue")
 
 func _on_area_entered(_area: Area2D) -> void:
+	game_manager.set_player_state(game_manager.PlayerState.ZOOMING_IN)
+	game_manager.player.start_zoom(global_position)
+	
 	timer.start()
-	game_manager.handle_timeline("window")
-	is_zooming_in = true
 	camera.set_camera_zoom(camera.window_zoom_value, camera.window_zoom_speed)
-	print("Entered Window area: ", game_manager.timelines)
+	start_dialogue()
 
 func _on_area_exited(_area: Area2D) -> void:
+	game_manager.set_player_state(game_manager.PlayerState.ZOOMING_OUT)
+	game_manager.player.end_zoom()
+	
 	timer.stop()
-	game_manager.handle_timeline("window", true)
-	if Dialogic.Styles.get_layout_node():
-		Dialogic.Styles.get_layout_node().hide()
-	is_zooming_in = false
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-	print("Exited Window area: ", game_manager.timelines)
+	pause_dialogue()
+
+func start_dialogue() -> void:
+	game_manager.start_dialogue(dialogue_resource, "window_intro")
+
+func pause_dialogue() -> void:
+	game_manager.pause_dialogue()

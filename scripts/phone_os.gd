@@ -7,32 +7,30 @@ extends Control
 @onready var camera: Control = $PhoneSize/Camera
 @onready var chats: Control = $PhoneSize/Chats
 @onready var asuka_chat: Control = $PhoneSize/AsukaChat
-@onready var game_manager: Node2D = %GameManager
+@onready var game_manager: Node = $"../../GameManager"
 @onready var battery_bar: ProgressBar = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar
 @onready var battery_timer: Timer = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar/BatteryTimer
-@onready var phone: Area2D = get_node("/root/World/Phone")
-@onready var player: CharacterBody2D = %Player
-
-var phone_state: String
 
 func _ready() -> void:
-	phone_state = "Off"
-	setup_battery()
 	reset_screens()
 	apps.visible = true
+	
+	if not game_manager.is_node_ready():
+		await game_manager.ready
+	
+	setup_battery()
 
 func _process(_delta: float) -> void:
-	handle_battery(phone_state)
-	#print(phone_state)
+	handle_battery()
 	if Input.is_action_just_pressed("ui_cancel"):
-		phone.state = "phone_zooming_in"
+		game_manager.set_player_state(game_manager.PlayerState.ZOOMING_IN)
 		go_to_screen(options)
 
 func go_to_screen(screen: Control) -> void:
 	reset_screens()
 	screen.visible = true
-	phone_state = screen.get_name()
-	if phone_state != "Apps":
+	game_manager.set_phone_state(game_manager.PhoneState[screen.name.to_upper()])
+	if game_manager.phone_state != game_manager.PhoneState.APPS:
 		bottom_bar.visible = true
 
 func reset_screens() -> void:
@@ -49,20 +47,17 @@ func setup_battery() -> void:
 	battery_timer.wait_time = game_manager.max_battery
 	battery_timer.start()
 	battery_timer.paused = true
-	handle_battery(phone_state)
+	handle_battery()
 
-func handle_battery(state) -> void:
-	if state in ["Off", "Options"]:
-		battery_timer.paused = true
-	else:
-		battery_timer.paused = false
+func handle_battery() -> void:
+	battery_timer.paused = not game_manager.is_battery_active()
 	battery_bar.value = battery_timer.time_left
 
 func _on_options_pressed() -> void:
 	go_to_screen(options)
 
 func _on_back_pressed() -> void:
-	if phone_state == "AsukaChat":
+	if game_manager.phone_state == game_manager.PhoneState.ASUKA_CHAT:
 		go_to_screen(chats)
 	else:
 		go_to_screen(apps)
@@ -74,10 +69,7 @@ func _on_quit_pressed() -> void:
 	get_tree().quit()
 
 func _on_fullscreen_toggled(toggled_on: bool) -> void:
-	if toggled_on:
-		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
-	else:
-		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
+	DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN if toggled_on else DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
 
 func _on_camera_pressed() -> void:
 	go_to_screen(camera)
@@ -89,11 +81,5 @@ func _on_asuka_pressed() -> void:
 	go_to_screen(asuka_chat)
 
 func _on_mouse_exited() -> void:
-	if player.state != "free":
-		phone_state = "Off"
-		phone.exit_phone()
-
-
-
-
-
+	if game_manager.player_state != game_manager.PlayerState.FREE:
+		game_manager.exit_phone()
