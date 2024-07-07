@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://3ngo2fu72k0i"]
+[gd_scene load_steps=19 format=3 uid="uid://3ngo2fu72k0i"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_shqgp"]
 [ext_resource type="PackedScene" uid="uid://mei3fh0wa3em" path="res://scenes/effects.tscn" id="1_u37f0"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/phone.gd" id="7_lhypb"]
 [ext_resource type="Texture2D" uid="uid://bvbhrwpow0q30" path="res://assets/images/eyes.png" id="9_fl5a1"]
 [ext_resource type="PackedScene" uid="uid://o0205cjoosgq" path="res://scenes/player.tscn" id="9_o22lg"]
+[ext_resource type="Script" path="res://scripts/notifications_manager.gd" id="10_2uot5"]
 [ext_resource type="PackedScene" uid="uid://cag4fc4uu0krp" path="res://scenes/audio_manager.tscn" id="12_3unc5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pmn2f"]
@@ -105,21 +106,23 @@ script = ExtResource("7_lhypb")
 wait_time = 0.1
 
 [node name="PhoneSprite" type="Sprite2D" parent="Phone"]
-position = Vector2(122, 65)
+position = Vector2(126, 25)
+rotation = -0.0730508
 scale = Vector2(0.755, 0.755)
 texture = ExtResource("3_sup45")
 
+[node name="Notifications" type="Node2D" parent="Phone"]
+script = ExtResource("10_2uot5")
+
 [node name="PhoneOS" parent="Phone" instance=ExtResource("7_g2i3f")]
-offset_left = -306.0
-offset_top = -366.0
-offset_right = 1294.0
-offset_bottom = 1234.0
-rotation = 0.081157
+offset_left = -334.0
+offset_top = -364.0
+offset_right = 1266.0
+offset_bottom = 1236.0
 scale = Vector2(0.419138, 0.419138)
 
 [node name="PhoneCollision" type="CollisionShape2D" parent="Phone"]
 position = Vector2(0, -2)
-rotation = 0.0746187
 scale = Vector2(37.2402, 33.1369)
 shape = SubResource("RectangleShape2D_qisob")
 

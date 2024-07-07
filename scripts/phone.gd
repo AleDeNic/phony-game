@@ -18,8 +18,8 @@ extends Area2D
 @export var effects_increase_speed: float = 2.5
 @export var effects_decrease_speed: float = 3.5
 @export_group("Rotation angles")
-@export var min_rotation: float = -12.0  # In degrees
-@export var max_rotation: float = -4.6  # In degrees
+@export var min_rotation: float = -8.0  # In degrees
+@export var max_rotation: float = 0.0  # In degrees
 @export_group("Rotation speeds")
 @export var rotation_up_speed: float = 16.0
 @export var rotation_down_speed: float = 10.0
@@ -50,7 +50,7 @@ func update_scale(delta: float) -> void:
 func update_rotation(delta: float) -> void:
 	var angle_difference = wrapf(target_rotation - rotation_degrees, -180.0, 180.0)
 	var rotation_step = current_rotation_speed * delta
-	
+
 	if abs(angle_difference) > 0.1:  # Adjust threshold for more sensitivity
 		var new_rotation = rotation_degrees + sign(angle_difference) * rotation_step
 		new_rotation = clamp(new_rotation, min_rotation, max_rotation)

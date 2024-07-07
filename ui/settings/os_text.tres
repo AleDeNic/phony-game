@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://do3s44f43vkkm"]
+
+[ext_resource type="FontFile" uid="uid://d02ygxi1jy6m3" path="res://ui/fonts/neuropol_x.otf" id="1_nrkua"]
+
+[resource]
+font = ExtResource("1_nrkua")
+font_size = 40
