@@ -20,7 +20,6 @@ func _ready() -> void:
 	target_zoom = default_zoom_value
 
 func _process(delta: float) -> void:
-	#print(zoom)
 	if is_zooming:
 		zoom = zoom.lerp(target_zoom, current_zoom_speed * delta)
 		zoom = clamp(zoom, phone_zoom_value, window_zoom_value)
@@ -34,4 +33,3 @@ func set_camera_zoom(zoom_value, zoom_speed) -> void:
 		current_zoom_speed = zoom_speed
 		is_zooming = true
 		print(target_zoom)
-		#print("start zoom")
