@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cs2sk7aftrk1c"]
+
+[ext_resource type="FontFile" uid="uid://d06s8b5831mca" path="res://ui/fonts/LibertinusMono-Regular.otf" id="1_782bf"]
+
+[resource]
+line_spacing = 1.0
+font = ExtResource("1_782bf")
+font_size = 36
+font_color = Color(0, 0, 0, 1)
