@@ -2,7 +2,7 @@ class_name PlayerManager
 extends Node
 
 enum PlayerState { FREE, ZOOMING_IN, ZOOMING_OUT, FOCUS, IN_PHONE }
-enum PhoneState { OFF, APPS, OPTIONS, CAMERA, CHATS, ASUKACHAT }
+
 @export var max_battery: float = 100.0
 @export var max_stress: float = 100.0
 @export var phone_stress_heal: float = 1.0
@@ -11,7 +11,7 @@ enum PhoneState { OFF, APPS, OPTIONS, CAMERA, CHATS, ASUKACHAT }
 @export var effects_increase_speed: float = 1.0
 
 var player_state: PlayerState = PlayerState.FREE
-var phone_state: PhoneState = PhoneState.OFF
+
 
 @onready var player: CharacterBody2D = %Player
 @onready var phone: Area2D = $"../Phone"
@@ -22,7 +22,7 @@ func _ready() -> void:
 	set_player_free()
 
 func _physics_process(_delta: float) -> void:
-	pass
+	print_player_state(player_state)
 
 func set_player_state(new_state: PlayerState) -> void:
 	player_state = new_state
@@ -78,17 +78,7 @@ func transition_player_to_free() -> void:
 		set_player_free()
 
 
-# ---------- PHONE STATE -----------
-func set_phone_state(new_state: PhoneState) -> void:
-	phone_state = new_state
 
-func get_phone_state() -> PhoneState:
-	return phone_state
-
-
-# ----- IDK -----
-func is_battery_active() -> bool:
-	return phone_state not in [PhoneState.OFF, PhoneState.OPTIONS]
 
 
 # ----- DEBUG FUNCTIONS -----
@@ -104,19 +94,3 @@ func print_player_state(state):
 			print("Player state: FOCUS")
 		PlayerState.IN_PHONE:
 			print("Player state: IN_PHONE")
-
-
-func print_phone_state(state):
-	match state:
-		PhoneState.OFF:
-			print("Phone state: OFF")
-		PhoneState.APPS:
-			print("Phone state: APPS")
-		PhoneState.OPTIONS:
-			print("Phone state: OPTIONS")
-		PhoneState.CAMERA:
-			print("Phone state: CAMERA")
-		PhoneState.CHATS:
-			print("Phone state: CHATS")
-		PhoneState.ASUKACHAT:
-			print("Phone state: ASUKACHAT")

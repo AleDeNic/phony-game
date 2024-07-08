@@ -81,7 +81,7 @@ func _on_phone_os_mouse_exited() -> void:
 func enter_phone() -> void:
 	player.target_position = Vector2(global_position)
 	player_manager.set_player_state(player_manager.PlayerState.ZOOMING_IN)
-	player_manager.set_phone_state(player_manager.PhoneState.APPS)
+	phone_os.set_phone_state(phone_os.PhoneState.APPS)
 	timer.start()
 	set_phone_scale(max_scale, scale_up_speed)
 	set_phone_rotation(max_rotation, rotation_up_speed)

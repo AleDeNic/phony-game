@@ -15,7 +15,6 @@ extends Area2D
 func _ready() -> void:
 	eyes_sprite.frame = 0
 
-
 func _process(_delta: float) -> void:
 	if story_manager.current_dialogue_area == self and not overlaps_body(player):
 		story_manager.end_dialogue()
