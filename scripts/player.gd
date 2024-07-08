@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 @export var default_speed: float = 65.0
 @export var transition_speed: float = 5.0
-@export var focus_speed: float = 200.0
+@export var focus_speed: float = 400.0
 @export var exit_speed: float = 12.0
 @export var dead_zone_radius: float = 1.0
 
@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 			handle_zooming_in(delta)
 		GameManager.PlayerState.ZOOMING_OUT:
 			handle_zooming_out(delta)
-		GameManager.PlayerState.IN_DIALOGUE:
+		GameManager.PlayerState.FOCUS:
 			velocity = Vector2.ZERO
 
 	move_and_slide()
@@ -59,7 +59,7 @@ func handle_zooming_in(delta: float) -> void:
 	if global_position.distance_to(target_position) >= 5.0:
 		target_speed = focus_speed
 	else:
-		game_manager.set_player_in_dialogue()
+		game_manager.set_player_to_focus()
 		target_speed = 0.0
 	current_speed = lerp(current_speed, target_speed, delta * transition_speed)
 	velocity = movement_vector * current_speed
