@@ -36,3 +36,5 @@ func lerp_color(color1: Color, color2: Color, t: float) -> Color:
 		lerp(color1.b, color2.b, t),
 		lerp(color1.a, color2.a, t)
 	)
+
+#func 

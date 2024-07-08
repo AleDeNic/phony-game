@@ -79,6 +79,7 @@ func _on_phone_os_mouse_exited() -> void:
 		exit_phone()
 
 func enter_phone() -> void:
+	player.target_position = Vector2(global_position)
 	game_manager.set_player_state(game_manager.PlayerState.ZOOMING_IN)
 	game_manager.set_phone_state(game_manager.PhoneState.APPS)
 	timer.start()
@@ -98,7 +99,5 @@ func exit_phone() -> void:
 # ----- STATE MANAGEMENT -----
 func update_player_state() -> void:
 	if abs(scale.x - target_scale.x) < 0.1:
-		if game_manager.player_state == game_manager.PlayerState.ZOOMING_IN:
-			game_manager.set_player_state(game_manager.PlayerState.IN_DIALOGUE)
-		elif game_manager.player_state == game_manager.PlayerState.ZOOMING_OUT:
-			game_manager.set_player_state(game_manager.PlayerState.FREE)
+		if game_manager.player_state == game_manager.PlayerState.ZOOMING_OUT:
+			game_manager.set_player_free()

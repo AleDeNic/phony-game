@@ -22,6 +22,7 @@ func _process(_delta: float) -> void:
 
 # ----- STATE MANAGEMENT -----
 func _on_area_entered(_area: Area2D) -> void:
+	player.target_position = Vector2(global_position)
 	game_manager.set_player_zooming_in()
 	timer.start()
 	game_manager.zoom_player(camera.asuka_zoom_value, camera.asuka_zoom_speed)
