@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7j5d8r5sk27h"]
+[gd_scene load_steps=9 format=3 uid="uid://c7j5d8r5sk27h"]
 
+[ext_resource type="Script" path="res://scripts/landscape_3d.gd" id="1_5o12r"]
 [ext_resource type="Environment" uid="uid://0mwu8qw6e2x0" path="res://shaders/environment_3d.tres" id="1_7wr4h"]
 [ext_resource type="Material" uid="uid://4agj4rvs7qeo" path="res://assets/materials/water.tres" id="2_ofr4l"]
 
@@ -49,9 +50,13 @@ _data = {
 }
 
 [node name="Landscape3D" type="Node3D"]
+script = ExtResource("1_5o12r")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("1_7wr4h")
+
+[node name="Timer" type="Timer" parent="WorldEnvironment"]
+wait_time = 20.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.826197, 0.380361, 0.415601, 0, -0.73769, 0.675139, 0.563382, -0.557798, -0.609477, 0, 18, 0)
