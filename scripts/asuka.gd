@@ -8,6 +8,7 @@ extends Area2D
 @onready var eyes_sprite: AnimatedSprite2D = $EyesSprite
 @onready var game_manager: Node = $"../GameManager"
 @onready var player: CharacterBody2D = %Player
+@onready var story_manager: Node = $"../StoryManager"
 
 
 # ----- INITIALIZATION AND PHYSICS -----
@@ -16,8 +17,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if game_manager.current_dialogue_area == self and not overlaps_body(player):
-		game_manager.end_dialogue()
+	if story_manager.current_dialogue_area == self and not overlaps_body(player):
+		story_manager.end_dialogue()
 
 
 # ----- STATE MANAGEMENT -----
@@ -28,24 +29,14 @@ func _on_area_entered(_area: Area2D) -> void:
 	game_manager.zoom_player(camera.asuka_zoom_value, camera.asuka_zoom_speed)
 	await get_tree().create_timer(0.3).timeout
 	eyes_sprite.frame = 1
-	game_manager.start_dialogue(dialogue_resource, dialogue_start, self)
+	story_manager.start_dialogue(dialogue_resource, dialogue_start, self)
 
 
 func _on_area_exited(_area: Area2D) -> void:
-	if game_manager.current_dialogue_area == self:
-		game_manager.end_dialogue()
+	if story_manager.current_dialogue_area == self:
+		story_manager.end_dialogue()
 
 	timer.stop()
 	game_manager.zoom_player(camera.default_zoom_value, camera.reset_zoom_speed)
 	await get_tree().create_timer(0.3).timeout
 	eyes_sprite.frame = 0
-
-
-#func _on_asuka_exit_area_mouse_exited() -> void:
-	#if game_manager.current_dialogue_area == self:
-		#game_manager.end_dialogue()
-#
-	#timer.stop()
-	#game_manager.zoom_player(camera.default_zoom_value, camera.reset_zoom_speed)
-	#await get_tree().create_timer(0.3).timeout
-	#eyes_sprite.frame = 0

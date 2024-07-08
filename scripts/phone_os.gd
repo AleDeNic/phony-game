@@ -14,13 +14,13 @@ extends Control
 func _ready() -> void:
 	reset_screens()
 	apps.visible = true
-	
+
 	if not game_manager.is_node_ready():
 		await game_manager.ready
-	
+
 	setup_battery()
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	handle_battery()
 	if Input.is_action_just_pressed("ui_cancel"):
 		game_manager.set_player_state(game_manager.PlayerState.ZOOMING_IN)

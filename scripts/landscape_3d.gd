@@ -6,28 +6,26 @@ extends Node3D
 @onready var water: ShaderMaterial = $Water.mesh.material as ShaderMaterial
 @onready var environment: Environment = $WorldEnvironment.environment
 
-@export_group("Top")
+@export_group("Prologue")
 @export var sky_prologue: Color = Color(0.0, 0.75, 0.95, 1.0)
-@export var sky_middle: Color = Color(0.5, 0.1, 0.3, 1.0)
-@export var sky_end: Color = Color(0.5, 0.3, 0.95, 1.0)
-
-@export_group("Horizon")
 @export var horizon_prologue: Color = Color(1.0, 1.0, 1.0, 1.0)
-@export var horizon_middle: Color = Color(1.0, 1.0, 1.0, 1.0)
-@export var horizon_end: Color = Color(1.0, 1.0, 1.0, 1.0)
-
-@export_group("Ground")
 @export var ground_prologue: Color = Color(0.2, 0.3, 1.0, 1.0)
-@export var ground_middle: Color = Color(0.2, 0.3, 1.0, 1.0)
-@export var ground_end: Color = Color(0.0, 0.0, 0.0, 1.0)
-
-@export_group("Water")
 @export var water_prologue: Color = Color(0.35, 0.45, 1.0, 1.0)
-@export var water_middle: Color = Color(0.35, 0.45, 1.0, 1.0)
+
+@export_group("Middle")
+@export var sky_middle: Color = Color(0.5, 0.1, 0.3, 1.0)
+@export var horizon_middle: Color = Color(1.0, 1.0, 1.0, 1.0)
+@export var ground_middle: Color = Color(0.9, 0.1, 0.5, 1.0)
+@export var water_middle: Color = Color(0.1, 0.9, 0.3, 1.0)
+
+@export_group("End")
+@export var sky_end: Color = Color(0.5, 0.3, 0.95, 1.0)
+@export var horizon_end: Color = Color(1.0, 1.0, 1.0, 1.0)
+@export var ground_end: Color = Color(0.0, 0.0, 0.0, 1.0)
 @export var water_end: Color = Color(0.1, 0.1, 0.1, 1.0)
 
 @export_group("Speeds")
-var color_speed: float = 0.002
+var color_speed: float = 0.1
 
 var current_sky: Color
 var current_horizon: Color
@@ -43,7 +41,8 @@ func _ready() -> void:
 	setup_colors()
 	handle_target_colors()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	handle_target_colors()
 	handle_sky_and_ground()
 	handle_horizon()
 	handle_water()
@@ -79,6 +78,7 @@ func change_target_colors(new_sky, new_horizon, new_ground, new_water):
 	target_horizon = new_horizon
 	target_ground = new_ground
 	target_water = new_water
+	#print("changinggggg targets")
 
 func setup_colors() -> void:
 	current_sky = sky_prologue

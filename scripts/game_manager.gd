@@ -11,64 +11,18 @@ enum PhoneState { OFF, APPS, OPTIONS, CAMERA, CHATS, ASUKACHAT }
 @export var effects_increase_speed: float = 1.0
 
 var player_state: PlayerState = PlayerState.FREE
-var phone_state: PhoneState   = PhoneState.OFF
+var phone_state: PhoneState = PhoneState.OFF
 
 @onready var player: CharacterBody2D = %Player
 @onready var phone: Area2D = $"../Phone"
 @onready var camera: Camera2D = $"../Player/Camera2D"
 
-var active_balloon: Node          = null
-var current_dialogue_area: Area2D = null
-
 
 func _ready() -> void:
 	initialize_player_state()
-	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
-
-func _process(_delta: float) -> void:
-	if player_state == PlayerState.FOCUS and current_dialogue_area:
-		if not current_dialogue_area.overlaps_body(player):
-			end_dialogue()
-	#print_player_state(player_state)
-
-
-# ----- DIALOGUES -----
-func start_dialogue(dialogue_resource: Resource, start_from: String, dialogue_area: Area2D) -> void:
-	active_balloon = DialogueManager.show_dialogue_balloon(dialogue_resource, start_from)
-	current_dialogue_area = dialogue_area
-
-
-func end_dialogue() -> void:
-	if active_balloon and is_instance_valid(active_balloon):
-		active_balloon.queue_free()
-	active_balloon = null
-	current_dialogue_area = null
-	set_player_zooming_out()
-
-
-func pause_dialogue() -> void:
-	if active_balloon and is_instance_valid(active_balloon):
-		if active_balloon.has_method("pause"):
-			active_balloon.pause()
-		else:
-			active_balloon.hide()
-	set_player_state(PlayerState.FREE)
-
-
-func resume_dialogue() -> void:
-	if active_balloon and is_instance_valid(active_balloon):
-		if active_balloon.has_method("resume"):
-			active_balloon.resume()
-		else:
-			active_balloon.show()
-	set_player_state(PlayerState.FOCUS)
-
-
-func _on_dialogue_ended(_resource: DialogueResource) -> void:
-	end_dialogue()
-	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-	set_player_free()
+func _physics_process(_delta: float) -> void:
+	pass
 
 
 # ---------- PLAYER STATE -----------
@@ -137,7 +91,6 @@ func zoom_player(zoom_value: Vector2, zoom_speed: float) -> void:
 # ---------- PHONE STATE -----------
 func set_phone_state(new_state: PhoneState) -> void:
 	phone_state = new_state
-
 
 func get_phone_state() -> PhoneState:
 	return phone_state

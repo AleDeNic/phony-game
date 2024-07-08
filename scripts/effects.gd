@@ -24,7 +24,7 @@ func _ready() -> void:
 	current_lod = blur_fisheye.get_shader_parameter("lod")
 	target_lod = MIN_LOD
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if game_manager.player_state in [game_manager.PlayerState.ZOOMING_IN, game_manager.PlayerState.ZOOMING_OUT, game_manager.PlayerState.FREE]:
 		var new_lod = lerp(current_lod, target_lod, current_lod_speed * delta)
 		if abs(new_lod - current_lod) > 0.001:
