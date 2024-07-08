@@ -15,35 +15,68 @@ enum PhoneState { OFF, APPS, OPTIONS, CAMERA, CHATS, ASUKACHAT }
 
 var phone_state: PhoneState = PhoneState.OFF
 
+
+# ----- INITIALIZATION AND PHYSICS -----
+
 func _ready() -> void:
+	setup_battery()
 	reset_screens()
 	apps.visible = true
-
-	if not player_manager.is_node_ready():
-		await player_manager.ready
-
-	setup_battery()
 
 func _physics_process(_delta: float) -> void:
 	handle_battery()
 	if Input.is_action_just_pressed("ui_cancel"):
-		player_manager.set_player_state(player_manager.PlayerState.ZOOMING_IN)
+		player_manager.set_player_zooming_in()
 		go_to_screen(options)
+	#print_phone_state(phone_state)
 
 
-# ---------- PHONE STATE -----------
+# ----- BATTERY -----
+
+func setup_battery() -> void:
+	battery_bar.max_value = player_manager.max_battery
+	battery_timer.wait_time = player_manager.max_battery
+	battery_timer.start()
+	battery_timer.paused = true
+	handle_battery()
+
+func handle_battery() -> void:
+	if is_battery_active():
+		battery_timer.paused = false
+	else:
+		battery_timer.paused = true
+	battery_bar.value = battery_timer.time_left
+
+func is_battery_active() -> bool:
+	if phone_state not in [PhoneState.OFF, PhoneState.OPTIONS]:
+		return true
+	else:
+		return false
+
+
+# ----- PHONE STATE -----
+
 func set_phone_state(new_state: PhoneState) -> void:
 	phone_state = new_state
 
 func get_phone_state() -> PhoneState:
 	return phone_state
 
-func is_battery_active() -> bool:
-	return phone_state not in [PhoneState.OFF, PhoneState.OPTIONS]
+func restore_phone_state():
+	match true:
+		apps.visible:
+			set_phone_state(PhoneState.APPS)
+		options.visible:
+			set_phone_state(PhoneState.OPTIONS)
+		camera.visible:
+			set_phone_state(PhoneState.CAMERA)
+		chats.visible:
+			set_phone_state(PhoneState.CHATS)
+		asukachat.visible:
+			set_phone_state(PhoneState.ASUKACHAT)
 
 
-
-
+# ----- HANDLE SCREENS -----
 
 func go_to_screen(screen: Control) -> void:
 	reset_screens()
@@ -61,17 +94,8 @@ func reset_screens() -> void:
 	chats.visible = false
 	asukachat.visible = false
 
-func setup_battery() -> void:
-	battery_bar.max_value = player_manager.max_battery
-	battery_timer.wait_time = player_manager.max_battery
-	battery_timer.start()
-	battery_timer.paused = true
-	handle_battery()
 
-func handle_battery() -> void:
-	battery_timer.paused = not is_battery_active()
-	battery_bar.value = battery_timer.time_left
-
+# ----- SIGNALS -----
 func _on_options_pressed() -> void:
 	go_to_screen(options)
 
@@ -88,7 +112,10 @@ func _on_quit_pressed() -> void:
 	get_tree().quit()
 
 func _on_fullscreen_toggled(toggled_on: bool) -> void:
-	DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN if toggled_on else DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
+	if toggled_on:
+		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
 
 func _on_camera_pressed() -> void:
 	go_to_screen(camera)
@@ -99,6 +126,8 @@ func _on_chats_pressed() -> void:
 func _on_asuka_pressed() -> void:
 	go_to_screen(asukachat)
 
+
+# ----- DEBUG -----
 
 func print_phone_state(state):
 	match state:

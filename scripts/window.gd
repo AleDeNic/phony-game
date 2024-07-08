@@ -20,7 +20,6 @@ func _physics_process(_delta: float) -> void:
 
 # ----- STATE MANAGEMENT -----
 func _on_area_entered(_area: Area2D) -> void:
-	#player_manager.set_player_state(player_manager.PlayerState.ZOOMING_IN)
 	timer.start()
 	camera.set_camera_zoom(camera.window_zoom_value, camera.window_zoom_speed)
 	story_manager.start_dialogue(dialogue_resource, dialogue_start, self)
@@ -29,6 +28,7 @@ func _on_area_entered(_area: Area2D) -> void:
 func _on_area_exited(_area: Area2D) -> void:
 	if story_manager.current_dialogue_area == self:
 		story_manager.end_dialogue()
+	player_manager.set_player_zooming_out()
 	timer.stop()
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 

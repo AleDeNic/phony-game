@@ -5,10 +5,15 @@ enum Phase { SPLASH, PROLOGUE, MIDDLE, END, CREDITS }
 
 var phase: Phase
 
+
+# ----- INITIALIZATION AND PHYSICS -----
+
 func _ready() -> void:
 	set_phase(Phase.PROLOGUE)
 
+
 # ----- HANDLING PHASE -----
+
 func set_phase(new_phase: Phase) -> void:
 	phase = new_phase
 	print_phase(phase)
@@ -31,7 +36,9 @@ func go_to_next_phase(phase: Phase) -> void:
 			set_phase(Phase.CREDITS)
 			pass
 
+
 # -----UTILS -----
+
 func print_phase(phase):
 	match phase:
 		Phase.SPLASH:

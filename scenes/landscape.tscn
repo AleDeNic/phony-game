@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cw0nk6gkudho2"]
+[gd_scene load_steps=8 format=3 uid="uid://cw0nk6gkudho2"]
 
 [ext_resource type="Texture2D" uid="uid://dnl0mum6ltimb" path="res://assets/images/train_2.png" id="1_008is"]
 [ext_resource type="PackedScene" uid="uid://c7j5d8r5sk27h" path="res://scenes/landscape_3d.tscn" id="1_ab0o5"]
+[ext_resource type="Texture2D" uid="uid://bwf4rbwvfoy7" path="res://assets/images/train_3.jpg" id="3_0466r"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8wvv8"]
 normal = Vector2(0, 1)
@@ -63,3 +64,9 @@ shape = SubResource("WorldBoundaryShape2D_boryj")
 [node name="TrainSprite" type="Sprite2D" parent="."]
 scale = Vector2(1.26857, 1.26857)
 texture = ExtResource("1_008is")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.407843)
+position = Vector2(-554, -330)
+scale = Vector2(1.20772, 1.20772)
+texture = ExtResource("3_0466r")

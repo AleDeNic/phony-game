@@ -37,17 +37,22 @@ var target_horizon: Color
 var target_ground: Color
 var target_water: Color
 
+
+# ----- INITIALIZATION AND PHYSICS -----
+
 func _ready() -> void:
 	setup_colors()
 	handle_target_colors()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	handle_target_colors()
 	handle_sky_and_ground()
 	handle_horizon()
 	handle_water()
 
+
 # ----- COLOR HANDLING -----
+
 func handle_sky_and_ground() -> void:
 	current_sky = lerp_color(current_sky, target_sky, color_speed)
 	current_ground = lerp_color(current_ground, target_ground, color_speed)
@@ -86,7 +91,9 @@ func setup_colors() -> void:
 	current_ground = ground_prologue
 	current_water = water_prologue
 
+
 # ----- UTILS -----
+
 func lerp_color(color1: Color, color2: Color, t: float) -> Color:
 	return Color(
 		lerp(color1.r, color2.r, t),

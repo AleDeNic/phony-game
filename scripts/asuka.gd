@@ -12,6 +12,7 @@ extends Area2D
 
 
 # ----- INITIALIZATION AND PHYSICS -----
+
 func _ready() -> void:
 	eyes_sprite.frame = 0
 
@@ -20,22 +21,30 @@ func _process(_delta: float) -> void:
 		story_manager.end_dialogue()
 
 
-# ----- STATE MANAGEMENT -----
+# ----- INTERACTIONS -----
+
 func _on_area_entered(_area: Area2D) -> void:
+	timer.start()
 	player.target_position = Vector2(global_position)
 	player_manager.set_player_zooming_in()
-	timer.start()
 	camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
-	await get_tree().create_timer(0.3).timeout
-	eyes_sprite.frame = 1
 	story_manager.start_dialogue(dialogue_resource, dialogue_start, self)
-
+	get_eyes_attention()
 
 func _on_area_exited(_area: Area2D) -> void:
+	timer.stop()
+	#player_manager.set_player_zooming_out()
 	if story_manager.current_dialogue_area == self:
 		story_manager.end_dialogue()
+	#camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
+	get_eyes_attention()
+	
 
-	timer.stop()
-	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
+# ----- UTILS -----
+
+func get_eyes_attention() -> void:
 	await get_tree().create_timer(0.3).timeout
-	eyes_sprite.frame = 0
+	if player_manager.get_player_state() == PlayerManager.PlayerState.ZOOMING_IN:
+		eyes_sprite.frame = 1
+	elif player_manager.get_player_state() == PlayerManager.PlayerState.ZOOMING_OUT:
+		eyes_sprite.frame = 0

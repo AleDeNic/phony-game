@@ -16,6 +16,9 @@ const MAX_BLUE: float = 1.0
 const MIN_LOD: float = 0.0
 const MAX_LOD: float = 3.5
 
+
+# ----- INITIALIZATION AND PHYSICS -----
+
 func _ready() -> void:
 	if not player_manager.is_node_ready():
 		await player_manager.ready
@@ -25,7 +28,7 @@ func _ready() -> void:
 	target_lod = MIN_LOD
 
 func _physics_process(delta: float) -> void:
-	if player_manager.player_state in [player_manager.PlayerState.ZOOMING_IN, player_manager.PlayerState.ZOOMING_OUT, player_manager.PlayerState.FREE]:
+	if player_manager.player_state in [player_manager.PlayerState.ZOOMING_IN, player_manager.PlayerState.ZOOMING_OUT]:
 		var new_lod = lerp(current_lod, target_lod, current_lod_speed * delta)
 		if abs(new_lod - current_lod) > 0.001:
 			new_lod = clamp(new_lod, MIN_LOD, MAX_LOD)
@@ -33,14 +36,19 @@ func _physics_process(delta: float) -> void:
 			blur_fisheye.set_shader_parameter("lod", current_lod)
 			current_blue = map_range(current_lod, MIN_LOD, MAX_LOD, MIN_BLUE, MAX_BLUE)
 			blue_filter.modulate.a = current_blue
+		else:
+			new_lod = target_lod
+
+
+# ----- EFFECTS -----
 
 func set_effects(lod_value: float, lod_speed: float) -> void:
 	if target_lod != lod_value:
 		target_lod = lod_value
 		current_lod_speed = lod_speed
 
-func map_range(value: float, from_min: float, from_max: float, to_min: float, to_max: float) -> float:
-	return (value - from_min) / (from_max - from_min) * (to_max - to_min) + to_min
+
+# ----- SIGNALS -----
 
 func _on_phone_timer_timeout() -> void:
 	if stress_level > 0:
@@ -53,3 +61,9 @@ func _on_asuka_timer_timeout() -> void:
 func _on_window_timer_timeout() -> void:
 	if stress_level < player_manager.max_stress:
 		stress_level += player_manager.window_stress_increase
+
+
+# ----- UTILS -----
+
+func map_range(value: float, from_min: float, from_max: float, to_min: float, to_max: float) -> float:
+	return (value - from_min) / (from_max - from_min) * (to_max - to_min) + to_min

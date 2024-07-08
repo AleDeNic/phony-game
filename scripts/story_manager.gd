@@ -9,17 +9,17 @@ extends Node
 var active_balloon: Node = null
 var current_dialogue_area: Area2D = null
 
-# Called when the node enters the scene tree for the first time.
+
+# ----- INITIALIZATION AND PHYSICS -----
 func _ready() -> void:
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if player_manager.player_state == PlayerManager.PlayerState.FOCUS and current_dialogue_area:
 		if not current_dialogue_area.overlaps_body(player):
 			end_dialogue()
 	#print_player_state(player_state)
+
 
 # ----- DIALOGUES -----
 func start_dialogue(dialogue_resource: Resource, start_from: String, dialogue_area: Area2D) -> void:
@@ -32,7 +32,6 @@ func end_dialogue() -> void:
 		active_balloon.queue_free()
 	active_balloon = null
 	current_dialogue_area = null
-	player_manager.set_player_zooming_out()
 
 
 func pause_dialogue() -> void:
@@ -41,7 +40,7 @@ func pause_dialogue() -> void:
 			active_balloon.pause()
 		else:
 			active_balloon.hide()
-	player_manager.set_player_state(PlayerManager.PlayerState.FREE)
+	player_manager.set_player_free()
 
 
 func resume_dialogue() -> void:
@@ -50,10 +49,10 @@ func resume_dialogue() -> void:
 			active_balloon.resume()
 		else:
 			active_balloon.show()
-	player_manager.set_player_state(PlayerManager.PlayerState.FOCUS)
+	player_manager.set_player_to_focus()
 
 
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	end_dialogue()
-	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
+	#camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 	player_manager.set_player_free()
