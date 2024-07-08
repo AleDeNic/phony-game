@@ -1,8 +1,12 @@
-[gd_resource type="ProceduralSkyMaterial" format=3 uid="uid://bj34hqlv2vq53"]
+[gd_resource type="ProceduralSkyMaterial" load_steps=2 format=3 uid="uid://bj34hqlv2vq53"]
+
+[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="1_wecmv"]
 
 [resource]
 sky_top_color = Color(1.07813e-05, 0.751362, 0.944015, 1)
 sky_horizon_color = Color(1, 1, 1, 1)
+sky_cover = ExtResource("1_wecmv")
+sky_cover_modulate = Color(0.535421, 0.535421, 0.535421, 1)
 ground_bottom_color = Color(0.210703, 0.305648, 1, 1)
 ground_horizon_color = Color(1, 1, 1, 1)
 ground_curve = 0.367584

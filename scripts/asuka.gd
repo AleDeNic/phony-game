@@ -39,3 +39,13 @@ func _on_area_exited(_area: Area2D) -> void:
 	game_manager.zoom_player(camera.default_zoom_value, camera.reset_zoom_speed)
 	await get_tree().create_timer(0.3).timeout
 	eyes_sprite.frame = 0
+
+
+#func _on_asuka_exit_area_mouse_exited() -> void:
+	#if game_manager.current_dialogue_area == self:
+		#game_manager.end_dialogue()
+#
+	#timer.stop()
+	#game_manager.zoom_player(camera.default_zoom_value, camera.reset_zoom_speed)
+	#await get_tree().create_timer(0.3).timeout
+	#eyes_sprite.frame = 0

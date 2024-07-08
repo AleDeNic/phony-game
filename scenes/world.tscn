@@ -1,5 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://bduasgadssrkv"]
+[gd_scene load_steps=21 format=3 uid="uid://bduasgadssrkv"]
 
+[ext_resource type="Script" path="res://scripts/phase_manager.gd" id="1_o757h"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_r7w0f"]
 [ext_resource type="PackedScene" uid="uid://mei3fh0wa3em" path="res://scenes/effects.tscn" id="1_u37f0"]
 [ext_resource type="Texture2D" uid="uid://cd73raw5kh70g" path="res://assets/images/phone.png" id="3_sup45"]
@@ -38,6 +39,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_4wa7i"]
 radius = 201.814
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_bh1k1"]
+radius = 528.48
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_klsqp"]
 radius = 18.7495
 
@@ -45,6 +49,10 @@ radius = 18.7495
 size = Vector2(5.46524, 9.68707)
 
 [node name="World" type="Node2D"]
+
+[node name="PhaseManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_o757h")
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("1_r7w0f")
@@ -68,9 +76,18 @@ sprite_frames = SubResource("SpriteFrames_yqvk5")
 process_mode = 3
 wait_time = 0.1
 
-[node name="AsukaCollision" type="CollisionShape2D" parent="Asuka"]
+[node name="AsukaEnterCollision" type="CollisionShape2D" parent="Asuka"]
 position = Vector2(2, -94)
 shape = SubResource("CircleShape2D_4wa7i")
+
+[node name="AsukaExitArea" type="Area2D" parent="Asuka"]
+visible = false
+collision_mask = 4
+
+[node name="AsukaExitCollision" type="CollisionShape2D" parent="Asuka/AsukaExitArea"]
+visible = false
+shape = SubResource("CircleShape2D_bh1k1")
+debug_color = Color(0.648266, 0.330411, 1, 0.42)
 
 [node name="Window" type="Area2D" parent="."]
 position = Vector2(1538, -453)
@@ -132,6 +149,7 @@ unique_name_in_owner = true
 [connection signal="area_entered" from="Asuka" to="Asuka" method="_on_area_entered"]
 [connection signal="area_exited" from="Asuka" to="Asuka" method="_on_area_exited"]
 [connection signal="timeout" from="Asuka/AsukaTimer" to="Effects" method="_on_asuka_timer_timeout"]
+[connection signal="mouse_exited" from="Asuka/AsukaExitArea" to="Asuka" method="_on_asuka_exit_area_mouse_exited"]
 [connection signal="area_entered" from="Window" to="Window" method="_on_area_entered"]
 [connection signal="area_exited" from="Window" to="Window" method="_on_area_exited"]
 [connection signal="timeout" from="Window/WindowTimer" to="Effects" method="_on_window_timer_timeout"]

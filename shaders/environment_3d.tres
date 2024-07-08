@@ -18,5 +18,4 @@ fog_density = 0.003
 fog_aerial_perspective = 0.375
 fog_sky_affect = 0.0
 adjustment_enabled = true
-adjustment_contrast = 1.1
 adjustment_saturation = 1.4

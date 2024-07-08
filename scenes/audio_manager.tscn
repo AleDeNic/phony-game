@@ -5,16 +5,16 @@
 [ext_resource type="AudioStream" uid="uid://bvk87o4ki14rk" path="res://assets/music/asuka.mp3" id="3_i7yuj"]
 [ext_resource type="AudioStream" uid="uid://bc6nj4ltkvjqr" path="res://assets/music/window.mp3" id="4_5yqum"]
 
-[node name="AudioManager" type="Node2D"]
+[node name="AudioManager" type="Node"]
 script = ExtResource("1_2livu")
 
-[node name="Dialogues" type="Node2D" parent="."]
+[node name="Dialogues" type="Node" parent="."]
 
 [node name="1_01" type="AudioStreamPlayer2D" parent="Dialogues"]
 
-[node name="SFX" type="Node2D" parent="."]
+[node name="SFX" type="Node" parent="."]
 
-[node name="Music" type="Node2D" parent="."]
+[node name="Music" type="Node" parent="."]
 
 [node name="Song01" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("2_jikh0")
