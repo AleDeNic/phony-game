@@ -21,21 +21,17 @@ func _process(_delta: float) -> void:
 # ----- STATE MANAGEMENT -----
 func _on_area_entered(_area: Area2D) -> void:
 		game_manager.set_player_state(game_manager.PlayerState.ZOOMING_IN)
-		player.start_zoom(global_position)
-		
+		#player.start_zoom(global_position)
 		timer.start()
-		
 		camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
 		await get_tree().create_timer(0.3).timeout
 		eyes_sprite.frame = 1
-		
 		game_manager.start_dialogue(dialogue_resource, dialogue_start, self)
 
 func _on_area_exited(_area: Area2D) -> void:
 		if game_manager.current_dialogue_area == self:
 			game_manager.end_dialogue()
 		
-		game_manager.set_player_state(game_manager.PlayerState.ZOOMING_OUT)
 		player.end_zoom()
 		
 		timer.stop()

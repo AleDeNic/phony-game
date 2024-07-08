@@ -6,6 +6,7 @@ extends Area2D
 @onready var timer: Timer = $WindowTimer
 @onready var camera: Camera2D = $"../Player/Camera2D"
 @onready var game_manager: Node = $"../GameManager"
+@onready var player: CharacterBody2D = %Player
 
 # ----- INITIALIZATION AND PHYSICS -----
 func _process(_delta: float) -> void:
@@ -14,7 +15,7 @@ func _process(_delta: float) -> void:
 
 func _on_area_entered(_area: Area2D) -> void:
 		game_manager.set_player_state(game_manager.PlayerState.ZOOMING_IN)
-		game_manager.player.start_zoom(global_position)
+		#game_manager.player.start_zoom(global_position)
 		
 		timer.start()
 		camera.set_camera_zoom(camera.window_zoom_value, camera.window_zoom_speed)
@@ -26,8 +27,7 @@ func _on_area_exited(_area: Area2D) -> void:
 		if game_manager.current_dialogue_area == self:
 			game_manager.end_dialogue()
 		
-		game_manager.set_player_state(game_manager.PlayerState.ZOOMING_OUT)
-		game_manager.player.end_zoom()
+		player.end_zoom()
 		
 		timer.stop()
 		camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)

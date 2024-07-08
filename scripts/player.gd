@@ -30,7 +30,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = Vector2.ZERO
 	move_and_slide()
-	#print(current_speed)
+	print_state(state)
 
 # ------------- INPUT & MOVEMENT -----------------
 func handle_movement(delta: float) -> void:
@@ -66,11 +66,11 @@ func reset_mouse_to_center() -> void:
 
 
 # ------------ HANDLE ZOOM ------------------
-func start_zoom(mov_position: Vector2) -> void:
-	state = State.ZOOMING_IN
-	game_manager.set_player_state(state)
-	target_position = mov_position
-	last_movement = Vector2.ZERO
+#func start_zoom(mov_position: Vector2) -> void:
+	#state = State.ZOOMING_IN
+	#game_manager.set_player_state(state)
+	#target_position = mov_position
+	#last_movement = Vector2.ZERO
 
 func end_zoom() -> void:
 	state = State.ZOOMING_OUT
@@ -96,3 +96,14 @@ func end_dialogue() -> void:
 func transition_to_free() -> void:
 	if state == State.ZOOMING_OUT and current_speed < 60.0:
 		set_free()
+
+func print_state(state):
+	match state:
+		State.FREE:
+			print("FREE")
+		State.ZOOMING_IN:
+			print("ZOOMING_IN")
+		State.ZOOMING_OUT:
+			print("ZOOMING_OUT")
+		State.IN_DIALOGUE:
+			print("IN_DIALOGUE")

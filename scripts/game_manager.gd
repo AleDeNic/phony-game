@@ -27,6 +27,7 @@ func process(_delta: float) -> void:
 	if player_state == PlayerState.IN_DIALOGUE and current_dialogue_area:
 		if not current_dialogue_area.overlaps_body(player):
 			end_dialogue()
+	print_player_state(player_state)
 
 # ---------- DIALOGUES -----------
 func start_dialogue(dialogue_resource: Resource, start_from: String, dialogue_area: Area2D) -> void:
@@ -42,7 +43,6 @@ func end_dialogue() -> void:
 	current_dialogue_area = null
 	set_player_state(PlayerState.ZOOMING_OUT)
 	player.end_dialogue()  
-
 
 func pause_dialogue() -> void:
 	if active_balloon and is_instance_valid(active_balloon):
@@ -81,3 +81,14 @@ func set_phone_state(new_state: PhoneState) -> void:
 
 func is_battery_active() -> bool:
 	return phone_state not in [PhoneState.OFF, PhoneState.OPTIONS]
+
+func print_player_state(state):
+	match state:
+		PlayerState.FREE:
+			print("FREE")
+		PlayerState.ZOOMING_IN:
+			print("ZOOMING_IN")
+		PlayerState.ZOOMING_OUT:
+			print("ZOOMING_OUT")
+		PlayerState.IN_DIALOGUE:
+			print("IN_DIALOGUE")
