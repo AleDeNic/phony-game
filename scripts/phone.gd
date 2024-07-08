@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var game_manager: Node = $"../GameManager"
+@onready var player_manager: Node = %PlayerManager
 @onready var timer: Timer = $PhoneTimer
 @onready var effects: Control = $"../Effects"
 @onready var camera: Camera2D = $"../Player/Camera2D"
@@ -39,7 +39,7 @@ func _ready() -> void:
 	rotation_degrees = min_rotation
 
 func _process(delta: float) -> void:
-	if game_manager.player_state in [game_manager.PlayerState.ZOOMING_IN, game_manager.PlayerState.ZOOMING_OUT]:
+	if player_manager.player_state in [player_manager.PlayerState.ZOOMING_IN, player_manager.PlayerState.ZOOMING_OUT]:
 		update_scale(delta)
 		update_rotation(delta)
 		update_player_state()
@@ -71,17 +71,17 @@ func update_rotation(delta: float) -> void:
 
 # --------- PHONE INTERACTIONS -----------
 func _on_area_entered(_area: Area2D) -> void:
-	if game_manager.player_state == game_manager.PlayerState.FREE:
+	if player_manager.player_state == player_manager.PlayerState.FREE:
 		enter_phone()
 
 func _on_phone_os_mouse_exited() -> void:
-	if game_manager.player_state != game_manager.PlayerState.FREE:
+	if player_manager.player_state != player_manager.PlayerState.FREE:
 		exit_phone()
 
 func enter_phone() -> void:
 	player.target_position = Vector2(global_position)
-	game_manager.set_player_state(game_manager.PlayerState.ZOOMING_IN)
-	game_manager.set_phone_state(game_manager.PhoneState.APPS)
+	player_manager.set_player_state(player_manager.PlayerState.ZOOMING_IN)
+	player_manager.set_phone_state(player_manager.PhoneState.APPS)
 	timer.start()
 	set_phone_scale(max_scale, scale_up_speed)
 	set_phone_rotation(max_rotation, rotation_up_speed)
@@ -89,7 +89,7 @@ func enter_phone() -> void:
 	camera.set_camera_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
 
 func exit_phone() -> void:
-	game_manager.set_player_state(game_manager.PlayerState.ZOOMING_OUT)
+	player_manager.set_player_state(player_manager.PlayerState.ZOOMING_OUT)
 	timer.stop()
 	set_phone_scale(min_scale, scale_down_speed)
 	set_phone_rotation(min_rotation, rotation_down_speed)
@@ -99,5 +99,5 @@ func exit_phone() -> void:
 # ----- STATE MANAGEMENT -----
 func update_player_state() -> void:
 	if abs(scale.x - target_scale.x) < 0.1:
-		if game_manager.player_state == game_manager.PlayerState.ZOOMING_OUT:
-			game_manager.set_player_free()
+		if player_manager.player_state == player_manager.PlayerState.ZOOMING_OUT:
+			player_manager.set_player_free()

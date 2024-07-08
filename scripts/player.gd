@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var game_manager: Node = $"../GameManager"
+@onready var player_manager: Node = %PlayerManager
 @onready var phone: Area2D = $"../Phone"
 
 @export var default_speed: float = 65.0
@@ -26,14 +26,14 @@ func _physics_process(delta: float) -> void:
 		setup_viewport()
 		return
 
-	match game_manager.get_player_state():
-		GameManager.PlayerState.FREE:
+	match player_manager.get_player_state():
+		PlayerManager.PlayerState.FREE:
 			handle_movement(delta)
-		GameManager.PlayerState.ZOOMING_IN:
+		PlayerManager.PlayerState.ZOOMING_IN:
 			handle_zooming_in(delta)
-		GameManager.PlayerState.ZOOMING_OUT:
+		PlayerManager.PlayerState.ZOOMING_OUT:
 			handle_zooming_out(delta)
-		GameManager.PlayerState.FOCUS:
+		PlayerManager.PlayerState.FOCUS:
 			handle_focus(delta)
 
 	#print(current_speed)
@@ -56,7 +56,7 @@ func handle_zooming_in(delta: float) -> void:
 		move_and_slide()
 	else:
 		current_speed = 0.0
-		game_manager.set_player_to_focus()
+		player_manager.set_player_to_focus()
 	
 
 func handle_zooming_out(delta: float) -> void:

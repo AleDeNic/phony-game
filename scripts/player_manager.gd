@@ -1,4 +1,4 @@
-class_name GameManager
+class_name PlayerManager
 extends Node
 
 enum PlayerState { FREE, ZOOMING_IN, ZOOMING_OUT, FOCUS, IN_PHONE }
@@ -19,16 +19,10 @@ var phone_state: PhoneState = PhoneState.OFF
 
 
 func _ready() -> void:
-	initialize_player_state()
+	set_player_free()
 
 func _physics_process(_delta: float) -> void:
 	pass
-
-
-# ---------- PLAYER STATE -----------
-func initialize_player_state() -> void:
-	set_player_free()
-
 
 func set_player_state(new_state: PlayerState) -> void:
 	player_state = new_state
@@ -82,10 +76,6 @@ func is_player_in_phone() -> bool:
 func transition_player_to_free() -> void:
 	if is_player_zooming_out():
 		set_player_free()
-
-
-func zoom_player(zoom_value: Vector2, zoom_speed: float) -> void:
-	camera.set_camera_zoom(zoom_value, zoom_speed)
 
 
 # ---------- PHONE STATE -----------

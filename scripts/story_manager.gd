@@ -1,6 +1,6 @@
 extends Node
 
-@onready var game_manager: GameManager = $"../GameManager"
+@onready var player_manager: PlayerManager = %PlayerManager
 @onready var player: CharacterBody2D = %Player
 @onready var asuka: Area2D = $"../Asuka"
 @onready var phone: Area2D = $"../Phone"
@@ -16,7 +16,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	if game_manager.player_state == GameManager.PlayerState.FOCUS and current_dialogue_area:
+	if player_manager.player_state == PlayerManager.PlayerState.FOCUS and current_dialogue_area:
 		if not current_dialogue_area.overlaps_body(player):
 			end_dialogue()
 	#print_player_state(player_state)
@@ -32,7 +32,7 @@ func end_dialogue() -> void:
 		active_balloon.queue_free()
 	active_balloon = null
 	current_dialogue_area = null
-	game_manager.set_player_zooming_out()
+	player_manager.set_player_zooming_out()
 
 
 func pause_dialogue() -> void:
@@ -41,7 +41,7 @@ func pause_dialogue() -> void:
 			active_balloon.pause()
 		else:
 			active_balloon.hide()
-	game_manager.set_player_state(GameManager.PlayerState.FREE)
+	player_manager.set_player_state(PlayerManager.PlayerState.FREE)
 
 
 func resume_dialogue() -> void:
@@ -50,10 +50,10 @@ func resume_dialogue() -> void:
 			active_balloon.resume()
 		else:
 			active_balloon.show()
-	game_manager.set_player_state(GameManager.PlayerState.FOCUS)
+	player_manager.set_player_state(PlayerManager.PlayerState.FOCUS)
 
 
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	end_dialogue()
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-	game_manager.set_player_free()
+	player_manager.set_player_free()

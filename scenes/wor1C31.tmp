@@ -56,13 +56,11 @@ unique_name_in_owner = true
 script = ExtResource("1_o757h")
 
 [node name="PlayerManager" type="Node" parent="."]
-unique_name_in_owner = true
 script = ExtResource("1_r7w0f")
 
 [node name="AudioManager" parent="." instance=ExtResource("12_3unc5")]
 
 [node name="StoryManager" type="Node" parent="."]
-unique_name_in_owner = true
 script = ExtResource("4_r820r")
 
 [node name="Landscape" parent="." instance=ExtResource("4_u7jec")]
@@ -151,11 +149,11 @@ shape = SubResource("RectangleShape2D_qisob")
 
 [node name="Player" parent="." instance=ExtResource("9_o22lg")]
 unique_name_in_owner = true
-default_speed = 65.0
-transition_speed = 5.0
-focus_speed = 400.0
-exit_speed = 30.0
-dead_zone_radius = 1.0
+default_speed = null
+transition_speed = null
+focus_speed = null
+exit_speed = null
+dead_zone_radius = null
 
 [connection signal="area_entered" from="Asuka" to="Asuka" method="_on_area_entered"]
 [connection signal="area_exited" from="Asuka" to="Asuka" method="_on_area_exited"]
