@@ -13,28 +13,28 @@ extends Area2D
 # ----- INITIALIZATION AND PHYSICS -----
 func _ready() -> void:
 	eyes_sprite.frame = 0
-	
+
+
 func _process(_delta: float) -> void:
 	if game_manager.current_dialogue_area == self and not overlaps_body(player):
 		game_manager.end_dialogue()
 
+
 # ----- STATE MANAGEMENT -----
 func _on_area_entered(_area: Area2D) -> void:
-		game_manager.set_player_state(game_manager.PlayerState.ZOOMING_IN)
-		#player.start_zoom(global_position)
-		timer.start()
-		camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
-		await get_tree().create_timer(0.3).timeout
-		eyes_sprite.frame = 1
-		game_manager.start_dialogue(dialogue_resource, dialogue_start, self)
+	game_manager.set_player_zooming_in()
+	timer.start()
+	game_manager.zoom_player(camera.asuka_zoom_value, camera.asuka_zoom_speed)
+	await get_tree().create_timer(0.3).timeout
+	eyes_sprite.frame = 1
+	game_manager.start_dialogue(dialogue_resource, dialogue_start, self)
+
 
 func _on_area_exited(_area: Area2D) -> void:
-		if game_manager.current_dialogue_area == self:
-			game_manager.end_dialogue()
-		
-		player.end_zoom()
-		
-		timer.stop()
-		camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-		await get_tree().create_timer(0.3).timeout
-		eyes_sprite.frame = 0
+	if game_manager.current_dialogue_area == self:
+		game_manager.end_dialogue()
+
+	timer.stop()
+	game_manager.zoom_player(camera.default_zoom_value, camera.reset_zoom_speed)
+	await get_tree().create_timer(0.3).timeout
+	eyes_sprite.frame = 0

@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-enum State { FREE, ZOOMING_IN, ZOOMING_OUT, IN_DIALOGUE }
-
 @onready var game_manager: Node = $"../GameManager"
 
 @export var default_speed: float = 65.0
@@ -10,100 +8,89 @@ enum State { FREE, ZOOMING_IN, ZOOMING_OUT, IN_DIALOGUE }
 @export var exit_speed: float = 12.0
 @export var dead_zone_radius: float = 1.0
 
-var current_speed: float = default_speed
+var current_speed: float   = default_speed
 var target_speed: float
-var state: State = State.FREE
 var viewport: Viewport
 var target_position: Vector2
 var last_movement: Vector2 = Vector2.ZERO
-var stopping: bool = false
+var stopping: bool         = false
 
+
+# ----- INITIALIZATION -----
 func _ready() -> void:
-	viewport = get_viewport()
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	reset_mouse_to_center()
+    viewport = get_viewport()
+    set_free()
+    reset_mouse_to_center()
+
 
 func _physics_process(delta: float) -> void:
-	if game_manager.player_state != game_manager.PlayerState.IN_DIALOGUE:
-		transition_to_free()
-		handle_movement(delta)
-	else:
-		velocity = Vector2.ZERO
-	move_and_slide()
-	print_state(state)
+    if not viewport:
+        setup_viewport()
+        return
+
+    match game_manager.get_player_state():
+        GameManager.PlayerState.FREE, GameManager.PlayerState.ZOOMING_OUT:
+            handle_movement(delta)
+        GameManager.PlayerState.ZOOMING_IN:
+            handle_zooming_in(delta)
+        GameManager.PlayerState.IN_DIALOGUE:
+            velocity = Vector2.ZERO
+
+    move_and_slide()
+
+
+# ----- VIEWPORT CHECK. IT MAY BE NULL DURING INITIALIZATION -----
+func setup_viewport() -> void:
+    viewport = get_viewport()
+    if viewport:
+        reset_mouse_to_center()
+
 
 # ------------- INPUT & MOVEMENT -----------------
 func handle_movement(delta: float) -> void:
-	var movement_vector: Vector2
-	
-	match state:
-		State.ZOOMING_IN:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			movement_vector = (target_position - global_position).normalized()
-			target_speed = zoom_speed if global_position.distance_to(target_position) >= 30.0 else 0.0
-		State.ZOOMING_OUT:
-			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-			movement_vector = get_movement_input()
-			current_speed = exit_speed
-			target_speed = default_speed
-		State.FREE:
-			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-			movement_vector = get_movement_input()
-			target_speed = default_speed
+    var movement_vector: Vector2 = get_movement_input()
 
-	reset_mouse_to_center()
-	current_speed = lerp(current_speed, target_speed, delta * transition_speed)
-	velocity = movement_vector * current_speed
+    if game_manager.is_player_zooming_out():
+        current_speed = exit_speed
+        target_speed = default_speed
+    else:
+        target_speed = default_speed
+
+    reset_mouse_to_center()
+    current_speed = lerp(current_speed, target_speed, delta * transition_speed)
+    velocity = movement_vector * current_speed
+
 
 func get_movement_input() -> Vector2:
-	var mouse_pos = viewport.get_mouse_position()
-	var center = viewport.get_visible_rect().size / 2
-	var movement_vector = mouse_pos - center
-	return Vector2.ZERO if movement_vector.length() < dead_zone_radius else movement_vector
+    if not viewport:
+        return Vector2.ZERO
+    var mouse_pos: Vector2       = viewport.get_mouse_position()
+    var center: Vector2          = viewport.get_visible_rect().size / 2
+    var movement_vector: Vector2 = mouse_pos - center
+    return Vector2.ZERO if movement_vector.length() < dead_zone_radius else movement_vector
+
 
 func reset_mouse_to_center() -> void:
-	viewport.warp_mouse(viewport.get_visible_rect().size / 2)
+    if viewport:
+        viewport.warp_mouse(viewport.get_visible_rect().size / 2)
 
 
-# ----- HANDLE ZOOM -----
-#func start_zoom(mov_position: Vector2) -> void:
-	#state = State.ZOOMING_IN
-	#game_manager.set_player_state(state)
-	#target_position = mov_position
-	#last_movement = Vector2.ZERO
+# ----- UTILS -----
+func handle_zooming_in(delta: float) -> void:
+    if target_position:
+        var movement_vector: Vector2 = (target_position - global_position).normalized()
+        target_speed = zoom_speed if global_position.distance_to(target_position) >= 30.0 else 0.0
+        current_speed = lerp(current_speed, target_speed, delta * transition_speed)
+        velocity = movement_vector * current_speed
+    else:
+        velocity = Vector2.ZERO
 
-func end_zoom() -> void:
-	state = State.ZOOMING_OUT
-	game_manager.set_player_state(state)
+
+func zoom_to(zoom_value: Vector2, zoom_speed: float) -> void:
+    $Camera2D.set_camera_zoom(zoom_value, zoom_speed)
+
 
 func set_free() -> void:
-	state = State.FREE
-	game_manager.set_player_state(game_manager.PlayerState.FREE)
-	reset_mouse_to_center()
-	stopping = false
-	last_movement = Vector2.ZERO
-
-func set_dialogue() -> void:
-	state = State.IN_DIALOGUE
-	last_movement = Vector2.ZERO
-
-func end_dialogue() -> void:
-	state = State.ZOOMING_OUT
-	game_manager.set_player_state(game_manager.PlayerState.ZOOMING_OUT)
-	stopping = true
-	reset_mouse_to_center()
-	
-func transition_to_free() -> void:
-	if state == State.ZOOMING_OUT and current_speed < 60.0:
-		set_free()
-
-func print_state(state):
-	match state:
-		State.FREE:
-			print("FREE")
-		State.ZOOMING_IN:
-			print("ZOOMING_IN")
-		State.ZOOMING_OUT:
-			print("ZOOMING_OUT")
-		State.IN_DIALOGUE:
-			print("IN_DIALOGUE")
+    reset_mouse_to_center()
+    stopping = false
+    last_movement = Vector2.ZERO
