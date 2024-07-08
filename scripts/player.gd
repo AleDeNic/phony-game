@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var default_speed: float = 65.0
 @export var transition_speed: float = 5.0
 @export var focus_speed: float = 400.0
-@export var exit_speed: float = 12.0
+@export var exit_speed: float = 30.0
 @export var dead_zone_radius: float = 1.0
 
 var current_speed: float = default_speed
@@ -34,17 +34,9 @@ func _physics_process(delta: float) -> void:
 		GameManager.PlayerState.ZOOMING_OUT:
 			handle_zooming_out(delta)
 		GameManager.PlayerState.FOCUS:
-			velocity = Vector2.ZERO
+			handle_focus(delta)
 
-	move_and_slide()
-
-
-# ----- VIEWPORT CHECK. IT MAY BE NULL DURING INITIALIZATION -----
-func setup_viewport() -> void:
-	viewport = get_viewport()
-	if viewport:
-		reset_mouse_to_center()
-
+	#print(current_speed)
 
 # ------------- INPUT & MOVEMENT -----------------
 func handle_movement(delta: float) -> void:
@@ -53,16 +45,19 @@ func handle_movement(delta: float) -> void:
 	reset_mouse_to_center()
 	current_speed = lerp(current_speed, target_speed, delta * transition_speed)
 	velocity = movement_vector * current_speed
+	move_and_slide()
 
 func handle_zooming_in(delta: float) -> void:
 	var movement_vector: Vector2 = (target_position - global_position).normalized()
 	if global_position.distance_to(target_position) >= 5.0:
 		target_speed = focus_speed
+		current_speed = lerp(current_speed, target_speed, delta * transition_speed)
+		velocity = movement_vector * current_speed
+		move_and_slide()
 	else:
+		current_speed = 0.0
 		game_manager.set_player_to_focus()
-		target_speed = 0.0
-	current_speed = lerp(current_speed, target_speed, delta * transition_speed)
-	velocity = movement_vector * current_speed
+	
 
 func handle_zooming_out(delta: float) -> void:
 	var movement_vector: Vector2 = get_movement_input()
@@ -71,7 +66,10 @@ func handle_zooming_out(delta: float) -> void:
 	reset_mouse_to_center()
 	current_speed = lerp(current_speed, target_speed, delta * transition_speed)
 	velocity = movement_vector * current_speed
+	move_and_slide()
 
+func handle_focus(delta: float) -> void:
+	pass
 
 func get_movement_input() -> Vector2:
 	if not viewport:
@@ -79,7 +77,10 @@ func get_movement_input() -> Vector2:
 	var mouse_pos: Vector2 = viewport.get_mouse_position()
 	var center: Vector2 = viewport.get_visible_rect().size / 2
 	var movement_vector: Vector2 = mouse_pos - center
-	return Vector2.ZERO if movement_vector.length() < dead_zone_radius else movement_vector
+	if movement_vector.length() < dead_zone_radius:
+		return Vector2.ZERO
+	else:
+		return movement_vector
 
 
 func reset_mouse_to_center() -> void:
@@ -89,11 +90,14 @@ func reset_mouse_to_center() -> void:
 
 # ----- UTILS -----
 
+# ----- VIEWPORT CHECK. IT MAY BE NULL DURING INITIALIZATION -----
+func setup_viewport() -> void:
+	viewport = get_viewport()
+	if viewport:
+		reset_mouse_to_center()
 
-
-func zoom_to(zoom_value: Vector2, zoom_speed: float) -> void:
-	$Camera2D.set_camera_zoom(zoom_value, zoom_speed)
-
+#func zoom_to(zoom_value: Vector2, zoom_speed: float) -> void:
+	#$Camera2D.set_camera_zoom(zoom_value, zoom_speed)
 
 func set_free() -> void:
 	reset_mouse_to_center()

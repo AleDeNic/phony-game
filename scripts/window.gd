@@ -19,8 +19,7 @@ func _on_area_entered(_area: Area2D) -> void:
 	game_manager.set_player_state(game_manager.PlayerState.ZOOMING_IN)
 	timer.start()
 
-	game_manager.zoom_player(camera.window_zoom_value, camera.window_zoom_speed)
-
+	camera.set_camera_zoom(camera.window_zoom_value, camera.window_zoom_speed)
 	game_manager.start_dialogue(dialogue_resource, dialogue_start, self)
 
 

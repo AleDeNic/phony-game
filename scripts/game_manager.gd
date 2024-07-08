@@ -30,12 +30,11 @@ func _process(_delta: float) -> void:
 	if player_state == PlayerState.FOCUS and current_dialogue_area:
 		if not current_dialogue_area.overlaps_body(player):
 			end_dialogue()
-	print_player_state(player_state)
+	#print_player_state(player_state)
 
 
 # ----- DIALOGUES -----
 func start_dialogue(dialogue_resource: Resource, start_from: String, dialogue_area: Area2D) -> void:
-	set_player_to_focus()
 	active_balloon = DialogueManager.show_dialogue_balloon(dialogue_resource, start_from)
 	current_dialogue_area = dialogue_area
 
@@ -132,7 +131,7 @@ func transition_player_to_free() -> void:
 
 
 func zoom_player(zoom_value: Vector2, zoom_speed: float) -> void:
-	player.zoom_to(zoom_value, zoom_speed)
+	camera.set_camera_zoom(zoom_value, zoom_speed)
 
 
 # ---------- PHONE STATE -----------
