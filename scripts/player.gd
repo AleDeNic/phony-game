@@ -65,7 +65,7 @@ func reset_mouse_to_center() -> void:
 	viewport.warp_mouse(viewport.get_visible_rect().size / 2)
 
 
-# ------------ HANDLE ZOOM ------------------
+# ----- HANDLE ZOOM -----
 #func start_zoom(mov_position: Vector2) -> void:
 	#state = State.ZOOMING_IN
 	#game_manager.set_player_state(state)

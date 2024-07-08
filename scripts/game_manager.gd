@@ -29,7 +29,7 @@ func process(_delta: float) -> void:
 			end_dialogue()
 	print_player_state(player_state)
 
-# ---------- DIALOGUES -----------
+# ----- DIALOGUES -----
 func start_dialogue(dialogue_resource: Resource, start_from: String, dialogue_area: Area2D) -> void:
 	set_player_state(PlayerState.IN_DIALOGUE)
 	player.set_dialogue()
@@ -79,16 +79,18 @@ func set_player_state(new_state: PlayerState) -> void:
 func set_phone_state(new_state: PhoneState) -> void:
 	phone_state = new_state
 
+# ----- IDK -----
 func is_battery_active() -> bool:
 	return phone_state not in [PhoneState.OFF, PhoneState.OPTIONS]
 
+# ----- DEBUG FUNCTIONS -----
 func print_player_state(state):
 	match state:
 		PlayerState.FREE:
-			print("FREE")
+			print("Player state: FREE")
 		PlayerState.ZOOMING_IN:
-			print("ZOOMING_IN")
+			print("Player state: ZOOMING_IN")
 		PlayerState.ZOOMING_OUT:
-			print("ZOOMING_OUT")
+			print("Player state: ZOOMING_OUT")
 		PlayerState.IN_DIALOGUE:
-			print("IN_DIALOGUE")
+			print("Player state: IN_DIALOGUE")
