@@ -1,6 +1,5 @@
 extends Control
 
-@onready var player_manager: Node = %PlayerManager
 @onready var stress_filter: ColorRect = $StressFilter
 @onready var blur_fisheye: ShaderMaterial = $BlurFisheye.material as ShaderMaterial
 @onready var blue_filter: ColorRect = $BlueFilter
@@ -20,15 +19,15 @@ const MAX_LOD: float = 3.5
 # ----- INITIALIZATION AND PHYSICS -----
 
 func _ready() -> void:
-	if not player_manager.is_node_ready():
-		await player_manager.ready
+	if not PlayerManager.is_node_ready():
+		await PlayerManager.ready
 	
-	current_lod_speed = player_manager.effects_increase_speed
+	current_lod_speed = PlayerManager.effects_increase_speed
 	current_lod = blur_fisheye.get_shader_parameter("lod")
 	target_lod = MIN_LOD
 
 func _physics_process(delta: float) -> void:
-	if player_manager.player_state in [player_manager.PlayerState.ZOOMING_IN, player_manager.PlayerState.ZOOMING_OUT]:
+	if PlayerManager.is_player_focusing():
 		var new_lod = lerp(current_lod, target_lod, current_lod_speed * delta)
 		if abs(new_lod - current_lod) > 0.001:
 			new_lod = clamp(new_lod, MIN_LOD, MAX_LOD)
@@ -47,20 +46,19 @@ func set_effects(lod_value: float, lod_speed: float) -> void:
 		target_lod = lod_value
 		current_lod_speed = lod_speed
 
-
 # ----- SIGNALS -----
 
 func _on_phone_timer_timeout() -> void:
 	if stress_level > 0:
-		stress_level -= player_manager.phone_stress_heal
+		stress_level -= PlayerManager.phone_stress_heal
 
 func _on_asuka_timer_timeout() -> void:
-	if stress_level < player_manager.max_stress:
-		stress_level += player_manager.asuka_stress_increase
+	if stress_level < PlayerManager.max_stress:
+		stress_level += PlayerManager.asuka_stress_increase
 
 func _on_window_timer_timeout() -> void:
-	if stress_level < player_manager.max_stress:
-		stress_level += player_manager.window_stress_increase
+	if stress_level < PlayerManager.max_stress:
+		stress_level += PlayerManager.window_stress_increase
 
 
 # ----- UTILS -----

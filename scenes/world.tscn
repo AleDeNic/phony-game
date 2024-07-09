@@ -1,11 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://bduasgadssrkv"]
+[gd_scene load_steps=19 format=3 uid="uid://bduasgadssrkv"]
 
-[ext_resource type="Script" path="res://scripts/phase_manager.gd" id="1_o757h"]
-[ext_resource type="Script" path="res://scripts/player_manager.gd" id="1_r7w0f"]
 [ext_resource type="PackedScene" uid="uid://mei3fh0wa3em" path="res://scenes/effects.tscn" id="1_u37f0"]
 [ext_resource type="Texture2D" uid="uid://cd73raw5kh70g" path="res://assets/images/phone.png" id="3_sup45"]
 [ext_resource type="Script" path="res://scripts/asuka.gd" id="4_1kcn2"]
-[ext_resource type="Script" path="res://scripts/story_manager.gd" id="4_r820r"]
 [ext_resource type="PackedScene" uid="uid://cw0nk6gkudho2" path="res://scenes/landscape.tscn" id="4_u7jec"]
 [ext_resource type="Script" path="res://scripts/window.gd" id="5_p0u8t"]
 [ext_resource type="PackedScene" uid="uid://dg55yu6bit6jt" path="res://scenes/phone_os.tscn" id="7_g2i3f"]
@@ -51,19 +48,7 @@ size = Vector2(5.46524, 9.68707)
 
 [node name="World" type="Node2D"]
 
-[node name="PhaseManager" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("1_o757h")
-
-[node name="PlayerManager" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("1_r7w0f")
-
 [node name="AudioManager" parent="." instance=ExtResource("12_3unc5")]
-
-[node name="StoryManager" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("4_r820r")
 
 [node name="Landscape" parent="." instance=ExtResource("4_u7jec")]
 
