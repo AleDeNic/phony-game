@@ -17,12 +17,14 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-AudioManager="*res://scripts/audio_manager.gd"
+AudioManager="*res://scripts/managers/audio_manager.gd"
+BrainManager="*res://scripts/managers/brain_manager.gd"
+NotificationsManager="*res://scripts/managers/notifications_manager.gd"
+PhaseManager="*res://scripts/managers/phase_manager.gd"
+PhoneManager="*res://scripts/managers/phone_manager.gd"
+PlayerManager="*res://scripts/managers/player_manager.gd"
+StoryManager="*res://scripts/managers/story_manager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-PlayerManager="*res://scripts/player_manager.gd"
-PhaseManager="*res://scripts/phase_manager.gd"
-StoryManager="*res://scripts/story_manager.gd"
-PhoneManager="*res://scripts/phone_manager.gd"
 
 [dialogic]
 

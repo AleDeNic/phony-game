@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bduasgadssrkv"]
+[gd_scene load_steps=18 format=3 uid="uid://bduasgadssrkv"]
 
 [ext_resource type="PackedScene" uid="uid://mei3fh0wa3em" path="res://scenes/effects.tscn" id="1_u37f0"]
 [ext_resource type="Texture2D" uid="uid://cd73raw5kh70g" path="res://assets/images/phone.png" id="3_sup45"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://scripts/phone.gd" id="7_lhypb"]
 [ext_resource type="Texture2D" uid="uid://bvbhrwpow0q30" path="res://assets/images/eyes.png" id="9_fl5a1"]
 [ext_resource type="PackedScene" uid="uid://o0205cjoosgq" path="res://scenes/player.tscn" id="9_o22lg"]
-[ext_resource type="Script" path="res://scripts/notifications_manager.gd" id="10_2uot5"]
 [ext_resource type="PackedScene" uid="uid://cag4fc4uu0krp" path="res://scenes/audio_manager.tscn" id="12_3unc5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pmn2f"]
@@ -116,9 +115,6 @@ position = Vector2(126, 25)
 rotation = -0.0730508
 scale = Vector2(0.755, 0.755)
 texture = ExtResource("3_sup45")
-
-[node name="Notifications" type="Node2D" parent="Phone"]
-script = ExtResource("10_2uot5")
 
 [node name="PhoneOS" parent="Phone" instance=ExtResource("7_g2i3f")]
 offset_left = -334.0
