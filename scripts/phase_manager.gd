@@ -2,26 +2,34 @@ extends Node
 
 enum Phase { SPLASH, PROLOGUE, MIDDLE, END, CREDITS }
 
-var phase: Phase
-
+@onready var phase_state: Phase = Phase.PROLOGUE
 
 # ----- INITIALIZATION AND PHYSICS -----
-
-func _ready() -> void:
-	set_phase(Phase.PROLOGUE)
-
+# ...
 
 # ----- HANDLING PHASE -----
 
 func set_phase(new_phase: Phase) -> void:
-	phase = new_phase
-	print_phase(phase)
+	phase_state = new_phase
+	print("Phase -> ", get_phase_value())
 
 func get_phase() -> Phase:
-	return phase
+	return phase_state
+	
+func get_phase_value():
+	match phase_state:
+		Phase.SPLASH:
+			return "SPLASH"
+		Phase.PROLOGUE:
+			return "PROLOGUE"
+		Phase.MIDDLE:
+			return "MIDDLE"
+		Phase.END:
+			return "END"
 
-func go_to_next_phase(phase: Phase) -> void:
-	match phase:
+# TODO: Funny.
+func advance() -> void:
+	match phase_state:
 		Phase.SPLASH:
 			set_phase(Phase.PROLOGUE)
 			pass
@@ -36,15 +44,3 @@ func go_to_next_phase(phase: Phase) -> void:
 			pass
 
 
-# -----UTILS -----
-
-func print_phase(phase):
-	match phase:
-		Phase.SPLASH:
-			print("Phase: SPLASH")
-		Phase.PROLOGUE:
-			print("Phase: PROLOGUE")
-		Phase.MIDDLE:
-			print("Phase: MIDDLE")
-		Phase.END:
-			print("Phase: END")

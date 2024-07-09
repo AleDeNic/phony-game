@@ -18,7 +18,7 @@ func _on_area_entered(_area: Area2D) -> void:
 	camera.set_camera_zoom(camera.window_zoom_value, camera.window_zoom_speed)
 	
 	StoryManager.start_dialogue(dialogue_resource, dialogue_start, self)
-	PhaseManager.go_to_next_phase(PhaseManager.get_phase())
+	PhaseManager.advance()
 
 func _on_area_exited(_area: Area2D) -> void:
 	timer.stop()

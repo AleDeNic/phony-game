@@ -1,10 +1,5 @@
 extends Node
 
-@onready var player: CharacterBody2D = %Player
-@onready var asuka: Area2D = $"../Asuka"
-@onready var phone: Area2D = $"../Phone"
-@onready var camera: Camera2D = $"../Player/Camera2D"
-
 var active_balloon: Node = null
 var current_dialogue_area: Area2D = null
 
@@ -17,12 +12,14 @@ func _ready() -> void:
 # ----- DIALOGUES -----
 
 func start_dialogue(dialogue_resource: Resource, start_from: String, dialogue_area: Area2D) -> void:
-	# print("dialogue started")
+	print("Dialogue ", dialogue_resource.resource_path, " started")
+	
 	active_balloon = DialogueManager.show_dialogue_balloon(dialogue_resource, start_from)
 	current_dialogue_area = dialogue_area
 
 func end_dialogue() -> void:
-	# print("dialogue ended")
+	print("Dialogue ended")
+	
 	if active_balloon and is_instance_valid(active_balloon):
 		active_balloon.queue_free()
 	active_balloon = null

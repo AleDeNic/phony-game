@@ -11,11 +11,6 @@ enum PlayerState { FREE, FOCUSING_IN, FOCUSING_OUT, FOCUSED }
 
 @onready var player_state: PlayerState = PlayerState.FREE
 
-@onready var player: CharacterBody2D = %Player
-@onready var phone: Area2D = $"../Phone"
-@onready var camera: Camera2D = $"../Player/Camera2D"
-
-
 # ----- INITIALIZATION AND PHYSICS -----
 # ...
 
