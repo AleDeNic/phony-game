@@ -21,7 +21,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	handle_battery()
 	if Input.is_action_just_pressed("ui_cancel"):
-		PlayerManager.set_player_zooming_in()
+		PlayerManager.set_player_focusing_in()
 		go_to_screen(options)
 	#print_phone_state(phone_state)
 

@@ -12,7 +12,8 @@ enum PlayerState { FREE, FOCUSING_IN, FOCUSING_OUT, FOCUSED }
 @onready var player_state: PlayerState = PlayerState.FREE
 
 # ----- INITIALIZATION AND PHYSICS -----
-# ...
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 # ----- STATE SETTERS -----
 
