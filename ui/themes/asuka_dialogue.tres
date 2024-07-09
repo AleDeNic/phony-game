@@ -14,24 +14,25 @@ draw_center = false
 bg_color = Color(1, 1, 1, 0.541176)
 border_color = Color(1, 1, 1, 1)
 corner_detail = 1
-expand_margin_left = 32.0
+expand_margin_left = 24.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nymye"]
-bg_color = Color(0.207843, 0.207843, 0.207843, 0)
+bg_color = Color(0.321569, 0.321569, 0.321569, 0.607843)
 draw_center = false
+corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lujt5"]
 bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fijlw"]
 bg_color = Color(1, 0.474453, 0.175174, 0.635294)
+expand_margin_left = 128.0
 
 [resource]
 Button/colors/font_focus_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 Button/colors/font_pressed_color = Color(0, 0, 0, 1)
-Button/constants/h_separation = 4
 Button/font_sizes/font_size = 28
 Button/fonts/font = ExtResource("1_1sxrh")
 Button/styles/disabled = SubResource("StyleBoxFlat_r1mnb")

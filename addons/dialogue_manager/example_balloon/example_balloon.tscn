@@ -97,9 +97,9 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 150.0
+offset_left = 62.0
 offset_top = 492.0
-offset_right = -296.0
+offset_right = -182.0
 offset_bottom = -29.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -113,7 +113,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 21.0
+offset_left = -100.0
 offset_top = 253.0
 offset_right = -571.0
 offset_bottom = -74.0
@@ -168,17 +168,21 @@ text = "Dialogue..."
 
 [node name="Responses" type="MarginContainer" parent="Balloon"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 229.0
-offset_top = -85.0
-offset_right = 893.0
-offset_bottom = -5.0
-grow_horizontal = 2
+offset_left = -553.0
+offset_top = -80.0
+offset_right = 111.0
+grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("4_a7i8o")
+
+[node name="ColorRect2" type="ColorRect" parent="Balloon/Responses"]
+material = SubResource("ShaderMaterial_qeojn")
+layout_mode = 2
 
 [node name="ResponsesMenu" type="VBoxContainer" parent="Balloon/Responses" node_paths=PackedStringArray("response_template")]
 unique_name_in_owner = true
