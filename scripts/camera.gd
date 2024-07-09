@@ -1,7 +1,5 @@
 extends Camera2D
 
-@onready var player_manager: Node = get_node("/root/World/PlayerManager")
-
 @export_group("Speed values")
 @export var phone_zoom_speed: float = 3.0
 @export var asuka_zoom_speed: float = 1.2

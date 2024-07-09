@@ -1,7 +1,5 @@
 extends Control
 
-enum PhoneState { OFF, APPS, OPTIONS, CAMERA, CHATS, ASUKACHAT }
-
 @onready var top_bar: Control = $PhoneSize/TopBar
 @onready var bottom_bar: Control = $PhoneSize/BottomBar
 @onready var apps: Control = $PhoneSize/Apps
@@ -9,11 +7,8 @@ enum PhoneState { OFF, APPS, OPTIONS, CAMERA, CHATS, ASUKACHAT }
 @onready var camera: Control = $PhoneSize/Camera
 @onready var chats: Control = $PhoneSize/Chats
 @onready var asukachat: Control = $PhoneSize/AsukaChat
-@onready var player_manager: Node = %PlayerManager
 @onready var battery_bar: ProgressBar = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar
 @onready var battery_timer: Timer = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar/BatteryTimer
-
-var phone_state: PhoneState = PhoneState.OFF
 
 
 # ----- INITIALIZATION AND PHYSICS -----
@@ -26,7 +21,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	handle_battery()
 	if Input.is_action_just_pressed("ui_cancel"):
-		player_manager.set_player_zooming_in()
+		PlayerManager.set_player_zooming_in()
 		go_to_screen(options)
 	#print_phone_state(phone_state)
 
@@ -34,46 +29,32 @@ func _physics_process(_delta: float) -> void:
 # ----- BATTERY -----
 
 func setup_battery() -> void:
-	battery_bar.max_value = player_manager.max_battery
-	battery_timer.wait_time = player_manager.max_battery
+	battery_bar.max_value = PlayerManager.max_battery
+	battery_timer.wait_time = PlayerManager.max_battery
 	battery_timer.start()
 	battery_timer.paused = true
 	handle_battery()
 
 func handle_battery() -> void:
-	if is_battery_active():
+	if PhoneManager.is_battery_active():
 		battery_timer.paused = false
 	else:
 		battery_timer.paused = true
 	battery_bar.value = battery_timer.time_left
 
-func is_battery_active() -> bool:
-	if phone_state not in [PhoneState.OFF, PhoneState.OPTIONS]:
-		return true
-	else:
-		return false
-
-
-# ----- PHONE STATE -----
-
-func set_phone_state(new_state: PhoneState) -> void:
-	phone_state = new_state
-
-func get_phone_state() -> PhoneState:
-	return phone_state
 
 func restore_phone_state():
 	match true:
 		apps.visible:
-			set_phone_state(PhoneState.APPS)
+			PhoneManager.set_phone_in_apps()
 		options.visible:
-			set_phone_state(PhoneState.OPTIONS)
+			PhoneManager.set_phone_in_options()
 		camera.visible:
-			set_phone_state(PhoneState.CAMERA)
+			PhoneManager.set_phone_in_camera()
 		chats.visible:
-			set_phone_state(PhoneState.CHATS)
+			PhoneManager.set_phone_in_chats()
 		asukachat.visible:
-			set_phone_state(PhoneState.ASUKACHAT)
+			PhoneManager.set_phone_in_asukachat()
 
 
 # ----- HANDLE SCREENS -----
@@ -81,8 +62,8 @@ func restore_phone_state():
 func go_to_screen(screen: Control) -> void:
 	reset_screens()
 	screen.visible = true
-	set_phone_state(PhoneState[screen.name.to_upper()])
-	if phone_state != PhoneState.APPS:
+	PhoneManager.set_phone_state(PhoneManager.PhoneState[screen.name.to_upper()])
+	if !PhoneManager.is_phone_in_apps():
 		bottom_bar.visible = true
 
 func reset_screens() -> void:
@@ -100,7 +81,7 @@ func _on_options_pressed() -> void:
 	go_to_screen(options)
 
 func _on_back_pressed() -> void:
-	if phone_state == PhoneState.ASUKACHAT:
+	if PhoneManager.is_phone_in_asukachat():
 		go_to_screen(chats)
 	else:
 		go_to_screen(apps)
@@ -125,21 +106,3 @@ func _on_chats_pressed() -> void:
 
 func _on_asuka_pressed() -> void:
 	go_to_screen(asukachat)
-
-
-# ----- DEBUG -----
-
-func print_phone_state(state):
-	match state:
-		PhoneState.OFF:
-			print("Phone state: OFF")
-		PhoneState.APPS:
-			print("Phone state: APPS")
-		PhoneState.OPTIONS:
-			print("Phone state: OPTIONS")
-		PhoneState.CAMERA:
-			print("Phone state: CAMERA")
-		PhoneState.CHATS:
-			print("Phone state: CHATS")
-		PhoneState.ASUKACHAT:
-			print("Phone state: ASUKACHAT")

@@ -1,7 +1,6 @@
-class_name PlayerManager
 extends Node
 
-enum PlayerState { FREE, ZOOMING_IN, ZOOMING_OUT, FOCUS }
+enum PlayerState { FREE, FOCUSING_IN, FOCUSING_OUT, FOCUSED }
 
 @export var max_battery: float = 100.0
 @export var max_stress: float = 100.0
@@ -10,7 +9,7 @@ enum PlayerState { FREE, ZOOMING_IN, ZOOMING_OUT, FOCUS }
 @export var window_stress_increase: float = 1.5
 @export var effects_increase_speed: float = 1.0
 
-var player_state: PlayerState = PlayerState.FREE
+@onready var player_state: PlayerState = PlayerState.FREE
 
 @onready var player: CharacterBody2D = %Player
 @onready var phone: Area2D = $"../Phone"
@@ -18,71 +17,57 @@ var player_state: PlayerState = PlayerState.FREE
 
 
 # ----- INITIALIZATION AND PHYSICS -----
+# ...
 
-func _ready() -> void:
-	set_player_free()
-
-#func _physics_process(_delta: float) -> void:
-	#print_player_state(player_state)
-
-
-# ----- GET STATE -----
-
-func get_player_state() -> PlayerState:
-	return player_state
-
-
-# ----- SET GENERIC STATE -----
+# ----- STATE SETTERS -----
 
 func set_player_state(new_state: PlayerState) -> void:
 	player_state = new_state
-
-
-# ----- SET SPECIFIC STATE -----
+	print("Player -> ", get_player_state_value())
 
 func set_player_free() -> void:
 	set_player_state(PlayerState.FREE)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
-func set_player_zooming_in() -> void:
-	set_player_state(PlayerState.ZOOMING_IN)
+func set_player_focusing_in() -> void:
+	set_player_state(PlayerState.FOCUSING_IN)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
-func set_player_zooming_out() -> void:
-	set_player_state(PlayerState.ZOOMING_OUT)
+func set_player_focusing_out() -> void:
+	set_player_state(PlayerState.FOCUSING_OUT)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-
-func set_player_to_focus() -> void:
-	set_player_state(PlayerState.FOCUS)
+	
+func set_player_focused() -> void:
+	set_player_state(PlayerState.FOCUSED)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+# ----- STATE GETTERS -----
 
-# ----- STATE BOOLEANS -----
+func get_player_state() -> PlayerState:
+	return player_state
+
+func get_player_state_value():
+	match player_state:
+		PlayerState.FREE:
+			return "FREE"
+		PlayerState.FOCUSING_IN:
+			return "FOCUSING_IN"
+		PlayerState.FOCUSING_OUT:
+			return "FOCUSING_OUT"
+		PlayerState.FOCUSED:
+			return "FOCUSED"
 
 func is_player_free() -> bool:
 	return player_state == PlayerState.FREE
 
-func is_player_zooming_in() -> bool:
-	return player_state == PlayerState.ZOOMING_IN
+func is_player_focusing_in() -> bool:
+	return player_state == PlayerState.FOCUSING_IN
 
-func is_player_zooming_out() -> bool:
-	return player_state == PlayerState.ZOOMING_OUT
+func is_player_focusing_out() -> bool:
+	return player_state == PlayerState.FOCUSING_OUT
 
-func is_player_zooming() -> bool:
-	return player_state in [PlayerState.ZOOMING_IN, PlayerState.ZOOMING_OUT]
+func is_player_focusing() -> bool:
+	return player_state in [PlayerState.FOCUSING_IN, PlayerState.FOCUSING_OUT]
 
-func is_player_to_focus() -> bool:
-	return player_state == PlayerState.FOCUS
-
-
-# ----- DEBUG FUNCTIONS -----
-func print_player_state(state):
-	match state:
-		PlayerState.FREE:
-			print("Player state: FREE")
-		PlayerState.ZOOMING_IN:
-			print("Player state: ZOOMING_IN")
-		PlayerState.ZOOMING_OUT:
-			print("Player state: ZOOMING_OUT")
-		PlayerState.FOCUS:
-			print("Player state: FOCUS")
+func is_player_focused() -> bool:
+	return player_state == PlayerState.FOCUSED

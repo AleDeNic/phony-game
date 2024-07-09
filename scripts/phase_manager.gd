@@ -1,4 +1,3 @@
-class_name PhaseManager
 extends Node
 
 enum Phase { SPLASH, PROLOGUE, MIDDLE, END, CREDITS }

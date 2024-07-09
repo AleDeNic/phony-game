@@ -9,6 +9,8 @@ Asuka: You[speed=0.4].[speed=0.2].[speed=0.1].
 - Will be reborn. => asuka_intro
 - Will continue. Together as one.
 - Will die. => END
+- Check your status.
+	Asuka: Your status is {{PlayerManager.get_player_state_value()}}
 Asuka: Reach for me.
 
 ~ asuka_intermezzo

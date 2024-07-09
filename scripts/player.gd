@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-@onready var player_manager: Node = %PlayerManager
 @onready var phone: Area2D = $"../Phone"
 
 @export var default_speed: float = 70.0
@@ -21,21 +20,22 @@ var focus_speed: float
 
 func _ready() -> void:
 	setup_viewport()
+
 	current_speed = default_speed
 	focus_speed = focus_speed_phone
 
 func _physics_process(delta: float) -> void:
 	check_viewport()
-	match player_manager.get_player_state():
+
+	match PlayerManager.get_player_state():
 		PlayerManager.PlayerState.FREE:
 			handle_free_movement(delta)
-		PlayerManager.PlayerState.ZOOMING_IN:
-			handle_zooming_in(delta)
-		PlayerManager.PlayerState.ZOOMING_OUT:
-			handle_zooming_out(delta)
-		PlayerManager.PlayerState.FOCUS:
-			handle_focus(delta)
-	#print(current_speed)
+		PlayerManager.PlayerState.FOCUSING_IN:
+			focus_in(delta)
+		PlayerManager.PlayerState.FOCUSING_OUT:
+			focus_out(delta)
+		PlayerManager.PlayerState.FOCUSED:
+			target_speed = 0.0
 
 
 # ----- INPUT & MOVEMENT -----
@@ -46,25 +46,22 @@ func handle_free_movement(delta: float) -> void:
 	reset_mouse_to_center()
 	move_player(delta, movement_vector)
 
-func handle_zooming_in(delta: float) -> void:
+func focus_in(delta: float) -> void:
 	var movement_vector: Vector2 = (target_position - global_position).normalized()
 	if global_position.distance_to(target_position) >= 10.0:
 		target_speed = focus_speed
 		move_player(delta, movement_vector)
 	else:
 		current_speed = 0.0
-		player_manager.set_player_to_focus()
-		player_manager.print_player_state(player_manager.player_state)
+		PlayerManager.set_player_focused()
 
-func handle_zooming_out(delta: float) -> void:
+func focus_out(delta: float) -> void:
 	var movement_vector: Vector2 = get_movement_input()
 	current_speed = exit_speed
 	target_speed = default_speed
 	reset_mouse_to_center()
 	move_player(delta, movement_vector)
 
-func handle_focus(_delta: float) -> void:
-	target_speed = 0.0
 
 func move_player(delta: float, movement_vector: Vector2) -> void:
 	current_speed = lerp(current_speed, target_speed, delta * transition_speed)

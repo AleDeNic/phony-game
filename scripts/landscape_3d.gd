@@ -1,7 +1,5 @@
 extends Node3D
 
-@onready var phase_manager: Node = get_node("/root/World/PhaseManager")
-
 @onready var sky: ProceduralSkyMaterial = $WorldEnvironment.environment.sky.sky_material as ProceduralSkyMaterial
 @onready var water: ShaderMaterial = $Water.mesh.material as ShaderMaterial
 @onready var environment: Environment = $WorldEnvironment.environment
@@ -70,7 +68,7 @@ func handle_water() -> void:
 	water.set_shader_parameter("water_color", current_water)
 
 func handle_target_colors() -> void:
-	match phase_manager.get_phase():
+	match PhaseManager.get_phase():
 		PhaseManager.Phase.PROLOGUE:
 			change_target_colors(sky_prologue, horizon_prologue, ground_prologue, water_prologue)
 		PhaseManager.Phase.MIDDLE:

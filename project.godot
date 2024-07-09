@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 AudioManager="*res://scripts/audio_manager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+PlayerManager="*res://scripts/player_manager.gd"
+PhaseManager="*res://scripts/phase_manager.gd"
+StoryManager="*res://scripts/story_manager.gd"
+PhoneManager="*res://scripts/phone_manager.gd"
 
 [dialogic]
 
