@@ -3,9 +3,10 @@ extends CharacterBody2D
 @onready var player_manager: Node = %PlayerManager
 @onready var phone: Area2D = $"../Phone"
 
-@export var default_speed: float = 65.0
-@export var transition_speed: float = 5.0
-@export var focus_speed: float = 500.0
+@export var default_speed: float = 70.0
+@export var transition_speed: float = 10.0
+@export var focus_speed_phone: float = 300.0
+@export var focus_speed_asuka: float = 600.0
 @export var exit_speed: float = 30.0
 @export var dead_zone_radius: float = 1.0
 
@@ -13,6 +14,7 @@ var current_speed: float
 var target_speed: float
 var viewport: Viewport
 var target_position: Vector2
+var focus_speed: float
 
 
 # ----- INITIALIZATION -----
@@ -20,6 +22,7 @@ var target_position: Vector2
 func _ready() -> void:
 	setup_viewport()
 	current_speed = default_speed
+	focus_speed = focus_speed_phone
 
 func _physics_process(delta: float) -> void:
 	check_viewport()
@@ -45,12 +48,13 @@ func handle_free_movement(delta: float) -> void:
 
 func handle_zooming_in(delta: float) -> void:
 	var movement_vector: Vector2 = (target_position - global_position).normalized()
-	if global_position.distance_to(target_position) >= 5.0:
+	if global_position.distance_to(target_position) >= 10.0:
 		target_speed = focus_speed
 		move_player(delta, movement_vector)
 	else:
 		current_speed = 0.0
 		player_manager.set_player_to_focus()
+		player_manager.print_player_state(player_manager.player_state)
 
 func handle_zooming_out(delta: float) -> void:
 	var movement_vector: Vector2 = get_movement_input()

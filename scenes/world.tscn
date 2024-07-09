@@ -38,7 +38,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4wa7i"]
-radius = 400.979
+radius = 210.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bh1k1"]
 radius = 528.48
@@ -87,11 +87,9 @@ position = Vector2(2, -94)
 shape = SubResource("CircleShape2D_4wa7i")
 
 [node name="AsukaExitArea" type="Area2D" parent="Asuka"]
-visible = false
 collision_mask = 4
 
 [node name="AsukaExitCollision" type="CollisionShape2D" parent="Asuka/AsukaExitArea"]
-visible = false
 shape = SubResource("CircleShape2D_bh1k1")
 debug_color = Color(0.648266, 0.330411, 1, 0.42)
 
@@ -155,7 +153,6 @@ unique_name_in_owner = true
 [connection signal="area_entered" from="Asuka" to="Asuka" method="_on_area_entered"]
 [connection signal="area_exited" from="Asuka" to="Asuka" method="_on_area_exited"]
 [connection signal="timeout" from="Asuka/AsukaTimer" to="Effects" method="_on_asuka_timer_timeout"]
-[connection signal="mouse_exited" from="Asuka/AsukaExitArea" to="Asuka" method="_on_asuka_exit_area_mouse_exited"]
 [connection signal="area_entered" from="Window" to="Window" method="_on_area_entered"]
 [connection signal="area_exited" from="Window" to="Window" method="_on_area_exited"]
 [connection signal="timeout" from="Window/WindowTimer" to="Effects" method="_on_window_timer_timeout"]

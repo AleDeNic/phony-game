@@ -1,8 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://73jm5qjy52vq"]
+[gd_scene load_steps=14 format=3 uid="uid://73jm5qjy52vq"]
 
 [ext_resource type="Script" path="res://addons/dialogue_manager/example_balloon/example_balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
+[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_wcv7c"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="3_72ixx"]
+[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="3_kn4n2"]
+[ext_resource type="Theme" uid="uid://b0uon3iawrhwg" path="res://ui/themes/asuka_dialogue.tres" id="4_a7i8o"]
+[ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="5_cmpv7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qeojn"]
+shader = ExtResource("3_kn4n2")
+shader_parameter/lod = 3.93
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -67,15 +75,50 @@ Panel/styles/panel = SubResource("StyleBoxFlat_uy0d5")
 layer = 100
 script = ExtResource("1_36de5")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(960, 540)
+scale = Vector2(0.444444, 0.5)
+texture = ExtResource("2_wcv7c")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_qeojn")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 751.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Balloon" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 492.0
+offset_right = -296.0
+offset_bottom = -29.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 1
 theme = SubResource("Theme_qq3yp")
+
+[node name="ColorRect" type="ColorRect" parent="Balloon"]
+material = SubResource("ShaderMaterial_qeojn")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = 253.0
+offset_right = -571.0
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="Balloon"]
 clip_children = 2
@@ -85,12 +128,13 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 21.0
-offset_top = -183.0
-offset_right = -19.0
-offset_bottom = -19.0
+offset_top = -306.0
+offset_right = -571.0
+offset_bottom = -74.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
+theme = ExtResource("4_a7i8o")
 
 [node name="Dialogue" type="MarginContainer" parent="Balloon/Panel"]
 layout_mode = 1
@@ -105,9 +149,12 @@ layout_mode = 2
 
 [node name="CharacterLabel" type="RichTextLabel" parent="Balloon/Panel/Dialogue/VBoxContainer"]
 unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 1
+theme = ExtResource("4_a7i8o")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("5_cmpv7")
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "Character"
 fit_content = true
@@ -126,10 +173,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -147.0
-offset_top = -558.0
-offset_right = 494.0
-offset_bottom = -154.0
+offset_left = 229.0
+offset_top = -85.0
+offset_right = 893.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -143,7 +190,11 @@ response_template = NodePath("ResponseExample")
 
 [node name="ResponseExample" type="Button" parent="Balloon/Responses/ResponsesMenu"]
 layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("4_a7i8o")
 text = "Response example"
+flat = true
+alignment = 0
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
 [connection signal="response_selected" from="Balloon/Responses/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

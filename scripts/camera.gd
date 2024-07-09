@@ -4,9 +4,10 @@ extends Camera2D
 
 @export_group("Speed values")
 @export var phone_zoom_speed: float = 3.0
-@export var asuka_zoom_speed: float = 0.6
+@export var asuka_zoom_speed: float = 1.2
 @export var window_zoom_speed: float = 0.8
 @export var reset_zoom_speed: float = 4.0
+
 @export_group("Zoom values")
 @export var phone_zoom_value = Vector2(0.8, 0.8)
 @export var asuka_zoom_value = Vector2(1.3, 1.3)
@@ -26,15 +27,11 @@ func _ready() -> void:
 	target_zoom = default_zoom_value
 
 func _physics_process(delta: float) -> void:
-	if player_manager.is_player_zooming():
+	if is_zooming == true:
 		zoom = zoom.lerp(target_zoom, current_zoom_speed * delta)
 		zoom = clamp(zoom, phone_zoom_value, window_zoom_value)
 		if abs(zoom.x - target_zoom.x) < 0.001:
 			zoom = target_zoom
-			#if player_manager.is_player_zooming_in():
-				#player_manager.set_player_to_focus()
-			#elif player_manager.is_player_zooming_out():
-				#player_manager.set_player_free()
 			is_zooming = false
 
 

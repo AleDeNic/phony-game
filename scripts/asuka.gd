@@ -26,18 +26,21 @@ func _process(_delta: float) -> void:
 func _on_area_entered(_area: Area2D) -> void:
 	timer.start()
 	player.target_position = Vector2(global_position)
+	player.focus_speed = player.focus_speed_asuka
 	player_manager.set_player_zooming_in()
 	camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
 	story_manager.start_dialogue(dialogue_resource, dialogue_start, self)
 	get_eyes_attention()
+	#player_manager.print_player_state(player_manager.player_state)
 
 func _on_area_exited(_area: Area2D) -> void:
 	timer.stop()
 	#player_manager.set_player_zooming_out()
 	if story_manager.current_dialogue_area == self:
 		story_manager.end_dialogue()
-	#camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
+	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 	get_eyes_attention()
+	#player_manager.print_player_state(player_manager.player_state)
 	
 
 # ----- UTILS -----

@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://b0uon3iawrhwg"]
+
+[ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="1_1sxrh"]
+[ext_resource type="FontFile" uid="uid://d06s8b5831mca" path="res://ui/fonts/LibertinusMono-Regular.otf" id="2_t4hx1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nymye"]
+bg_color = Color(0.207843, 0.207843, 0.207843, 0.67451)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fijlw"]
+bg_color = Color(1, 0.474453, 0.175174, 0.635294)
+
+[resource]
+Button/font_sizes/font_size = 28
+Button/fonts/font = ExtResource("1_1sxrh")
+Button/styles/normal = SubResource("StyleBoxFlat_nymye")
+Panel/styles/panel = SubResource("StyleBoxFlat_fijlw")
+RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
+RichTextLabel/font_sizes/normal_font_size = 32
+RichTextLabel/fonts/normal_font = ExtResource("2_t4hx1")

@@ -66,6 +66,7 @@ scale = Vector2(1.26857, 1.26857)
 texture = ExtResource("1_008is")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.407843)
 position = Vector2(-554, -330)
 scale = Vector2(1.20772, 1.20772)

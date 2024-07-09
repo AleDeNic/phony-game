@@ -13,22 +13,27 @@ extends Area2D
 
 
 # ----- INITIALIZATION AND PHYSICS -----
+
+func _ready() -> void:
+	pass
+
 func _physics_process(_delta: float) -> void:
 	if story_manager.current_dialogue_area == self and not overlaps_body(story_manager.player):
 		story_manager.end_dialogue()
 
 
 # ----- STATE MANAGEMENT -----
+
 func _on_area_entered(_area: Area2D) -> void:
 	timer.start()
-	camera.set_camera_zoom(camera.window_zoom_value, camera.window_zoom_speed)
 	story_manager.start_dialogue(dialogue_resource, dialogue_start, self)
 	phase_manager.go_to_next_phase(phase_manager.get_phase())
+	camera.set_camera_zoom(camera.window_zoom_value, camera.window_zoom_speed)
 
 func _on_area_exited(_area: Area2D) -> void:
+	timer.stop()
 	if story_manager.current_dialogue_area == self:
 		story_manager.end_dialogue()
 	player_manager.set_player_zooming_out()
-	timer.stop()
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 

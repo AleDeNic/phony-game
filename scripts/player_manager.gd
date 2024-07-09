@@ -22,8 +22,8 @@ var player_state: PlayerState = PlayerState.FREE
 func _ready() -> void:
 	set_player_free()
 
-func _physics_process(_delta: float) -> void:
-	print_player_state(player_state)
+#func _physics_process(_delta: float) -> void:
+	#print_player_state(player_state)
 
 
 # ----- GET STATE -----
