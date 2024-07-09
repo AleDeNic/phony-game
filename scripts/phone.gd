@@ -64,6 +64,8 @@ func enter_phone() -> void:
 	phone_os.restore_phone_state()
 	timer.start()
 	
+	camera.set_camera_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
+	
 	set_phone_scale(max_scale, scale_up_speed)
 	set_phone_rotation(max_rotation, rotation_up_speed)
 	
@@ -73,8 +75,11 @@ func exit_phone() -> void:
 	PlayerManager.set_player_focusing_out()
 	timer.stop()
 	PhoneManager.set_phone_off()
+	
+	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 	set_phone_scale(min_scale, scale_down_speed)
 	set_phone_rotation(min_rotation, rotation_down_speed)
+	
 	effects.set_effects(effects.MIN_LOD, effects_decrease_speed)
 
 
