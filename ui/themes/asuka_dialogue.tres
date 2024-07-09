@@ -1,18 +1,44 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://b0uon3iawrhwg"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://b0uon3iawrhwg"]
 
 [ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="1_1sxrh"]
 [ext_resource type="FontFile" uid="uid://d06s8b5831mca" path="res://ui/fonts/LibertinusMono-Regular.otf" id="2_t4hx1"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r1mnb"]
+bg_color = Color(0.541787, 0.541787, 0.541787, 1)
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e2nru"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vufvh"]
+bg_color = Color(1, 1, 1, 0.541176)
+border_color = Color(1, 1, 1, 1)
+corner_detail = 1
+expand_margin_left = 32.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nymye"]
-bg_color = Color(0.207843, 0.207843, 0.207843, 0.67451)
+bg_color = Color(0.207843, 0.207843, 0.207843, 0)
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lujt5"]
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fijlw"]
 bg_color = Color(1, 0.474453, 0.175174, 0.635294)
 
 [resource]
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/constants/h_separation = 4
 Button/font_sizes/font_size = 28
 Button/fonts/font = ExtResource("1_1sxrh")
+Button/styles/disabled = SubResource("StyleBoxFlat_r1mnb")
+Button/styles/focus = SubResource("StyleBoxFlat_e2nru")
+Button/styles/hover = SubResource("StyleBoxFlat_vufvh")
 Button/styles/normal = SubResource("StyleBoxFlat_nymye")
+Button/styles/pressed = SubResource("StyleBoxFlat_lujt5")
 Panel/styles/panel = SubResource("StyleBoxFlat_fijlw")
 RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
 RichTextLabel/font_sizes/normal_font_size = 32

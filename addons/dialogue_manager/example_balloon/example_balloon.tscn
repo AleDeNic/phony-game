@@ -193,8 +193,8 @@ layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("4_a7i8o")
 text = "Response example"
-flat = true
 alignment = 0
+expand_icon = true
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
 [connection signal="response_selected" from="Balloon/Responses/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]
