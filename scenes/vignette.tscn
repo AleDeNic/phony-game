@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwgby5u3ws41u"]
+
+[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="1_k4eep"]
+[ext_resource type="Shader" path="res://shaders/vignette_color.gdshader" id="1_ohbtw"]
+[ext_resource type="Shader" path="res://shaders/vignette_blur.gdshader" id="2_e2q18"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8rrhg"]
+shader = ExtResource("2_e2q18")
+shader_parameter/blur_radius = 0.25
+shader_parameter/blur_amount = 4.0
+shader_parameter/blur_inner = 0.6
+shader_parameter/blur_outer = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v2vil"]
+shader = ExtResource("1_ohbtw")
+shader_parameter/inner_radius = 0.331
+shader_parameter/outer_radius = 1.312
+shader_parameter/vignette_strength = 1.225
+shader_parameter/dither_strength = 0.0
+shader_parameter/vignette_color = null
+
+[node name="Vignette" type="CanvasLayer"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(960, 540)
+scale = Vector2(0.444444, 0.5)
+texture = ExtResource("1_k4eep")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BlurVignette" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_8rrhg")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorVignette" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_v2vil")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 @export var default_speed: float = 70.0
 @export var transition_speed: float = 10.0
-@export var focus_speed_phone: float = 300.0
+@export var focus_speed_phone: float = 400.0
 @export var focus_speed_asuka: float = 600.0
 @export var exit_speed: float = 30.0
 @export var dead_zone_radius: float = 1.0

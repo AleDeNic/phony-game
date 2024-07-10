@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Node
 
 ## The action to use for advancing the dialogue
 @export var next_action: StringName = &"ui_accept"

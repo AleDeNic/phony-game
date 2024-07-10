@@ -71,6 +71,7 @@ position = Vector2(2, -94)
 shape = SubResource("CircleShape2D_4wa7i")
 
 [node name="AsukaExitArea" type="Area2D" parent="Asuka"]
+visible = false
 collision_mask = 4
 
 [node name="AsukaExitCollision" type="CollisionShape2D" parent="Asuka/AsukaExitArea"]
