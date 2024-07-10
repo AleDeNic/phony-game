@@ -1,13 +1,8 @@
 ~ asuka_intro
 
-Asuka: I'm now reborn. Remember...
+Asuka: I'm now reborn. Remember... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Asuka: You[speed=0.4].[speed=0.2].[speed=0.1].
-- Cannot. Cannot. Cannot. Cannot. Cannot.
-	Asuka: Redo.
-- Are not.
-	Asuka: Alone.
 - Will be reborn. => asuka_intro
-- Will continue. Together as one.
 - Will die. => END
 - Check your status.
 	Asuka: Your status is {{PlayerManager.get_player_state_value()}}

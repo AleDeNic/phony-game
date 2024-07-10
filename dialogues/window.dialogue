@@ -2,12 +2,6 @@
 
 Me: [[Hi|Hello|Howdy]], this is some dialogue.
 Me: Here are some choices.
-- First one
-	Me: You picked the first one.
-- Second one
-	Me: You picked the second one.
-- Start again => window_intro
-- End the conversation => END
 Me: For more information see the online documentation.
 
 => END
