@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dg55yu6bit6jt"]
+[gd_scene load_steps=29 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_os.gd" id="1_r0wjl"]
 [ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_hqmi7"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bm2pd3jhn61iq" path="res://assets/images/selfie.png" id="7_7bxb7"]
 [ext_resource type="FontFile" uid="uid://d02ygxi1jy6m3" path="res://ui/fonts/neuropol_x.otf" id="7_f3rx8"]
 [ext_resource type="Texture2D" uid="uid://bh2aodmuhfccj" path="res://assets/images/icons/messages_icon.webp" id="7_rhvqn"]
+[ext_resource type="LabelSettings" uid="uid://b0qm7cdafhgra" path="res://ui/settings/app_title.tres" id="8_0yw4n"]
 [ext_resource type="StyleBox" uid="uid://bdnuw0by175th" path="res://ui/styles/battery_bar.tres" id="8_v8ae1"]
 [ext_resource type="StyleBox" uid="uid://duct66cpghgeh" path="res://ui/styles/separator.tres" id="8_y0en8"]
 [ext_resource type="Texture2D" uid="uid://byqi5w8p5ltyq" path="res://assets/images/cursor_48.png" id="9_6xph0"]
@@ -107,58 +108,61 @@ color = Color(1, 1, 1, 0.439216)
 
 [node name="Apps" type="Control" parent="PhoneSize"]
 visible = false
-modulate = Color(1, 1, 1, 0.611765)
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -214.0
+offset_top = 272.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 mouse_filter = 1
+theme = ExtResource("12_fsmwd")
 
 [node name="MarginContainer" type="MarginContainer" parent="PhoneSize/Apps"]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -653.0
-offset_bottom = -441.0
+anchor_bottom = 0.5
+offset_top = -274.0
+offset_bottom = 274.0
 grow_horizontal = 2
-grow_vertical = 0
-theme = SubResource("Theme_mdga8")
+grow_vertical = 2
+theme = ExtResource("12_fsmwd")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/Apps/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PhoneSize/Apps/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+theme = ExtResource("12_fsmwd")
 
-[node name="Camera" type="Button" parent="PhoneSize/Apps/MarginContainer/HBoxContainer"]
+[node name="Camera" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
-theme_override_constants/icon_max_width = 156
-theme_override_font_sizes/font_size = 32
+theme = ExtResource("12_fsmwd")
+text = "Camera"
 icon = ExtResource("5_8pkqu")
-flat = true
+alignment = 0
 
-[node name="Chats" type="Button" parent="PhoneSize/Apps/MarginContainer/HBoxContainer"]
+[node name="Chats" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
-theme_override_constants/icon_max_width = 156
-text = "
-"
+theme = ExtResource("12_fsmwd")
+text = "Chats"
 icon = ExtResource("7_rhvqn")
-flat = true
+alignment = 0
 
-[node name="Video" type="Button" parent="PhoneSize/Apps/MarginContainer/HBoxContainer"]
+[node name="Video" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
-theme_override_constants/icon_max_width = 156
+theme = ExtResource("12_fsmwd")
+text = "Video"
 icon = ExtResource("6_vmfnf")
-flat = true
+alignment = 0
 
-[node name="Options" type="Control" parent="PhoneSize"]
+[node name="Settings" type="Control" parent="PhoneSize"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -168,41 +172,44 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/Options"]
+[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/Settings"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 158.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_mdga8")
+theme = ExtResource("12_fsmwd")
+theme_override_constants/margin_top = 128
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PhoneSize/Options/MarginContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="PhoneSize/Settings/MarginContainer"]
 layout_mode = 2
 
-[node name="Settings" type="Label" parent="PhoneSize/Options/MarginContainer/VBoxContainer2"]
+[node name="Settings" type="Label" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
-theme = SubResource("Theme_mdga8")
+theme = ExtResource("12_fsmwd")
 theme_override_font_sizes/font_size = 48
 text = "Settings"
+label_settings = ExtResource("8_0yw4n")
 horizontal_alignment = 3
 vertical_alignment = 1
 
-[node name="Quit" type="Button" parent="PhoneSize/Options/MarginContainer/VBoxContainer2"]
+[node name="HSeparator" type="HSeparator" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 mouse_filter = 1
-theme = SubResource("Theme_mdga8")
-theme_override_font_sizes/font_size = 72
-text = "Turn off phone"
+theme = ExtResource("12_fsmwd")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/Options/MarginContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2"]
 layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 alignment = 1
 
-[node name="VolumeLabel" type="Label" parent="PhoneSize/Options/MarginContainer/VBoxContainer2/HBoxContainer"]
+[node name="VolumeLabel" type="Label" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_mdga8")
@@ -210,26 +217,28 @@ theme_override_font_sizes/font_size = 48
 text = "Volume"
 vertical_alignment = 1
 
-[node name="VSeparator" type="VSeparator" parent="PhoneSize/Options/MarginContainer/VBoxContainer2/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_constants/separation = 48
 theme_override_styles/separator = ExtResource("8_y0en8")
 
-[node name="VolumeSlider" type="HSlider" parent="PhoneSize/Options/MarginContainer/VBoxContainer2/HBoxContainer"]
+[node name="VolumeSlider" type="HSlider" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 1
+theme = ExtResource("12_fsmwd")
 max_value = 1.0
 step = 0.05
 script = ExtResource("4_5jmmy")
 bus_name = "Master"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PhoneSize/Options/MarginContainer/VBoxContainer2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Fullscreen" type="Label" parent="PhoneSize/Options/MarginContainer/VBoxContainer2/HBoxContainer2"]
+[node name="Fullscreen" type="Label" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
@@ -239,10 +248,18 @@ text = "Fullscreen"
 horizontal_alignment = 3
 vertical_alignment = 1
 
-[node name="FullscreenSwitch" type="CheckButton" parent="PhoneSize/Options/MarginContainer/VBoxContainer2/HBoxContainer2"]
+[node name="FullscreenSwitch" type="CheckButton" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 mouse_filter = 1
+theme = ExtResource("12_fsmwd")
 alignment = 2
+
+[node name="Quit" type="Button" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_mdga8")
+theme_override_font_sizes/font_size = 72
+text = "Turn off phone"
 
 [node name="Camera" type="Control" parent="PhoneSize"]
 visible = false
@@ -291,21 +308,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+theme = ExtResource("12_fsmwd")
 
 [node name="MarginContainer" type="MarginContainer" parent="PhoneSize/Chats"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 110.0
-offset_bottom = -146.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_mdga8")
+theme = ExtResource("12_fsmwd")
+theme_override_constants/margin_top = 128
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PhoneSize/Chats/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 32
+
+[node name="Chats" type="Label" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+theme_override_font_sizes/font_size = 48
+text = "Chats"
+label_settings = ExtResource("8_0yw4n")
+horizontal_alignment = 3
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
 
 [node name="Asuka" type="Button" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -341,11 +374,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 110.0
-offset_bottom = -146.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_mdga8")
+theme = ExtResource("12_fsmwd")
+theme_override_constants/margin_top = 128
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PhoneSize/AsukaChat/MarginContainer"]
 layout_mode = 2
@@ -357,6 +389,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = SubResource("Theme_mdga8")
 text = "Asuka chat"
+label_settings = ExtResource("8_0yw4n")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -432,12 +465,14 @@ label_settings = ExtResource("13_lgy4j")
 autowrap_mode = 3
 
 [node name="TopBar" type="Control" parent="PhoneSize"]
+custom_minimum_size = Vector2(0, 128)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 110.0
+offset_bottom = 106.0
 grow_horizontal = 2
 mouse_filter = 2
+theme = ExtResource("12_fsmwd")
 
 [node name="ColorRect" type="ColorRect" parent="PhoneSize/TopBar"]
 visible = false
@@ -452,28 +487,31 @@ color = Color(0, 0, 0, 0.478431)
 
 [node name="MarginContainer" type="MarginContainer" parent="PhoneSize/TopBar"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 111.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-theme = SubResource("Theme_mdga8")
+grow_vertical = 2
+theme = ExtResource("12_fsmwd")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/TopBar/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 0
+theme = ExtResource("12_fsmwd")
 
 [node name="Time" type="Label" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 1
 theme = SubResource("Theme_mdga8")
 text = "10:36"
 label_settings = ExtResource("14_n38hu")
+vertical_alignment = 1
 
 [node name="VSeparator2" type="VSeparator" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
+theme = ExtResource("12_fsmwd")
 theme_override_constants/separation = 12
-theme_override_styles/separator = ExtResource("8_y0en8")
 
 [node name="Notification" type="TextureRect" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
 visible = false
@@ -484,15 +522,16 @@ expand_mode = 3
 [node name="VSeparator" type="VSeparator" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
+theme = ExtResource("12_fsmwd")
 theme_override_constants/separation = 320
-theme_override_styles/separator = ExtResource("8_y0en8")
 
 [node name="BatteryBar" type="ProgressBar" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 1
-theme = SubResource("Theme_mdga8")
+theme = ExtResource("12_fsmwd")
 max_value = 30.0
 
 [node name="BatteryTimer" type="Timer" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar"]
@@ -511,7 +550,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -152.0
+offset_top = -163.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
@@ -536,7 +575,6 @@ theme = ExtResource("12_fsmwd")
 [node name="Back" type="Button" parent="PhoneSize/BottomBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 8
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 icon = ExtResource("15_0cf0y")
@@ -545,7 +583,6 @@ icon_alignment = 1
 [node name="Home" type="Button" parent="PhoneSize/BottomBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 8
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 icon = ExtResource("16_hax3j")
@@ -554,16 +591,15 @@ icon_alignment = 1
 [node name="Options" type="Button" parent="PhoneSize/BottomBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 8
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 icon = ExtResource("17_26q5e")
 icon_alignment = 1
 
-[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/HBoxContainer/Camera" to="." method="_on_camera_pressed"]
-[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/HBoxContainer/Chats" to="." method="_on_chats_pressed"]
-[connection signal="pressed" from="PhoneSize/Options/MarginContainer/VBoxContainer2/Quit" to="." method="_on_quit_pressed"]
-[connection signal="toggled" from="PhoneSize/Options/MarginContainer/VBoxContainer2/HBoxContainer2/FullscreenSwitch" to="." method="_on_fullscreen_toggled"]
+[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Camera" to="." method="_on_camera_pressed"]
+[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Chats" to="." method="_on_chats_pressed"]
+[connection signal="toggled" from="PhoneSize/Settings/MarginContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/FullscreenSwitch" to="." method="_on_fullscreen_toggled"]
+[connection signal="pressed" from="PhoneSize/Settings/MarginContainer/VBoxContainer2/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="PhoneSize/Chats/MarginContainer/VBoxContainer/Asuka" to="." method="_on_asuka_pressed"]
 [connection signal="pressed" from="PhoneSize/BottomBar/MarginContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="PhoneSize/BottomBar/MarginContainer/HBoxContainer/Home" to="." method="_on_home_pressed"]

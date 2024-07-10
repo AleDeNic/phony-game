@@ -3,7 +3,7 @@ extends Control
 @onready var top_bar: Control = $PhoneSize/TopBar
 @onready var bottom_bar: Control = $PhoneSize/BottomBar
 @onready var apps: Control = $PhoneSize/Apps
-@onready var options: Control = $PhoneSize/Options
+@onready var settings: Control = $PhoneSize/Settings
 @onready var camera: Control = $PhoneSize/Camera
 @onready var chats: Control = $PhoneSize/Chats
 @onready var asukachat: Control = $PhoneSize/AsukaChat
@@ -22,7 +22,7 @@ func _physics_process(_delta: float) -> void:
 	handle_battery()
 	if Input.is_action_just_pressed("ui_cancel"):
 		PlayerManager.set_player_focusing_in()
-		go_to_screen(options)
+		go_to_screen(settings)
 	#print_phone_state(phone_state)
 
 
@@ -47,7 +47,7 @@ func restore_phone_state():
 	match true:
 		apps.visible:
 			PhoneManager.set_phone_in_apps()
-		options.visible:
+		settings.visible:
 			PhoneManager.set_phone_in_options()
 		camera.visible:
 			PhoneManager.set_phone_in_camera()
@@ -70,7 +70,7 @@ func reset_screens() -> void:
 	top_bar.visible = true
 	bottom_bar.visible = false
 	apps.visible = false
-	options.visible = false
+	settings.visible = false
 	camera.visible = false
 	chats.visible = false
 	asukachat.visible = false
@@ -78,7 +78,7 @@ func reset_screens() -> void:
 
 # ----- SIGNALS -----
 func _on_options_pressed() -> void:
-	go_to_screen(options)
+	go_to_screen(settings)
 
 func _on_back_pressed() -> void:
 	if PhoneManager.is_phone_in_asukachat():

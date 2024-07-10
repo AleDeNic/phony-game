@@ -1,28 +1,77 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://v3wqj6dvklo0"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://v3wqj6dvklo0"]
 
 [ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="1_husnp"]
+[ext_resource type="Texture2D" uid="uid://mvnf1ybkdtub" path="res://assets/images/icons/empty.png" id="2_odldd"]
 [ext_resource type="FontFile" uid="uid://d02ygxi1jy6m3" path="res://ui/fonts/neuropol_x.otf" id="3_b1npm"]
 [ext_resource type="StyleBox" uid="uid://bkskyjp3vt3rs" path="res://ui/styles/bubble_chat.tres" id="3_legdh"]
 [ext_resource type="StyleBox" uid="uid://bdnuw0by175th" path="res://ui/styles/battery_bar.tres" id="4_j8c6n"]
 [ext_resource type="StyleBox" uid="uid://jgie8qpxs0gh" path="res://ui/styles/bubble_player.tres" id="4_syer0"]
 [ext_resource type="StyleBox" uid="uid://c4lw5oyyq5657" path="res://ui/styles/battery_bar_fill.tres" id="5_wcsjy"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d1qcl"]
+content_margin_left = 24.0
+content_margin_right = 24.0
+bg_color = Color(1, 1, 1, 0)
+draw_center = false
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n8he5"]
+content_margin_left = 24.0
+content_margin_right = 24.0
 bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c07qa"]
+content_margin_left = 24.0
+content_margin_right = 24.0
+bg_color = Color(1, 1, 1, 1)
 draw_center = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5svl"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b40ib"]
+content_margin_left = 24.0
+content_margin_right = 24.0
+bg_color = Color(1, 1, 1, 0.501961)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_32333"]
+color = Color(1, 1, 1, 1)
+thickness = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prsn3"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lhuxj"]
+bg_color = Color(1, 1, 1, 1)
+border_width_top = 42
+border_color = Color(1, 1, 1, 0.407843)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_v1ukr"]
+color = Color(1, 1, 1, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 0
 
 [resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(0, 0, 0, 1)
+Button/colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/icon_pressed_color = Color(0, 0, 0, 1)
 Button/constants/h_separation = 16
+Button/constants/icon_max_width = 156
 Button/font_sizes/font_size = 40
 Button/fonts/font = ExtResource("1_husnp")
+Button/styles/focus = SubResource("StyleBoxFlat_d1qcl")
 Button/styles/hover = SubResource("StyleBoxFlat_n8he5")
 Button/styles/normal = SubResource("StyleBoxFlat_c07qa")
+Button/styles/pressed = SubResource("StyleBoxFlat_b40ib")
 HBoxContainer/constants/separation = 0
+HSeparator/constants/separation = 24
+HSeparator/styles/separator = SubResource("StyleBoxLine_32333")
+HSlider/icons/grabber = ExtResource("2_odldd")
+HSlider/icons/grabber_disabled = ExtResource("2_odldd")
+HSlider/icons/grabber_highlight = ExtResource("2_odldd")
+HSlider/icons/tick = ExtResource("2_odldd")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_prsn3")
+HSlider/styles/slider = SubResource("StyleBoxFlat_lhuxj")
 Label/colors/font_color = Color(0.0992318, 0.0992318, 0.0992318, 1)
 Label/font_sizes/font_size = 36
 Label/fonts/font = ExtResource("1_husnp")
@@ -32,10 +81,10 @@ MarginContainer/constants/margin_bottom = 24
 MarginContainer/constants/margin_left = 24
 MarginContainer/constants/margin_right = 24
 MarginContainer/constants/margin_top = 24
-Panel/styles/panel = SubResource("StyleBoxFlat_j5svl")
 ProgressBar/colors/font_color = Color(0, 0, 0, 1)
 ProgressBar/font_sizes/font_size = 32
 ProgressBar/fonts/font = ExtResource("3_b1npm")
 ProgressBar/styles/background = ExtResource("4_j8c6n")
 ProgressBar/styles/fill = ExtResource("5_wcsjy")
 VBoxContainer/constants/separation = 16
+VSeparator/styles/separator = SubResource("StyleBoxLine_v1ukr")
