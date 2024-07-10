@@ -42,3 +42,7 @@ func get_eyes_attention() -> void:
 		eyes_sprite.frame = 1
 	elif PlayerManager.is_player_focusing_out():
 		eyes_sprite.frame = 0
+
+
+#func _on_asuka_exit_area_mouse_exited() -> void:
+	#print("exitttttt")

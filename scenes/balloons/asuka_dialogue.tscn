@@ -15,8 +15,13 @@ shader_parameter/blend_factor = 0.3
 shader_parameter/overlay = Vector3(0, 0, 0)
 shader_parameter/gray_color = 0.5
 
-[node name="AsukaDialogue" type="CanvasLayer"]
-layer = 100
+[node name="AsukaDialogue" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_brcee")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -27,6 +32,7 @@ texture = ExtResource("2_8t3wi")
 
 [node name="Blur" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_qeojn")
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -39,7 +45,7 @@ size_flags_vertical = 8
 [node name="Balloon" type="Control" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 270)
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0

@@ -1,4 +1,6 @@
-extends Node
+extends Control
+
+@onready var camera: Camera2D = get_node("/root/World/Player/Camera2D")
 
 ## The action to use for advancing the dialogue
 @export var next_action: StringName = &"ui_accept"
@@ -82,6 +84,10 @@ func _ready() -> void:
 	# If the responses menu doesn't have a next action set, use this one
 	if responses_menu.next_action.is_empty():
 		responses_menu.next_action = next_action
+
+
+func _physics_process(delta: float) -> void:
+	global_position = camera.global_position
 
 
 func _unhandled_input(_event: InputEvent) -> void:
