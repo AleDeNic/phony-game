@@ -1,28 +1,29 @@
 [gd_scene load_steps=9 format=3 uid="uid://dp6p4x8pg6o1h"]
 
-[ext_resource type="Script" path="res://scripts/balloons/default_balloon.gd" id="1_64vhc"]
-[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_ntthw"]
-[ext_resource type="Shader" path="res://shaders/blur_color_bw.gdshader" id="3_3ipfv"]
-[ext_resource type="Theme" uid="uid://b0uon3iawrhwg" path="res://ui/themes/asuka_dialogue.tres" id="4_m3m1v"]
-[ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="5_dy8pr"]
-[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="6_50din"]
-[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="7_it88u"]
+[ext_resource type="Script" path="res://scripts/balloons/default_balloon.gd" id="1_brcee"]
+[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_8t3wi"]
+[ext_resource type="Shader" path="res://shaders/blur_color_bw.gdshader" id="3_dy5pn"]
+[ext_resource type="Theme" uid="uid://b0uon3iawrhwg" path="res://ui/themes/asuka_dialogue.tres" id="4_stjmq"]
+[ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="5_8x763"]
+[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="6_8p3d1"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="7_yk3rh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qeojn"]
-shader = ExtResource("3_3ipfv")
+shader = ExtResource("3_dy5pn")
 shader_parameter/lod = 5.0
-shader_parameter/blending = Vector4(1, 1, 1, 1)
 shader_parameter/blend_factor = 0.3
+shader_parameter/overlay = Vector3(0, 0, 0)
+shader_parameter/gray_color = 0.5
 
-[node name="DefaultBalloon" type="CanvasLayer"]
+[node name="AsukaDialogue" type="CanvasLayer"]
 layer = 100
-script = ExtResource("1_64vhc")
+script = ExtResource("1_brcee")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(960, 540)
 scale = Vector2(0.444444, 0.5)
-texture = ExtResource("2_ntthw")
+texture = ExtResource("2_8t3wi")
 
 [node name="Blur" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_qeojn")
@@ -47,7 +48,7 @@ offset_top = -1080.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
-theme = ExtResource("4_m3m1v")
+theme = ExtResource("4_stjmq")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Balloon"]
 layout_mode = 1
@@ -60,59 +61,59 @@ offset_top = -270.0
 offset_right = 4.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("4_m3m1v")
+theme = ExtResource("4_stjmq")
 
 [node name="Dialogue" type="MarginContainer" parent="Balloon/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("4_m3m1v")
+theme = ExtResource("4_stjmq")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Balloon/HBoxContainer/Dialogue"]
 custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
-theme = ExtResource("4_m3m1v")
+theme = ExtResource("4_stjmq")
 
 [node name="CharacterLabel" type="RichTextLabel" parent="Balloon/HBoxContainer/Dialogue/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 1
-theme = ExtResource("4_m3m1v")
+theme = ExtResource("4_stjmq")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 0
-theme_override_fonts/normal_font = ExtResource("5_dy8pr")
+theme_override_fonts/normal_font = ExtResource("5_8x763")
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 text = "Character"
 fit_content = true
 scroll_active = false
 
-[node name="DialogueLabel" parent="Balloon/HBoxContainer/Dialogue/HBoxContainer" instance=ExtResource("6_50din")]
+[node name="DialogueLabel" parent="Balloon/HBoxContainer/Dialogue/HBoxContainer" instance=ExtResource("6_8p3d1")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("4_m3m1v")
+theme = ExtResource("4_stjmq")
 text = "Dialogue..."
 
 [node name="Responses" type="MarginContainer" parent="Balloon/HBoxContainer"]
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
-theme = ExtResource("4_m3m1v")
+theme = ExtResource("4_stjmq")
 
 [node name="ResponsesMenu" type="VBoxContainer" parent="Balloon/HBoxContainer/Responses" node_paths=PackedStringArray("response_template")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 2
-script = ExtResource("7_it88u")
+script = ExtResource("7_yk3rh")
 response_template = NodePath("ResponseExample")
 
 [node name="ResponseExample" type="Button" parent="Balloon/HBoxContainer/Responses/ResponsesMenu"]
 layout_mode = 2
 mouse_filter = 1
-theme = ExtResource("4_m3m1v")
+theme = ExtResource("4_stjmq")
 text = "Response example"
 alignment = 0
 expand_icon = true

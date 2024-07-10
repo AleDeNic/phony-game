@@ -1,21 +1,31 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://v3wqj6dvklo0"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://v3wqj6dvklo0"]
 
 [ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="1_husnp"]
-[ext_resource type="FontFile" uid="uid://d06s8b5831mca" path="res://ui/fonts/LibertinusMono-Regular.otf" id="2_ggun7"]
 [ext_resource type="FontFile" uid="uid://d02ygxi1jy6m3" path="res://ui/fonts/neuropol_x.otf" id="3_b1npm"]
 [ext_resource type="StyleBox" uid="uid://bkskyjp3vt3rs" path="res://ui/styles/bubble_chat.tres" id="3_legdh"]
 [ext_resource type="StyleBox" uid="uid://bdnuw0by175th" path="res://ui/styles/battery_bar.tres" id="4_j8c6n"]
 [ext_resource type="StyleBox" uid="uid://jgie8qpxs0gh" path="res://ui/styles/bubble_player.tres" id="4_syer0"]
 [ext_resource type="StyleBox" uid="uid://c4lw5oyyq5657" path="res://ui/styles/battery_bar_fill.tres" id="5_wcsjy"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n8he5"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c07qa"]
+draw_center = false
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5svl"]
 
 [resource]
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/constants/h_separation = 16
 Button/font_sizes/font_size = 40
 Button/fonts/font = ExtResource("1_husnp")
+Button/styles/hover = SubResource("StyleBoxFlat_n8he5")
+Button/styles/normal = SubResource("StyleBoxFlat_c07qa")
+HBoxContainer/constants/separation = 0
 Label/colors/font_color = Color(0.0992318, 0.0992318, 0.0992318, 1)
 Label/font_sizes/font_size = 36
-Label/fonts/font = ExtResource("2_ggun7")
+Label/fonts/font = ExtResource("1_husnp")
 Label/styles/bubble_chat = ExtResource("3_legdh")
 Label/styles/bubble_player = ExtResource("4_syer0")
 MarginContainer/constants/margin_bottom = 24

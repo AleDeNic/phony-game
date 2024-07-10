@@ -5,7 +5,9 @@ var current_dialogue_area: Area2D = null
 
 ### If you need to add a new balloon, copy the scene below. Remember that if you need
 ### to change the balloon's behaviour, you will need to create another script under scripts/balloons.
-@onready var default_balloon: String = "res://scenes/balloons/default_balloon.tscn"
+@onready var asuka_dialogue: String = "res://scenes/balloons/asuka_dialogue.tscn"
+@onready var window_monologue: String = "res://scenes/balloons/window_monologue.tscn"
+@onready var phone_chat: String = "res://scenes/balloons/phone_chat.tscn"
 # @onready var phone_balloon: String = "path/to/phone_balloon.tscn"
 
 # ----- INITIALIZATION AND PHYSICS -----

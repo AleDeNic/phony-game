@@ -21,7 +21,7 @@ func _on_area_entered(_area: Area2D) -> void:
 	player.focus_speed = player.focus_speed_asuka
 	PlayerManager.set_player_focusing_in()
 	camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
-	StoryManager.start_dialogue(StoryManager.default_balloon, dialogue_resource, dialogue_start, self)
+	StoryManager.start_dialogue(StoryManager.asuka_dialogue, dialogue_resource, dialogue_start, self)
 	get_eyes_attention()
 
 func _on_area_exited(_area: Area2D) -> void:
