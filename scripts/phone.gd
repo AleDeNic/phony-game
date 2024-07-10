@@ -57,6 +57,7 @@ func _on_phone_os_mouse_exited() -> void:
 		exit_phone()
 
 func enter_phone() -> void:
+	
 	player.target_position = Vector2(global_position)
 	player.focus_speed = player.focus_speed_phone
 	PlayerManager.set_player_focusing_in()

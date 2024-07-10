@@ -24,6 +24,6 @@ func _on_area_exited(_area: Area2D) -> void:
 	timer.stop()
 	
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-	if StoryManager.current_dialogue_area == self:
-		StoryManager.end_dialogue()
+	#if StoryManager.current_dialogue_area == self:
+		#StoryManager.end_dialogue()
 	PlayerManager.set_player_focusing_out()

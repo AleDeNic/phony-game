@@ -86,8 +86,9 @@ func _ready() -> void:
 		responses_menu.next_action = next_action
 
 
-func _physics_process(delta: float) -> void:
-	global_position = camera.global_position
+func _process(delta: float) -> void:
+	var offset: Vector2 = Vector2(30.0, 50.0)
+	global_position = global_position.lerp(camera.global_position, 0.1) + offset
 
 
 func _unhandled_input(_event: InputEvent) -> void:
