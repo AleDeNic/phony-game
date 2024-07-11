@@ -1,5 +1,7 @@
 extends Area2D
 
+signal rage
+
 @export var dialogue_resource: Resource = load("res://dialogues/asuka.dialogue")
 @export var dialogue_start: String = "asuka_intro"
 
@@ -12,6 +14,7 @@ extends Area2D
 # ----- INITIALIZATION AND PHYSICS -----
 
 func _ready() -> void:
+	connect("rage", BrainManager._on_asuka_timer_timeout)
 	eyes_sprite.frame = 0
 
 
@@ -42,6 +45,13 @@ func exit_asuka() -> void:
 	
 	#if StoryManager.current_dialogue_area == self:
 		#StoryManager.end_dialogue()
+
+
+# ----- SIGNALS -----
+
+func _on_asuka_timer_timeout() -> void:
+	emit_signal("rage")
+
 
 # ----- UTILS -----
 

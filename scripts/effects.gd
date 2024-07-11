@@ -48,17 +48,7 @@ func set_effects(lod_value: float, lod_speed: float) -> void:
 
 # ----- SIGNALS -----
 
-func _on_phone_timer_timeout() -> void:
-	if stress_level > 0:
-		stress_level -= PlayerManager.phone_stress_heal
 
-func _on_asuka_timer_timeout() -> void:
-	if stress_level < PlayerManager.max_stress:
-		stress_level += PlayerManager.asuka_stress_increase
-
-func _on_window_timer_timeout() -> void:
-	if stress_level < PlayerManager.max_stress:
-		stress_level += PlayerManager.window_stress_increase
 
 
 # ----- UTILS -----

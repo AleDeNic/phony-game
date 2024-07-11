@@ -61,7 +61,7 @@ sprite_frames = SubResource("SpriteFrames_yqvk5")
 
 [node name="AsukaTimer" type="Timer" parent="Asuka"]
 process_mode = 3
-wait_time = 0.1
+wait_time = 0.5
 
 [node name="AsukaEnterCollision" type="CollisionShape2D" parent="Asuka"]
 position = Vector2(2, -94)
@@ -96,7 +96,6 @@ collision_mask = 4
 script = ExtResource("7_lhypb")
 
 [node name="PhoneTimer" type="Timer" parent="Phone"]
-wait_time = 0.1
 
 [node name="PhoneSprite" type="Sprite2D" parent="Phone"]
 position = Vector2(126, 25)
@@ -121,9 +120,9 @@ unique_name_in_owner = true
 
 [connection signal="area_entered" from="Asuka" to="Asuka" method="_on_area_entered"]
 [connection signal="area_exited" from="Asuka" to="Asuka" method="_on_area_exited"]
-[connection signal="timeout" from="Asuka/AsukaTimer" to="Effects" method="_on_asuka_timer_timeout"]
+[connection signal="timeout" from="Asuka/AsukaTimer" to="Asuka" method="_on_asuka_timer_timeout"]
 [connection signal="area_entered" from="Window" to="Window" method="_on_area_entered"]
 [connection signal="area_exited" from="Window" to="Window" method="_on_area_exited"]
 [connection signal="area_entered" from="Phone" to="Phone" method="_on_area_entered"]
-[connection signal="timeout" from="Phone/PhoneTimer" to="Effects" method="_on_phone_timer_timeout"]
+[connection signal="timeout" from="Phone/PhoneTimer" to="Phone" method="_on_phone_timer_timeout"]
 [connection signal="mouse_exited" from="Phone/PhoneOS" to="Phone" method="_on_phone_os_mouse_exited"]
