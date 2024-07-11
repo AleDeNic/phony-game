@@ -10,6 +10,7 @@ extends Control
 @onready var battery_bar: ProgressBar = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar
 @onready var battery_timer: Timer = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar/BatteryTimer
 
+@export var max_battery: float = 100.0
 
 # ----- INITIALIZATION AND PHYSICS -----
 
@@ -29,8 +30,8 @@ func _physics_process(_delta: float) -> void:
 # ----- BATTERY -----
 
 func setup_battery() -> void:
-	battery_bar.max_value = PlayerManager.max_battery
-	battery_timer.wait_time = PlayerManager.max_battery
+	battery_bar.max_value = max_battery
+	battery_timer.wait_time = max_battery
 	battery_timer.start()
 	battery_timer.paused = true
 	handle_battery()

@@ -12,7 +12,7 @@ func handle_panic_filter() -> void:
 	if BrainManager.player_panic > BrainManager.panic_wait:
 		panic_blur_inner = map_range(BrainManager.player_panic, BrainManager.panic_wait, BrainManager.max_panic, blur_level, 0.0)
 		blur_vignette.set_shader_parameter("blur_inner", panic_blur_inner)
-		print(panic_blur_inner)
+		#print(panic_blur_inner)
 
 
 # ----- UTILS -----

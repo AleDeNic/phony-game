@@ -2,7 +2,7 @@ extends Node
 
 enum PlayerState { FREE, FOCUSING_ON_PHONE, FOCUSING_ON_ASUKA, FOCUSING_OUT, FOCUSED_PHONE, FOCUSED_ASUKA }
 
-@export var max_battery: float = 100.0
+
 @export var effects_increase_speed: float = 1.0
 
 @onready var player_state: PlayerState = PlayerState.FREE
