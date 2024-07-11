@@ -1,15 +1,15 @@
 extends CanvasLayer
 
-@onready var panic_filter: ShaderMaterial = $PanicCanvas/PanicFilter.material as ShaderMaterial
+@onready var blur_vignette: ShaderMaterial = $BlurVignette.material as ShaderMaterial
 
 func _physics_process(delta: float) -> void:
 	handle_panic_filter()
 
 func handle_panic_filter() -> void:
 	# effect increases with player panic
-	var panic_lod
-	panic_lod = map_range(BrainManager.player_panic, 0, 300, 0, 3)
-	panic_filter.set_shader_parameter("lod", panic_lod)
+	var panic_blur_inner
+	panic_blur_inner = map_range(BrainManager.player_panic, 0, 300, 0.6, 0.0)
+	blur_vignette.set_shader_parameter("blur_inner", panic_blur_inner)
 
 # ----- UTILS -----
 

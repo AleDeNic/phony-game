@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://mei3fh0wa3em"]
 
 [ext_resource type="Shader" path="res://shaders/blur_and_fisheye.gdshader" id="1_8svnj"]
-[ext_resource type="Script" path="res://scripts/phone_filters.gd" id="1_p1tst"]
+[ext_resource type="Script" path="res://scripts/phone_effects.gd" id="1_p1tst"]
 [ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_4jocn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nv2ku"]
@@ -9,7 +9,7 @@ shader = ExtResource("1_8svnj")
 shader_parameter/lod = 0.0
 shader_parameter/effect_amount = -0.15
 
-[node name="PhoneFilters" type="Control"]
+[node name="PhoneEffects" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
