@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cag4fc4uu0krp"]
+[gd_scene load_steps=6 format=3 uid="uid://cag4fc4uu0krp"]
 
 [ext_resource type="Script" path="res://scripts/managers/audio_manager.gd" id="1_2livu"]
+[ext_resource type="AudioStream" uid="uid://7lrjfg5nlukd" path="res://assets/sfx/phone_vibration.mp3" id="2_5e3yg"]
 [ext_resource type="AudioStream" uid="uid://ci0igyrcmtxbd" path="res://assets/music/soundtrack.mp3" id="2_jikh0"]
 [ext_resource type="AudioStream" uid="uid://bvk87o4ki14rk" path="res://assets/music/asuka.mp3" id="3_i7yuj"]
 [ext_resource type="AudioStream" uid="uid://bc6nj4ltkvjqr" path="res://assets/music/window.mp3" id="4_5yqum"]
@@ -13,6 +14,9 @@ script = ExtResource("1_2livu")
 [node name="1_01" type="AudioStreamPlayer2D" parent="Dialogues"]
 
 [node name="SFX" type="Node" parent="."]
+
+[node name="PhoneVibration" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("2_5e3yg")
 
 [node name="Music" type="Node" parent="."]
 

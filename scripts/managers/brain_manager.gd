@@ -9,6 +9,8 @@ extends Node
 @export var max_panic: int = 300
 @export var max_rage: int = 300
 
+@export var panic_wait: int = 100
+
 var player_panic: int = 0
 var asuka_rage: int = 0
 
