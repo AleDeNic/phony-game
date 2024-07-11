@@ -15,27 +15,28 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
-	if PlayerManager.is_player_focused_phone() == false and has_notification_arrived == false:
-		increase_probability()
+	if !PlayerManager.is_player_focused_phone() and not has_notification_arrived:
 		handle_notifications()
-	if PlayerManager.is_player_focused_phone() and has_notification_arrived == true:
+	if PlayerManager.is_player_focused_phone() and has_notification_arrived:
 		reset_notification()
 
 
 # ----- RANDOM NOTIFICATIONS -----
 
 func handle_notifications() -> void:
+	increase_probability()
+	
 	var random_number: float = rng.randf_range(0.0, 100.0)
 	if random_number <= probability:
 		phone_vibration.play()
 		probability = 0.001
 		has_notification_arrived = true
-		print("Notification arrived: ", random_number)
+		print("Random notification seed: ", random_number, " | Current probabilty: ", probability)
 
 func increase_probability() -> void:
 	probability += probability_increase
-	#print(probability)
+	# print("Probability increased by: ", probability_increase)
 
 func reset_notification() -> void:
 	has_notification_arrived = false
-	print("notification reset")
+	print("Notification::Reset::Relive")

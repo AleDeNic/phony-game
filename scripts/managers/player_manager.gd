@@ -2,12 +2,12 @@ extends Node
 
 enum PlayerState { FREE, FOCUSING_ON_PHONE, FOCUSING_ON_ASUKA, FOCUSING_OUT, FOCUSED_PHONE, FOCUSED_ASUKA }
 
-
 @export var effects_increase_speed: float = 1.0
 
 @onready var player_state: PlayerState = PlayerState.FREE
 
 # ----- INITIALIZATION AND PHYSICS -----
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 

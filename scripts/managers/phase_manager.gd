@@ -27,7 +27,7 @@ func get_phase_value():
 		Phase.END:
 			return "END"
 
-# TODO: Funny.
+# TODO: Funny. Very funny.
 func advance() -> void:
 	match phase_state:
 		Phase.SPLASH:
