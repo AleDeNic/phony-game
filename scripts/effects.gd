@@ -1,10 +1,9 @@
 extends Control
 
-@onready var stress_filter: ColorRect = $StressFilter
+@onready var panic_filter: ShaderMaterial = $PanicCanvas/PanicFilter.material as ShaderMaterial
 @onready var blur_fisheye: ShaderMaterial = $BlurFisheye.material as ShaderMaterial
 @onready var blue_filter: ColorRect = $BlueFilter
 
-var stress_level: float = 0.0
 var target_lod: float = 3.5
 var current_lod: float = 0.0
 var current_lod_speed: float = 0.0
@@ -38,6 +37,11 @@ func _physics_process(delta: float) -> void:
 		else:
 			new_lod = target_lod
 
+	# effect increases with player panic
+	var panic_lod
+	panic_lod = map_range(BrainManager.player_panic, 0, 300, 0, 3)
+	panic_filter.set_shader_parameter("lod", panic_lod)
+
 
 # ----- EFFECTS -----
 
@@ -45,10 +49,6 @@ func set_effects(lod_value: float, lod_speed: float) -> void:
 	if target_lod != lod_value:
 		target_lod = lod_value
 		current_lod_speed = lod_speed
-
-# ----- SIGNALS -----
-
-
 
 
 # ----- UTILS -----
