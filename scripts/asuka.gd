@@ -7,6 +7,7 @@ extends Area2D
 @onready var eyes_sprite: AnimatedSprite2D = $EyesSprite
 @onready var player: CharacterBody2D = %Player
 
+var is_dialogue_started: bool = false
 
 # ----- INITIALIZATION AND PHYSICS -----
 
@@ -24,16 +25,15 @@ func enter_asuka() -> void:
 	player.set_focus_target(global_position, player.focus_speed_asuka)
 	PlayerManager.set_player_focusing_on_asuka()
 	camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
-	StoryManager.start_dialogue(StoryManager.asuka_dialogue, dialogue_resource, dialogue_start, self)
 	get_eyes_attention()
+	if !is_dialogue_started:
+		StoryManager.start_dialogue(StoryManager.asuka_dialogue, dialogue_resource, dialogue_start, self)
+		is_dialogue_started = true
 
 func exit_asuka() -> void:
 	PlayerManager.set_player_focusing_out()
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 	get_eyes_attention()
-	
-	#if StoryManager.current_dialogue_area == self:
-		#StoryManager.end_dialogue()
 
 
 # ----- UTILS -----

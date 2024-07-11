@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+@onready var asuka: Area2D = get_node("/root/World/Asuka")
+
 ## The action to use for advancing the dialogue
 @export var next_action: StringName = &"ui_accept"
 
@@ -151,3 +153,8 @@ func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 
 
 #endregion
+
+
+func _on_balloon_mouse_exited() -> void:
+	if PlayerManager.is_player_focused_asuka():
+		asuka.exit_asuka()
