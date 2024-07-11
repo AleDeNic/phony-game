@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://djenfep7ipolx"]
+[gd_scene load_steps=6 format=3 uid="uid://djenfep7ipolx"]
 
 [ext_resource type="Script" path="res://scripts/balloons/dialogue_balloon.gd" id="1_cwkdr"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="3_72ixx"]
+[ext_resource type="FontFile" uid="uid://d02ygxi1jy6m3" path="res://ui/fonts/neuropol_x.otf" id="3_ciqv1"]
 [ext_resource type="Theme" uid="uid://b0uon3iawrhwg" path="res://ui/themes/asuka_dialogue.tres" id="4_3onkd"]
 
 [node name="DialogueBalloon" type="CanvasLayer"]
+follow_viewport_enabled = true
 script = ExtResource("1_cwkdr")
 
 [node name="Balloon" type="Control" parent="."]
@@ -14,10 +16,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 320.0
-offset_top = 725.0
-offset_right = -291.0
-offset_bottom = -129.0
+offset_left = 137.0
+offset_top = 526.0
+offset_right = -191.0
+offset_bottom = -108.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -38,6 +40,7 @@ theme = ExtResource("4_3onkd")
 
 [node name="Panel" type="Panel" parent="Balloon/MarginContainer/HBoxContainer"]
 clip_children = 2
+custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
@@ -62,6 +65,7 @@ modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("4_3onkd")
+theme_override_fonts/normal_font = ExtResource("3_ciqv1")
 bbcode_enabled = true
 text = "Character"
 fit_content = true
@@ -82,7 +86,7 @@ theme = ExtResource("4_3onkd")
 [node name="ResponsesMenu" type="VBoxContainer" parent="Balloon/MarginContainer/HBoxContainer/Responses" node_paths=PackedStringArray("response_template")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 4
 theme = ExtResource("4_3onkd")
 theme_override_constants/separation = 2
 script = ExtResource("3_72ixx")
@@ -93,6 +97,7 @@ layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("4_3onkd")
 text = "Response example"
+alignment = 0
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
 [connection signal="mouse_exited" from="Balloon" to="." method="_on_balloon_mouse_exited"]

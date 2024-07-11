@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @onready var asuka: Area2D = get_node("/root/World/Asuka")
+@onready var player: CharacterBody2D = get_node("/root/World/Player")
 
 ## The action to use for advancing the dialogue
 @export var next_action: StringName = &"ui_accept"
@@ -76,14 +77,25 @@ var dialogue_line: DialogueLine:
 	get:
 		return dialogue_line
 
+var balloon_position: Vector2
 
 func _ready() -> void:
 	balloon.hide()
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
+	#balloon.global_position.x = asuka.global_position.x - balloon.size.x / 2
+	#balloon.global_position.y = asuka.global_position.y - balloon.size.y
 
 	# If the responses menu doesn't have a next action set, use this one
 	if responses_menu.next_action.is_empty():
 		responses_menu.next_action = next_action
+
+
+func _physics_process(_delta: float) -> void:
+	handle_balloon_movement()
+
+func handle_balloon_movement() -> void:
+	var offset_position = Vector2(player.global_position.x - balloon.size.x / 2, player.global_position.y)
+	balloon.global_position = balloon.global_position.lerp(offset_position, 0.1)
 
 
 func _unhandled_input(_event: InputEvent) -> void:
