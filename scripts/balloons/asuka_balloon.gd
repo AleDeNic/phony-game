@@ -87,7 +87,7 @@ func _ready() -> void:
 		responses_menu.next_action = next_action
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	handle_balloon_movement()
 
 func handle_balloon_movement() -> void:
@@ -97,24 +97,6 @@ func handle_balloon_movement() -> void:
 			#global_position = global_position.lerp(camera.global_position, 0.1) + offset
 			var mouse_pos = get_global_mouse_position()
 			global_position = global_position.lerp(mouse_pos, 0.1) + offset
-		PlayerManager.PlayerState.FOCUSED_PHONE:
-			dialogue_label.release_focus()
-			character_label.release_focus()
-			responses_menu.release_focus()
-			balloon.release_focus()
-			release_focus()
-			balloon.focus_mode = Control.FOCUS_NONE
-			focus_mode = Control.FOCUS_NONE
-			dialogue_label.focus_mode = Control.FOCUS_NONE
-			character_label.focus_mode = Control.FOCUS_NONE
-			responses_menu.focus_mode = Control.FOCUS_NONE
-			mouse_filter = Control.MOUSE_FILTER_PASS
-			dialogue_label.mouse_filter = Control.MOUSE_FILTER_PASS
-			character_label.mouse_filter = Control.MOUSE_FILTER_PASS
-			responses_menu.mouse_filter = Control.MOUSE_FILTER_PASS
-			balloon.mouse_filter = Control.MOUSE_FILTER_PASS
-		PlayerManager.PlayerState.FOCUSED_ASUKA:
-			pass
 
 
 func _unhandled_input(_event: InputEvent) -> void:

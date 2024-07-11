@@ -33,24 +33,24 @@ func _physics_process(delta: float) -> void:
 
 # ----- INCREASE PANIC AND RAGE -----
 
-func increase_player_panic(delta) -> void:
+func increase_player_panic(_delta) -> void:
 	if player_panic < max_panic:
 		player_panic += panic_increase
 
-func increase_asuka_rage(delta) -> void:
+func increase_asuka_rage(_delta) -> void:
 	if asuka_rage < max_rage:
 		asuka_rage += rage_increase
 
 
 # ----- RESET -----
 
-func reset_player_panic(delta) -> void:
+func reset_player_panic(_delta) -> void:
 	if player_panic > panic_decrease:
 		player_panic -= panic_decrease
 	else:
 		player_panic = 0
 
-func reset_asuka_rage(delta) -> void:
+func reset_asuka_rage(_delta) -> void:
 	if asuka_rage > rage_decrease:
 		asuka_rage -= rage_decrease
 	else:

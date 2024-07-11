@@ -5,7 +5,7 @@ extends CanvasLayer
 @export var blur_level: float = 0.6
 var panic_blur_inner: float = blur_level
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	handle_panic_filter()
 
 func handle_panic_filter() -> void:

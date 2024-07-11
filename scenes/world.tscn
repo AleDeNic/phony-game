@@ -85,36 +85,39 @@ offset_right = 5392.0
 offset_bottom = 2986.0
 mouse_filter = 1
 
-[node name="Phone" type="Area2D" parent="."]
+[node name="Player" parent="." instance=ExtResource("9_o22lg")]
+unique_name_in_owner = true
+
+[node name="PhoneCanvas" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Phone" type="Area2D" parent="PhoneCanvas"]
 z_index = 2
 position = Vector2(0, 1250)
 collision_mask = 4
 script = ExtResource("7_lhypb")
 
-[node name="PhoneSprite" type="Sprite2D" parent="Phone"]
+[node name="PhoneSprite" type="Sprite2D" parent="PhoneCanvas/Phone"]
 position = Vector2(126, 25)
 rotation = -0.0730508
 scale = Vector2(0.755, 0.755)
 texture = ExtResource("3_sup45")
 
-[node name="PhoneOS" parent="Phone" instance=ExtResource("7_g2i3f")]
+[node name="PhoneOS" parent="PhoneCanvas/Phone" instance=ExtResource("7_g2i3f")]
 offset_left = -334.0
 offset_top = -364.0
 offset_right = 1266.0
 offset_bottom = 1236.0
 scale = Vector2(0.419138, 0.419138)
 
-[node name="PhoneCollision" type="CollisionShape2D" parent="Phone"]
+[node name="PhoneCollision" type="CollisionShape2D" parent="PhoneCanvas/Phone"]
 position = Vector2(0, -2)
 scale = Vector2(37.2402, 33.1369)
 shape = SubResource("RectangleShape2D_qisob")
-
-[node name="Player" parent="." instance=ExtResource("9_o22lg")]
-unique_name_in_owner = true
 
 [connection signal="area_entered" from="Asuka" to="Asuka" method="_on_area_entered"]
 [connection signal="area_exited" from="Asuka" to="Asuka" method="_on_area_exited"]
 [connection signal="area_entered" from="Window" to="Window" method="_on_area_entered"]
 [connection signal="area_exited" from="Window" to="Window" method="_on_area_exited"]
-[connection signal="area_entered" from="Phone" to="Phone" method="_on_area_entered"]
-[connection signal="mouse_exited" from="Phone/PhoneOS" to="Phone" method="_on_phone_os_mouse_exited"]
+[connection signal="area_entered" from="PhoneCanvas/Phone" to="PhoneCanvas/Phone" method="_on_area_entered"]
+[connection signal="mouse_exited" from="PhoneCanvas/Phone/PhoneOS" to="PhoneCanvas/Phone" method="_on_phone_os_mouse_exited"]

@@ -41,5 +41,5 @@ func _physics_process(delta) -> void:
 	position = original_position + current_swing_offset
 
 # Function to generate random float between min and max
-func rand_range(min, max):
-	return randf() * (max - min) + min
+func rand_range(min_value, max_value):
+	return randf() * (max_value - min_value) + min_value

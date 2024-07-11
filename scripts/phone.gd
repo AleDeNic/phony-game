@@ -1,7 +1,7 @@
 extends Area2D
 
-@onready var phone_effects: Control = $"../PhoneEffects"
-@onready var camera: Camera2D = $"../Player/Camera2D"
+@onready var phone_effects: Control = get_node("/root/World/PhoneEffects")
+@onready var camera: Camera2D = get_node("/root/World/Player/Camera2D")
 @onready var player: CharacterBody2D = %Player
 @onready var phone_os: Control = $PhoneOS
 
@@ -57,7 +57,6 @@ func _on_phone_os_mouse_exited() -> void:
 func enter_phone() -> void:
 	player.set_focus_target(global_position, player.focus_speed_phone)
 	PlayerManager.set_player_focusing_on_phone()
-	phone_os.grab_focus()
 	# TODO: Change this change this change this change this change this change this change this change this change this change this change this change this 
 	phone_os.restore_phone_state()
 	camera.set_camera_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)

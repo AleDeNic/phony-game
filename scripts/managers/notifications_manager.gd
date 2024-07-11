@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var phone_vibration: AudioStreamPlayer2D = get_node("/root/World/AudioManager/SFX/PhoneVibration")
-@onready var phone_os: Control = get_node("/root/World/Phone/PhoneOS")
+@onready var phone_os: Control = get_node("/root/World/PhoneCanvas/Phone/PhoneOS")
 
 var rng = RandomNumberGenerator.new()
 var probability: float = 0.01
@@ -14,7 +14,7 @@ var has_notification_arrived: bool = false
 func _ready() -> void:
 	pass
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if !PlayerManager.is_player_focused_phone() and not has_notification_arrived:
 		handle_notifications()
 	if PlayerManager.is_player_focused_phone() and has_notification_arrived:
