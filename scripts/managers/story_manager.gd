@@ -10,6 +10,8 @@ var current_dialogue_area: Area2D = null
 @onready var phone_chat: String = "res://scenes/balloons/phone_chat.tscn"
 # @onready var phone_balloon: String = "path/to/phone_balloon.tscn"
 
+@onready var asuka: Area2D = get_node("/root/World/Asuka")
+
 # ----- INITIALIZATION AND PHYSICS -----
 
 func _ready() -> void:
@@ -31,7 +33,7 @@ func end_dialogue() -> void:
 	active_balloon = null
 	current_dialogue_area = null
 	
-	PlayerManager.set_player_free()
+	asuka.exit_asuka()
 
 func pause_dialogue() -> void:
 	if active_balloon and is_instance_valid(active_balloon):

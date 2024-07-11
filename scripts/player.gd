@@ -6,8 +6,9 @@ extends CharacterBody2D
 @export var transition_speed: float = 10.0
 @export var focus_speed_phone: float = 400.0
 @export var focus_speed_asuka: float = 600.0
-@export var exit_speed: float = 30.0
 @export var dead_zone_radius: float = 1.0
+@onready var camera: Camera2D = $"../Player/Camera2D"
+
 
 var current_speed: float
 var target_speed: float
@@ -26,15 +27,16 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	check_viewport()
+	print(current_speed)
 
 	match PlayerManager.get_player_state():
 		PlayerManager.PlayerState.FREE:
 			handle_free_movement(delta)
-		PlayerManager.PlayerState.FOCUSING_IN:
+		PlayerManager.PlayerState.FOCUSING_IN, PlayerManager.PlayerState.FOCUSING_IN_ASUKA:
 			focus_in(delta)
 		PlayerManager.PlayerState.FOCUSING_OUT:
 			focus_out(delta)
-		PlayerManager.PlayerState.FOCUSED:
+		PlayerManager.PlayerState.FOCUSED, PlayerManager.PlayerState.FOCUSED_ASUKA:
 			target_speed = 0.0
 
 
@@ -53,15 +55,19 @@ func focus_in(delta: float) -> void:
 		move_player(delta, movement_vector)
 	else:
 		current_speed = 0.0
-		PlayerManager.set_player_focused()
+		if PlayerManager.is_player_focusing_in():
+			PlayerManager.set_player_focused()
+		elif PlayerManager.is_player_focusing_in_asuka():
+			PlayerManager.set_player_focused_asuka()
 
 func focus_out(delta: float) -> void:
+	# to fix the high initial movement vector when you exit the dialogue
 	var movement_vector: Vector2 = get_movement_input()
-	current_speed = exit_speed
 	target_speed = default_speed
-	reset_mouse_to_center()
 	move_player(delta, movement_vector)
-
+	reset_mouse_to_center()
+	if !camera.is_zooming:
+		PlayerManager.set_player_free()
 
 func move_player(delta: float, movement_vector: Vector2) -> void:
 	current_speed = lerp(current_speed, target_speed, delta * transition_speed)

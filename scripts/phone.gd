@@ -43,13 +43,12 @@ func _physics_process(delta: float) -> void:
 	if PlayerManager.is_player_focusing():
 		update_scale(delta)
 		update_rotation(delta)
-		update_player_state()
 
 
 # --------- PHONE INTERACTIONS -----------
 
 func _on_area_entered(_area: Area2D) -> void:
-	if PlayerManager.is_player_free():
+	if PlayerManager.is_player_free() or PlayerManager.is_player_focusing_out():
 		enter_phone()
 
 func _on_phone_os_mouse_exited() -> void:
@@ -57,7 +56,6 @@ func _on_phone_os_mouse_exited() -> void:
 		exit_phone()
 
 func enter_phone() -> void:
-	
 	player.target_position = Vector2(global_position)
 	player.focus_speed = player.focus_speed_phone
 	PlayerManager.set_player_focusing_in()
@@ -112,11 +110,3 @@ func update_rotation(delta: float) -> void:
 		var new_rotation = rotation_degrees + sign(rotation_difference) * rotation_step
 		new_rotation = clamp(new_rotation, min_rotation, max_rotation)
 		rotation_degrees = new_rotation
-
-
-# ----- STATE MANAGEMENT -----
-
-func update_player_state() -> void:
-	if abs(scale.x - target_scale.x) < 0.1:
-		if PlayerManager.is_player_focusing_out():
-			PlayerManager.set_player_free()

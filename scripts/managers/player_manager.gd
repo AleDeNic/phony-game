@@ -1,6 +1,6 @@
 extends Node
 
-enum PlayerState { FREE, FOCUSING_IN, FOCUSING_OUT, FOCUSED }
+enum PlayerState { FREE, FOCUSING_IN, FOCUSING_IN_ASUKA, FOCUSING_OUT, FOCUSED, FOCUSED_ASUKA }
 
 @export var max_battery: float = 100.0
 @export var max_stress: float = 100.0
@@ -29,12 +29,20 @@ func set_player_focusing_in() -> void:
 	set_player_state(PlayerState.FOCUSING_IN)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
+func set_player_focusing_in_asuka() -> void:
+	set_player_state(PlayerState.FOCUSING_IN_ASUKA)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
 func set_player_focusing_out() -> void:
 	set_player_state(PlayerState.FOCUSING_OUT)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 func set_player_focused() -> void:
 	set_player_state(PlayerState.FOCUSED)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func set_player_focused_asuka() -> void:
+	set_player_state(PlayerState.FOCUSED_ASUKA)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 # ----- STATE GETTERS -----
@@ -48,10 +56,14 @@ func get_player_state_value():
 			return "FREE"
 		PlayerState.FOCUSING_IN:
 			return "FOCUSING_IN"
+		PlayerState.FOCUSING_IN_ASUKA:
+			return "FOCUSING_IN_ASUKA"
 		PlayerState.FOCUSING_OUT:
 			return "FOCUSING_OUT"
 		PlayerState.FOCUSED:
 			return "FOCUSED"
+		PlayerState.FOCUSED_ASUKA:
+			return "FOCUSED_ASUKA"
 
 func is_player_free() -> bool:
 	return player_state == PlayerState.FREE
@@ -59,11 +71,17 @@ func is_player_free() -> bool:
 func is_player_focusing_in() -> bool:
 	return player_state == PlayerState.FOCUSING_IN
 
+func is_player_focusing_in_asuka() -> bool:
+	return player_state == PlayerState.FOCUSING_IN_ASUKA
+
 func is_player_focusing_out() -> bool:
 	return player_state == PlayerState.FOCUSING_OUT
 
 func is_player_focusing() -> bool:
-	return player_state in [PlayerState.FOCUSING_IN, PlayerState.FOCUSING_OUT]
+	return player_state in [PlayerState.FOCUSING_IN, PlayerState.FOCUSING_IN_ASUKA, PlayerState.FOCUSING_OUT]
 
 func is_player_focused() -> bool:
 	return player_state == PlayerState.FOCUSED
+
+func is_player_focused_asuka() -> bool:
+	return player_state == PlayerState.FOCUSED_ASUKA

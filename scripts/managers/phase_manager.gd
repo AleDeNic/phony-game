@@ -5,7 +5,7 @@ enum Phase { SPLASH, PROLOGUE, MIDDLE, END, CREDITS }
 @onready var phase_state: Phase = Phase.PROLOGUE
 
 # ----- INITIALIZATION AND PHYSICS -----
-# ...
+
 
 # ----- HANDLING PHASE -----
 
