@@ -89,6 +89,7 @@ mouse_filter = 1
 unique_name_in_owner = true
 
 [node name="PhoneCanvas" type="CanvasLayer" parent="."]
+layer = 3
 follow_viewport_enabled = true
 
 [node name="Phone" type="Area2D" parent="PhoneCanvas"]
