@@ -73,7 +73,7 @@ script = ExtResource("5_p0u8t")
 scale = Vector2(47.685, 47.685)
 shape = SubResource("CircleShape2D_klsqp")
 
-[node name="Effects" parent="." instance=ExtResource("1_u37f0")]
+[node name="PhoneFilters" parent="." instance=ExtResource("1_u37f0")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

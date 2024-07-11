@@ -32,4 +32,4 @@ input_pickable = false
 [node name="TriggerCollision" type="CollisionShape2D" parent="Trigger"]
 shape = SubResource("CircleShape2D_h1w0k")
 
-[node name="Vignette" parent="." instance=ExtResource("3_b3e3x")]
+[node name="PlayerEffects" parent="." instance=ExtResource("3_b3e3x")]

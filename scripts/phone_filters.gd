@@ -1,6 +1,5 @@
 extends Control
 
-@onready var panic_filter: ShaderMaterial = $PanicCanvas/PanicFilter.material as ShaderMaterial
 @onready var blur_fisheye: ShaderMaterial = $BlurFisheye.material as ShaderMaterial
 @onready var blue_filter: ColorRect = $BlueFilter
 
@@ -20,12 +19,15 @@ const MAX_LOD: float = 3.5
 func _ready() -> void:
 	if not PlayerManager.is_node_ready():
 		await PlayerManager.ready
-	
-	current_lod_speed = PlayerManager.effects_increase_speed
-	current_lod = blur_fisheye.get_shader_parameter("lod")
-	target_lod = MIN_LOD
+	setup_phone_filters()
 
 func _physics_process(delta: float) -> void:
+	handle_phone_filters(delta)
+
+
+# ----- EFFECTS -----
+
+func handle_phone_filters(delta: float) -> void:
 	if PlayerManager.is_player_focusing():
 		var new_lod = lerp(current_lod, target_lod, current_lod_speed * delta)
 		if abs(new_lod - current_lod) > 0.001:
@@ -37,19 +39,15 @@ func _physics_process(delta: float) -> void:
 		else:
 			new_lod = target_lod
 
-	# effect increases with player panic
-	var panic_lod
-	panic_lod = map_range(BrainManager.player_panic, 0, 300, 0, 3)
-	panic_filter.set_shader_parameter("lod", panic_lod)
-
-
-# ----- EFFECTS -----
+func setup_phone_filters() -> void:
+	current_lod_speed = PlayerManager.effects_increase_speed
+	current_lod = blur_fisheye.get_shader_parameter("lod")
+	target_lod = MIN_LOD
 
 func set_effects(lod_value: float, lod_speed: float) -> void:
 	if target_lod != lod_value:
 		target_lod = lod_value
 		current_lod_speed = lod_speed
-
 
 # ----- UTILS -----
 

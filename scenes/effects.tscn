@@ -1,20 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://mei3fh0wa3em"]
+[gd_scene load_steps=5 format=3 uid="uid://mei3fh0wa3em"]
 
 [ext_resource type="Shader" path="res://shaders/blur_and_fisheye.gdshader" id="1_8svnj"]
-[ext_resource type="Script" path="res://scripts/effects.gd" id="1_jx2xl"]
+[ext_resource type="Script" path="res://scripts/phone_filters.gd" id="1_p1tst"]
 [ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_4jocn"]
-[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="3_o1tey"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nv2ku"]
 shader = ExtResource("1_8svnj")
 shader_parameter/lod = 0.0
 shader_parameter/effect_amount = -0.15
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o3ptg"]
-shader = ExtResource("3_o1tey")
-shader_parameter/lod = 3.032
-
-[node name="Effects" type="Control"]
+[node name="PhoneFilters" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +18,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 mouse_filter = 2
-script = ExtResource("1_jx2xl")
+script = ExtResource("1_p1tst")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -45,17 +40,6 @@ color = Color(0, 2.69532e-06, 0.941457, 0.592157)
 [node name="BlurFisheye" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_nv2ku")
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="PanicCanvas" type="CanvasLayer" parent="."]
-
-[node name="PanicFilter" type="ColorRect" parent="PanicCanvas"]
-material = SubResource("ShaderMaterial_o3ptg")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
