@@ -1,8 +1,5 @@
 extends Area2D
 
-signal panic_increase
-
-@onready var timer: Timer = $PhoneTimer
 @onready var effects: Control = $"../Effects"
 @onready var camera: Camera2D = $"../Player/Camera2D"
 @onready var player: CharacterBody2D = %Player
@@ -36,9 +33,7 @@ var target_rotation: float = min_rotation
 
 # ----- INITIALIZATION AND PHYSICS -----
 
-func _ready() -> void:
-	connect("panic_increase", BrainManager._on_phone_timer_timeout)
-	
+func _ready() -> void:	
 	current_scale_speed = scale_up_speed
 	current_rotation_speed = rotation_up_speed
 	rotation_degrees = min_rotation
@@ -62,10 +57,9 @@ func _on_phone_os_mouse_exited() -> void:
 func enter_phone() -> void:
 	player.target_position = Vector2(global_position)
 	player.focus_speed = player.focus_speed_phone
-	PlayerManager.set_player_focusing_in()
+	PlayerManager.set_player_focusing_on_phone()
 	# TODO: Change this change this change this change this change this change this change this change this change this change this change this change this 
 	phone_os.restore_phone_state()
-	timer.start()
 	
 	camera.set_camera_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
 	
@@ -77,7 +71,6 @@ func enter_phone() -> void:
 func exit_phone() -> void:
 	PlayerManager.set_player_focusing_out()
 	PhoneManager.set_phone_off()
-	timer.stop()
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 	set_phone_scale(min_scale, scale_down_speed)
 	set_phone_rotation(min_rotation, rotation_down_speed)
@@ -86,8 +79,8 @@ func exit_phone() -> void:
 
 # ----- SIGNALS -----
 
-func _on_phone_timer_timeout() -> void:
-	emit_signal("panic_increase")
+#func _on_phone_timer_timeout() -> void:
+	#emit_signal("panic_increase")
 
 # ----- SET ANIMATIONS -----
 

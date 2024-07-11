@@ -4,7 +4,6 @@ extends Area2D
 @export var dialogue_start: String = "window_intro"
 
 @onready var camera: Camera2D = $"../Player/Camera2D"
-@onready var player: CharacterBody2D = %Player
 
 # ----- INITIALIZATION AND PHYSICS -----
 # ...

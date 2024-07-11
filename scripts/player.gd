@@ -32,11 +32,11 @@ func _physics_process(delta: float) -> void:
 	match PlayerManager.get_player_state():
 		PlayerManager.PlayerState.FREE:
 			handle_free_movement(delta)
-		PlayerManager.PlayerState.FOCUSING_IN, PlayerManager.PlayerState.FOCUSING_IN_ASUKA:
+		PlayerManager.PlayerState.FOCUSING_ON_PHONE, PlayerManager.PlayerState.FOCUSING_ON_ASUKA:
 			focus_in(delta)
 		PlayerManager.PlayerState.FOCUSING_OUT:
 			focus_out(delta)
-		PlayerManager.PlayerState.FOCUSED, PlayerManager.PlayerState.FOCUSED_ASUKA:
+		PlayerManager.PlayerState.FOCUSED_PHONE, PlayerManager.PlayerState.FOCUSED_ASUKA:
 			target_speed = 0.0
 
 
@@ -55,9 +55,9 @@ func focus_in(delta: float) -> void:
 		move_player(delta, movement_vector)
 	else:
 		current_speed = 0.0
-		if PlayerManager.is_player_focusing_in():
-			PlayerManager.set_player_focused()
-		elif PlayerManager.is_player_focusing_in_asuka():
+		if PlayerManager.is_player_focusing_on_phone():
+			PlayerManager.set_player_focused_phone()
+		elif PlayerManager.is_player_focusing_on_asuka():
 			PlayerManager.set_player_focused_asuka()
 
 func focus_out(delta: float) -> void:

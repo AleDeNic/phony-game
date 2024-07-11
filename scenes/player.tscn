@@ -15,6 +15,11 @@ collision_layer = 4
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_hwf0t")
+default_speed = null
+transition_speed = null
+focus_speed_phone = null
+focus_speed_asuka = null
+dead_zone_radius = null
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xpx4y")
