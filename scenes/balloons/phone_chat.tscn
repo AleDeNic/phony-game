@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bka81bhorumlj"]
 
-[ext_resource type="Script" path="res://scripts/balloons/default_balloon.gd" id="1_arlhk"]
+[ext_resource type="Script" path="res://scripts/balloons/asuka_balloon.gd" id="1_arlhk"]
 [ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_lyuf5"]
 [ext_resource type="Shader" path="res://shaders/blur_color_bw.gdshader" id="3_ps8e3"]
 [ext_resource type="Theme" uid="uid://b0uon3iawrhwg" path="res://ui/themes/asuka_dialogue.tres" id="4_82y0x"]

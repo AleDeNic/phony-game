@@ -17,6 +17,7 @@ extends Control
 func _ready() -> void:
 	setup_battery()
 	reset_screens()
+	grab_focus()
 	apps.visible = true
 
 func _physics_process(_delta: float) -> void:

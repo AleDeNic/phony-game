@@ -20,13 +20,8 @@ func _on_area_entered(_area: Area2D) -> void:
 	if PlayerManager.is_player_free() or PlayerManager.is_player_focusing_out():
 		enter_asuka()
 
-#func _on_area_exited(_area: Area2D) -> void:
-	#if !PlayerManager.is_player_free():
-		#exit_asuka()
-
 func enter_asuka() -> void:
-	player.target_position = Vector2(global_position)
-	player.focus_speed = player.focus_speed_asuka
+	player.set_focus_target(global_position, player.focus_speed_asuka)
 	PlayerManager.set_player_focusing_on_asuka()
 	camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
 	StoryManager.start_dialogue(StoryManager.asuka_dialogue, dialogue_resource, dialogue_start, self)

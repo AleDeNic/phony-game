@@ -74,6 +74,9 @@ func move_player(delta: float, movement_vector: Vector2) -> void:
 	velocity = movement_vector * current_speed
 	move_and_slide()
 
+func set_focus_target(target_global_position, speed) -> void:
+	target_position = Vector2(target_global_position)
+	focus_speed = speed
 
 # ----- INPUT & MOUSE-----
 

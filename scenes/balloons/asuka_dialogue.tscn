@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dp6p4x8pg6o1h"]
+[gd_scene load_steps=8 format=3 uid="uid://dp6p4x8pg6o1h"]
 
-[ext_resource type="Script" path="res://scripts/balloons/default_balloon.gd" id="1_brcee"]
-[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_8t3wi"]
+[ext_resource type="Script" path="res://scripts/balloons/asuka_balloon.gd" id="1_brcee"]
 [ext_resource type="Shader" path="res://shaders/blur_color_bw.gdshader" id="3_dy5pn"]
 [ext_resource type="Theme" uid="uid://b0uon3iawrhwg" path="res://ui/themes/asuka_dialogue.tres" id="4_stjmq"]
 [ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="5_8x763"]
@@ -20,16 +19,14 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 329.0
+offset_top = 527.0
+offset_right = -287.0
+offset_bottom = -102.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_brcee")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(960, 540)
-scale = Vector2(0.444444, 0.5)
-texture = ExtResource("2_8t3wi")
 
 [node name="Blur" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_qeojn")
@@ -37,51 +34,45 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 810.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+mouse_filter = 1
 
 [node name="Balloon" type="Control" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 270)
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -1080.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("4_stjmq")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Balloon"]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -270.0
-offset_right = 4.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 theme = ExtResource("4_stjmq")
 
 [node name="Dialogue" type="MarginContainer" parent="Balloon/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 theme = ExtResource("4_stjmq")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Balloon/HBoxContainer/Dialogue"]
-custom_minimum_size = Vector2(1000, 0)
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 theme = ExtResource("4_stjmq")
 
 [node name="CharacterLabel" type="RichTextLabel" parent="Balloon/HBoxContainer/Dialogue/HBoxContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 1
@@ -97,7 +88,8 @@ scroll_active = false
 
 [node name="DialogueLabel" parent="Balloon/HBoxContainer/Dialogue/HBoxContainer" instance=ExtResource("6_8p3d1")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(800, 0)
+visible = false
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -105,12 +97,13 @@ theme = ExtResource("4_stjmq")
 text = "Dialogue..."
 
 [node name="Responses" type="MarginContainer" parent="Balloon/HBoxContainer"]
-custom_minimum_size = Vector2(800, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme = ExtResource("4_stjmq")
 
 [node name="ResponsesMenu" type="VBoxContainer" parent="Balloon/HBoxContainer/Responses" node_paths=PackedStringArray("response_template")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 2
@@ -118,6 +111,7 @@ script = ExtResource("7_yk3rh")
 response_template = NodePath("ResponseExample")
 
 [node name="ResponseExample" type="Button" parent="Balloon/HBoxContainer/Responses/ResponsesMenu"]
+visible = false
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("4_stjmq")
@@ -125,5 +119,6 @@ text = "Response example"
 alignment = 0
 expand_icon = true
 
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
 [connection signal="response_selected" from="Balloon/HBoxContainer/Responses/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

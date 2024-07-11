@@ -55,17 +55,14 @@ func _on_phone_os_mouse_exited() -> void:
 		exit_phone()
 
 func enter_phone() -> void:
-	player.target_position = Vector2(global_position)
-	player.focus_speed = player.focus_speed_phone
+	player.set_focus_target(global_position, player.focus_speed_phone)
 	PlayerManager.set_player_focusing_on_phone()
+	phone_os.grab_focus()
 	# TODO: Change this change this change this change this change this change this change this change this change this change this change this change this 
 	phone_os.restore_phone_state()
-	
 	camera.set_camera_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
-	
 	set_phone_scale(max_scale, scale_up_speed)
 	set_phone_rotation(max_rotation, rotation_up_speed)
-	
 	phone_effects.set_effects(phone_effects.MAX_LOD, effects_increase_speed)
 
 func exit_phone() -> void:
@@ -77,11 +74,6 @@ func exit_phone() -> void:
 	set_phone_rotation(min_rotation, rotation_down_speed)
 	phone_effects.set_effects(phone_effects.MIN_LOD, effects_decrease_speed)
 
-
-# ----- SIGNALS -----
-
-#func _on_phone_timer_timeout() -> void:
-	#emit_signal("panic_increase")
 
 # ----- SET ANIMATIONS -----
 
