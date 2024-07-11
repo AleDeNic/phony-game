@@ -6,17 +6,20 @@ extends Node
 var player_panic: float
 var asuka_rage: float
 
+func _ready() -> void:
+	pass
+
 func _physics_process(delta: float) -> void:
 	match PlayerManager.get_player_state():
 		PlayerManager.PlayerState.FREE:
 			handle_player_panic()
 			handle_asuka_rage()
 		PlayerManager.PlayerState.FOCUSED_ASUKA:
-			pass
+			handle_player_panic()
 		PlayerManager.PlayerState.FOCUSED_PHONE:
-			pass
-	print("Player panic: ", player_panic)
-	print("Asuka rage: ", asuka_rage)
+			handle_asuka_rage()
+	#print("Player panic: ", player_panic)
+	#print("Asuka rage: ", asuka_rage)
 
 func handle_player_panic() -> void:
 	player_panic += panic_increase

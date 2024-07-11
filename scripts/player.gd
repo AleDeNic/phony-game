@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 		PlayerManager.PlayerState.FREE:
 			handle_free_movement(delta)
 		PlayerManager.PlayerState.FOCUSING_ON_PHONE, PlayerManager.PlayerState.FOCUSING_ON_ASUKA:
-			focus_in(delta)
+			focus(delta)
 		PlayerManager.PlayerState.FOCUSING_OUT:
 			focus_out(delta)
 		PlayerManager.PlayerState.FOCUSED_PHONE, PlayerManager.PlayerState.FOCUSED_ASUKA:
@@ -48,7 +48,7 @@ func handle_free_movement(delta: float) -> void:
 	reset_mouse_to_center()
 	move_player(delta, movement_vector)
 
-func focus_in(delta: float) -> void:
+func focus(delta: float) -> void:
 	var movement_vector: Vector2 = (target_position - global_position).normalized()
 	if global_position.distance_to(target_position) >= 10.0:
 		target_speed = focus_speed

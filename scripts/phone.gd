@@ -69,6 +69,7 @@ func enter_phone() -> void:
 	effects.set_effects(effects.MAX_LOD, effects_increase_speed)
 
 func exit_phone() -> void:
+	player.current_speed = 0.0
 	PlayerManager.set_player_focusing_out()
 	PhoneManager.set_phone_off()
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)

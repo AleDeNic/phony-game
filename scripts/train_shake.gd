@@ -13,7 +13,7 @@ var current_swing_offset : Vector2
 var target_swing_offset : Vector2
 var change_direction_timer = 0.0
 
-func _ready():
+func _ready() -> void:
 	original_position = position
 	# Initialize swing offsets
 	current_swing_offset = Vector2.ZERO
@@ -21,7 +21,7 @@ func _ready():
 	# Start the swing effect
 	set_process(true)
 
-func _process(delta):
+func _physics_process(delta) -> void:
 	# Update timer for changing direction
 	change_direction_timer += delta
 

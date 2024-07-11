@@ -17,7 +17,7 @@ func _ready() -> void:
 # ----- INTERACTIONS -----
 
 func _on_area_entered(_area: Area2D) -> void:
-	if PlayerManager.is_player_free():
+	if PlayerManager.is_player_free() or PlayerManager.is_player_focusing_out():
 		enter_asuka()
 
 #func _on_area_exited(_area: Area2D) -> void:
