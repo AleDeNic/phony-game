@@ -1,11 +1,12 @@
 ~ asuka_intro
 
 Asuka: I'm now reborn. Remember... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
-Asuka: You[speed=0.4].[speed=0.2].[speed=0.1].
+Asuka: You[speed=0.4].[speed=0.2].[speed=0.1]. [do PhaseManager.advance()]
+Asuka: Tell me!
 - Will be reborn. => asuka_intro
 - Will die. => END
 - Check your status.
-	Asuka: Your status is {{PlayerManager.get_player_state_value()}}
+Asuka: Your status is {{PlayerManager.get_player_state_value()}}
 Asuka: Reach for me.
 
 ~ asuka_intermezzo

@@ -16,23 +16,24 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 160.0
-offset_top = 520.0
-offset_right = -160.0
-offset_bottom = -100.0
+offset_left = 120.0
+offset_top = 90.0
+offset_right = -120.0
+offset_bottom = -90.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(800, 230)
 mouse_filter = 1
 theme = ExtResource("4_3onkd")
 
 [node name="MarginContainer" type="MarginContainer" parent="Balloon"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -369.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 theme = ExtResource("4_3onkd")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Balloon/MarginContainer"]
@@ -41,7 +42,7 @@ theme = ExtResource("4_3onkd")
 
 [node name="Panel" type="Panel" parent="Balloon/MarginContainer/HBoxContainer"]
 clip_children = 2
-custom_minimum_size = Vector2(1000, 0)
+custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
@@ -80,8 +81,8 @@ theme = ExtResource("4_3onkd")
 text = "Dialogue..."
 
 [node name="Responses" type="MarginContainer" parent="Balloon/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 theme = ExtResource("4_3onkd")
 
 [node name="ResponsesMenu" type="VBoxContainer" parent="Balloon/MarginContainer/HBoxContainer/Responses" node_paths=PackedStringArray("response_template")]

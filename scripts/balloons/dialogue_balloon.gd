@@ -78,28 +78,26 @@ var dialogue_line: DialogueLine:
 		return dialogue_line
 
 var balloon_position: Vector2
+var balloon_offset_position: Vector2
 
 func _ready() -> void:
 	balloon.hide()
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
-	#balloon.global_position.x = asuka.global_position.x - balloon.size.x / 2
-	#balloon.global_position.y = asuka.global_position.y - balloon.size.y
 
 	# If the responses menu doesn't have a next action set, use this one
 	if responses_menu.next_action.is_empty():
 		responses_menu.next_action = next_action
 	
-	balloon.pivot_offset = balloon.size / 2
 	balloon.global_position = asuka.global_position
-
+	balloon.pivot_offset = balloon.size / 2
+	balloon_offset_position = Vector2(840, 450)
 
 func _physics_process(_delta: float) -> void:
 	handle_balloon_movement()
 	#handle_balloon_scale()
 
 func handle_balloon_movement() -> void:
-	var offset_position = Vector2(player.global_position.x - balloon.size.x / 2, player.global_position.y)
-	balloon.global_position = balloon.global_position.lerp(offset_position, 0.1)
+	balloon.global_position = balloon.global_position.lerp(player.global_position - balloon_offset_position, 0.1)
 
 func handle_balloon_scale() -> void:
 	var target_balloon_scale: float = 1.0
@@ -107,7 +105,8 @@ func handle_balloon_scale() -> void:
 		PlayerManager.PlayerState.FREE, PlayerManager.PlayerState.FOCUSING_OUT, PlayerManager.PlayerState.FOCUSING_ON_PHONE:
 			target_balloon_scale = 1.0
 		PlayerManager.PlayerState.FOCUSING_ON_ASUKA, PlayerManager.PlayerState.FOCUSED_ASUKA:
-			target_balloon_scale = 0.9
+			target_balloon_scale = 0.6
+	#balloon.pivot_offset = balloon.size / 2
 	balloon.scale = balloon.scale.lerp(Vector2(target_balloon_scale, target_balloon_scale), 0.1)
 
 

@@ -1,8 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cw0nk6gkudho2"]
 
-[ext_resource type="Texture2D" uid="uid://dnl0mum6ltimb" path="res://assets/images/train_2.png" id="1_008is"]
 [ext_resource type="PackedScene" uid="uid://c7j5d8r5sk27h" path="res://scenes/landscape_3d.tscn" id="1_ab0o5"]
-[ext_resource type="Texture2D" uid="uid://bwf4rbwvfoy7" path="res://assets/images/train_3.jpg" id="3_0466r"]
+[ext_resource type="Texture2D" uid="uid://tv5lacuxyhma" path="res://assets/images/train_interior-min.png" id="2_85fba"]
 [ext_resource type="Script" path="res://scripts/train_shake.gd" id="3_wisc5"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8wvv8"]
@@ -15,6 +14,8 @@ normal = Vector2(-1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_boryj"]
 normal = Vector2(1, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eod4f"]
 
 [node name="Landscape" type="Node2D"]
 
@@ -63,8 +64,10 @@ position = Vector2(-2000, 0)
 shape = SubResource("WorldBoundaryShape2D_boryj")
 
 [node name="TrainSprite" type="Sprite2D" parent="."]
-scale = Vector2(1.26857, 1.26857)
-texture = ExtResource("1_008is")
+material = SubResource("ShaderMaterial_eod4f")
+position = Vector2(-259, 17)
+scale = Vector2(1.049, 1.049)
+texture = ExtResource("2_85fba")
 script = ExtResource("3_wisc5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -72,4 +75,4 @@ visible = false
 modulate = Color(1, 1, 1, 0.407843)
 position = Vector2(-554, -330)
 scale = Vector2(1.20772, 1.20772)
-texture = ExtResource("3_0466r")
+texture = ExtResource("2_85fba")
