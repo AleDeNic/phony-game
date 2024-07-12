@@ -11,6 +11,7 @@ radius = 800.0
 radius = 50.2892
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 6
 collision_layer = 4
 collision_mask = 2
 motion_mode = 1
@@ -33,4 +34,3 @@ input_pickable = false
 shape = SubResource("CircleShape2D_h1w0k")
 
 [node name="PlayerEffects" parent="." instance=ExtResource("3_2rlh4")]
-layer = 3

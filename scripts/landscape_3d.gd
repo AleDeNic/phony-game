@@ -1,5 +1,7 @@
 extends Node3D
 
+@onready var player_effects: CanvasLayer = get_node("/root/World/Player/PlayerEffects")
+
 @onready var sky: ProceduralSkyMaterial = $WorldEnvironment.environment.sky.sky_material as ProceduralSkyMaterial
 @onready var water: ShaderMaterial = $Water.mesh.material as ShaderMaterial
 @onready var environment: Environment = $WorldEnvironment.environment
@@ -47,6 +49,7 @@ func _physics_process(_delta: float) -> void:
 	handle_sky_and_ground()
 	handle_horizon()
 	handle_water()
+	handle_color_filter()
 
 
 # ----- COLOR HANDLING -----
@@ -89,6 +92,8 @@ func setup_colors() -> void:
 	current_ground = ground_prologue
 	current_water = water_prologue
 
+func handle_color_filter() -> void:
+	player_effects.soft_light_color = current_sky
 
 # ----- UTILS -----
 

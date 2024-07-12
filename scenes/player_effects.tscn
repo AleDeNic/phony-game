@@ -1,9 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwgby5u3ws41u"]
+[gd_scene load_steps=9 format=3 uid="uid://dwgby5u3ws41u"]
 
 [ext_resource type="Script" path="res://scripts/player_effects.gd" id="1_4c5qi"]
 [ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_0buma"]
 [ext_resource type="Shader" path="res://shaders/vignette_blur.gdshader" id="3_1y26i"]
+[ext_resource type="Shader" path="res://shaders/color_soft_light.gdshader" id="3_65on8"]
 [ext_resource type="Shader" path="res://shaders/vignette_color.gdshader" id="4_j57av"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6qsre"]
+shader = ExtResource("3_65on8")
+shader_parameter/overlay_color = Vector4(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8rrhg"]
 shader = ExtResource("3_1y26i")
@@ -21,6 +26,7 @@ shader_parameter/dither_strength = 0.0
 shader_parameter/vignette_color = null
 
 [node name="PlayerEffects" type="CanvasLayer"]
+layer = 6
 script = ExtResource("1_4c5qi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -28,6 +34,12 @@ visible = false
 position = Vector2(960, 540)
 scale = Vector2(0.444444, 0.5)
 texture = ExtResource("2_0buma")
+
+[node name="ColorFilter" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_6qsre")
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
 
 [node name="BlurVignette" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_8rrhg")

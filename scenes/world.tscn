@@ -85,9 +85,6 @@ offset_right = 5392.0
 offset_bottom = 2986.0
 mouse_filter = 1
 
-[node name="Player" parent="." instance=ExtResource("9_o22lg")]
-unique_name_in_owner = true
-
 [node name="PhoneCanvas" type="CanvasLayer" parent="."]
 layer = 3
 follow_viewport_enabled = true
@@ -115,6 +112,9 @@ scale = Vector2(0.419138, 0.419138)
 position = Vector2(0, -2)
 scale = Vector2(37.2402, 33.1369)
 shape = SubResource("RectangleShape2D_qisob")
+
+[node name="Player" parent="." instance=ExtResource("9_o22lg")]
+unique_name_in_owner = true
 
 [connection signal="area_entered" from="Asuka" to="Asuka" method="_on_area_entered"]
 [connection signal="area_exited" from="Asuka" to="Asuka" method="_on_area_exited"]
