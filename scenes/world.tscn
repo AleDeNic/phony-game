@@ -34,10 +34,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4wa7i"]
-radius = 355.203
+radius = 215.058
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_klsqp"]
-radius = 18.7495
+radius = 30.2653
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qisob"]
 size = Vector2(5.46524, 9.68707)
@@ -49,7 +49,7 @@ size = Vector2(5.46524, 9.68707)
 [node name="Landscape" parent="." instance=ExtResource("4_u7jec")]
 
 [node name="Asuka" type="Area2D" parent="."]
-position = Vector2(-962, -265)
+position = Vector2(-779, -3)
 collision_mask = 4
 input_pickable = false
 script = ExtResource("4_1kcn2")
@@ -64,7 +64,7 @@ position = Vector2(2, -94)
 shape = SubResource("CircleShape2D_4wa7i")
 
 [node name="Window" type="Area2D" parent="."]
-position = Vector2(1538, -453)
+position = Vector2(1951, -506)
 collision_mask = 4
 input_pickable = false
 script = ExtResource("5_p0u8t")

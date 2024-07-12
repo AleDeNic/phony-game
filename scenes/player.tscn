@@ -4,8 +4,9 @@
 [ext_resource type="Script" path="res://scripts/camera.gd" id="2_owyey"]
 [ext_resource type="PackedScene" uid="uid://dwgby5u3ws41u" path="res://scenes/player_effects.tscn" id="3_2rlh4"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xpx4y"]
-radius = 800.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h6l3x"]
+radius = 560.0
+height = 1980.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h1w0k"]
 radius = 50.2892
@@ -18,7 +19,8 @@ motion_mode = 1
 script = ExtResource("1_hwf0t")
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_xpx4y")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_h6l3x")
 debug_color = Color(0, 0.636893, 0.399121, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
