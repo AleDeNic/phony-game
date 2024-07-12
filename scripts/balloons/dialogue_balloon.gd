@@ -97,7 +97,7 @@ func _physics_process(_delta: float) -> void:
 	#handle_balloon_scale()
 
 func handle_balloon_movement() -> void:
-	balloon.global_position = balloon.global_position.lerp(player.global_position - balloon_offset_position, 0.1)
+	balloon.global_position = balloon.global_position.lerp(player.global_position - balloon_offset_position, 0.2)
 
 func handle_balloon_scale() -> void:
 	var target_balloon_scale: float = 1.0

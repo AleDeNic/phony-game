@@ -9,7 +9,6 @@ extends CharacterBody2D
 @export var dead_zone_radius: float = 1.0
 @onready var camera: Camera2D = $"../Player/Camera2D"
 
-
 var current_speed: float
 var target_speed: float
 var viewport: Viewport

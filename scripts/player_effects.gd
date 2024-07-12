@@ -2,28 +2,36 @@ extends CanvasLayer
 
 @onready var blur_vignette: ShaderMaterial = $BlurVignette.material as ShaderMaterial
 @onready var color_filter: ShaderMaterial = $ColorFilter.material as ShaderMaterial
+@onready var color_vignette: ShaderMaterial = $ColorVignette.material as ShaderMaterial
 
-@export var blur_level: float = 0.6
-var panic_blur_inner: float = blur_level
 
 var soft_light_color: Color
 @export var color_amount: float = 0.6
 
+var blur_inner: float = 0.8
+var blur_radius: float = 0.25
+var blur_outer: float = 0.7
 
 # ----- PROCESSING!!! -----
 
 func _physics_process(_delta: float) -> void:
-	handle_panic_filter()
+	handle_phone_sickness_filter()
 	change_color_filter(soft_light_color)
 
 
 # ----- HANDLE FILTERS -----
 
-func handle_panic_filter() -> void:
-	if BrainManager.player_panic > BrainManager.panic_wait:
-		panic_blur_inner = map_range(BrainManager.player_panic, BrainManager.panic_wait, BrainManager.max_panic, blur_level, 0.0)
-		blur_vignette.set_shader_parameter("blur_inner", panic_blur_inner)
-		#print(panic_blur_inner)
+func handle_phone_sickness_filter() -> void:
+	if BrainManager.phone_sickness > BrainManager.phone_sickness_wait:
+		
+		blur_inner = map_range(BrainManager.phone_sickness, BrainManager.phone_sickness_wait, BrainManager.max_phone_sickness, 0.8, 0.0)
+		blur_radius = map_range(BrainManager.phone_sickness, BrainManager.phone_sickness_wait, BrainManager.max_phone_sickness, 0.25, 0.6)
+		blur_outer = map_range(BrainManager.phone_sickness, BrainManager.phone_sickness_wait, BrainManager.max_phone_sickness, 0.7, 0.35)
+		
+		blur_vignette.set_shader_parameter("blur_inner", blur_inner)
+		blur_vignette.set_shader_parameter("blur_radius", blur_radius)
+		blur_vignette.set_shader_parameter("blur_outer", blur_outer)
+		#print(phone_sickness_blur_inner)
 
 func change_color_filter(color_vector: Color) -> void:
 	color_vector.a = color_amount

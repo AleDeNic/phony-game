@@ -35,7 +35,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 2.69532e-06, 0.941457, 0.592157)
+color = Color(0, 0, 0, 0.854902)
 
 [node name="BlurFisheye" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_nv2ku")

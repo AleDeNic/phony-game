@@ -14,14 +14,14 @@ shader_parameter/overlay_color = Vector4(1, 1, 1, 1)
 shader = ExtResource("3_1y26i")
 shader_parameter/blur_radius = 0.25
 shader_parameter/blur_amount = 4.0
-shader_parameter/blur_inner = 0.6
+shader_parameter/blur_inner = 0.8
 shader_parameter/blur_outer = 0.7
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v2vil"]
 shader = ExtResource("4_j57av")
-shader_parameter/inner_radius = 0.331
-shader_parameter/outer_radius = 1.312
-shader_parameter/vignette_strength = 1.225
+shader_parameter/inner_radius = 0.163
+shader_parameter/outer_radius = 1.253
+shader_parameter/vignette_strength = 1.864
 shader_parameter/dither_strength = 0.0
 shader_parameter/vignette_color = null
 
