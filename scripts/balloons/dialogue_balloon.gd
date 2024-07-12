@@ -88,14 +88,27 @@ func _ready() -> void:
 	# If the responses menu doesn't have a next action set, use this one
 	if responses_menu.next_action.is_empty():
 		responses_menu.next_action = next_action
+	
+	balloon.pivot_offset = balloon.size / 2
+	balloon.global_position = asuka.global_position
 
 
 func _physics_process(_delta: float) -> void:
 	handle_balloon_movement()
+	#handle_balloon_scale()
 
 func handle_balloon_movement() -> void:
 	var offset_position = Vector2(player.global_position.x - balloon.size.x / 2, player.global_position.y)
 	balloon.global_position = balloon.global_position.lerp(offset_position, 0.1)
+
+func handle_balloon_scale() -> void:
+	var target_balloon_scale: float = 1.0
+	match PlayerManager.get_player_state():
+		PlayerManager.PlayerState.FREE, PlayerManager.PlayerState.FOCUSING_OUT, PlayerManager.PlayerState.FOCUSING_ON_PHONE:
+			target_balloon_scale = 1.0
+		PlayerManager.PlayerState.FOCUSING_ON_ASUKA, PlayerManager.PlayerState.FOCUSED_ASUKA:
+			target_balloon_scale = 0.9
+	balloon.scale = balloon.scale.lerp(Vector2(target_balloon_scale, target_balloon_scale), 0.1)
 
 
 func _unhandled_input(_event: InputEvent) -> void:

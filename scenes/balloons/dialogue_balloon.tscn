@@ -16,12 +16,13 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 137.0
-offset_top = 526.0
-offset_right = -191.0
-offset_bottom = -108.0
+offset_left = 160.0
+offset_top = 520.0
+offset_right = -160.0
+offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(800, 230)
 mouse_filter = 1
 theme = ExtResource("4_3onkd")
 
