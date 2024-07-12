@@ -51,7 +51,7 @@ func _on_area_entered(_area: Area2D) -> void:
 		enter_phone()
 
 func _on_phone_os_mouse_exited() -> void:
-	if !PlayerManager.is_player_free():
+	if !PlayerManager.is_player_free() and !NotificationsManager.has_notification_arrived:
 		exit_phone()
 
 func enter_phone() -> void:

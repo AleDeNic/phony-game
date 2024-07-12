@@ -5,7 +5,7 @@ extends Node2D
 
 var rng = RandomNumberGenerator.new()
 var probability: float = 0.01
-var probability_increase: float = 0.0003
+var probability_increase: float = 0.0006
 
 var has_notification_arrived: bool = false
 
@@ -17,9 +17,10 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if !PlayerManager.is_player_focused_phone() and not has_notification_arrived:
 		handle_notifications()
-	if PlayerManager.is_player_focused_phone() and has_notification_arrived:
-		reset_notification()
+	#if PlayerManager.is_player_focused_phone() and has_notification_arrived:
+		#reset_notification()
 
+# TODO reset notifications only when you read all of them
 
 # ----- RANDOM NOTIFICATIONS -----
 
