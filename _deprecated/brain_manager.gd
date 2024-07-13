@@ -1,4 +1,4 @@
-#extends Node
+extends Node
 #
 #@export_group("Phone sickness")
 #@export var phone_sickness_increase: int = 1

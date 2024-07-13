@@ -6,6 +6,8 @@ uniform float blend_factor : hint_range(0.0, 1.0) = 0.3;
 uniform vec3 overlay = vec3(0.0, 0.0, 0.0);
 uniform float saturation : hint_range(0.0, 1.0) = 0.5;
 uniform float blur_size : hint_range(0.0, 5.0) = 1.0;
+uniform vec3 black_overlay = vec3(0.0, 0.0, 0.0);
+uniform float black_blend_factor : hint_range(0.0, 1.0) = 0.3;
 
 vec3 apply_saturation(vec3 color, float sat) {
     float luminance = dot(color, vec3(0.299, 0.587, 0.114));
@@ -31,6 +33,9 @@ void fragment() {
     
     // Blend the result with the original color using the blend_factor
     vec3 final_color = mix(desaturated, blended, blend_factor);
+    
+    // Apply black overlay blending
+    final_color = mix(final_color, black_overlay, black_blend_factor);
     
     // Simple blur approximation by averaging neighboring pixels
     vec4 blurred_color = vec4(0.0);

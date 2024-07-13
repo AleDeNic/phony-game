@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://b0uon3iawrhwg"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://b0uon3iawrhwg"]
 
 [ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="1_1sxrh"]
 [ext_resource type="FontFile" uid="uid://d06s8b5831mca" path="res://ui/fonts/LibertinusMono-Regular.otf" id="2_t4hx1"]
@@ -24,13 +24,21 @@ corner_detail = 1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lujt5"]
 bg_color = Color(1, 1, 1, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vt1bi"]
+bg_color = Color(0.73468, 0.73468, 0.73468, 0.517647)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_focus_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 Button/colors/font_outline_color = Color(0, 0, 0, 0.345098)
-Button/font_sizes/font_size = 28
+Button/font_sizes/font_size = 32
 Button/fonts/font = ExtResource("1_1sxrh")
 Button/styles/disabled = SubResource("StyleBoxFlat_r1mnb")
 Button/styles/focus = SubResource("StyleBoxFlat_e2nru")
@@ -42,9 +50,10 @@ MarginContainer/constants/margin_bottom = 48
 MarginContainer/constants/margin_left = 64
 MarginContainer/constants/margin_right = 64
 MarginContainer/constants/margin_top = 48
+Panel/styles/panel = SubResource("StyleBoxFlat_vt1bi")
 RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
 RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0.0627451)
 RichTextLabel/constants/shadow_outline_size = 1
-RichTextLabel/font_sizes/normal_font_size = 32
+RichTextLabel/font_sizes/normal_font_size = 40
 RichTextLabel/fonts/normal_font = ExtResource("2_t4hx1")
 VBoxContainer/constants/separation = 24

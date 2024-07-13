@@ -1,14 +1,48 @@
-[gd_scene load_steps=6 format=3 uid="uid://djenfep7ipolx"]
+[gd_scene load_steps=10 format=3 uid="uid://djenfep7ipolx"]
 
 [ext_resource type="Script" path="res://scripts/balloons/dialogue_balloon.gd" id="1_cwkdr"]
+[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_a5ldb"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="3_72ixx"]
 [ext_resource type="FontFile" uid="uid://d02ygxi1jy6m3" path="res://ui/fonts/neuropol_x.otf" id="3_ciqv1"]
 [ext_resource type="Theme" uid="uid://b0uon3iawrhwg" path="res://ui/themes/asuka_dialogue.tres" id="4_3onkd"]
+[ext_resource type="Shader" path="res://shaders/blur_color_bw.gdshader" id="4_ykamr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jljrk"]
+shader = ExtResource("4_ykamr")
+shader_parameter/lod = 4.0
+shader_parameter/blend_factor = 0.1
+shader_parameter/overlay = Vector3(0, 0, 0)
+shader_parameter/saturation = 0.0
+shader_parameter/blur_size = 0.0
+shader_parameter/black_overlay = Vector3(0, 0, 0)
+shader_parameter/black_blend_factor = 0.7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6bc6"]
+draw_center = false
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(1, 1, 1, 0.756863)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 6.0
+expand_margin_top = 6.0
+expand_margin_right = 6.0
+expand_margin_bottom = 6.0
 
 [node name="DialogueBalloon" type="CanvasLayer"]
 follow_viewport_enabled = true
 script = ExtResource("1_cwkdr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(960, 540)
+scale = Vector2(0.444444, 0.5)
+texture = ExtResource("2_a5ldb")
 
 [node name="Balloon" type="Control" parent="."]
 unique_name_in_owner = true
@@ -28,38 +62,42 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -369.0
+offset_top = -419.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("4_3onkd")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Balloon/MarginContainer"]
-layout_mode = 2
-theme = ExtResource("4_3onkd")
-
-[node name="Panel" type="Panel" parent="Balloon/MarginContainer/HBoxContainer"]
-clip_children = 2
+[node name="Panel" type="Panel" parent="Balloon/MarginContainer"]
+material = SubResource("ShaderMaterial_jljrk")
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("4_3onkd")
 
-[node name="Dialogue" type="MarginContainer" parent="Balloon/MarginContainer/HBoxContainer/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="PanelBorders" type="Panel" parent="Balloon/MarginContainer"]
+layout_mode = 2
 theme = ExtResource("4_3onkd")
+theme_override_styles/panel = SubResource("StyleBoxFlat_p6bc6")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/MarginContainer/HBoxContainer/Panel/Dialogue"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Balloon/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("4_3onkd")
 
-[node name="CharacterLabel" type="RichTextLabel" parent="Balloon/MarginContainer/HBoxContainer/Panel/Dialogue/VBoxContainer"]
+[node name="Dialogue" type="MarginContainer" parent="Balloon/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(1100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_3onkd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/MarginContainer/HBoxContainer/Dialogue"]
+layout_mode = 2
+theme = ExtResource("4_3onkd")
+
+[node name="CharacterLabel" type="RichTextLabel" parent="Balloon/MarginContainer/HBoxContainer/Dialogue/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 1
@@ -70,7 +108,7 @@ text = "Character"
 fit_content = true
 scroll_active = false
 
-[node name="DialogueLabel" parent="Balloon/MarginContainer/HBoxContainer/Panel/Dialogue/VBoxContainer" instance=ExtResource("2_a8ve6")]
+[node name="DialogueLabel" parent="Balloon/MarginContainer/HBoxContainer/Dialogue/VBoxContainer" instance=ExtResource("2_a8ve6")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -78,14 +116,13 @@ theme = ExtResource("4_3onkd")
 text = "Dialogue..."
 
 [node name="Responses" type="MarginContainer" parent="Balloon/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("4_3onkd")
 
 [node name="ResponsesMenu" type="VBoxContainer" parent="Balloon/MarginContainer/HBoxContainer/Responses" node_paths=PackedStringArray("response_template")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 4
 theme = ExtResource("4_3onkd")
 theme_override_constants/separation = 2
 script = ExtResource("3_72ixx")

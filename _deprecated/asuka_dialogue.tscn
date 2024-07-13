@@ -14,6 +14,8 @@ shader_parameter/blend_factor = 0.3
 shader_parameter/overlay = Vector3(0, 0, 0)
 shader_parameter/saturation = 0.5
 shader_parameter/blur_size = 1.0
+shader_parameter/black_overlay = Vector3(0, 0, 0)
+shader_parameter/black_blend_factor = 0.3
 
 [node name="AsukaDialogue" type="Control"]
 layout_mode = 3

@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 AudioManager="*res://scripts/managers/audio_manager.gd"
-BrainManager="res://_deprecated/brain_manager.gd"
 NotificationsManager="*res://scripts/managers/notifications_manager.gd"
 PhaseManager="*res://scripts/managers/phase_manager.gd"
 PhoneManager="*res://scripts/managers/phone_manager.gd"
