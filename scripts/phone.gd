@@ -68,6 +68,7 @@ func exit_phone() -> void:
 	player.current_speed = 0.0
 	PlayerManager.set_player_focusing_out()
 	PhoneManager.set_phone_off()
+	phone_os.reset_screens()
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 	set_phone_scale(min_scale, scale_down_speed)
 	set_phone_rotation(min_rotation, rotation_down_speed)

@@ -3,6 +3,8 @@ extends Node2D
 @onready var phone_vibration: AudioStreamPlayer2D = get_node("/root/World/AudioManager/SFX/PhoneVibration")
 @onready var phone_os: Control = get_node("/root/World/PhoneCanvas/Phone/PhoneOS")
 
+signal notification
+
 var rng = RandomNumberGenerator.new()
 var probability: float = 0.01
 var probability_increase: float = 0.0006
@@ -32,7 +34,7 @@ func handle_notifications() -> void:
 		phone_vibration.play()
 		probability = 0.001
 		has_notification_arrived = true
-		print("Random notification seed: ", random_number, " | Current probabilty: ", probability)
+		emit_signal("notification")
 
 func increase_probability() -> void:
 	probability += probability_increase

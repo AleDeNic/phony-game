@@ -9,6 +9,7 @@ extends Control
 @onready var asukachat: Control = $PhoneSize/AsukaChat
 @onready var battery_bar: ProgressBar = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar
 @onready var battery_timer: Timer = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar/BatteryTimer
+@onready var player_01: Label = $PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player01
 
 @export var max_battery: float = 100.0
 
@@ -18,6 +19,7 @@ func _ready() -> void:
 	setup_battery()
 	reset_screens()
 	apps.visible = true
+	NotificationsManager.connect("notification", Callable(self, "spawn_message"))
 
 func _physics_process(_delta: float) -> void:
 	handle_battery()
@@ -26,6 +28,9 @@ func _physics_process(_delta: float) -> void:
 		go_to_screen(settings)
 	#print_phone_state(phone_state)
 
+func spawn_message() -> void:
+	player_01.visible = true
+	print("notification arrived")
 
 # ----- BATTERY -----
 
@@ -45,17 +50,19 @@ func handle_battery() -> void:
 
 
 func restore_phone_state():
-	match true:
-		apps.visible:
-			PhoneManager.set_phone_in_apps()
-		settings.visible:
-			PhoneManager.set_phone_in_options()
-		camera.visible:
-			PhoneManager.set_phone_in_camera()
-		chats.visible:
-			PhoneManager.set_phone_in_chats()
-		asukachat.visible:
-			PhoneManager.set_phone_in_asukachat()
+	PhoneManager.set_phone_in_apps()
+	go_to_screen(apps)
+	#match true:
+		#apps.visible:
+			#PhoneManager.set_phone_in_apps()
+		#settings.visible:
+			#PhoneManager.set_phone_in_settings()
+		#camera.visible:
+			#PhoneManager.set_phone_in_camera()
+		#chats.visible:
+			#PhoneManager.set_phone_in_chats()
+		#asukachat.visible:
+			#PhoneManager.set_phone_in_asukachat()
 
 
 # ----- HANDLE SCREENS -----
@@ -78,7 +85,7 @@ func reset_screens() -> void:
 
 
 # ----- SIGNALS -----
-func _on_options_pressed() -> void:
+func _on_settings_pressed() -> void:
 	go_to_screen(settings)
 
 func _on_back_pressed() -> void:

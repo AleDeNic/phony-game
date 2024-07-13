@@ -19,7 +19,7 @@ func set_phone_off() -> void:
 func set_phone_in_apps() -> void:
 	set_phone_state(PhoneState.APPS)
 	
-func set_phone_in_options() -> void:
+func set_phone_in_settings() -> void:
 	set_phone_state(PhoneState.SETTINGS)
 	
 func set_phone_in_camera() -> void:
@@ -44,7 +44,7 @@ func get_phone_state_value():
 		PhoneState.APPS:
 			return "APPS"
 		PhoneState.SETTINGS:
-			return "OPTIONS"
+			return "SETTINGS"
 		PhoneState.CAMERA:
 			return "CAMERA"
 		PhoneState.CHATS:
@@ -58,7 +58,7 @@ func is_phone_off() -> bool:
 func is_phone_in_apps() -> bool:
 	return phone_state == PhoneState.APPS
 	
-func is_phone_in_options() -> bool:
+func is_phone_in_settings() -> bool:
 	return phone_state == PhoneState.SETTINGS
 	
 func is_phone_in_camera() -> bool:
