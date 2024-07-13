@@ -4,8 +4,8 @@ extends CharacterBody2D
 
 @export var default_speed: float = 70.0
 @export var transition_speed: float = 10.0
-@export var focus_speed_phone: float = 400.0
-@export var focus_speed_asuka: float = 600.0
+@export var focus_speed_phone: float = 200.0
+@export var focus_speed_asuka: float = 400.0
 @export var dead_zone_radius: float = 1.0
 @onready var camera: Camera2D = $"../Player/Camera2D"
 
@@ -20,13 +20,11 @@ var focus_speed: float
 
 func _ready() -> void:
 	setup_viewport()
-
 	current_speed = default_speed
 	focus_speed = focus_speed_phone
 
 func _physics_process(delta: float) -> void:
 	check_viewport()
-
 	match PlayerManager.get_player_state():
 		PlayerManager.PlayerState.FREE:
 			handle_free_movement(delta)
@@ -48,33 +46,27 @@ func handle_free_movement(delta: float) -> void:
 
 func focus(delta: float) -> void:
 	var movement_vector: Vector2 = (target_position - global_position).normalized()
-	if global_position.distance_to(target_position) >= 10.0:
+	if global_position.distance_to(target_position) >= 5.0:
 		target_speed = focus_speed
 		move_player(delta, movement_vector)
 	else:
 		current_speed = 0.0
-		if PlayerManager.is_player_focusing_on_phone():
-			PlayerManager.set_player_focused_phone()
-		elif PlayerManager.is_player_focusing_on_asuka():
-			PlayerManager.set_player_focused_asuka()
 
 func focus_out(delta: float) -> void:
-	# to fix the high initial movement vector when you exit the dialogue
 	var movement_vector: Vector2 = get_movement_input()
 	target_speed = default_speed
 	move_player(delta, movement_vector)
 	reset_mouse_to_center()
-	if !camera.is_zooming:
-		PlayerManager.set_player_free()
 
 func move_player(delta: float, movement_vector: Vector2) -> void:
 	current_speed = lerp(current_speed, target_speed, delta * transition_speed)
-	velocity = movement_vector * current_speed
+	velocity = velocity.lerp(movement_vector * current_speed, delta * transition_speed)
 	move_and_slide()
 
-func set_focus_target(target_global_position, speed) -> void:
+func set_focus_target(target_global_position: Vector2, speed: float) -> void:
 	target_position = Vector2(target_global_position)
 	focus_speed = speed
+
 
 # ----- INPUT & MOUSE-----
 

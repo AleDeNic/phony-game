@@ -6,4 +6,4 @@
 line_spacing = 1.0
 font = ExtResource("1_tkafw")
 font_size = 42
-font_color = Color(0, 0, 0, 1)
+font_color = Color(0, 0, 0, 0.784314)

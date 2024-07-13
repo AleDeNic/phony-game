@@ -29,7 +29,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	handle_notifications()
 	handle_phone_sickness()
-	print("Player phone_sickness: ", phone_sickness)
+	#print("Player phone_sickness: ", phone_sickness)
 
 
 # ----- PHONE SICKNESS -----

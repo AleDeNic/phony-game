@@ -13,6 +13,7 @@ extends Control
 @onready var default_player: Label = $PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultPlayer
 @onready var background: ColorRect = $PhoneSize/Background
 @onready var black_background: ColorRect = $PhoneSize/BlackBackground
+@onready var notification_button: Button = $PhoneSize/TopBar/MarginContainer/HBoxContainer/NotificationButton
 
 @export var max_battery: float = 300.0
 
@@ -23,6 +24,7 @@ func _ready() -> void:
 	reset_screens()
 	#apps.visible = true
 	background.visible = true
+	notification_button.visible = false
 	#black_background.visible = true
 	NotificationsManager.connect("notification", Callable(self, "spawn_new_asuka_message"))
 
@@ -107,6 +109,10 @@ func _on_chats_pressed() -> void:
 func _on_asuka_pressed() -> void:
 	go_to_screen(asukachat)
 	NotificationsManager.clear_notifications()
+	notification_button.visible = false
+
+func _on_notification_button_pressed() -> void:
+	go_to_screen(chats)
 
 func spawn_new_asuka_message() -> void:
 	var new_asuka = default_asuka.duplicate() as Label
@@ -115,6 +121,7 @@ func spawn_new_asuka_message() -> void:
 	parent.move_child(new_asuka, default_asuka.get_index() + 1)
 	new_asuka.visible = true
 	default_asuka = new_asuka
+	notification_button.visible = true
 
 func spawn_new_player_message() -> void:
 	var new_player = default_player.duplicate() as Label
@@ -124,3 +131,6 @@ func spawn_new_player_message() -> void:
 	new_player.visible = true
 	default_asuka = new_player
 	print("notification arrived")
+
+
+

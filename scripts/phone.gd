@@ -7,8 +7,8 @@ extends Area2D
 @export var dialogue_start: String = "angry_asuka_intro"
 
 @export_group("Scale sizes")
-@export var min_scale: Vector2 = Vector2(1.0, 1.0)
-@export var max_scale: Vector2 = Vector2(2.0, 2.0)
+@export var min_scale: Vector2 = Vector2(0.7, 0.7)
+@export var max_scale: Vector2 = Vector2(1.8, 1.8)
 
 @export_group("Scale speeds")
 @export var scale_up_speed: float = 3.0
@@ -34,6 +34,7 @@ var target_rotation: float = min_rotation
 var is_dialogue_started: bool = false
 var angry_dialogue_index: int = 0
 
+
 # ----- INITIALIZATION AND PHYSICS -----
 
 func _ready() -> void:	
@@ -45,6 +46,7 @@ func _physics_process(delta: float) -> void:
 	if PlayerManager.is_player_focusing():
 		update_scale(delta)
 		update_rotation(delta)
+
 
 # --------- PHONE INTERACTIONS -----------
 
@@ -67,6 +69,10 @@ func enter_phone() -> void:
 	#phone_os.black_background.visible = false
 	
 	start_angry_dialogue()
+	
+	await get_tree().create_timer(1.0).timeout
+	if PlayerManager.is_player_focusing_on_phone():
+		PlayerManager.set_player_focused_phone()
 
 func exit() -> void:
 	player.current_speed = 0.0
@@ -78,6 +84,9 @@ func exit() -> void:
 	set_phone_rotation(min_rotation, rotation_down_speed)
 	phone_effects.set_effects(phone_effects.MIN_LOD, effects_decrease_speed)
 	#phone_os.black_background.visible = true
+	await get_tree().create_timer(1.0).timeout
+	if PlayerManager.is_player_focusing_out():
+		PlayerManager.set_player_free()
 
 func start_angry_dialogue() -> void:
 	var dialogue_path: String = "res://dialogues/angry_asuka_%d.dialogue" % angry_dialogue_index
@@ -88,6 +97,7 @@ func start_angry_dialogue() -> void:
 		angry_dialogue_index += 1
 	else:
 		print("Dialogue resource not found: ", dialogue_path)
+
 
 # ----- SET ANIMATIONS -----
 
@@ -100,6 +110,7 @@ func set_phone_rotation(rotation_value: float, rotation_speed: float) -> void:
 	if target_rotation != rotation_value:
 		target_rotation = rotation_value
 		current_rotation_speed = rotation_speed
+
 
 # ----- UPDATE SCALE & ROTATION -----
 

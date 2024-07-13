@@ -75,7 +75,6 @@ history/save_on_save=true
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
 window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="res://assets/images/cursor_48.png"
 mouse_cursor/custom_image_hotspot=Vector2(24, 24)
