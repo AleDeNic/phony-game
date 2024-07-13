@@ -4,6 +4,8 @@ extends Area2D
 @onready var camera: Camera2D = get_node("/root/World/Player/Camera2D")
 @onready var player: CharacterBody2D = %Player
 @onready var phone_os: Control = $PhoneOS
+@export var dialogue_resource: Resource = load("res://dialogues/angry_asuka.dialogue")
+@export var dialogue_start: String = "angry_asuka_intro"
 
 @export_group("Scale sizes")
 @export var min_scale: Vector2 = Vector2(1.0, 1.0)
@@ -30,6 +32,7 @@ var target_scale: Vector2 = min_scale
 var current_rotation_speed: float = 0.0
 var target_rotation: float = min_rotation
 
+var is_dialogue_started: bool = false
 
 # ----- INITIALIZATION AND PHYSICS -----
 
@@ -52,7 +55,7 @@ func _on_area_entered(_area: Area2D) -> void:
 
 func _on_phone_os_mouse_exited() -> void:
 	if !PlayerManager.is_player_free() and NotificationsManager.are_notifications_cleared:
-		exit_phone()
+		exit()
 
 func enter_phone() -> void:
 	NotificationsManager.increase_probability()
@@ -64,8 +67,12 @@ func enter_phone() -> void:
 	set_phone_rotation(max_rotation, rotation_up_speed)
 	phone_effects.set_effects(phone_effects.MAX_LOD, effects_increase_speed)
 	phone_os.background.visible = true
+	
+	if !is_dialogue_started:
+		StoryManager.start_dialogue(StoryManager.dialogue_balloon, dialogue_resource, dialogue_start, self, true)
+		is_dialogue_started = true
 
-func exit_phone() -> void:
+func exit() -> void:
 	player.current_speed = 0.0
 	PlayerManager.set_player_focusing_out()
 	PhoneManager.set_phone_off()
