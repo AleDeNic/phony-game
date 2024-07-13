@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cw0nk6gkudho2"]
 
 [ext_resource type="PackedScene" uid="uid://c7j5d8r5sk27h" path="res://scenes/landscape_3d.tscn" id="1_ab0o5"]
-[ext_resource type="Texture2D" uid="uid://tv5lacuxyhma" path="res://assets/images/train_interior-min.png" id="2_85fba"]
+[ext_resource type="Texture2D" uid="uid://bp26i6exw2enj" path="res://assets/images/train_interior_3.png" id="2_86bk8"]
 [ext_resource type="Script" path="res://scripts/train_shake.gd" id="3_wisc5"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8wvv8"]
@@ -55,7 +55,7 @@ shape = SubResource("WorldBoundaryShape2D_8wvv8")
 
 [node name="BottomBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
 visibility_layer = 2
-position = Vector2(0, 2000)
+position = Vector2(0, 2200)
 shape = SubResource("WorldBoundaryShape2D_neuer")
 
 [node name="RightBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
@@ -65,18 +65,18 @@ shape = SubResource("WorldBoundaryShape2D_674om")
 
 [node name="LeftBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
 visibility_layer = 2
-position = Vector2(-2600, 0)
+position = Vector2(-2500, 0)
 shape = SubResource("WorldBoundaryShape2D_boryj")
 
 [node name="TrainSprite" type="Sprite2D" parent="."]
-position = Vector2(-249, 65)
+position = Vector2(-140, 349)
 scale = Vector2(0.78875, 0.78875)
-texture = ExtResource("2_85fba")
+texture = ExtResource("2_86bk8")
 script = ExtResource("3_wisc5")
 
 [node name="SunLight" type="Sprite2D" parent="TrainSprite"]
 modulate = Color(1, 1, 1, 0.294118)
-position = Vector2(2435.73, 1036.68)
+position = Vector2(2408.88, 945.8)
 rotation = 2.2131
-scale = Vector2(117.408, 80.514)
+scale = Vector2(119.383, 80.514)
 texture = SubResource("GradientTexture2D_fkblq")
