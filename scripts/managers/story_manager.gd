@@ -21,6 +21,7 @@ var dialogue_queue: Array = []
 
 var non_prioritized_balloon: Node = null
 
+# TODO: Handle prioritized dialogues. There needs to be only one at a time, otherwise angry dialogues will overlap
 # ----- INITIALIZATION AND PHYSICS -----
 
 func _ready() -> void:
@@ -139,11 +140,11 @@ func end_dialogue() -> void:
 		prioritized_dialogue = null
 		print("Prioritized dialogue ended.")
 		if last_non_prioritized_dialogue:
-			var dialogue_to_resume = last_non_prioritized_dialogue
+			var dialogue_to_resume: Dictionary = last_non_prioritized_dialogue
 			last_non_prioritized_dialogue = {}
 			print("Resuming last non-prioritized dialogue: ", dialogue_to_resume)
 			if non_prioritized_balloon and is_instance_valid(non_prioritized_balloon):
-				non_prioritized_balloon.visible = true  # Show the non-prioritized dialogue balloon
+				non_prioritized_balloon.visible = true
 				active_balloon = non_prioritized_balloon
 				non_prioritized_balloon = null
 			else:

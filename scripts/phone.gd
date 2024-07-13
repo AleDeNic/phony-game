@@ -67,9 +67,7 @@ func enter_phone() -> void:
 	phone_effects.set_effects(phone_effects.MAX_LOD, effects_increase_speed)
 	phone_os.background.visible = true
 	
-	if !is_dialogue_started:
-		start_angry_dialogue()
-		is_dialogue_started = true
+	start_angry_dialogue()
 
 func exit() -> void:
 	player.current_speed = 0.0
@@ -83,8 +81,8 @@ func exit() -> void:
 	phone_os.background.visible = false
 
 func start_angry_dialogue() -> void:
-	var dialogue_path = "res://dialogues/angry_asuka_%d.dialogue" % angry_dialogue_index
-	var dialogue_resource = load(dialogue_path)
+	var dialogue_path: String = "res://dialogues/angry_asuka_%d.dialogue" % angry_dialogue_index
+	var dialogue_resource     = load(dialogue_path)
 	
 	if dialogue_resource:
 		StoryManager.start_dialogue(StoryManager.dialogue_balloon, dialogue_resource, dialogue_start, self, true)
