@@ -9,12 +9,12 @@ extends Control
 @onready var asukachat: Control = $PhoneSize/AsukaChat
 @onready var battery_bar: ProgressBar = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar
 @onready var battery_timer: Timer = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar/BatteryTimer
-@onready var default_asuka: Label = $PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/DefaultAsuka
-@onready var default_player: Label = $PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/DefaultPlayer
+@onready var default_asuka: Label = $PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultAsuka
+@onready var default_player: Label = $PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultPlayer
 @onready var background: ColorRect = $PhoneSize/Background
 @onready var black_background: ColorRect = $PhoneSize/BlackBackground
 
-@export var max_battery: float = 100.0
+@export var max_battery: float = 300.0
 
 # ----- INITIALIZATION AND PHYSICS -----
 

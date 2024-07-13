@@ -81,7 +81,7 @@ func exit() -> void:
 
 func start_angry_dialogue() -> void:
 	var dialogue_path: String = "res://dialogues/angry_asuka_%d.dialogue" % angry_dialogue_index
-	var dialogue_resource     = load(dialogue_path)
+	var dialogue_resource = load(dialogue_path)
 	
 	if dialogue_resource:
 		StoryManager.start_dialogue(StoryManager.dialogue_balloon, dialogue_resource, dialogue_start, self, true)

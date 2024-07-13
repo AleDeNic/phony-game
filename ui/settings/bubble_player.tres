@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://16acir6c1ycc"]
+
+[ext_resource type="FontFile" uid="uid://bc421jf5gpyi4" path="res://ui/fonts/ArialNarrow.TTF" id="1_ypgu7"]
+
+[resource]
+line_spacing = 1.0
+font = ExtResource("1_ypgu7")
+font_size = 42

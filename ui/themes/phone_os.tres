@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=18 format=3 uid="uid://v3wqj6dvklo0"]
+[gd_resource type="Theme" load_steps=21 format=3 uid="uid://v3wqj6dvklo0"]
 
 [ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="1_husnp"]
 [ext_resource type="Texture2D" uid="uid://mvnf1ybkdtub" path="res://assets/images/icons/empty.png" id="2_odldd"]
@@ -9,26 +9,24 @@
 [ext_resource type="StyleBox" uid="uid://c4lw5oyyq5657" path="res://ui/styles/battery_bar_fill.tres" id="5_wcsjy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d1qcl"]
-content_margin_left = 24.0
-content_margin_right = 24.0
 bg_color = Color(1, 1, 1, 0)
 draw_center = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n8he5"]
-content_margin_left = 24.0
-content_margin_right = 24.0
-bg_color = Color(1, 1, 1, 1)
+bg_color = Color(1, 1, 1, 0.501961)
+expand_margin_left = 48.0
+expand_margin_right = 48.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c07qa"]
-content_margin_left = 24.0
-content_margin_right = 24.0
 bg_color = Color(1, 1, 1, 1)
 draw_center = false
+expand_margin_left = 48.0
+expand_margin_right = 48.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b40ib"]
-content_margin_left = 24.0
-content_margin_right = 24.0
 bg_color = Color(1, 1, 1, 0.501961)
+expand_margin_left = 48.0
+expand_margin_right = 48.0
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_32333"]
 color = Color(1, 1, 1, 1)
@@ -61,6 +59,18 @@ expand_margin_top = 24.0
 expand_margin_right = 24.0
 expand_margin_bottom = 24.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6vnp3"]
+content_margin_right = 24.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifotf"]
+bg_color = Color(1, 1, 1, 0.627451)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njws0"]
+draw_center = false
+border_width_left = 12
+corner_detail = 1
+
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_v1ukr"]
 color = Color(1, 1, 1, 1)
 grow_begin = 0.0
@@ -68,9 +78,11 @@ grow_end = 0.0
 thickness = 0
 
 [resource]
-Button/colors/font_color = Color(0, 0, 0, 0.784314)
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
-Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
 Button/colors/icon_hover_color = Color(0, 0, 0, 1)
 Button/colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
 Button/colors/icon_pressed_color = Color(0, 0, 0, 1)
@@ -91,15 +103,15 @@ HSlider/icons/grabber_highlight = ExtResource("2_odldd")
 HSlider/icons/tick = ExtResource("2_odldd")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_prsn3")
 HSlider/styles/slider = SubResource("StyleBoxFlat_lhuxj")
-Label/colors/font_color = Color(0.0980392, 0.0980392, 0.0980392, 0.784314)
+Label/colors/font_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
 Label/font_sizes/font_size = 36
 Label/fonts/font = ExtResource("1_husnp")
 Label/styles/bubble_chat = ExtResource("3_legdh")
 Label/styles/bubble_player = ExtResource("4_syer0")
 Label/styles/normal = SubResource("StyleBoxFlat_i8c8n")
 MarginContainer/constants/margin_bottom = 24
-MarginContainer/constants/margin_left = 24
-MarginContainer/constants/margin_right = 24
+MarginContainer/constants/margin_left = 48
+MarginContainer/constants/margin_right = 48
 MarginContainer/constants/margin_top = 24
 Panel/styles/panel = SubResource("StyleBoxFlat_xpriy")
 ProgressBar/colors/font_color = Color(0, 0, 0, 1)
@@ -107,5 +119,8 @@ ProgressBar/font_sizes/font_size = 32
 ProgressBar/fonts/font = ExtResource("3_b1npm")
 ProgressBar/styles/background = ExtResource("4_j8c6n")
 ProgressBar/styles/fill = ExtResource("5_wcsjy")
-VBoxContainer/constants/separation = 16
+ScrollContainer/styles/panel = SubResource("StyleBoxEmpty_6vnp3")
+VBoxContainer/constants/separation = 0
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_ifotf")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_njws0")
 VSeparator/styles/separator = SubResource("StyleBoxLine_v1ukr")
