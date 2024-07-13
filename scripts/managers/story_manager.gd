@@ -6,7 +6,6 @@ var current_dialogue_area: Area2D = null
 @onready var dialogue_balloon: String = "res://scenes/balloons/dialogue_balloon.tscn"
 
 @onready var asuka: Area2D = get_node("/root/World/Asuka")
-@onready var points: int = 0
 @onready var dialogue_scene: String = ""
 @onready var dialogue_resource: Resource = null
 @onready var dialogue_start: String = ""
@@ -29,9 +28,6 @@ func _ready() -> void:
 	print("Ready function executed. DialogueManager.dialogue_ended connected.")
 
 # ----- STATE GETTERS -----
-func get_points() -> int:
-	return points
-
 func get_dialogue_resource() -> Resource:
 	return dialogue_resource
 

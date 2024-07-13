@@ -3,11 +3,14 @@ extends Node
 enum Phase { SPLASH, PROLOGUE, MIDDLE, END, CREDITS }
 
 @onready var phase_state: Phase = Phase.PROLOGUE
+@onready var points: int = 0
+@onready var threshold: int = 15
 
 # ----- INITIALIZATION AND PHYSICS -----
-
-
 # ----- HANDLING PHASE -----
+func get_points() -> int:
+	return points
+	
 
 func set_phase(new_phase: Phase) -> void:
 	phase_state = new_phase
