@@ -22,11 +22,11 @@ func _physics_process(_delta: float) -> void:
 # ----- HANDLE FILTERS -----
 
 func handle_phone_sickness_filter() -> void:
-	if BrainManager.phone_sickness > BrainManager.phone_sickness_wait:
+	if NotificationsManager.phone_sickness > NotificationsManager.phone_sickness_wait:
 		
-		blur_inner = map_range(BrainManager.phone_sickness, BrainManager.phone_sickness_wait, BrainManager.max_phone_sickness, 0.8, 0.0)
-		blur_radius = map_range(BrainManager.phone_sickness, BrainManager.phone_sickness_wait, BrainManager.max_phone_sickness, 0.25, 0.6)
-		blur_outer = map_range(BrainManager.phone_sickness, BrainManager.phone_sickness_wait, BrainManager.max_phone_sickness, 0.7, 0.35)
+		blur_inner = map_range(NotificationsManager.phone_sickness, NotificationsManager.phone_sickness_wait, NotificationsManager.max_phone_sickness, 0.8, 0.0)
+		blur_radius = map_range(NotificationsManager.phone_sickness, NotificationsManager.phone_sickness_wait, NotificationsManager.max_phone_sickness, 0.25, 0.6)
+		blur_outer = map_range(NotificationsManager.phone_sickness, NotificationsManager.phone_sickness_wait, NotificationsManager.max_phone_sickness, 0.7, 0.35)
 		
 		blur_vignette.set_shader_parameter("blur_inner", blur_inner)
 		blur_vignette.set_shader_parameter("blur_radius", blur_radius)

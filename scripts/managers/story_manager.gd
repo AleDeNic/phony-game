@@ -43,10 +43,8 @@ func get_dialogue_area() -> Area2D:
 func get_active_balloon() -> Node:
 	return active_balloon
 
+
 # ----- STATE SETTERS -----
-func add_points(value: int) -> void:
-	points += value
-	print("Points added. Current points: ", points)
 
 func set_dialogue_resource(resource: Resource) -> void:
 	dialogue_resource = resource

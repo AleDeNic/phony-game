@@ -57,7 +57,6 @@ func _on_phone_os_mouse_exited() -> void:
 		exit()
 
 func enter_phone() -> void:
-	NotificationsManager.increase_probability()
 	player.set_focus_target(global_position, player.focus_speed_phone)
 	PlayerManager.set_player_focusing_on_phone()
 	phone_os.restore_phone_state()
