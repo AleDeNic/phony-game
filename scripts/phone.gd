@@ -51,7 +51,7 @@ func _on_area_entered(_area: Area2D) -> void:
 		enter_phone()
 
 func _on_phone_os_mouse_exited() -> void:
-	if !PlayerManager.is_player_free() and !NotificationsManager.has_notification_arrived:
+	if !PlayerManager.is_player_free() and NotificationsManager.are_notifications_cleared:
 		exit_phone()
 
 func enter_phone() -> void:
@@ -63,6 +63,7 @@ func enter_phone() -> void:
 	set_phone_scale(max_scale, scale_up_speed)
 	set_phone_rotation(max_rotation, rotation_up_speed)
 	phone_effects.set_effects(phone_effects.MAX_LOD, effects_increase_speed)
+	phone_os.background.visible = true
 
 func exit_phone() -> void:
 	player.current_speed = 0.0
@@ -73,6 +74,7 @@ func exit_phone() -> void:
 	set_phone_scale(min_scale, scale_down_speed)
 	set_phone_rotation(min_rotation, rotation_down_speed)
 	phone_effects.set_effects(phone_effects.MIN_LOD, effects_decrease_speed)
+	phone_os.background.visible = false
 
 
 # ----- SET ANIMATIONS -----

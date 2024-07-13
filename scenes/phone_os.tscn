@@ -28,10 +28,10 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gne0p"]
 shader = ExtResource("3_4lvoo")
 shader_parameter/lod = 3.0
-shader_parameter/blend_factor = 1.0
-shader_parameter/overlay = Vector3(1, 1, 1)
-shader_parameter/saturation = 1.0
-shader_parameter/blur_size = 1.0
+shader_parameter/blend_factor = 0.5
+shader_parameter/overlay = Vector3(0.1, 0.1, 0.2)
+shader_parameter/saturation = 0.5
+shader_parameter/blur_size = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n8he5"]
 bg_color = Color(1, 1, 1, 1)
@@ -97,7 +97,19 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="Background" type="ColorRect" parent="PhoneSize"]
+visible = false
 material = SubResource("ShaderMaterial_gne0p")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.439216)
+
+[node name="WhiteBackground" type="ColorRect" parent="PhoneSize"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -302,6 +314,7 @@ grow_vertical = 0
 layout_mode = 2
 
 [node name="Chats" type="Control" parent="PhoneSize"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -350,7 +363,6 @@ icon = ExtResource("9_6xph0")
 alignment = 0
 
 [node name="AsukaChat" type="Control" parent="PhoneSize"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -358,17 +370,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-
-[node name="Background" type="ColorRect" parent="PhoneSize/AsukaChat"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(1, 1, 1, 0.439216)
 
 [node name="MarginContainer" type="MarginContainer" parent="PhoneSize/AsukaChat"]
 layout_mode = 1
@@ -404,7 +405,8 @@ size_flags_horizontal = 0
 size_flags_vertical = 3
 theme = SubResource("Theme_mdga8")
 
-[node name="Asuka01" type="Label" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="DefaultAsuka" type="Label" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(600, 1)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -414,7 +416,7 @@ text = "this is just a placeholder text. don't think this is the real thing 'cau
 label_settings = ExtResource("13_lgy4j")
 autowrap_mode = 3
 
-[node name="Player01" type="Label" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="DefaultPlayer" type="Label" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
@@ -422,50 +424,6 @@ size_flags_horizontal = 8
 size_flags_stretch_ratio = 0.0
 theme = SubResource("Theme_mdga8")
 theme_override_styles/normal = ExtResource("14_yaw3x")
-text = "this is just a placeholder text. don't think this is the real thing 'cause it's not."
-label_settings = ExtResource("13_lgy4j")
-autowrap_mode = 3
-
-[node name="Asuka02" type="Label" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(600, 1)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = SubResource("Theme_mdga8")
-theme_override_styles/normal = ExtResource("13_o3gel")
-text = "this is just a placeholder text. don't think this is the real thing 'cause it's not."
-label_settings = ExtResource("13_lgy4j")
-autowrap_mode = 3
-
-[node name="Asuka03" type="Label" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(600, 1)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = SubResource("Theme_mdga8")
-theme_override_styles/normal = ExtResource("13_o3gel")
-text = "this is just a placeholder text. don't think this is the real thing 'cause it's not."
-label_settings = ExtResource("13_lgy4j")
-autowrap_mode = 3
-
-[node name="Asuka04" type="Label" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(600, 1)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = SubResource("Theme_mdga8")
-theme_override_styles/normal = ExtResource("13_o3gel")
-text = "this is just a placeholder text. don't think this is the real thing 'cause it's not."
-label_settings = ExtResource("13_lgy4j")
-autowrap_mode = 3
-
-[node name="Asuka05" type="Label" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(600, 1)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = SubResource("Theme_mdga8")
-theme_override_styles/normal = ExtResource("13_o3gel")
 text = "this is just a placeholder text. don't think this is the real thing 'cause it's not."
 label_settings = ExtResource("13_lgy4j")
 autowrap_mode = 3
