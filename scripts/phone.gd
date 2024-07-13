@@ -4,7 +4,6 @@ extends Area2D
 @onready var camera: Camera2D = get_node("/root/World/Player/Camera2D")
 @onready var player: CharacterBody2D = %Player
 @onready var phone_os: Control = $PhoneOS
-@export var dialogue_resource: Resource = load("res://dialogues/angry_asuka.dialogue")
 @export var dialogue_start: String = "angry_asuka_intro"
 
 @export_group("Scale sizes")
@@ -33,6 +32,7 @@ var current_rotation_speed: float = 0.0
 var target_rotation: float = min_rotation
 
 var is_dialogue_started: bool = false
+var angry_dialogue_index: int = 0
 
 # ----- INITIALIZATION AND PHYSICS -----
 
@@ -45,7 +45,6 @@ func _physics_process(delta: float) -> void:
 	if PlayerManager.is_player_focusing():
 		update_scale(delta)
 		update_rotation(delta)
-
 
 # --------- PHONE INTERACTIONS -----------
 
@@ -69,7 +68,7 @@ func enter_phone() -> void:
 	phone_os.background.visible = true
 	
 	if !is_dialogue_started:
-		StoryManager.start_dialogue(StoryManager.dialogue_balloon, dialogue_resource, dialogue_start, self, true)
+		start_angry_dialogue()
 		is_dialogue_started = true
 
 func exit() -> void:
@@ -83,6 +82,15 @@ func exit() -> void:
 	phone_effects.set_effects(phone_effects.MIN_LOD, effects_decrease_speed)
 	phone_os.background.visible = false
 
+func start_angry_dialogue() -> void:
+	var dialogue_path = "res://dialogues/angry_asuka_%d.dialogue" % angry_dialogue_index
+	var dialogue_resource = load(dialogue_path)
+	
+	if dialogue_resource:
+		StoryManager.start_dialogue(StoryManager.dialogue_balloon, dialogue_resource, dialogue_start, self, true)
+		angry_dialogue_index += 1
+	else:
+		print("Dialogue resource not found: ", dialogue_path)
 
 # ----- SET ANIMATIONS -----
 
@@ -95,7 +103,6 @@ func set_phone_rotation(rotation_value: float, rotation_speed: float) -> void:
 	if target_rotation != rotation_value:
 		target_rotation = rotation_value
 		current_rotation_speed = rotation_speed
-
 
 # ----- UPDATE SCALE & ROTATION -----
 
