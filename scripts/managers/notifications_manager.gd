@@ -6,10 +6,12 @@ extends Node2D
 signal notification
 
 var rng = RandomNumberGenerator.new()
-var probability: float = 0.01
-var probability_increase: float = 0.0006
+var probability: float = 0.1
+var probability_increase: float = 0.1
 
 var are_notifications_cleared: bool = true
+
+var dialogue_state: int = 1
 
 
 # ----- INIT -----
@@ -20,28 +22,21 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if !PlayerManager.is_player_focused_phone():
 		handle_notifications()
-	#if PlayerManager.is_player_focused_phone() and has_notification_arrived:
-		#reset_notification()
-
-# TODO reset notifications only when you read all of them
 
 
 # ----- RANDOM NOTIFICATIONS -----
 
 func handle_notifications() -> void:
-	increase_probability()
-
 	var random_number: float = rng.randf_range(0.0, 100.0)
 	if random_number <= probability:
 		phone_vibration.play()
-		probability = 0.001
 		are_notifications_cleared = false
 		emit_signal("notification")
+		print("notification arrived. Probability: ", probability)
 
 func increase_probability() -> void:
-	probability += probability_increase
-	# print("Probability increased by: ", probability_increase)
+	probability += dialogue_state * probability_increase
+	print("Probability increased by: ", dialogue_state * probability_increase)
 
-func reset_notification() -> void:
-	#has_notification_arrived = false
-	print("Notification::Reset::Relive")
+func clear_notifications() -> void:
+	are_notifications_cleared = true

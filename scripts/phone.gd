@@ -55,9 +55,9 @@ func _on_phone_os_mouse_exited() -> void:
 		exit_phone()
 
 func enter_phone() -> void:
+	NotificationsManager.increase_probability()
 	player.set_focus_target(global_position, player.focus_speed_phone)
 	PlayerManager.set_player_focusing_on_phone()
-	# TODO: Change this change this change this change this change this change this change this change this change this change this change this change this 
 	phone_os.restore_phone_state()
 	camera.set_camera_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
 	set_phone_scale(max_scale, scale_up_speed)

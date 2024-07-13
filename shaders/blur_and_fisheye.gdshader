@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 uniform float lod: hint_range(0.0, 5.0) = 2.0;
-uniform float effect_amount : hint_range(-2.5, 2.5) = 0.8;
+uniform float effect_amount : hint_range(-2.5, 2.5) = -0.15;
 
 void fragment() {
     // Fetch screen resolution

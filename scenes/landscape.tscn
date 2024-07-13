@@ -76,7 +76,7 @@ script = ExtResource("3_wisc5")
 
 [node name="SunLight" type="Sprite2D" parent="TrainSprite"]
 modulate = Color(1, 1, 1, 0.294118)
-position = Vector2(2204.75, 1485.9)
+position = Vector2(2435.73, 1036.68)
 rotation = 2.2131
-scale = Vector2(144.416, 83.1438)
+scale = Vector2(117.408, 80.514)
 texture = SubResource("GradientTexture2D_fkblq")

@@ -103,7 +103,7 @@ func _on_chats_pressed() -> void:
 
 func _on_asuka_pressed() -> void:
 	go_to_screen(asukachat)
-	NotificationsManager.are_notifications_cleared = true
+	NotificationsManager.clear_notifications()
 
 func spawn_new_asuka_message() -> void:
 	var new_asuka = default_asuka.duplicate() as Label
@@ -112,7 +112,6 @@ func spawn_new_asuka_message() -> void:
 	parent.move_child(new_asuka, default_asuka.get_index() + 1)
 	new_asuka.visible = true
 	default_asuka = new_asuka
-	print("notification arrived")
 
 func spawn_new_player_message() -> void:
 	var new_player = default_player.duplicate() as Label
