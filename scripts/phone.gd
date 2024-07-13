@@ -60,15 +60,19 @@ func _on_phone_os_mouse_exited() -> void:
 
 func enter_phone() -> void:
 	player.set_focus_target(global_position, player.focus_speed_phone)
+
 	PlayerManager.set_player_focusing_on_phone()
+
 	phone_os.restore_phone_state()
 	camera.set_camera_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
+
 	set_phone_scale(max_scale, scale_up_speed)
 	set_phone_rotation(max_rotation, rotation_up_speed)
+
 	phone_effects.set_effects(phone_effects.MAX_LOD, effects_increase_speed)
-	#phone_os.black_background.visible = false
 	
-	start_angry_dialogue()
+	if PhaseManager.can_dialogue_spawn():
+		start_angry_dialogue()
 	
 	await get_tree().create_timer(1.0).timeout
 	if PlayerManager.is_player_focusing_on_phone():
@@ -76,15 +80,20 @@ func enter_phone() -> void:
 
 func exit() -> void:
 	player.current_speed = 0.0
+
 	PlayerManager.set_player_focusing_out()
 	PhoneManager.set_phone_off()
+
 	phone_os.reset_screens()
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
+
 	set_phone_scale(min_scale, scale_down_speed)
 	set_phone_rotation(min_rotation, rotation_down_speed)
+
 	phone_effects.set_effects(phone_effects.MIN_LOD, effects_decrease_speed)
-	#phone_os.black_background.visible = true
+
 	await get_tree().create_timer(1.0).timeout
+	
 	if PlayerManager.is_player_focusing_out():
 		PlayerManager.set_player_free()
 

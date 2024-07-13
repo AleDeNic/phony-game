@@ -6,6 +6,7 @@ extends Node2D
 signal notification
 
 # ----- PHONE SICKNESS -----
+
 var phone_sickness_increase: int = 1
 var phone_sickness_decrease: int = 30
 var max_phone_sickness: int = 300
@@ -13,6 +14,7 @@ var phone_sickness_wait: int = 100
 var phone_sickness: int = 0
 
 # ----- NOTIFICATIONS -----
+
 var rng = RandomNumberGenerator.new()
 var probability: float = 0.1
 var probability_increase: float = 0.1
@@ -23,13 +25,10 @@ var dialogue_state: int = 1
 
 # ----- INIT AND PROCESS-----
 
-func _ready() -> void:
-	pass
-
 func _physics_process(_delta: float) -> void:
 	handle_notifications()
 	handle_phone_sickness()
-	#print("Player phone_sickness: ", phone_sickness)
+	# print("Player phone_sickness: ", phone_sickness)
 
 
 # ----- PHONE SICKNESS -----
