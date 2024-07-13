@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=16 format=3 uid="uid://v3wqj6dvklo0"]
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://v3wqj6dvklo0"]
 
 [ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="1_husnp"]
 [ext_resource type="Texture2D" uid="uid://mvnf1ybkdtub" path="res://assets/images/icons/empty.png" id="2_odldd"]
@@ -42,6 +42,25 @@ bg_color = Color(1, 1, 1, 1)
 border_width_top = 42
 border_color = Color(1, 1, 1, 0.407843)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i8c8n"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xpriy"]
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 24.0
+expand_margin_top = 24.0
+expand_margin_right = 24.0
+expand_margin_bottom = 24.0
+
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_v1ukr"]
 color = Color(1, 1, 1, 1)
 grow_begin = 0.0
@@ -49,7 +68,7 @@ grow_end = 0.0
 thickness = 0
 
 [resource]
-Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_color = Color(0, 0, 0, 0.784314)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 Button/colors/icon_hover_color = Color(0, 0, 0, 1)
@@ -72,15 +91,17 @@ HSlider/icons/grabber_highlight = ExtResource("2_odldd")
 HSlider/icons/tick = ExtResource("2_odldd")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_prsn3")
 HSlider/styles/slider = SubResource("StyleBoxFlat_lhuxj")
-Label/colors/font_color = Color(0.0992318, 0.0992318, 0.0992318, 1)
+Label/colors/font_color = Color(0.0980392, 0.0980392, 0.0980392, 0.784314)
 Label/font_sizes/font_size = 36
 Label/fonts/font = ExtResource("1_husnp")
 Label/styles/bubble_chat = ExtResource("3_legdh")
 Label/styles/bubble_player = ExtResource("4_syer0")
+Label/styles/normal = SubResource("StyleBoxFlat_i8c8n")
 MarginContainer/constants/margin_bottom = 24
 MarginContainer/constants/margin_left = 24
 MarginContainer/constants/margin_right = 24
 MarginContainer/constants/margin_top = 24
+Panel/styles/panel = SubResource("StyleBoxFlat_xpriy")
 ProgressBar/colors/font_color = Color(0, 0, 0, 1)
 ProgressBar/font_sizes/font_size = 32
 ProgressBar/fonts/font = ExtResource("3_b1npm")

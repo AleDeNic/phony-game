@@ -7,7 +7,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nv2ku"]
 shader = ExtResource("1_8svnj")
 shader_parameter/lod = 0.0
-shader_parameter/effect_amount = -0.0499999
+shader_parameter/effect_amount = -0.0799999
 
 [node name="PhoneEffects" type="Control"]
 layout_mode = 3

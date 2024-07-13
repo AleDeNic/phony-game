@@ -64,7 +64,7 @@ func enter_phone() -> void:
 	set_phone_scale(max_scale, scale_up_speed)
 	set_phone_rotation(max_rotation, rotation_up_speed)
 	phone_effects.set_effects(phone_effects.MAX_LOD, effects_increase_speed)
-	phone_os.background.visible = true
+	#phone_os.black_background.visible = false
 	
 	start_angry_dialogue()
 
@@ -77,7 +77,7 @@ func exit() -> void:
 	set_phone_scale(min_scale, scale_down_speed)
 	set_phone_rotation(min_rotation, rotation_down_speed)
 	phone_effects.set_effects(phone_effects.MIN_LOD, effects_decrease_speed)
-	phone_os.background.visible = false
+	#phone_os.black_background.visible = true
 
 func start_angry_dialogue() -> void:
 	var dialogue_path: String = "res://dialogues/angry_asuka_%d.dialogue" % angry_dialogue_index

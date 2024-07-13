@@ -12,6 +12,7 @@ extends Control
 @onready var default_asuka: Label = $PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/DefaultAsuka
 @onready var default_player: Label = $PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/DefaultPlayer
 @onready var background: ColorRect = $PhoneSize/Background
+@onready var black_background: ColorRect = $PhoneSize/BlackBackground
 
 @export var max_battery: float = 100.0
 
@@ -20,7 +21,9 @@ extends Control
 func _ready() -> void:
 	setup_battery()
 	reset_screens()
-	apps.visible = true
+	#apps.visible = true
+	background.visible = true
+	#black_background.visible = true
 	NotificationsManager.connect("notification", Callable(self, "spawn_new_asuka_message"))
 
 func _physics_process(_delta: float) -> void:

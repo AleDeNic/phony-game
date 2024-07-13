@@ -96,9 +96,9 @@ collision_mask = 4
 script = ExtResource("7_lhypb")
 
 [node name="PhoneSprite" type="Sprite2D" parent="PhoneCanvas/Phone"]
-position = Vector2(126, 25)
+position = Vector2(136, 38)
 rotation = -0.0730508
-scale = Vector2(0.755, 0.755)
+scale = Vector2(0.786291, 0.797138)
 texture = ExtResource("8_kw2w2")
 
 [node name="PhoneOS" parent="PhoneCanvas/Phone" instance=ExtResource("7_g2i3f")]
