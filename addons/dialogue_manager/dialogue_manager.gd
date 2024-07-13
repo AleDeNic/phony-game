@@ -132,6 +132,7 @@ func get_next_dialogue_line(resource: DialogueResource, key: String = "", extra_
 			return await get_next_dialogue_line(resource, dialogue.next_id, extra_game_states, mutation_behaviour)
 	else:
 		got_dialogue.emit(dialogue)
+		print(dialogue)
 		return dialogue
 
 

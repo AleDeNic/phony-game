@@ -26,7 +26,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	check_viewport()
-	#print(current_speed)
 
 	match PlayerManager.get_player_state():
 		PlayerManager.PlayerState.FREE:
