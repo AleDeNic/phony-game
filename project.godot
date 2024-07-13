@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 AudioManager="*res://scripts/managers/audio_manager.gd"
-BrainManager="*res://scripts/managers/brain_manager.gd"
+BrainManager="res://_deprecated/brain_manager.gd"
 NotificationsManager="*res://scripts/managers/notifications_manager.gd"
 PhaseManager="*res://scripts/managers/phase_manager.gd"
 PhoneManager="*res://scripts/managers/phone_manager.gd"
@@ -104,7 +104,7 @@ dialogic_default_action={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://dialogues/asuka.dialogue", "res://dialogues/window.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogues/asuka.dialogue", "res://dialogues/window.dialogue", "res://dialogues/angry_asuka_0.dialogue", "res://dialogues/angry_asuka_1.dialogue")
 
 [layer_names]
 
