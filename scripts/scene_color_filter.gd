@@ -3,19 +3,22 @@ extends CanvasLayer
 @onready var landscape_3d: Node3D = $"../Landscape/ParallaxBackground/ParallaxLayer/SubViewportContainer/SubViewport/Landscape3D"
 @onready var color_filter: ShaderMaterial = $ColorFilter.material as ShaderMaterial
 
-var soft_light_color: Color
 @export var color_amount: float = 0.6
 
-func _ready() -> void:
-	pass # Replace with function body.
 
-func _physics_process(delta: float) -> void:
-	handle_color_filter()
-	change_color_filter(soft_light_color)
+# ----- INITIALIZE EVA 01 -----
+
+func _ready() -> void:
+	effects_coroutine()
+
+func effects_coroutine() -> void:
+	while true:
+		await get_tree().create_timer(0.5).timeout
+		change_color_filter(landscape_3d.current_sky)
+
+
+# ----- COLOR OVERLAY -----
 
 func change_color_filter(color_vector: Color) -> void:
 	color_vector.a = color_amount
 	color_filter.set_shader_parameter("overlay_color", color_vector)
-
-func handle_color_filter() -> void:
-	soft_light_color = landscape_3d.current_sky

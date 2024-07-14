@@ -36,7 +36,8 @@ func notifications_coroutine() -> void:
 	while true:
 		await get_tree().create_timer(0.5).timeout
 		handle_notifications()
-		print(are_notifications_cleared)
+		print("Can notifications arrive?", can_notifications_arrive)
+		print("Are notification cleared?", are_notifications_cleared)
 
 func sickness_coroutine() -> void:
 	while true:
