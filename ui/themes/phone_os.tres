@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=24 format=3 uid="uid://v3wqj6dvklo0"]
+[gd_resource type="Theme" load_steps=25 format=3 uid="uid://v3wqj6dvklo0"]
 
 [ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="1_husnp"]
 [ext_resource type="Texture2D" uid="uid://mvnf1ybkdtub" path="res://assets/images/icons/empty.png" id="2_odldd"]
@@ -6,6 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://bdnuw0by175th" path="res://ui/styles/battery_bar.tres" id="4_j8c6n"]
 [ext_resource type="StyleBox" uid="uid://jgie8qpxs0gh" path="res://ui/styles/bubble_player.tres" id="4_syer0"]
 [ext_resource type="StyleBox" uid="uid://c4lw5oyyq5657" path="res://ui/styles/battery_bar_fill.tres" id="5_wcsjy"]
+[ext_resource type="FontFile" uid="uid://ca4j2u2x7wiml" path="res://ui/fonts/HDArnie-Italic.otf" id="8_6ln5t"]
 [ext_resource type="FontFile" uid="uid://bc421jf5gpyi4" path="res://ui/fonts/ArialNarrow.TTF" id="8_kqulh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d1qcl"]
@@ -148,7 +149,9 @@ ProgressBar/fonts/font = ExtResource("1_husnp")
 ProgressBar/styles/background = ExtResource("4_j8c6n")
 ProgressBar/styles/fill = ExtResource("5_wcsjy")
 RichTextLabel/colors/default_color = Color(0, 0, 0, 0.784314)
+RichTextLabel/font_sizes/italics_font_size = 24
 RichTextLabel/font_sizes/normal_font_size = 42
+RichTextLabel/fonts/italics_font = ExtResource("8_6ln5t")
 RichTextLabel/fonts/normal_font = ExtResource("8_kqulh")
 RichTextLabel/styles/bubble_player = ExtResource("4_syer0")
 RichTextLabel/styles/normal = ExtResource("3_legdh")

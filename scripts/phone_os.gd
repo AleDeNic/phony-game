@@ -129,7 +129,7 @@ func spawn_new_asuka_message() -> void:
 	else:
 		message_sender = generate_mysterious_words(7, 7)
 
-	new_message.text = "[color=" + asuka_color + "]" + message_sender + ":[/color] " + generate_mysterious_words(50, 10)
+	new_message.text = "[color=" + asuka_color + "]" + message_sender + ":[/color]   " + generate_mysterious_words(50, 10) + "  [i][color=gray] at 10:" + str(int(current_time)).pad_zeros(2) + "[/color]"
 	default_message = new_message
 	notification_button.visible = true
 	#scroll_container.scroll_vertical = scroll_container.get_v_scroll_bar().max_value
@@ -142,7 +142,7 @@ func spawn_new_player_message(message_text: String) -> void:
 	parent.move_child(new_player_message, parent.get_child_count() - 1)
 	
 	new_player_message.visible = true
-	new_player_message.text = message_text
+	new_player_message.text = message_text  + "  [i][color=white] at 10:" + str(int(current_time)).pad_zeros(2) + "[/color]"
 	default_player_message = new_player_message  # Update default_player to the new message node
 	
 	print("Notification arrived")
