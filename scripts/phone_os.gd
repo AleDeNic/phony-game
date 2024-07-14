@@ -14,15 +14,17 @@ extends Control
 @onready var background: ColorRect = $PhoneSize/Background
 @onready var black_background: ColorRect = $PhoneSize/BlackBackground
 @onready var notification_button: Button = $PhoneSize/TopBar/MarginContainer/HBoxContainer/NotificationButton
+@onready var clock: Label = $PhoneSize/TopBar/MarginContainer/HBoxContainer/Clock
 
-@export var max_battery: float = 30.0
+@export var max_battery: float = 300.0
+@export var max_time: float = 59
+@export var current_time: float = 12.0
 
 # ----- INITIALIZATION AND PHYSICS -----
 
 func _ready() -> void:
 	setup_battery()
 	reset_screens()
-	#apps.visible = true
 	background.visible = true
 	notification_button.visible = false
 	#black_background.visible = true
@@ -30,10 +32,10 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	handle_battery()
+	handle_clock()
 	if Input.is_action_just_pressed("ui_cancel"):
 		PlayerManager.set_player_focusing_on_phone()
 		go_to_screen(settings)
-	#print_phone_state(phone_state)
 
 
 # ----- BATTERY -----
@@ -46,15 +48,23 @@ func setup_battery() -> void:
 	handle_battery()
 
 func handle_battery() -> void:
-	battery_timer.paused = !PhoneManager.is_battery_active()
-	battery_bar.value = battery_timer.time_left
-	if battery_bar.value == 0:
-		turn_off_phone()
+	if !PhoneManager.is_phone_discharged():
+		battery_timer.paused = !PhoneManager.is_battery_active()
+		battery_bar.value = battery_timer.time_left
+		if battery_bar.value == 0:
+			turn_off_phone()
 
 func turn_off_phone() -> void:
 	PhoneManager.set_phone_discharged()
 	reset_screens()
 	top_bar.visible = false
+
+
+# ----- CLOCK -----
+
+func handle_clock() -> void:
+	current_time = map_range(battery_bar.value, max_battery, 0.0, 12, 59)
+	clock.text = "10:" + str(int(current_time)).pad_zeros(2)
 
 
 # ----- HANDLE SCREENS -----
@@ -131,5 +141,10 @@ func spawn_new_player_message() -> void:
 	default_asuka = new_player
 	print("notification arrived")
 
+
+# ----- UTILS -----
+
+func map_range(value: float, from_min: float, from_max: float, to_min: float, to_max: float) -> float:
+	return (value - from_min) / (from_max - from_min) * (to_max - to_min) + to_min
 
 

@@ -610,7 +610,7 @@ theme = ExtResource("12_fsmwd")
 layout_mode = 2
 theme = ExtResource("12_fsmwd")
 
-[node name="Time" type="Label" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
+[node name="Clock" type="Label" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_vertical = 1

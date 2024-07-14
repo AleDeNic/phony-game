@@ -54,6 +54,8 @@ func get_phone_state_value():
 			return "CHATS"
 		PhoneState.ASUKACHAT:
 			return "ASUKA CHAT"
+		PhoneState.DISCHARGED:
+			return "DISCHARGED"
 			
 func is_phone_off() -> bool:
 	return phone_state == PhoneState.OFF
