@@ -35,12 +35,11 @@ offset_left = 212.0
 offset_top = -1549.0
 offset_right = 972.0
 offset_bottom = -649.0
-scale = Vector2(4.02664, 4.02664)
+scale = Vector2(4, 4)
 
 [node name="SubViewport" type="SubViewport" parent="ParallaxBackground/ParallaxLayer/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(760, 900)
-render_target_update_mode = 4
 
 [node name="Landscape3D" parent="ParallaxBackground/ParallaxLayer/SubViewportContainer/SubViewport" instance=ExtResource("1_ab0o5")]
 

@@ -8,9 +8,10 @@ extends CanvasLayer
 var soft_light_color: Color
 @export var color_amount: float = 0.6
 
-var blur_inner: float = 0.8
-var blur_radius: float = 0.25
-var blur_outer: float = 0.7
+@export var blur_inner: float = 0.8
+@export var blur_radius: float = 0.25
+@export var blur_outer: float = 0.7
+
 
 # ----- PROCESSING!!! -----
 

@@ -8,8 +8,9 @@ enum Phase { SPLASH, PROLOGUE, MIDDLE, END, CREDITS }
 
 var probability: float = 20.0
 
-# ----- INITIALIZATION AND PHYSICS -----
+
 # ----- HANDLING PHASE -----
+
 func get_points() -> int:
 	return points
 	

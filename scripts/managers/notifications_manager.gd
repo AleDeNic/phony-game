@@ -5,19 +5,21 @@ extends Node2D
 
 signal notification
 
+
 # ----- PHONE SICKNESS -----
 
-var phone_sickness_increase: int = 1
-var phone_sickness_decrease: int = 30
-var max_phone_sickness: int = 300
-var phone_sickness_wait: int = 100
+var phone_sickness_increase: int = 20
+var phone_sickness_decrease: int = 50
+var max_phone_sickness: int = 100
+var phone_sickness_wait: int = 1
 var phone_sickness: int = 0
+
 
 # ----- NOTIFICATIONS -----
 
-var rng = RandomNumberGenerator.new()
-var probability: float = 0.6 # should be 0.1 in the final game
-var probability_increase: float = 0.1
+var notification_probability: float = 5.0
+var asuka_message_probability: float = 20.0
+var notification_probability_increase: float = 5.0
 var are_notifications_cleared: bool = true
 
 var dialogue_state: int = 1
@@ -25,11 +27,15 @@ var dialogue_state: int = 1
 
 # ----- INIT AND PROCESS-----
 
-func _physics_process(_delta: float) -> void:
-	handle_notifications()
-	handle_phone_sickness()
-	# print("Player phone_sickness: ", phone_sickness)
+func _ready() -> void:
+	notifications_coroutine()
 
+func notifications_coroutine() -> void:
+	while true:
+		await get_tree().create_timer(1).timeout
+		handle_notifications()
+		handle_phone_sickness()
+		print("Player phone_sickness: ", phone_sickness)
 
 # ----- PHONE SICKNESS -----
 
@@ -56,16 +62,19 @@ func handle_notifications() -> void:
 	if PlayerManager.is_player_focused_phone():
 		reset_phone_sickness()
 	else:
-		var random_number: float = rng.randf_range(0.0, 100.0)
-		if random_number <= probability:
+		var random_number: float = randf_range(0.0, 100.0)
+		if random_number <= notification_probability:
 			phone_vibration.play()
 			are_notifications_cleared = false
 			emit_signal("notification")
-			print("notification arrived. Probability: ", probability)
 
 func increase_probability() -> void:
-	probability += dialogue_state * probability_increase
-	print("Probability increased by: ", dialogue_state * probability_increase)
+	notification_probability += dialogue_state * notification_probability_increase
+	print("Probability increased by: ", dialogue_state * notification_probability_increase)
 
 func clear_notifications() -> void:
 	are_notifications_cleared = true
+
+func is_message_from_asuka() -> bool:
+	var random_number: int = randi() % 100
+	return random_number <= asuka_message_probability

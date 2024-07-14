@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dg55yu6bit6jt"]
+[gd_scene load_steps=35 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_os.gd" id="1_r0wjl"]
 [ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_hqmi7"]
@@ -14,7 +14,6 @@
 [ext_resource type="StyleBox" uid="uid://duct66cpghgeh" path="res://ui/styles/separator.tres" id="8_y0en8"]
 [ext_resource type="StyleBox" uid="uid://c4lw5oyyq5657" path="res://ui/styles/battery_bar_fill.tres" id="9_6yc02"]
 [ext_resource type="Theme" uid="uid://v3wqj6dvklo0" path="res://ui/themes/phone_os.tres" id="12_fsmwd"]
-[ext_resource type="LabelSettings" uid="uid://cs2sk7aftrk1c" path="res://ui/settings/bubble_chat.tres" id="13_lgy4j"]
 [ext_resource type="StyleBox" uid="uid://bkskyjp3vt3rs" path="res://ui/styles/bubble_chat.tres" id="13_o3gel"]
 [ext_resource type="LabelSettings" uid="uid://do3s44f43vkkm" path="res://ui/settings/os_text.tres" id="14_n38hu"]
 [ext_resource type="StyleBox" uid="uid://jgie8qpxs0gh" path="res://ui/styles/bubble_player.tres" id="14_yaw3x"]
@@ -22,7 +21,6 @@
 [ext_resource type="Texture2D" uid="uid://dhc8q2h36kxwr" path="res://assets/images/icons/home.png" id="16_hax3j"]
 [ext_resource type="Texture2D" uid="uid://cewdbxx36id1s" path="res://assets/images/icons/settings.png" id="17_26q5e"]
 [ext_resource type="Theme" uid="uid://b0uon3iawrhwg" path="res://ui/themes/asuka_dialogue.tres" id="19_dm1ly"]
-[ext_resource type="LabelSettings" uid="uid://16acir6c1ycc" path="res://ui/settings/bubble_player.tres" id="21_22xec"]
 [ext_resource type="Texture2D" uid="uid://ddal4ib0em5pb" path="res://assets/images/icons/dialogue.png" id="22_h83me"]
 [ext_resource type="StyleBox" uid="uid://c6yj5nlxgbf6q" path="res://ui/styles/bottom_bar_hover.tres" id="24_4o1io"]
 [ext_resource type="StyleBox" uid="uid://drw7cjkbby3nk" path="res://ui/styles/bottom_bar_pressed.tres" id="25_a714u"]
@@ -41,6 +39,13 @@ draw_center = false
 bg_color = Color(0.945098, 0, 0.32549, 0.470588)
 expand_margin_left = 48.0
 expand_margin_right = 48.0
+
+[sub_resource type="Gradient" id="Gradient_p7c3o"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tenqg"]
+gradient = SubResource("Gradient_p7c3o")
+fill_to = Vector2(0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n8he5"]
 bg_color = Color(1, 1, 1, 1)
@@ -73,13 +78,6 @@ ProgressBar/fonts/font = ExtResource("7_f3rx8")
 ProgressBar/styles/background = ExtResource("8_v8ae1")
 ProgressBar/styles/fill = ExtResource("9_6yc02")
 VBoxContainer/constants/separation = 16
-
-[sub_resource type="Gradient" id="Gradient_p7c3o"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_tenqg"]
-gradient = SubResource("Gradient_p7c3o")
-fill_to = Vector2(0, 1)
 
 [sub_resource type="Gradient" id="Gradient_um8yg"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
@@ -183,7 +181,7 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
-text = "Chats"
+text = "Chat"
 alignment = 0
 
 [node name="Video" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
@@ -390,57 +388,30 @@ size_flags_vertical = 3
 theme = ExtResource("12_fsmwd")
 theme_override_constants/separation = 16
 
-[node name="DefaultMessage" type="Label" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="DefaultMessage" type="RichTextLabel" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 1
 theme = ExtResource("12_fsmwd")
-theme_override_styles/normal = ExtResource("13_o3gel")
+bbcode_enabled = true
 text = "this is just a placeholder text. don't think this is the real thing 'cause it's not."
-label_settings = ExtResource("13_lgy4j")
-autowrap_mode = 3
+fit_content = true
+scroll_following = true
 
-[node name="DefaultPlayer" type="Label" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="DefaultPlayerMessage" type="RichTextLabel" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-size_flags_stretch_ratio = 0.0
+mouse_filter = 1
 theme = ExtResource("12_fsmwd")
+theme_override_colors/default_color = Color(1, 1, 1, 0.92549)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.141176)
 theme_override_styles/normal = ExtResource("14_yaw3x")
+bbcode_enabled = true
 text = "this is just a placeholder text. don't think this is the real thing 'cause it's not."
-label_settings = ExtResource("21_22xec")
-autowrap_mode = 3
-
-[node name="DefaultAsuka2" type="Label" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(560, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = SubResource("Theme_mdga8")
-theme_override_styles/normal = ExtResource("13_o3gel")
-text = "this is just a placeholder text. don't think this is the real thing 'cause it's not."
-label_settings = ExtResource("13_lgy4j")
-autowrap_mode = 3
-
-[node name="DefaultPlayer2" type="Label" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(560, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_stretch_ratio = 0.0
-theme = SubResource("Theme_mdga8")
-theme_override_styles/normal = ExtResource("14_yaw3x")
-text = "this is just a placeholder text. don't think this is the real thing 'cause it's not."
-label_settings = ExtResource("21_22xec")
-autowrap_mode = 3
-
-[node name="DefaultAsuka3" type="Label" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(560, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = SubResource("Theme_mdga8")
-theme_override_styles/normal = ExtResource("13_o3gel")
-text = "this is just a placeholder text. don't think this is the real thing 'cause it's not."
-label_settings = ExtResource("13_lgy4j")
-autowrap_mode = 3
+fit_content = true
+scroll_following = true
 
 [node name="HSeparator2" type="HSeparator" parent="PhoneSize/Chat/MarginContainer/VBoxContainer"]
 layout_mode = 2

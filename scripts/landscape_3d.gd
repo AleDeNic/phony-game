@@ -43,13 +43,16 @@ var target_water: Color
 func _ready() -> void:
 	setup_colors()
 	handle_target_colors()
+	colors_coroutine()
 
-func _physics_process(_delta: float) -> void:
-	handle_target_colors()
-	handle_sky_and_ground()
-	handle_horizon()
-	handle_water()
-	handle_color_filter()
+func colors_coroutine() -> void:
+	while true:
+		await get_tree().create_timer(0.5).timeout
+		handle_target_colors()
+		handle_sky_and_ground()
+		handle_horizon()
+		handle_water()
+		handle_color_filter()
 
 
 # ----- COLOR HANDLING -----
