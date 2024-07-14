@@ -1,19 +1,26 @@
-[gd_scene load_steps=29 format=3 uid="uid://bduasgadssrkv"]
+[gd_scene load_steps=36 format=3 uid="uid://bduasgadssrkv"]
 
 [ext_resource type="Script" path="res://scripts/asuka.gd" id="4_1kcn2"]
 [ext_resource type="PackedScene" uid="uid://cw0nk6gkudho2" path="res://scenes/landscape.tscn" id="4_u7jec"]
-[ext_resource type="Texture2D" uid="uid://bfxqev4pj4cv2" path="res://assets/images/asuka_03.png" id="5_01stb"]
+[ext_resource type="Script" path="res://scripts/asuka_sprites.gd" id="5_23i0c"]
+[ext_resource type="Texture2D" uid="uid://c22mm8g3dhe77" path="res://assets/images/asuka/Asuka_armsontable.png" id="5_60vxw"]
 [ext_resource type="Script" path="res://scripts/window.gd" id="5_p0u8t"]
+[ext_resource type="Texture2D" uid="uid://722n6qlga4k1" path="res://assets/images/asuka/asuka_03_arms.png" id="6_25xk2"]
+[ext_resource type="Texture2D" uid="uid://der57pjxyh82s" path="res://assets/images/asuka/asuka_exp_pleased.png" id="7_dqynw"]
 [ext_resource type="PackedScene" uid="uid://dg55yu6bit6jt" path="res://scenes/phone_os.tscn" id="7_g2i3f"]
 [ext_resource type="Script" path="res://scripts/phone.gd" id="7_lhypb"]
+[ext_resource type="Texture2D" uid="uid://hj4qx3t8bt0s" path="res://assets/images/asuka/asuka_exp_talking.png" id="8_ingyy"]
 [ext_resource type="Texture2D" uid="uid://7ndlo5c3k4sq" path="res://assets/images/phone_2.png" id="8_kw2w2"]
 [ext_resource type="Texture2D" uid="uid://bvbhrwpow0q30" path="res://assets/images/eyes.png" id="9_fl5a1"]
 [ext_resource type="PackedScene" uid="uid://o0205cjoosgq" path="res://scenes/player.tscn" id="9_o22lg"]
+[ext_resource type="Texture2D" uid="uid://cf1limxyfyrs" path="res://assets/images/asuka/asuka_exp_upset.png" id="9_vu23h"]
+[ext_resource type="Texture2D" uid="uid://lpc65lv8g72l" path="res://assets/images/asuka/asuka_eyes_closed.png" id="10_gjmsp"]
+[ext_resource type="Texture2D" uid="uid://cva28k0te0pa6" path="res://assets/images/asuka/asuka_eyes_lookaway.png" id="11_b37oy"]
 [ext_resource type="PackedScene" uid="uid://cag4fc4uu0krp" path="res://scenes/audio_manager.tscn" id="12_3unc5"]
 [ext_resource type="Shader" path="res://shaders/color_soft_light.gdshader" id="12_ghcqe"]
-[ext_resource type="Script" path="res://scripts/scene_color_filter.gd" id="12_x0p2c"]
+[ext_resource type="Texture2D" uid="uid://b8um65qvmuqr0" path="res://assets/images/asuka/asuka_eyes_normal.png" id="12_tpe1b"]
+[ext_resource type="Script" path="res://scripts/color_filter.gd" id="12_x0p2c"]
 [ext_resource type="Script" path="res://scripts/phone_effects.gd" id="13_el7tb"]
-[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="14_ntobp"]
 [ext_resource type="Shader" path="res://shaders/blur_and_fisheye.gdshader" id="15_80wp3"]
 [ext_resource type="Script" path="res://scripts/player_effects.gd" id="16_6m8c5"]
 [ext_resource type="Shader" path="res://shaders/blur_vignette.gdshader" id="17_5vfsr"]
@@ -87,18 +94,60 @@ input_pickable = false
 script = ExtResource("4_1kcn2")
 
 [node name="EyesSprite" type="AnimatedSprite2D" parent="Asuka"]
+visible = false
 position = Vector2(-15, -156)
 scale = Vector2(2.72581, 2.72581)
 sprite_frames = SubResource("SpriteFrames_yqvk5")
 
-[node name="Sprite2D" type="Sprite2D" parent="Asuka"]
-position = Vector2(-104.375, 398.863)
-scale = Vector2(0.437384, 0.437384)
-texture = ExtResource("5_01stb")
-
 [node name="AsukaEnterCollision" type="CollisionShape2D" parent="Asuka"]
 position = Vector2(2, -94)
 shape = SubResource("CircleShape2D_4wa7i")
+
+[node name="AsukaSprites" type="Node2D" parent="Asuka"]
+script = ExtResource("5_23i0c")
+
+[node name="Asuka03" type="Sprite2D" parent="Asuka/AsukaSprites"]
+position = Vector2(-113, 513)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("5_60vxw")
+
+[node name="Asuka03Arms" type="Sprite2D" parent="Asuka/AsukaSprites"]
+position = Vector2(-100, 225)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("6_25xk2")
+
+[node name="AsukaExpressions" type="Node2D" parent="Asuka/AsukaSprites"]
+position = Vector2(-1, -13)
+
+[node name="ExpPleased" type="Sprite2D" parent="Asuka/AsukaSprites/AsukaExpressions"]
+position = Vector2(-114, -63)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("7_dqynw")
+
+[node name="ExpTalking" type="Sprite2D" parent="Asuka/AsukaSprites/AsukaExpressions"]
+position = Vector2(-116, -62)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("8_ingyy")
+
+[node name="ExpUpset" type="Sprite2D" parent="Asuka/AsukaSprites/AsukaExpressions"]
+position = Vector2(-115, -62)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("9_vu23h")
+
+[node name="AsukaEyes" type="Node2D" parent="Asuka/AsukaSprites"]
+position = Vector2(-116, -64)
+scale = Vector2(0.43, 0.43)
+
+[node name="EyesClosed" type="Sprite2D" parent="Asuka/AsukaSprites/AsukaEyes"]
+position = Vector2(0, -55)
+texture = ExtResource("10_gjmsp")
+
+[node name="EyesLookaway" type="Sprite2D" parent="Asuka/AsukaSprites/AsukaEyes"]
+position = Vector2(0, -86)
+texture = ExtResource("11_b37oy")
+
+[node name="EyesNormal" type="Sprite2D" parent="Asuka/AsukaSprites/AsukaEyes"]
+texture = ExtResource("12_tpe1b")
 
 [node name="Window" type="Area2D" parent="."]
 position = Vector2(1951, -506)
@@ -143,11 +192,11 @@ shape = SubResource("RectangleShape2D_qisob")
 unique_name_in_owner = true
 
 [node name="SceneEffects" type="Node2D" parent="."]
-script = ExtResource("12_x0p2c")
 
 [node name="ColorOverlay" type="CanvasLayer" parent="SceneEffects"]
+script = ExtResource("12_x0p2c")
 
-[node name="ColorFilter" type="ColorRect" parent="SceneEffects/ColorOverlay"]
+[node name="ColorOverlay" type="ColorRect" parent="SceneEffects/ColorOverlay"]
 material = SubResource("ShaderMaterial_b5tpt")
 offset_left = -2674.0
 offset_top = -1683.0
@@ -157,12 +206,6 @@ mouse_filter = 2
 
 [node name="PhoneEffects" type="CanvasLayer" parent="SceneEffects"]
 script = ExtResource("13_el7tb")
-
-[node name="Sprite2D" type="Sprite2D" parent="SceneEffects/PhoneEffects"]
-visible = false
-position = Vector2(-3830.22, -2121.5)
-scale = Vector2(0.693415, 0.780093)
-texture = ExtResource("14_ntobp")
 
 [node name="BlueFilter" type="ColorRect" parent="SceneEffects/PhoneEffects"]
 modulate = Color(1, 1, 1, 0)
@@ -194,12 +237,6 @@ mouse_filter = 2
 [node name="PlayerEffects" type="CanvasLayer" parent="SceneEffects"]
 layer = 6
 script = ExtResource("16_6m8c5")
-
-[node name="Sprite2D" type="Sprite2D" parent="SceneEffects/PlayerEffects"]
-visible = false
-position = Vector2(960, 540)
-scale = Vector2(0.444444, 0.5)
-texture = ExtResource("14_ntobp")
 
 [node name="BlurVignette" type="ColorRect" parent="SceneEffects/PlayerEffects"]
 material = SubResource("ShaderMaterial_8rrhg")

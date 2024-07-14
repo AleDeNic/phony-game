@@ -1,7 +1,7 @@
-extends Node2D
+extends CanvasLayer
 
 @onready var landscape_3d: Node3D = $"../Landscape/ParallaxBackground/ParallaxLayer/SubViewportContainer/SubViewport/Landscape3D"
-@onready var color_filter: ShaderMaterial = $ColorOverlay/ColorFilter.material as ShaderMaterial
+@onready var color_overlay: ShaderMaterial = $ColorOverlay.material as ShaderMaterial
 
 @export var color_amount: float = 0.6
 
@@ -21,4 +21,4 @@ func effects_coroutine() -> void:
 
 func update_color_filter(color_vector: Color) -> void:
 	color_vector.a = color_amount
-	color_filter.set_shader_parameter("overlay_color", color_vector)
+	color_overlay.set_shader_parameter("overlay_color", color_vector)
