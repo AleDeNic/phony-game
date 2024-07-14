@@ -1,17 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwgby5u3ws41u"]
+[gd_scene load_steps=7 format=3 uid="uid://dwgby5u3ws41u"]
 
 [ext_resource type="Script" path="res://scripts/player_effects.gd" id="1_4c5qi"]
 [ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_0buma"]
-[ext_resource type="Shader" path="res://shaders/vignette_blur.gdshader" id="3_1y26i"]
-[ext_resource type="Shader" path="res://shaders/color_soft_light.gdshader" id="3_65on8"]
+[ext_resource type="Shader" path="res://shaders/blur_vignette.gdshader" id="4_ecx1s"]
 [ext_resource type="Shader" path="res://shaders/vignette_color.gdshader" id="4_j57av"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6qsre"]
-shader = ExtResource("3_65on8")
-shader_parameter/overlay_color = Vector4(1, 1, 1, 1)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8rrhg"]
-shader = ExtResource("3_1y26i")
+shader = ExtResource("4_ecx1s")
 shader_parameter/blur_radius = 0.25
 shader_parameter/blur_amount = 4.0
 shader_parameter/blur_inner = 0.8
@@ -19,10 +14,10 @@ shader_parameter/blur_outer = 0.7
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v2vil"]
 shader = ExtResource("4_j57av")
-shader_parameter/inner_radius = 0.163
-shader_parameter/outer_radius = 1.253
-shader_parameter/vignette_strength = 1.864
-shader_parameter/dither_strength = 0.0
+shader_parameter/inner_radius = 0.17
+shader_parameter/outer_radius = 1.7
+shader_parameter/vignette_strength = 1.7
+shader_parameter/dither_strength = 0.07
 shader_parameter/vignette_color = null
 
 [node name="PlayerEffects" type="CanvasLayer"]
@@ -34,12 +29,6 @@ visible = false
 position = Vector2(960, 540)
 scale = Vector2(0.444444, 0.5)
 texture = ExtResource("2_0buma")
-
-[node name="ColorFilter" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_6qsre")
-offset_right = 1920.0
-offset_bottom = 1080.0
-mouse_filter = 2
 
 [node name="BlurVignette" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_8rrhg")

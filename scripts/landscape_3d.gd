@@ -52,7 +52,6 @@ func colors_coroutine() -> void:
 		handle_sky_and_ground()
 		handle_horizon()
 		handle_water()
-		handle_color_filter()
 
 
 # ----- COLOR HANDLING -----
@@ -94,9 +93,6 @@ func setup_colors() -> void:
 	current_horizon = horizon_prologue
 	current_ground = ground_prologue
 	current_water = water_prologue
-
-func handle_color_filter() -> void:
-	player_effects.soft_light_color = current_sky
 
 # ----- UTILS -----
 
