@@ -32,9 +32,9 @@ motion_scale = Vector2(0.6, 0.8)
 [node name="SubViewportContainer" type="SubViewportContainer" parent="ParallaxBackground/ParallaxLayer"]
 z_index = -1
 offset_left = 212.0
-offset_top = -1549.0
+offset_top = -1764.0
 offset_right = 972.0
-offset_bottom = -649.0
+offset_bottom = -864.0
 scale = Vector2(4, 4)
 
 [node name="SubViewport" type="SubViewport" parent="ParallaxBackground/ParallaxLayer/SubViewportContainer"]
