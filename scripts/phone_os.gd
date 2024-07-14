@@ -60,6 +60,7 @@ func handle_battery() -> void:
 
 func turn_off_phone() -> void:
 	PhoneManager.set_phone_discharged()
+	NotificationsManager.clear_notifications()
 	reset_screens()
 	top_bar.visible = false
 
@@ -125,7 +126,7 @@ func _on_asuka_pressed() -> void:
 	notification_button.visible = false
 
 func _on_notification_button_pressed() -> void:
-	go_to_screen(chats)
+	go_to_screen(asukachat)
 
 func _on_input_message_text_submitted(new_text: String) -> void:
 	spawn_new_player_message(new_text)
@@ -139,22 +140,25 @@ func spawn_new_asuka_message() -> void:
 	var new_message = default_message.duplicate() as Label
 	var parent = default_message.get_parent()
 	parent.add_child(new_message)
-	parent.move_child(new_message, default_message.get_index() + 1)
+	parent.move_child(new_message, parent.get_child_count() - 1)
 	new_message.visible = true
 	new_message.text = generate_mysterious_code(50, 10)
 	default_message = new_message
 	notification_button.visible = true
 	#scroll_container.scroll_vertical = scroll_container.get_v_scroll_bar().max_value
 
-func spawn_new_player_message(message_text) -> void:
+func spawn_new_player_message(message_text: String) -> void:
 	var new_player_message = default_player.duplicate() as Label
 	var parent = default_player.get_parent()
+	
 	parent.add_child(new_player_message)
-	parent.move_child(new_player_message, default_player.get_index() + 1)
+	parent.move_child(new_player_message, parent.get_child_count() - 1)
+	
 	new_player_message.visible = true
 	new_player_message.text = message_text
-	default_message = new_player_message
-	print("notification arrived")
+	default_player = new_player_message  # Update default_player to the new message node
+	
+	print("Notification arrived")
 
 
 # ----- UTILS -----
