@@ -63,13 +63,15 @@ func enter_phone() -> void:
 
 	PlayerManager.set_player_focusing_on_phone()
 
-	phone_os.restore_phone_state()
 	camera.set_camera_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
 
 	set_phone_scale(max_scale, scale_up_speed)
 	set_phone_rotation(max_rotation, rotation_up_speed)
 
 	phone_effects.set_effects(phone_effects.MAX_LOD, effects_increase_speed)
+	
+	if !PhoneManager.is_phone_discharged():
+		phone_os.go_to_screen(phone_os.apps)
 	
 	if PhaseManager.can_dialogue_spawn():
 		start_angry_dialogue()
@@ -84,13 +86,15 @@ func exit() -> void:
 	PlayerManager.set_player_focusing_out()
 	PhoneManager.set_phone_off()
 
-	phone_os.reset_screens()
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 
 	set_phone_scale(min_scale, scale_down_speed)
 	set_phone_rotation(min_rotation, rotation_down_speed)
 
 	phone_effects.set_effects(phone_effects.MIN_LOD, effects_decrease_speed)
+
+	if !PhoneManager.is_phone_discharged():
+		phone_os.reset_screens()
 
 	await get_tree().create_timer(1.0).timeout
 	

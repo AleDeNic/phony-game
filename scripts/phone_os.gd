@@ -15,7 +15,7 @@ extends Control
 @onready var black_background: ColorRect = $PhoneSize/BlackBackground
 @onready var notification_button: Button = $PhoneSize/TopBar/MarginContainer/HBoxContainer/NotificationButton
 
-@export var max_battery: float = 300.0
+@export var max_battery: float = 30.0
 
 # ----- INITIALIZATION AND PHYSICS -----
 
@@ -46,16 +46,15 @@ func setup_battery() -> void:
 	handle_battery()
 
 func handle_battery() -> void:
-	if PhoneManager.is_battery_active():
-		battery_timer.paused = false
-	else:
-		battery_timer.paused = true
+	battery_timer.paused = !PhoneManager.is_battery_active()
 	battery_bar.value = battery_timer.time_left
+	if battery_bar.value == 0:
+		turn_off_phone()
 
-
-func restore_phone_state():
-	PhoneManager.set_phone_in_apps()
-	go_to_screen(apps)
+func turn_off_phone() -> void:
+	PhoneManager.set_phone_discharged()
+	reset_screens()
+	top_bar.visible = false
 
 
 # ----- HANDLE SCREENS -----

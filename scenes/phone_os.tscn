@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dg55yu6bit6jt"]
+[gd_scene load_steps=38 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_os.gd" id="1_r0wjl"]
 [ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_hqmi7"]
@@ -6,13 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://bfg0lk6kvgptl" path="res://assets/images/icons/notification_icon.png" id="3_jnjbr"]
 [ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="4_1d7ag"]
 [ext_resource type="Script" path="res://scripts/volume_slider.gd" id="4_5jmmy"]
-[ext_resource type="Texture2D" uid="uid://d4fbje5m8eptw" path="res://assets/images/icons/camera_big.png" id="5_odvuw"]
-[ext_resource type="Texture2D" uid="uid://2khpaq8icmno" path="res://assets/images/icons/chats_big.png" id="6_h8ro3"]
 [ext_resource type="Texture2D" uid="uid://cjmjkd3h610nf" path="res://assets/images/icons/video_icon.png" id="6_vmfnf"]
 [ext_resource type="Texture2D" uid="uid://bm2pd3jhn61iq" path="res://assets/images/selfie.png" id="7_7bxb7"]
 [ext_resource type="FontFile" uid="uid://d02ygxi1jy6m3" path="res://ui/fonts/neuropol_x.otf" id="7_f3rx8"]
 [ext_resource type="LabelSettings" uid="uid://b0qm7cdafhgra" path="res://ui/settings/app_title.tres" id="8_0yw4n"]
-[ext_resource type="Texture2D" uid="uid://dtqp3xtvx65g1" path="res://assets/images/icons/settings_big.png" id="8_n8wtp"]
 [ext_resource type="StyleBox" uid="uid://bdnuw0by175th" path="res://ui/styles/battery_bar.tres" id="8_v8ae1"]
 [ext_resource type="StyleBox" uid="uid://duct66cpghgeh" path="res://ui/styles/separator.tres" id="8_y0en8"]
 [ext_resource type="Texture2D" uid="uid://byqi5w8p5ltyq" path="res://assets/images/cursor_48.png" id="9_6xph0"]
@@ -147,6 +144,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0.439216)
 
 [node name="Apps" type="Control" parent="PhoneSize"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -178,7 +176,6 @@ layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 text = "Camera"
-icon = ExtResource("5_odvuw")
 alignment = 0
 
 [node name="Chats" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
@@ -186,7 +183,6 @@ layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 text = "Chats"
-icon = ExtResource("6_h8ro3")
 alignment = 0
 
 [node name="Video" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
@@ -204,7 +200,6 @@ mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 text = "Settings
 "
-icon = ExtResource("8_n8wtp")
 alignment = 0
 
 [node name="Settings" type="Control" parent="PhoneSize"]
@@ -341,7 +336,6 @@ grow_vertical = 0
 layout_mode = 2
 
 [node name="Chats" type="Control" parent="PhoneSize"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -360,6 +354,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("12_fsmwd")
 theme_override_constants/margin_top = 128
+theme_override_constants/margin_bottom = 163
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PhoneSize/Chats/MarginContainer"]
 layout_mode = 2
@@ -386,7 +381,53 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
-text = "Asuka"
+text = "bottolo"
+icon = ExtResource("9_6xph0")
+alignment = 0
+
+[node name="Chat02" type="Button" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+text = "PROCEDURAL ART"
+icon = ExtResource("9_6xph0")
+alignment = 0
+
+[node name="Chat03" type="Button" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+text = "Mum
+"
+icon = ExtResource("9_6xph0")
+alignment = 0
+
+[node name="Chat04" type="Button" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+text = "azazello"
+icon = ExtResource("9_6xph0")
+alignment = 0
+
+[node name="Chat05" type="Button" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+text = "hikikomori_hideout"
+icon = ExtResource("9_6xph0")
+alignment = 0
+
+[node name="Chat06" type="Button" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+text = "Nihilist Meme Stash"
 icon = ExtResource("9_6xph0")
 alignment = 0
 
