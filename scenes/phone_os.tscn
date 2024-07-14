@@ -392,6 +392,7 @@ theme_override_constants/separation = 16
 custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
 size_flags_horizontal = 0
+size_flags_vertical = 0
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 bbcode_enabled = true
@@ -403,13 +404,14 @@ scroll_following = true
 custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 0
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 theme_override_colors/default_color = Color(1, 1, 1, 0.92549)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.141176)
 theme_override_styles/normal = ExtResource("14_yaw3x")
 bbcode_enabled = true
-text = "this is just a placeholder text. don't think this is the real thing 'cause it's not."
+text = "this is just 2wwwwwwwwwww wwwwww"
 fit_content = true
 scroll_following = true
 
@@ -430,7 +432,7 @@ tooltip_text = "... how should i answer?"
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 placeholder_text = "Write a message..."
-max_length = 40
+max_length = 64
 caret_blink = true
 
 [node name="SendMessage" type="Button" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/HBoxContainer"]
@@ -482,7 +484,6 @@ theme = ExtResource("12_fsmwd")
 [node name="Clock" type="Label" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
-size_flags_vertical = 1
 theme = SubResource("Theme_mdga8")
 text = "10:36"
 label_settings = ExtResource("14_n38hu")
@@ -495,6 +496,7 @@ theme = ExtResource("12_fsmwd")
 
 [node name="NotificationButton" type="Button" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 icon = ExtResource("3_jnjbr")
@@ -507,12 +509,14 @@ mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 
 [node name="BatteryBar" type="ProgressBar" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(128, 0)
+custom_minimum_size = Vector2(128, 48)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 max_value = 30.0
+step = 0.1
+show_percentage = false
 
 [node name="BatteryTimer" type="Timer" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar"]
 one_shot = true

@@ -99,11 +99,13 @@ func _on_chat_pressed() -> void:
 	go_to_screen(chat)
 	NotificationsManager.clear_notifications()
 	notification_button.visible = false
+	scroll_container_to_bottom()
 
 func _on_notification_button_pressed() -> void:
 	go_to_screen(chat)
 	NotificationsManager.clear_notifications()
 	notification_button.visible = false
+	scroll_container_to_bottom()
 
 func _on_input_message_text_submitted(new_text: String) -> void:
 	spawn_new_player_message(new_text)
@@ -129,10 +131,9 @@ func spawn_new_asuka_message() -> void:
 	else:
 		message_sender = generate_mysterious_words(7, 7)
 
-	new_message.text = "[color=" + asuka_color + "]" + message_sender + ":[/color]   " + generate_mysterious_words(50, 10) + "  [i][color=gray] at 10:" + str(int(current_time)).pad_zeros(2) + "[/color]"
+	new_message.text = "[color=" + asuka_color + "]" + message_sender + ":[/color]   " + generate_mysterious_words(50, 10) + "  [i][color=gray] at 10:" + str(int(current_time)).pad_zeros(2) + "[/color][/i]"
 	default_message = new_message
 	notification_button.visible = true
-	#scroll_container.scroll_vertical = scroll_container.get_v_scroll_bar().max_value
 
 func spawn_new_player_message(message_text: String) -> void:
 	var new_player_message = default_player_message.duplicate() as RichTextLabel
@@ -142,10 +143,16 @@ func spawn_new_player_message(message_text: String) -> void:
 	parent.move_child(new_player_message, parent.get_child_count() - 1)
 	
 	new_player_message.visible = true
-	new_player_message.text = message_text  + "  [i][color=white] at 10:" + str(int(current_time)).pad_zeros(2) + "[/color]"
-	default_player_message = new_player_message  # Update default_player to the new message node
+	new_player_message.text = message_text  + "  [i][color=white] at 10:" + str(int(current_time)).pad_zeros(2) + "[/color][/i]"
+	default_player_message = new_player_message
 	
+	call_deferred("scroll_container_to_bottom")
+
 	print("Notification arrived")
+
+func scroll_container_to_bottom() -> void:
+	await get_tree().create_timer(0.1).timeout
+	scroll_container.scroll_vertical = scroll_container.get_v_scroll_bar().max_value
 
 
 # ----- CLOCK AND BATTERY-----
