@@ -21,7 +21,6 @@ var notification_probability: float = 5.0
 var asuka_message_probability: float = 20.0
 var notification_probability_increase: float = 2.0
 var are_notifications_cleared: bool = true
-
 var dialogue_state: int = 1
 
 
@@ -35,10 +34,11 @@ func notifications_coroutine() -> void:
 	while true:
 		await get_tree().create_timer(0.5).timeout
 		handle_notifications()
+		print(are_notifications_cleared)
 
 func sickness_coroutine() -> void:
 	while true:
-		await get_tree().create_timer(0.08).timeout
+		await get_tree().create_timer(0.1).timeout
 		handle_phone_sickness()
 		print("Player phone_sickness: ", phone_sickness)
 
@@ -48,7 +48,7 @@ func sickness_coroutine() -> void:
 func handle_phone_sickness() -> void:
 	if PlayerManager.is_player_focused_phone() or PlayerManager.is_player_focusing_on_phone():
 		reset_phone_sickness()
-	else:
+	elif are_notifications_cleared == false:
 		increase_phone_sickness()
 
 func increase_phone_sickness() -> void:
@@ -65,7 +65,7 @@ func reset_phone_sickness() -> void:
 # ----- RANDOM NOTIFICATIONS -----
 
 func handle_notifications() -> void:
-	if !PlayerManager.is_player_focused_phone():
+	if !PlayerManager.is_player_focused_phone() and !PlayerManager.is_player_focusing_on_phone():
 		var random_number: float = randf_range(0.0, 100.0)
 		if random_number <= notification_probability:
 			phone_vibration.play()
