@@ -9,14 +9,17 @@ extends Control
 @onready var asukachat: Control = $PhoneSize/AsukaChat
 @onready var battery_bar: ProgressBar = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar
 @onready var battery_timer: Timer = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar/BatteryTimer
-@onready var default_asuka: Label = $PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultAsuka
+@onready var default_message: Label = $PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultMessage
 @onready var default_player: Label = $PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultPlayer
 @onready var background: ColorRect = $PhoneSize/Background
 @onready var black_background: ColorRect = $PhoneSize/BlackBackground
 @onready var notification_button: Button = $PhoneSize/TopBar/MarginContainer/HBoxContainer/NotificationButton
 @onready var clock: Label = $PhoneSize/TopBar/MarginContainer/HBoxContainer/Clock
+@onready var scroll_container: ScrollContainer = $PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer
+@onready var input_message: LineEdit = $PhoneSize/AsukaChat/MarginContainer/VBoxContainer/HBoxContainer/InputMessage
 
-@export var max_battery: float = 300.0
+
+@export var max_battery: float = 30.0
 @export var max_time: float = 59
 @export var current_time: float = 12.0
 
@@ -25,6 +28,7 @@ extends Control
 func _ready() -> void:
 	setup_battery()
 	reset_screens()
+	scroll_container.set_deferred("scroll_vertical", 600)
 	background.visible = true
 	notification_button.visible = false
 	#black_background.visible = true
@@ -113,7 +117,7 @@ func _on_camera_pressed() -> void:
 	go_to_screen(camera)
 
 func _on_chats_pressed() -> void:
-	go_to_screen(chats)
+	go_to_screen(asukachat)
 
 func _on_asuka_pressed() -> void:
 	go_to_screen(asukachat)
@@ -123,22 +127,33 @@ func _on_asuka_pressed() -> void:
 func _on_notification_button_pressed() -> void:
 	go_to_screen(chats)
 
-func spawn_new_asuka_message() -> void:
-	var new_asuka = default_asuka.duplicate() as Label
-	var parent = default_asuka.get_parent()
-	parent.add_child(new_asuka)
-	parent.move_child(new_asuka, default_asuka.get_index() + 1)
-	new_asuka.visible = true
-	default_asuka = new_asuka
-	notification_button.visible = true
+func _on_input_message_text_submitted(new_text: String) -> void:
+	spawn_new_player_message(new_text)
+	input_message.clear()
 
-func spawn_new_player_message() -> void:
-	var new_player = default_player.duplicate() as Label
+func _on_send_message_pressed() -> void:
+	spawn_new_player_message(input_message.text)
+	input_message.clear()
+
+func spawn_new_asuka_message() -> void:
+	var new_message = default_message.duplicate() as Label
+	var parent = default_message.get_parent()
+	parent.add_child(new_message)
+	parent.move_child(new_message, default_message.get_index() + 1)
+	new_message.visible = true
+	new_message.text = generate_mysterious_code(50, 10)
+	default_message = new_message
+	notification_button.visible = true
+	#scroll_container.scroll_vertical = scroll_container.get_v_scroll_bar().max_value
+
+func spawn_new_player_message(message_text) -> void:
+	var new_player_message = default_player.duplicate() as Label
 	var parent = default_player.get_parent()
-	parent.add_child(new_player)
-	parent.move_child(new_player, default_player.get_index() + 1)
-	new_player.visible = true
-	default_asuka = new_player
+	parent.add_child(new_player_message)
+	parent.move_child(new_player_message, default_player.get_index() + 1)
+	new_player_message.visible = true
+	new_player_message.text = message_text
+	default_message = new_player_message
 	print("notification arrived")
 
 
@@ -147,4 +162,27 @@ func spawn_new_player_message() -> void:
 func map_range(value: float, from_min: float, from_max: float, to_min: float, to_max: float) -> float:
 	return (value - from_min) / (from_max - from_min) * (to_max - to_min) + to_min
 
+func generate_mysterious_code(total_length: int, max_word_length: int) -> String:
+	var characters = "!@#$%^&*()_+-=[]{}|;:,.<>?/~★✦✧✩✪✫✬✭✮✯✰†‡✞✟✠"
+	var code = ""
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	
+	var current_word_length = 0
+	
+	while code.length() < total_length:
+		if current_word_length >= max_word_length or (current_word_length > 0 and rng.randf() < 0.2):
+			code += " "
+			current_word_length = 0
+		else:
+			var random_char = characters[rng.randi() % characters.length()]
+			code += random_char
+			current_word_length += 1
+	
+	# Trim leading/trailing spaces and ensure exact length
+	code = code.strip_edges()
+	if code.length() > total_length:
+		code = code.substr(0, total_length)
+	
+	return code
 

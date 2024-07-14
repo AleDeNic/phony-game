@@ -336,6 +336,7 @@ grow_vertical = 0
 layout_mode = 2
 
 [node name="Chats" type="Control" parent="PhoneSize"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -376,7 +377,7 @@ layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 
-[node name="Asuka" type="Button" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
+[node name="Bottolo" type="Button" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 mouse_filter = 1
@@ -432,7 +433,6 @@ icon = ExtResource("9_6xph0")
 alignment = 0
 
 [node name="AsukaChat" type="Control" parent="PhoneSize"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -474,6 +474,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("12_fsmwd")
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer"]
 custom_minimum_size = Vector2(500, 0)
@@ -483,7 +484,7 @@ size_flags_vertical = 3
 theme = ExtResource("12_fsmwd")
 theme_override_constants/separation = 16
 
-[node name="DefaultAsuka" type="Label" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="DefaultMessage" type="Label" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -535,17 +536,6 @@ text = "this is just a placeholder text. don't think this is the real thing 'cau
 label_settings = ExtResource("13_lgy4j")
 autowrap_mode = 3
 
-[node name="DefaultPlayer3" type="Label" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(560, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_stretch_ratio = 0.0
-theme = SubResource("Theme_mdga8")
-theme_override_styles/normal = ExtResource("14_yaw3x")
-text = "this is just a placeholder text. don't think this is the real thing 'cause it's not."
-label_settings = ExtResource("21_22xec")
-autowrap_mode = 3
-
 [node name="HSeparator2" type="HSeparator" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
@@ -556,18 +546,19 @@ layout_mode = 2
 theme = ExtResource("12_fsmwd")
 theme_override_constants/separation = 24
 
-[node name="TextEdit" type="TextEdit" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 80)
+[node name="InputMessage" type="LineEdit" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "...what am i doing..."
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
-placeholder_text = "Write a messagge..."
+placeholder_text = "Write a message..."
+max_length = 40
+caret_blink = true
 
-[node name="Button" type="Button" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="SendMessage" type="Button" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 icon = ExtResource("22_h83me")
 expand_icon = true
@@ -723,7 +714,9 @@ icon_alignment = 1
 [connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="toggled" from="PhoneSize/Settings/MarginContainer/VBoxContainer2/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="pressed" from="PhoneSize/Settings/MarginContainer/VBoxContainer2/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="PhoneSize/Chats/MarginContainer/VBoxContainer/Asuka" to="." method="_on_asuka_pressed"]
+[connection signal="pressed" from="PhoneSize/Chats/MarginContainer/VBoxContainer/Bottolo" to="." method="_on_asuka_pressed"]
+[connection signal="text_submitted" from="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/HBoxContainer/InputMessage" to="." method="_on_input_message_text_submitted"]
+[connection signal="pressed" from="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/HBoxContainer/SendMessage" to="." method="_on_send_message_pressed"]
 [connection signal="pressed" from="PhoneSize/TopBar/MarginContainer/HBoxContainer/NotificationButton" to="." method="_on_notification_button_pressed"]
 [connection signal="pressed" from="PhoneSize/BottomBar/MarginContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="PhoneSize/BottomBar/MarginContainer/HBoxContainer/Home" to="." method="_on_home_pressed"]

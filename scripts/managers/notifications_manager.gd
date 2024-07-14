@@ -16,7 +16,7 @@ var phone_sickness: int = 0
 # ----- NOTIFICATIONS -----
 
 var rng = RandomNumberGenerator.new()
-var probability: float = 0.1
+var probability: float = 0.6 # should be 0.1 in the final game
 var probability_increase: float = 0.1
 var are_notifications_cleared: bool = true
 

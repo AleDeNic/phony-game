@@ -6,5 +6,6 @@
 line_spacing = 1.0
 font = ExtResource("1_ypgu7")
 font_size = 42
+font_color = Color(1, 1, 1, 0.92549)
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 0.12549)

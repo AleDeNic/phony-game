@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=22 format=3 uid="uid://v3wqj6dvklo0"]
+[gd_resource type="Theme" load_steps=24 format=3 uid="uid://v3wqj6dvklo0"]
 
 [ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="1_husnp"]
 [ext_resource type="Texture2D" uid="uid://mvnf1ybkdtub" path="res://assets/images/icons/empty.png" id="2_odldd"]
@@ -42,6 +42,17 @@ border_color = Color(1, 1, 1, 0.407843)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i8c8n"]
 draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i0k52"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_llnov"]
+content_margin_left = 32.0
+bg_color = Color(0, 0, 0, 0.27451)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xpriy"]
 draw_center = false
@@ -120,6 +131,12 @@ Label/fonts/font = ExtResource("1_husnp")
 Label/styles/bubble_chat = ExtResource("3_legdh")
 Label/styles/bubble_player = ExtResource("4_syer0")
 Label/styles/normal = SubResource("StyleBoxFlat_i8c8n")
+LineEdit/colors/font_color = Color(1, 1, 1, 0.92549)
+LineEdit/constants/caret_width = 5
+LineEdit/font_sizes/font_size = 40
+LineEdit/fonts/font = ExtResource("8_kqulh")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_i0k52")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_llnov")
 MarginContainer/constants/margin_bottom = 24
 MarginContainer/constants/margin_left = 48
 MarginContainer/constants/margin_right = 48
@@ -132,6 +149,7 @@ ProgressBar/fonts/font = ExtResource("1_husnp")
 ProgressBar/styles/background = ExtResource("4_j8c6n")
 ProgressBar/styles/fill = ExtResource("5_wcsjy")
 ScrollContainer/styles/panel = SubResource("StyleBoxEmpty_6vnp3")
+TextEdit/constants/caret_width = 6
 TextEdit/font_sizes/font_size = 40
 TextEdit/fonts/font = ExtResource("8_kqulh")
 TextEdit/styles/normal = SubResource("StyleBoxFlat_sosx7")
