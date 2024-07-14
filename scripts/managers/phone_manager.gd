@@ -1,6 +1,6 @@
 extends Node
 
-enum PhoneState { OFF, APPS, SETTINGS, CAMERA, CHATS, ASUKACHAT, DISCHARGED }
+enum PhoneState { OFF, APPS, SETTINGS, CAMERA, CHAT, DISCHARGED }
 
 @onready var phone_state: PhoneState = PhoneState.OFF
 
@@ -25,11 +25,8 @@ func set_phone_in_settings() -> void:
 func set_phone_in_camera() -> void:
 	set_phone_state(PhoneState.CAMERA)
 	
-func set_phone_in_chats() -> void:
-	set_phone_state(PhoneState.CHATS)
-	
-func set_phone_in_asukachat() -> void:
-	set_phone_state(PhoneState.ASUKACHAT)
+func set_phone_in_chat() -> void:
+	set_phone_state(PhoneState.CHAT)
 
 func set_phone_discharged() -> void:
 	set_phone_state(PhoneState.DISCHARGED)
@@ -50,10 +47,8 @@ func get_phone_state_value():
 			return "SETTINGS"
 		PhoneState.CAMERA:
 			return "CAMERA"
-		PhoneState.CHATS:
-			return "CHATS"
-		PhoneState.ASUKACHAT:
-			return "ASUKA CHAT"
+		PhoneState.CHAT:
+			return "CHAT"
 		PhoneState.DISCHARGED:
 			return "DISCHARGED"
 			
@@ -69,11 +64,8 @@ func is_phone_in_settings() -> bool:
 func is_phone_in_camera() -> bool:
 	return phone_state == PhoneState.CAMERA
 	
-func is_phone_in_chats() -> bool:
-	return phone_state == PhoneState.CHATS
-	
-func is_phone_in_asukachat() -> bool:
-	return phone_state == PhoneState.ASUKACHAT
+func is_phone_in_chat() -> bool:
+	return phone_state == PhoneState.CHAT
 	
 func is_battery_active() -> bool:
 	return phone_state not in [PhoneState.OFF, PhoneState.SETTINGS]

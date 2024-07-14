@@ -5,18 +5,17 @@ extends Control
 @onready var apps: Control = $PhoneSize/Apps
 @onready var settings: Control = $PhoneSize/Settings
 @onready var camera: Control = $PhoneSize/Camera
-@onready var chats: Control = $PhoneSize/Chats
-@onready var asukachat: Control = $PhoneSize/AsukaChat
+@onready var chat: Control = $PhoneSize/Chat
 @onready var battery_bar: ProgressBar = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar
 @onready var battery_timer: Timer = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar/BatteryTimer
-@onready var default_message: Label = $PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultMessage
-@onready var default_player: Label = $PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultPlayer
+@onready var default_message: Label = $PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultMessage
+@onready var default_player: Label = $PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultPlayer
 @onready var background: ColorRect = $PhoneSize/Background
 @onready var black_background: ColorRect = $PhoneSize/BlackBackground
 @onready var notification_button: Button = $PhoneSize/TopBar/MarginContainer/HBoxContainer/NotificationButton
 @onready var clock: Label = $PhoneSize/TopBar/MarginContainer/HBoxContainer/Clock
-@onready var scroll_container: ScrollContainer = $PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer
-@onready var input_message: LineEdit = $PhoneSize/AsukaChat/MarginContainer/VBoxContainer/HBoxContainer/InputMessage
+@onready var scroll_container: ScrollContainer = $PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer
+@onready var input_message: LineEdit = $PhoneSize/Chat/MarginContainer/VBoxContainer/HBoxContainer/InputMessage
 
 
 @export var max_battery: float = 30.0
@@ -87,8 +86,8 @@ func reset_screens() -> void:
 	apps.visible = false
 	settings.visible = false
 	camera.visible = false
-	chats.visible = false
-	asukachat.visible = false
+	chat.visible = false
+	chat.visible = false
 
 
 # ----- SIGNALS -----
@@ -97,10 +96,7 @@ func _on_settings_pressed() -> void:
 	go_to_screen(settings)
 
 func _on_back_pressed() -> void:
-	if PhoneManager.is_phone_in_asukachat():
-		go_to_screen(chats)
-	else:
-		go_to_screen(apps)
+	go_to_screen(apps)
 
 func _on_home_pressed() -> void:
 	go_to_screen(apps)
@@ -117,16 +113,15 @@ func _on_fullscreen_toggled(toggled_on: bool) -> void:
 func _on_camera_pressed() -> void:
 	go_to_screen(camera)
 
-func _on_chats_pressed() -> void:
-	go_to_screen(asukachat)
-
-func _on_asuka_pressed() -> void:
-	go_to_screen(asukachat)
+func _on_chat_pressed() -> void:
+	go_to_screen(chat)
 	NotificationsManager.clear_notifications()
 	notification_button.visible = false
 
 func _on_notification_button_pressed() -> void:
-	go_to_screen(asukachat)
+	go_to_screen(chat)
+	NotificationsManager.clear_notifications()
+	notification_button.visible = false
 
 func _on_input_message_text_submitted(new_text: String) -> void:
 	spawn_new_player_message(new_text)

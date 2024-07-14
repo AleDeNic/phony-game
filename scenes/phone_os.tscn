@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dg55yu6bit6jt"]
+[gd_scene load_steps=37 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_os.gd" id="1_r0wjl"]
 [ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_hqmi7"]
@@ -12,7 +12,6 @@
 [ext_resource type="LabelSettings" uid="uid://b0qm7cdafhgra" path="res://ui/settings/app_title.tres" id="8_0yw4n"]
 [ext_resource type="StyleBox" uid="uid://bdnuw0by175th" path="res://ui/styles/battery_bar.tres" id="8_v8ae1"]
 [ext_resource type="StyleBox" uid="uid://duct66cpghgeh" path="res://ui/styles/separator.tres" id="8_y0en8"]
-[ext_resource type="Texture2D" uid="uid://byqi5w8p5ltyq" path="res://assets/images/cursor_48.png" id="9_6xph0"]
 [ext_resource type="StyleBox" uid="uid://c4lw5oyyq5657" path="res://ui/styles/battery_bar_fill.tres" id="9_6yc02"]
 [ext_resource type="Theme" uid="uid://v3wqj6dvklo0" path="res://ui/themes/phone_os.tres" id="12_fsmwd"]
 [ext_resource type="LabelSettings" uid="uid://cs2sk7aftrk1c" path="res://ui/settings/bubble_chat.tres" id="13_lgy4j"]
@@ -172,13 +171,15 @@ layout_mode = 2
 theme = ExtResource("12_fsmwd")
 
 [node name="Camera" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 text = "Camera"
 alignment = 0
 
-[node name="Chats" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+[node name="Chat" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
@@ -187,6 +188,7 @@ alignment = 0
 
 [node name="Video" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
 visible = false
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
@@ -195,6 +197,7 @@ icon = ExtResource("6_vmfnf")
 alignment = 0
 
 [node name="Settings" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
@@ -335,104 +338,7 @@ grow_vertical = 0
 [node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/Camera/MarginContainer"]
 layout_mode = 2
 
-[node name="Chats" type="Control" parent="PhoneSize"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme = ExtResource("12_fsmwd")
-
-[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/Chats"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("12_fsmwd")
-theme_override_constants/margin_top = 128
-theme_override_constants/margin_bottom = 163
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PhoneSize/Chats/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 32
-
-[node name="Chats" type="Label" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 1
-theme = ExtResource("12_fsmwd")
-theme_override_font_sizes/font_size = 48
-text = "Chats"
-label_settings = ExtResource("8_0yw4n")
-horizontal_alignment = 3
-vertical_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 1
-theme = ExtResource("12_fsmwd")
-
-[node name="Bottolo" type="Button" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-mouse_filter = 1
-theme = ExtResource("12_fsmwd")
-text = "bottolo"
-icon = ExtResource("9_6xph0")
-alignment = 0
-
-[node name="Chat02" type="Button" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-mouse_filter = 1
-theme = ExtResource("12_fsmwd")
-text = "PROCEDURAL ART"
-icon = ExtResource("9_6xph0")
-alignment = 0
-
-[node name="Chat03" type="Button" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-mouse_filter = 1
-theme = ExtResource("12_fsmwd")
-text = "Mum
-"
-icon = ExtResource("9_6xph0")
-alignment = 0
-
-[node name="Chat04" type="Button" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-mouse_filter = 1
-theme = ExtResource("12_fsmwd")
-text = "azazello"
-icon = ExtResource("9_6xph0")
-alignment = 0
-
-[node name="Chat05" type="Button" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-mouse_filter = 1
-theme = ExtResource("12_fsmwd")
-text = "hikikomori_hideout"
-icon = ExtResource("9_6xph0")
-alignment = 0
-
-[node name="Chat06" type="Button" parent="PhoneSize/Chats/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-mouse_filter = 1
-theme = ExtResource("12_fsmwd")
-text = "Nihilist Meme Stash"
-icon = ExtResource("9_6xph0")
-alignment = 0
-
-[node name="AsukaChat" type="Control" parent="PhoneSize"]
+[node name="Chat" type="Control" parent="PhoneSize"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -441,7 +347,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/AsukaChat"]
+[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/Chat"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -452,11 +358,11 @@ theme = ExtResource("12_fsmwd")
 theme_override_constants/margin_top = 128
 theme_override_constants/margin_bottom = 163
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PhoneSize/AsukaChat/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PhoneSize/Chat/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("12_fsmwd")
 
-[node name="Label" type="Label" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PhoneSize/Chat/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -464,19 +370,19 @@ theme = ExtResource("19_dm1ly")
 text = "Asuka chat"
 label_settings = ExtResource("8_0yw4n")
 
-[node name="HSeparator" type="HSeparator" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PhoneSize/Chat/MarginContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PhoneSize/Chat/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("12_fsmwd")
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -484,7 +390,7 @@ size_flags_vertical = 3
 theme = ExtResource("12_fsmwd")
 theme_override_constants/separation = 16
 
-[node name="DefaultMessage" type="Label" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="DefaultMessage" type="Label" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -494,7 +400,7 @@ text = "this is just a placeholder text. don't think this is the real thing 'cau
 label_settings = ExtResource("13_lgy4j")
 autowrap_mode = 3
 
-[node name="DefaultPlayer" type="Label" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="DefaultPlayer" type="Label" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -505,7 +411,7 @@ text = "this is just a placeholder text. don't think this is the real thing 'cau
 label_settings = ExtResource("21_22xec")
 autowrap_mode = 3
 
-[node name="DefaultAsuka2" type="Label" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="DefaultAsuka2" type="Label" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -515,7 +421,7 @@ text = "this is just a placeholder text. don't think this is the real thing 'cau
 label_settings = ExtResource("13_lgy4j")
 autowrap_mode = 3
 
-[node name="DefaultPlayer2" type="Label" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="DefaultPlayer2" type="Label" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -526,7 +432,7 @@ text = "this is just a placeholder text. don't think this is the real thing 'cau
 label_settings = ExtResource("21_22xec")
 autowrap_mode = 3
 
-[node name="DefaultAsuka3" type="Label" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="DefaultAsuka3" type="Label" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -536,26 +442,27 @@ text = "this is just a placeholder text. don't think this is the real thing 'cau
 label_settings = ExtResource("13_lgy4j")
 autowrap_mode = 3
 
-[node name="HSeparator2" type="HSeparator" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="PhoneSize/Chat/MarginContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/Chat/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("12_fsmwd")
 theme_override_constants/separation = 24
 
-[node name="InputMessage" type="LineEdit" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="InputMessage" type="LineEdit" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "... how should i answer?"
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 placeholder_text = "Write a message..."
 max_length = 40
 caret_blink = true
 
-[node name="SendMessage" type="Button" parent="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="SendMessage" type="Button" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 mouse_filter = 1
@@ -651,15 +558,15 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -163.0
+offset_top = -128.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="PhoneSize/BottomBar"]
 modulate = Color(1, 1, 1, 0.313726)
-position = Vector2(360, 81.5)
-scale = Vector2(11.25, 2.54688)
+position = Vector2(360, 63.9999)
+scale = Vector2(11.25, 2)
 texture = SubResource("GradientTexture2D_0j85k")
 
 [node name="MarginContainer" type="MarginContainer" parent="PhoneSize/BottomBar"]
@@ -710,13 +617,12 @@ icon = ExtResource("17_26q5e")
 icon_alignment = 1
 
 [connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Camera" to="." method="_on_camera_pressed"]
-[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Chats" to="." method="_on_chats_pressed"]
+[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Chat" to="." method="_on_chat_pressed"]
 [connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="toggled" from="PhoneSize/Settings/MarginContainer/VBoxContainer2/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="pressed" from="PhoneSize/Settings/MarginContainer/VBoxContainer2/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="PhoneSize/Chats/MarginContainer/VBoxContainer/Bottolo" to="." method="_on_asuka_pressed"]
-[connection signal="text_submitted" from="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/HBoxContainer/InputMessage" to="." method="_on_input_message_text_submitted"]
-[connection signal="pressed" from="PhoneSize/AsukaChat/MarginContainer/VBoxContainer/HBoxContainer/SendMessage" to="." method="_on_send_message_pressed"]
+[connection signal="text_submitted" from="PhoneSize/Chat/MarginContainer/VBoxContainer/HBoxContainer/InputMessage" to="." method="_on_input_message_text_submitted"]
+[connection signal="pressed" from="PhoneSize/Chat/MarginContainer/VBoxContainer/HBoxContainer/SendMessage" to="." method="_on_send_message_pressed"]
 [connection signal="pressed" from="PhoneSize/TopBar/MarginContainer/HBoxContainer/NotificationButton" to="." method="_on_notification_button_pressed"]
 [connection signal="pressed" from="PhoneSize/BottomBar/MarginContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="PhoneSize/BottomBar/MarginContainer/HBoxContainer/Home" to="." method="_on_home_pressed"]
