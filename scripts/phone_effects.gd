@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 @onready var blur_fisheye: ShaderMaterial = $BlurFisheye.material as ShaderMaterial
 @onready var blue_filter: ColorRect = $BlueFilter

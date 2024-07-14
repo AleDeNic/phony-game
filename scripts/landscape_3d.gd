@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var player_effects: CanvasLayer = get_node("/root/World/Player/PlayerEffects")
+@onready var player_effects: CanvasLayer = get_node("/root/World/SceneEffects/PlayerEffects")
 
 @onready var sky: ProceduralSkyMaterial = $WorldEnvironment.environment.sky.sky_material as ProceduralSkyMaterial
 @onready var water: ShaderMaterial = $Water.mesh.material as ShaderMaterial

@@ -71,7 +71,7 @@ func reset_phone_sickness() -> void:
 # ----- RANDOM NOTIFICATIONS -----
 
 func handle_notifications() -> void:
-	if !PlayerManager.is_player_focused_phone() and !PlayerManager.is_player_focusing_on_phone():
+	if !PlayerManager.is_player_focused_phone() and !PlayerManager.is_player_focusing():
 		var random_number: float = randf_range(0.0, 100.0)
 		if random_number <= notification_probability:
 			phone_vibration.play()

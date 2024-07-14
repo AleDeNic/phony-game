@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 
 # Parameters for the swing effect
 @export var max_swing_offset = 40.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cw0nk6gkudho2"]
+[gd_scene load_steps=15 format=3 uid="uid://cw0nk6gkudho2"]
 
 [ext_resource type="PackedScene" uid="uid://c7j5d8r5sk27h" path="res://scenes/landscape_3d.tscn" id="1_ab0o5"]
 [ext_resource type="Texture2D" uid="uid://bp26i6exw2enj" path="res://assets/images/train_interior_3.png" id="2_86bk8"]
@@ -31,6 +31,41 @@ gradient = SubResource("Gradient_1jydq")
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0.976068)
 
+[sub_resource type="Animation" id="Animation_xaolg"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_ogtyq"]
+resource_name = "light_rotation"
+loop_mode = 2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(2.21308, -0.25, 0, 0.25, 0, 2.02982, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f1jc5"]
+_data = {
+"RESET": SubResource("Animation_xaolg"),
+"light_rotation": SubResource("Animation_ogtyq")
+}
+
 [node name="Landscape" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -40,15 +75,16 @@ motion_scale = Vector2(0.6, 0.8)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="ParallaxBackground/ParallaxLayer"]
 z_index = -1
+clip_contents = true
 offset_left = 212.0
-offset_top = -1764.0
+offset_top = -2166.0
 offset_right = 972.0
-offset_bottom = -864.0
+offset_bottom = -1066.0
 scale = Vector2(4, 4)
 
 [node name="SubViewport" type="SubViewport" parent="ParallaxBackground/ParallaxLayer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(760, 900)
+size = Vector2i(760, 1100)
 render_target_update_mode = 4
 
 [node name="Landscape3D" parent="ParallaxBackground/ParallaxLayer/SubViewportContainer/SubViewport" instance=ExtResource("1_ab0o5")]
@@ -77,25 +113,32 @@ visibility_layer = 2
 position = Vector2(-2500, 0)
 shape = SubResource("WorldBoundaryShape2D_boryj")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="TrainInterior" type="Node2D" parent="."]
+script = ExtResource("3_wisc5")
 
-[node name="TrainSprite" type="Sprite2D" parent="Node2D"]
+[node name="TrainSprite" type="Sprite2D" parent="TrainInterior"]
 modulate = Color(0.688043, 0.688043, 0.688043, 1)
 position = Vector2(-140, 349)
 scale = Vector2(0.78875, 0.78875)
 texture = ExtResource("2_86bk8")
-script = ExtResource("3_wisc5")
 
-[node name="Darkness" type="Sprite2D" parent="Node2D"]
+[node name="Darkness" type="Sprite2D" parent="TrainInterior"]
 modulate = Color(1, 1, 1, 0.690196)
 position = Vector2(-405.936, 1559.65)
 rotation = 2.2131
 scale = Vector2(57.4442, 115.452)
 texture = SubResource("GradientTexture2D_fkblq")
 
-[node name="SunLight" type="Sprite2D" parent="Node2D"]
+[node name="SunLight" type="Sprite2D" parent="TrainInterior"]
 modulate = Color(1, 1, 1, 0.176471)
-position = Vector2(1504.06, 1102.57)
-rotation = 2.2131
+position = Vector2(744, -1423)
 scale = Vector2(101.408, 69.7681)
 texture = SubResource("GradientTexture2D_v17xp")
+offset = Vector2(17.16, -30.975)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TrainInterior/SunLight"]
+libraries = {
+"": SubResource("AnimationLibrary_f1jc5")
+}
+autoplay = "light_rotation"
+speed_scale = 0.1

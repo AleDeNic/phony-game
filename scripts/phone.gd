@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var phone_effects: Control = get_node("/root/World/PhoneEffects")
+@onready var phone_effects: CanvasLayer = get_node("/root/World/SceneEffects/PhoneEffects")
 @onready var camera: Camera2D = get_node("/root/World/Player/Camera2D")
 @onready var player: CharacterBody2D = %Player
 @onready var phone_os: Control = $PhoneOS

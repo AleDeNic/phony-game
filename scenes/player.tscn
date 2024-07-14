@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://o0205cjoosgq"]
+[gd_scene load_steps=5 format=3 uid="uid://o0205cjoosgq"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_hwf0t"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="2_owyey"]
-[ext_resource type="PackedScene" uid="uid://dwgby5u3ws41u" path="res://scenes/player_effects.tscn" id="3_2rlh4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h6l3x"]
 radius = 560.0
@@ -34,5 +33,3 @@ input_pickable = false
 
 [node name="TriggerCollision" type="CollisionShape2D" parent="Trigger"]
 shape = SubResource("CircleShape2D_h1w0k")
-
-[node name="PlayerEffects" parent="." instance=ExtResource("3_2rlh4")]
