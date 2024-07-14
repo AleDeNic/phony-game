@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://bduasgadssrkv"]
+[gd_scene load_steps=18 format=3 uid="uid://bduasgadssrkv"]
 
 [ext_resource type="PackedScene" uid="uid://mei3fh0wa3em" path="res://scenes/phone_effects.tscn" id="1_u37f0"]
 [ext_resource type="Script" path="res://scripts/asuka.gd" id="4_1kcn2"]
 [ext_resource type="PackedScene" uid="uid://cw0nk6gkudho2" path="res://scenes/landscape.tscn" id="4_u7jec"]
+[ext_resource type="Texture2D" uid="uid://bfxqev4pj4cv2" path="res://assets/images/asuka_03.png" id="5_01stb"]
 [ext_resource type="Script" path="res://scripts/window.gd" id="5_p0u8t"]
 [ext_resource type="PackedScene" uid="uid://dg55yu6bit6jt" path="res://scenes/phone_os.tscn" id="7_g2i3f"]
 [ext_resource type="Script" path="res://scripts/phone.gd" id="7_lhypb"]
@@ -58,6 +59,11 @@ script = ExtResource("4_1kcn2")
 position = Vector2(-15, -156)
 scale = Vector2(2.72581, 2.72581)
 sprite_frames = SubResource("SpriteFrames_yqvk5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Asuka"]
+position = Vector2(-104.375, 398.863)
+scale = Vector2(0.437384, 0.437384)
+texture = ExtResource("5_01stb")
 
 [node name="AsukaEnterCollision" type="CollisionShape2D" parent="Asuka"]
 position = Vector2(2, -94)

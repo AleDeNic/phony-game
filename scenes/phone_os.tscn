@@ -432,7 +432,7 @@ tooltip_text = "... how should i answer?"
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 placeholder_text = "Write a message..."
-max_length = 64
+max_length = 144
 caret_blink = true
 
 [node name="SendMessage" type="Button" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/HBoxContainer"]
