@@ -95,7 +95,7 @@ func start_dialogue(dialogue_scene: String, dialogue_resource: Resource, start_f
 				}
 				print("Last non-prioritized dialogue set: ", last_non_prioritized_dialogue)
 			if active_balloon and is_instance_valid(active_balloon):
-				active_balloon.visible = false  # Hide the non-prioritized dialogue balloon
+				active_balloon.visible = false
 				non_prioritized_balloon = active_balloon
 				active_balloon = null
 		prioritized_dialogue = dialogue_resource
