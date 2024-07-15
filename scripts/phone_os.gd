@@ -132,7 +132,7 @@ func spawn_new_asuka_message() -> void:
 	else:
 		message_sender = generate_mysterious_words(7, 7)
 
-	new_message.text = "[color=" + asuka_color + "]" + message_sender + ":[/color]   " + generate_mysterious_words(50, 10) + "  [i][color=gray] at 10:" + str(int(current_time)).pad_zeros(2) + "[/color][/i]"
+	new_message.text = "[color=" + asuka_color + "]" + message_sender + ":[/color]   " + generate_mysterious_words(50, 10) + "  [i][color=gray] 8:" + str(int(current_time)).pad_zeros(2) + " am[/color][/i]"
 	default_message = new_message
 	notification_button.visible = true
 
@@ -144,7 +144,7 @@ func spawn_new_player_message(message_text: String) -> void:
 	parent.move_child(new_player_message, parent.get_child_count() - 1)
 	
 	new_player_message.visible = true
-	new_player_message.text = message_text  + "  [i][color=white] at 10:" + str(int(current_time)).pad_zeros(2) + "[/color][/i]"
+	new_player_message.text = message_text  + "  [i][color=white] 8:" + str(int(current_time)).pad_zeros(2) + " am[/color][/i]"
 	default_player_message = new_player_message
 	
 	call_deferred("scroll_container_to_bottom")
@@ -174,7 +174,7 @@ func handle_battery() -> void:
 
 func handle_clock() -> void:
 	current_time = map_range(battery_bar.value, max_battery, 0.0, 12, 59)
-	clock.text = "10:" + str(int(current_time)).pad_zeros(2)
+	clock.text = "8:" + str(int(current_time)).pad_zeros(2) + " am"
 
 
 # ----- TOOLTIP -----

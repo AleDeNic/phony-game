@@ -384,12 +384,12 @@ theme_override_constants/margin_bottom = 163
 layout_mode = 2
 theme = ExtResource("12_fsmwd")
 
-[node name="Label" type="Label" parent="PhoneSize/Chat/MarginContainer/VBoxContainer"]
+[node name="ChatName" type="Label" parent="PhoneSize/Chat/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("19_dm1ly")
-text = "Asuka chat"
+text = "random chat name"
 label_settings = ExtResource("8_0yw4n")
 
 [node name="HSeparator" type="HSeparator" parent="PhoneSize/Chat/MarginContainer/VBoxContainer"]
@@ -413,6 +413,7 @@ theme = ExtResource("12_fsmwd")
 theme_override_constants/separation = 16
 
 [node name="DefaultMessage" type="RichTextLabel" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -425,6 +426,7 @@ fit_content = true
 scroll_following = true
 
 [node name="DefaultPlayerMessage" type="RichTextLabel" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -452,7 +454,6 @@ theme_override_constants/separation = 24
 [node name="InputMessage" type="LineEdit" parent="PhoneSize/Chat/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "... how should i answer?"
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 placeholder_text = "Write a message..."
