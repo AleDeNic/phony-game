@@ -57,6 +57,8 @@ func _on_area_entered(_area: Area2D) -> void:
 func _on_phone_os_mouse_exited() -> void:
 	if !PlayerManager.is_player_free() and NotificationsManager.are_notifications_cleared:
 		exit()
+	else:
+		phone_os.display_cant_leave_alert()
 
 func enter_phone() -> void:
 	player.set_focus_target(global_position, player.focus_speed_phone)
@@ -92,6 +94,7 @@ func exit() -> void:
 	set_phone_rotation(min_rotation, rotation_down_speed)
 
 	phone_effects.set_effects(phone_effects.MIN_LOD, effects_decrease_speed)
+	phone_os.hide_cant_leave_alert()
 
 	if !PhoneManager.is_phone_discharged():
 		phone_os.reset_screens()

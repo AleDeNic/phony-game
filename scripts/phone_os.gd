@@ -16,7 +16,7 @@ extends Control
 @onready var clock: Label = $PhoneSize/TopBar/MarginContainer/HBoxContainer/Clock
 @onready var scroll_container: ScrollContainer = $PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer
 @onready var input_message: LineEdit = $PhoneSize/Chat/MarginContainer/VBoxContainer/HBoxContainer/InputMessage
-
+@onready var cant_leave_alert: Label = $CantLeaveAlert
 
 @export var max_battery: float = 30.0
 @export var max_time: float = 59
@@ -34,6 +34,7 @@ func _ready() -> void:
 	battery_and_clock_coroutine()
 	scroll_container.set_deferred("scroll_vertical", 600)
 	background.visible = true
+	cant_leave_alert.visible = false
 	notification_button.visible = false
 	NotificationsManager.connect("notification", Callable(self, "spawn_new_asuka_message"))
 	
@@ -175,6 +176,14 @@ func handle_clock() -> void:
 	current_time = map_range(battery_bar.value, max_battery, 0.0, 12, 59)
 	clock.text = "10:" + str(int(current_time)).pad_zeros(2)
 
+
+# ----- TOOLTIP -----
+
+func display_cant_leave_alert() -> void:
+	cant_leave_alert.visible = true
+
+func hide_cant_leave_alert() -> void:
+	cant_leave_alert.visible = false
 
 # ----- UTILS -----
 

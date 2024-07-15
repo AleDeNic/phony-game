@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dg55yu6bit6jt"]
+[gd_scene load_steps=37 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_os.gd" id="1_r0wjl"]
 [ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_hqmi7"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bfg0lk6kvgptl" path="res://assets/images/icons/notification_icon.png" id="3_jnjbr"]
 [ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="4_1d7ag"]
 [ext_resource type="Script" path="res://scripts/volume_slider.gd" id="4_5jmmy"]
+[ext_resource type="FontFile" uid="uid://ca4j2u2x7wiml" path="res://ui/fonts/HDArnie-Italic.otf" id="4_pq3r1"]
 [ext_resource type="Texture2D" uid="uid://cjmjkd3h610nf" path="res://assets/images/icons/video_icon.png" id="6_vmfnf"]
 [ext_resource type="Texture2D" uid="uid://bm2pd3jhn61iq" path="res://assets/images/selfie.png" id="7_7bxb7"]
 [ext_resource type="FontFile" uid="uid://d02ygxi1jy6m3" path="res://ui/fonts/neuropol_x.otf" id="7_f3rx8"]
@@ -24,6 +25,12 @@
 [ext_resource type="Texture2D" uid="uid://ddal4ib0em5pb" path="res://assets/images/icons/dialogue.png" id="22_h83me"]
 [ext_resource type="StyleBox" uid="uid://c6yj5nlxgbf6q" path="res://ui/styles/bottom_bar_hover.tres" id="24_4o1io"]
 [ext_resource type="StyleBox" uid="uid://drw7cjkbby3nk" path="res://ui/styles/bottom_bar_pressed.tres" id="25_a714u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_eymc1"]
+font = ExtResource("4_pq3r1")
+font_size = 48
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.101961)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gne0p"]
 shader = ExtResource("3_2wg1f")
@@ -103,6 +110,22 @@ visible = false
 position = Vector2(1497.78, 842.5)
 scale = Vector2(0.693415, 0.780093)
 texture = ExtResource("2_hqmi7")
+
+[node name="CantLeaveAlert" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -340.0
+offset_top = 215.0
+offset_right = -1459.0
+offset_bottom = -1234.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_fsmwd")
+text = "...should check
+my messages first..."
+label_settings = SubResource("LabelSettings_eymc1")
 
 [node name="PhoneSize" type="Control" parent="."]
 layout_mode = 1

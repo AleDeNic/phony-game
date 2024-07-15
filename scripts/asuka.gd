@@ -4,7 +4,6 @@ extends Area2D
 @export var dialogue_start: String = "asuka_intro"
 
 @onready var camera: Camera2D = $"../Player/Camera2D"
-@onready var eyes_sprite: AnimatedSprite2D = $EyesSprite
 @onready var player: CharacterBody2D = %Player
 
 enum AsukaMoods {
@@ -17,10 +16,6 @@ enum AsukaMoods {
 var is_dialogue_started: bool = false
 
 @onready var mood: AsukaMoods = AsukaMoods.NEUTRAL
-
-
-# TODO: Add Asuka sprite node reference here
-# @onready var asuka_sprite: Sprite = $AsukaSprite
 
 
 # ----- INITIALIZATION AND PHYSICS -----
