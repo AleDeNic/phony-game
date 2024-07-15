@@ -109,7 +109,7 @@ func start_angry_dialogue() -> void:
 	var dialogue_resource = load(dialogue_path)
 	
 	if dialogue_resource:
-		StoryManager.start_dialogue(StoryManager.dialogue_balloon, dialogue_resource, dialogue_start, self, true)
+		StoryManager.start_dialogue(StoryManager.dialogue_balloon, dialogue_resource, dialogue_start, self, true, true)
 		angry_dialogue_index += 1
 	else:
 		print("Dialogue resource not found: ", dialogue_path)

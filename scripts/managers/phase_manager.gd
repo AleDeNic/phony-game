@@ -52,6 +52,10 @@ func advance() -> void:
 # ----- UTILS -----
 
 func can_dialogue_spawn() -> bool:
+	if StoryManager.angry_dialogue_active:
+		print("Angry dialogue active, skipping spawn check")
+		return false
+	
 	print("Probability: ", probability)
 	var frankiePie: float = RandomNumberGenerator.new().randf_range(0.0, 100.0)
 	

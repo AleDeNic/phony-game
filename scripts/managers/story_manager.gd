@@ -20,6 +20,8 @@ var dialogue_queue: Array = []
 
 var non_prioritized_balloon: Node = null
 
+var angry_dialogue_active: bool = false
+
 # TODO: Handle prioritized dialogues. There needs to be only one at a time, otherwise angry dialogues will overlap
 # ----- INITIALIZATION AND PHYSICS -----
 
@@ -64,8 +66,12 @@ func set_dialogue_area(area: Area2D) -> void:
 
 # ----- DIALOGUES -----
 
-func start_dialogue(dialogue_scene: String, dialogue_resource: Resource, start_from: String, dialogue_area: Area2D, prioritize: bool = false) -> void:
+func start_dialogue(dialogue_scene: String, dialogue_resource: Resource, start_from: String, dialogue_area: Area2D, prioritize: bool = false, is_angry: bool = false) -> void:
 	print("Attempting to start dialogue: ", dialogue_resource.resource_path)
+
+	if is_angry and angry_dialogue_active:
+		print("An angry dialogue is already active. Ignoring this request.")
+		return
 	
 	if prioritized_dialogue and not prioritize:
 		print("A prioritized dialogue is active. Queueing this dialogue.")
@@ -96,6 +102,10 @@ func start_dialogue(dialogue_scene: String, dialogue_resource: Resource, start_f
 		dialogue_queue.clear()
 		print("Prioritized dialogue set. Queue cleared.")
 	
+	if is_angry:
+		angry_dialogue_active = true
+		print("Angry dialogue started.")
+
 	if active_balloon and is_instance_valid(active_balloon):
 		active_balloon.queue_free()
 		print("Previous active balloon freed.")
@@ -116,6 +126,11 @@ func start_dialogue(dialogue_scene: String, dialogue_resource: Resource, start_f
 
 func end_dialogue() -> void:
 	print("Dialogue ended")
+
+	if angry_dialogue_active:
+		angry_dialogue_active = false
+		print("Angry dialogue ended.")
+
 	if active_balloon and is_instance_valid(active_balloon):
 		active_balloon.queue_free()
 		print("Active balloon freed.")
