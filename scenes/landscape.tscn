@@ -1,18 +1,18 @@
 [gd_scene load_steps=27 format=3 uid="uid://cw0nk6gkudho2"]
 
 [ext_resource type="PackedScene" uid="uid://c7j5d8r5sk27h" path="res://scenes/landscape_3d.tscn" id="1_ab0o5"]
-[ext_resource type="Texture2D" uid="uid://bp26i6exw2enj" path="res://assets/images/train_interior_3.png" id="2_86bk8"]
+[ext_resource type="Texture2D" uid="uid://bp26i6exw2enj" path="res://assets/sprites/train_interior_3.png" id="2_86bk8"]
 [ext_resource type="Script" path="res://scripts/train_shake.gd" id="3_wisc5"]
 [ext_resource type="Script" path="res://scripts/asuka_sprites.gd" id="4_ydt1p"]
-[ext_resource type="Texture2D" uid="uid://c22mm8g3dhe77" path="res://assets/images/asuka/Asuka_armsontable.png" id="5_5mk2g"]
-[ext_resource type="Texture2D" uid="uid://der57pjxyh82s" path="res://assets/images/asuka/asuka_exp_pleased.png" id="6_17nrg"]
-[ext_resource type="Texture2D" uid="uid://hj4qx3t8bt0s" path="res://assets/images/asuka/asuka_exp_talking.png" id="7_cgat7"]
-[ext_resource type="Texture2D" uid="uid://cf1limxyfyrs" path="res://assets/images/asuka/asuka_exp_upset.png" id="8_20cjt"]
-[ext_resource type="Texture2D" uid="uid://lpc65lv8g72l" path="res://assets/images/asuka/asuka_eyes_closed.png" id="9_t0gpy"]
-[ext_resource type="Texture2D" uid="uid://cva28k0te0pa6" path="res://assets/images/asuka/asuka_eyes_lookaway.png" id="10_2uxyl"]
-[ext_resource type="Texture2D" uid="uid://b8um65qvmuqr0" path="res://assets/images/asuka/asuka_eyes_normal.png" id="11_3ikg8"]
+[ext_resource type="Texture2D" uid="uid://caffbwaol2yek" path="res://assets/sprites/asuka/asuka_03.png" id="5_rrp3l"]
+[ext_resource type="Texture2D" uid="uid://der57pjxyh82s" path="res://assets/sprites/asuka/asuka_exp_pleased.png" id="6_17nrg"]
+[ext_resource type="Texture2D" uid="uid://hj4qx3t8bt0s" path="res://assets/sprites/asuka/asuka_exp_talking.png" id="7_cgat7"]
+[ext_resource type="Texture2D" uid="uid://cf1limxyfyrs" path="res://assets/sprites/asuka/asuka_exp_upset.png" id="8_20cjt"]
+[ext_resource type="Texture2D" uid="uid://lpc65lv8g72l" path="res://assets/sprites/asuka/asuka_eyes_closed.png" id="9_t0gpy"]
+[ext_resource type="Texture2D" uid="uid://cva28k0te0pa6" path="res://assets/sprites/asuka/asuka_eyes_lookaway.png" id="10_2uxyl"]
+[ext_resource type="Texture2D" uid="uid://b8um65qvmuqr0" path="res://assets/sprites/asuka/asuka_eyes_normal.png" id="11_3ikg8"]
 [ext_resource type="Texture2D" uid="uid://p8u26rag8l26" path="res://assets/sprites/table.png" id="12_lodsi"]
-[ext_resource type="Texture2D" uid="uid://722n6qlga4k1" path="res://assets/images/asuka/asuka_03_arms.png" id="13_hgjpy"]
+[ext_resource type="Texture2D" uid="uid://722n6qlga4k1" path="res://assets/sprites/asuka/asuka_03_arms.png" id="13_hgjpy"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8wvv8"]
 normal = Vector2(0, 1)
@@ -146,7 +146,7 @@ script = ExtResource("4_ydt1p")
 [node name="Asuka03" type="Sprite2D" parent="TrainInterior/AsukaSprites"]
 position = Vector2(-113, 513)
 scale = Vector2(0.43, 0.43)
-texture = ExtResource("5_5mk2g")
+texture = ExtResource("5_rrp3l")
 
 [node name="AsukaExpressions" type="Node2D" parent="TrainInterior/AsukaSprites"]
 position = Vector2(-1, -13)

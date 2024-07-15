@@ -1,14 +1,14 @@
 [gd_scene load_steps=37 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_os.gd" id="1_r0wjl"]
-[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_hqmi7"]
+[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/textures/clouds.jpg" id="2_hqmi7"]
 [ext_resource type="Shader" path="res://shaders/blur_color.gdshader" id="3_2wg1f"]
-[ext_resource type="Texture2D" uid="uid://bfg0lk6kvgptl" path="res://assets/images/icons/notification_icon.png" id="3_jnjbr"]
+[ext_resource type="Texture2D" uid="uid://bfg0lk6kvgptl" path="res://assets/ui/notification_icon.png" id="3_jnjbr"]
 [ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="4_1d7ag"]
 [ext_resource type="Script" path="res://scripts/volume_slider.gd" id="4_5jmmy"]
 [ext_resource type="FontFile" uid="uid://ca4j2u2x7wiml" path="res://ui/fonts/HDArnie-Italic.otf" id="4_pq3r1"]
-[ext_resource type="Texture2D" uid="uid://cjmjkd3h610nf" path="res://assets/images/icons/video_icon.png" id="6_vmfnf"]
-[ext_resource type="Texture2D" uid="uid://bm2pd3jhn61iq" path="res://assets/images/selfie.png" id="7_7bxb7"]
+[ext_resource type="Texture2D" uid="uid://cjmjkd3h610nf" path="res://1deprecated/video_icon.png" id="6_vmfnf"]
+[ext_resource type="Texture2D" uid="uid://bm2pd3jhn61iq" path="res://assets/sprites/selfie.png" id="7_7bxb7"]
 [ext_resource type="FontFile" uid="uid://d02ygxi1jy6m3" path="res://ui/fonts/neuropol_x.otf" id="7_f3rx8"]
 [ext_resource type="LabelSettings" uid="uid://b0qm7cdafhgra" path="res://ui/settings/app_title.tres" id="8_0yw4n"]
 [ext_resource type="StyleBox" uid="uid://bdnuw0by175th" path="res://ui/styles/battery_bar.tres" id="8_v8ae1"]
@@ -18,15 +18,16 @@
 [ext_resource type="StyleBox" uid="uid://bkskyjp3vt3rs" path="res://ui/styles/bubble_chat.tres" id="13_o3gel"]
 [ext_resource type="LabelSettings" uid="uid://do3s44f43vkkm" path="res://ui/settings/os_text.tres" id="14_n38hu"]
 [ext_resource type="StyleBox" uid="uid://jgie8qpxs0gh" path="res://ui/styles/bubble_player.tres" id="14_yaw3x"]
-[ext_resource type="Texture2D" uid="uid://b535qnl8st5wi" path="res://assets/images/icons/back.png" id="15_0cf0y"]
-[ext_resource type="Texture2D" uid="uid://dhc8q2h36kxwr" path="res://assets/images/icons/home.png" id="16_hax3j"]
-[ext_resource type="Texture2D" uid="uid://cewdbxx36id1s" path="res://assets/images/icons/settings.png" id="17_26q5e"]
+[ext_resource type="Texture2D" uid="uid://b535qnl8st5wi" path="res://assets/ui/back.png" id="15_0cf0y"]
+[ext_resource type="Texture2D" uid="uid://dhc8q2h36kxwr" path="res://assets/ui/home.png" id="16_hax3j"]
+[ext_resource type="Texture2D" uid="uid://cewdbxx36id1s" path="res://assets/ui/settings.png" id="17_26q5e"]
 [ext_resource type="Theme" uid="uid://b0uon3iawrhwg" path="res://ui/themes/asuka_dialogue.tres" id="19_dm1ly"]
-[ext_resource type="Texture2D" uid="uid://ddal4ib0em5pb" path="res://assets/images/icons/dialogue.png" id="22_h83me"]
+[ext_resource type="Texture2D" uid="uid://ddal4ib0em5pb" path="res://assets/ui/dialogue.png" id="22_h83me"]
 [ext_resource type="StyleBox" uid="uid://c6yj5nlxgbf6q" path="res://ui/styles/bottom_bar_hover.tres" id="24_4o1io"]
 [ext_resource type="StyleBox" uid="uid://drw7cjkbby3nk" path="res://ui/styles/bottom_bar_pressed.tres" id="25_a714u"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_eymc1"]
+line_spacing = -10.0
 font = ExtResource("4_pq3r1")
 font_size = 48
 shadow_size = 2

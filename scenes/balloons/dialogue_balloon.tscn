@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://djenfep7ipolx"]
 
 [ext_resource type="Script" path="res://scripts/balloons/dialogue_balloon.gd" id="1_cwkdr"]
-[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_a5ldb"]
+[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/textures/clouds.jpg" id="2_a5ldb"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="3_72ixx"]
 [ext_resource type="FontFile" uid="uid://d02ygxi1jy6m3" path="res://ui/fonts/neuropol_x.otf" id="3_ciqv1"]

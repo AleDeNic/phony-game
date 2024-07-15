@@ -1,9 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://dwgby5u3ws41u"]
 
 [ext_resource type="Script" path="res://scripts/player_effects.gd" id="1_4c5qi"]
-[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/images/clouds.jpg" id="2_0buma"]
+[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/textures/clouds.jpg" id="2_0buma"]
 [ext_resource type="Shader" path="res://shaders/blur_vignette.gdshader" id="4_ecx1s"]
 [ext_resource type="Shader" path="res://shaders/vignette_color.gdshader" id="4_j57av"]
+
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8rrhg"]
 shader = ExtResource("4_ecx1s")

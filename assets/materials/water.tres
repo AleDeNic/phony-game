@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://4agj4rvs7qeo"]
 
 [ext_resource type="Shader" path="res://shaders/water_scroll.gdshader" id="1_uoosd"]
-[ext_resource type="Texture2D" uid="uid://cqd5lsvh3lpp4" path="res://assets/images/water_normal.jpg" id="2_bb0rr"]
+[ext_resource type="Texture2D" uid="uid://cqd5lsvh3lpp4" path="res://assets/textures/water_normal.jpg" id="2_bb0rr"]
 
 [resource]
 render_priority = 0
