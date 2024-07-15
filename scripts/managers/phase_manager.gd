@@ -37,17 +37,6 @@ func check_threshold() -> bool:
 		_:
 			return false
 # ----- PHASE -----
-func get_phase_value():
-	match phase_state:
-		Phase.SPLASH:
-			return "SPLASH"
-		Phase.PROLOGUE:
-			return "PROLOGUE"
-		Phase.MIDDLE:
-			return "MIDDLE"
-		Phase.END:
-			return "END"
-
 func set_phase(new_phase: Phase) -> void:
 	phase_state = new_phase
 	print("Phase -> ", get_phase_value())
