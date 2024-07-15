@@ -1,22 +1,115 @@
 ~ asuka_intro
 
-Asuka: I'm now reborn. Remember... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
-Asuka: You[speed=0.4].[speed=0.2].[speed=0.1]. [do PhaseManager.advance()]
-Asuka: Tell me!
-- Will be reborn. => asuka_intro
-- Will die. => END
-- Check your status.
-Asuka: Your status is {{PlayerManager.get_player_state_value()}}
-Asuka: Reach for me.
+[speed=0.5]Hey. Is everything alright?
+- Well... Kinda. Why?
+	You seemed a bit off. [wait=1][wave amp=25 freq=5]But if you say so...[/wave]
+- I was feeling better before.
+	[speed=0.5]Sure. [speed=1]I can see that. You were looking better, too!
+- ...
+	I guess you don't want to talk about it.
+[speed=0.6]Anyway... [speed=1]look up! See how the sky is today? It's exceptionally clear.
+- It sure does seem so. +
+	I can feel the excitement in your words. Yeah... we [wave amp=25 freq=5]love[/wave] the sun, don't we?
+	I mean, the sun is now unbereable from spring to fall. I [shake rate=20 level=10]really[/shake] want to settle in Arcadia Bay when I'll grow up.
+	- Since when you've started to think about your future?
+		From the moment I have cared about [speed=0.3]not [speed=1]being miserable.
+		- That makes my past miserable.
+		- That makes my future miserable.
+	- I thought you grew up three years ago.
+		[speed=2.5]Right. [speed=1]But, [speed=2]you know, [speed=1]feeling the need to grow up is actually a sign of, well... growing up.
+		- You will never be satisfied with yourself.
+		- Does growing up mean being better?
+	- But you were so deeply in love with Arcadia Bay.
+		Have you ever wondered [shake rate=20 level=10]why[/shake] I'm on this very train?
+		- You are running from something.
+		- You are reaching for something.
+		[speed=2]Could be true. [wait=1]Could not. [wait=1]Who knows.
+- I would really love an option to skip small talks. =
+	[speed=2]Fine. [speed=1]I don't really care about the weather anyway. 
+	I was just trying to act like a normal person with you.[wait=1] You know, at least once in a lifetime.
+	- I'm not normal, though. Or am I?
+		You are [shake rate=20 level=10]not[/shake]. Don't take this as an excuse, though.
+	- This implies that you are not normal.
+		Perhaps... Or perhaps I have stopped to even bother thinking about it a long time ago.
+	- I'm allergic to normal people.
+		Is this the best line you can come up with?
+		[wave amp=25 freq=5]"Every one is bad, wrong and stupid!"[/wave] Classic. Doesn't work with me.
+	I guess we will never get this mess out of our head anyway.
+	What does "normality" even mean? Come on.
+	- It means being irrelevant at any given moment.
+		Are you admitting your [shake rate=20 level=10]normality[/shake]?
+	- It means being reassured by conformity.
+		Bold words by who is reassured by anormality.
+	...
+- You know me. I don't care. -
+	You didn't change. Monsieur [wave amp=25 freq=5]"I son't care about anysing"[/wave]. I [speed=0.5]really[speed=1] wonder if you ever cared about us.
+	- Did you ever?
+		I did [speed=0.3]everything[speed=1], while you did the bare minimum everytime.
+		[speed=0.1]Everytime.
+		But I won't bring in the old "cats vs dogs" debate.
+	- Both of us were selfish.
+		Caring for others is just a miserable coping mechanism to fill the absence of self-love.
+		See? I have made my research.
+		- I think people already do "self-love" them a lot.
+		- It has always been "self-hate" for you.
+		- ...
+	- ...
+Ok, let's continue our [wave amp=25 freq=5]enjoyable[/wave] conversation.
 
-~ asuka_intermezzo
+~ asuka_phone
 
-Asuka: We're here.
-- I'm not sure.
-	Asuka: I am.
-- We are here, indeed.
-	Asuka: Wrong answer. 
-	=> asuka_intro
-- Not anymore. => END
+You still have the phone I have given you as a gift. [speed=0.3]That[speed=1] was a while ago, huh.
+- I mean, it still works. Why shouldn't I have it? =
+	Judging by how much you're using it now, [speed=1.5]I agree with you. [speed=1]It does still work. Must be providence or something.
+- I still have it, yes. But it barely works... I really should change it before it dies on me. =
+	Seems like it is working as intended. [speed=2]I mean, [speed=1]look at how much you are using it.
+- Wrong. It is a different phone, look at its color and symbiotic link. -
+	[wave amp=25 freq=5]Hahaha[/wave]! [speed=0.7]Coincidentally... [speed=1.3]it looks exactly the same. [speed=1]There really is no need to be ashamed, you know.
+Still spending all night and day on that thing?
+- Pretty much. What about you? =
+	You told me once that I wouldn't last a day in the Reality. [speed=0.3]Dead wrong.
+	[speed=1]I have deleted all my digital IDs a while ago. Being able to feel alive and free is... great. [speed=1.5]You should try that.
+	- I think I'm fine. Thanks, though. -
+		Can't say I haven't tried...
+	- Like I didn't try already. -
+		How can something like that possibly go wrong? What happened?
+	- Seems like you still don't get me, even after all this time (severus snape 2008). -
+		As a matter of fact... it is the complete opposite. I was getting everything about you too well, and that's exactly why I have left.
+	[speed=0.1]...
+	[speed=1]You don't want to talk about it.
+- Not really. Only when I'm... [speed=2]bored. -
+	I'm boring you too... Great.
+	This just fuels my desire to know if your life is also boring.
+	- It is. Satisfied?
+	- No.
+		Interesting. And what is it that you do?
+		- I brush my teeth every day with a bamboo toothbrush.
+			Because it keeps your gum healthy. I knew about it already.
+		- I try to make poses. In front of a mirror.
+			[wave amp=15 freq=3]Such an artist[/wave]. Inspiring.
+		- I make short films about different kinds of grass.
+			Green thumb! Suits your day, huh.
+		[speed=2]Cool. [speed=1]Such an... improvement.
+	- Why bother asking?
+		[speed=2.5]Can't explain it. [speed=1]You can see it as me being curious, that is all.
+- Better than dealing with people. In real life, you know. -
+	[speed=2.5]Know your enemies. [speed=1]The Reality doesn't rely on garbage.
+	Seems more like you haven't picked the right people. [shake rate=10 level=5]Life doesn't revolve around you[/shake].
+	- What can I do about it? +
+		Leaving your room could do the trick. Try, at least.
+		It hurts me to the core... [speed=2]seeing you living like this, [speed=1]I mean.
+	- You are basically saying it's my fault.
+		And whose fault should it be?
+		[speed=1.5]I couldn't stand your passive mindset then. [speed=1]Can't stand it now, too.
+	- I relied on you.
+		[speed=0.1]...
+		[wave amp=30 freq=10]Hahaha[/wave]!
+		Good one. [wait=1]You still don't know me one bit.
+	But I don't want to argue. I don't care anymore.
+	- Me neither.
+		Good.
+	- Then why?
+		...
+[wait=30]
 
 => END

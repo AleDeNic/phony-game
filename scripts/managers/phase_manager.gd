@@ -9,11 +9,45 @@ enum Phase { SPLASH, PROLOGUE, MIDDLE, END, CREDITS }
 var probability: float = 20.0
 
 
-# ----- HANDLING PHASE -----
+# ----- POINTS -----
 
 func get_points() -> int:
 	return points
 	
+func set_points(new_points: int) -> void:
+	points = new_points
+	print("Points -> ", points)
+
+func addPoints(new_points: int) -> void:
+	points += new_points
+	print("Points -> ", points)
+
+func get_threshold() -> int:
+	return threshold
+
+func set_threshold(new_threshold: int) -> void:
+	threshold = new_threshold
+	print("Threshold -> ", threshold)
+
+# TODO: This is a placeholder. Implement a proper check
+func check_threshold() -> bool:
+	match points:
+		threshold:
+			return true
+		_:
+			return false
+# ----- PHASE -----
+func get_phase_value():
+	match phase_state:
+		Phase.SPLASH:
+			return "SPLASH"
+		Phase.PROLOGUE:
+			return "PROLOGUE"
+		Phase.MIDDLE:
+			return "MIDDLE"
+		Phase.END:
+			return "END"
+
 func set_phase(new_phase: Phase) -> void:
 	phase_state = new_phase
 	print("Phase -> ", get_phase_value())
