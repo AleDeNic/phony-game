@@ -1,52 +1,21 @@
-[gd_scene load_steps=36 format=3 uid="uid://bduasgadssrkv"]
+[gd_scene load_steps=24 format=3 uid="uid://bduasgadssrkv"]
 
 [ext_resource type="Script" path="res://scripts/asuka.gd" id="4_1kcn2"]
 [ext_resource type="PackedScene" uid="uid://cw0nk6gkudho2" path="res://scenes/landscape.tscn" id="4_u7jec"]
-[ext_resource type="Script" path="res://scripts/asuka_sprites.gd" id="5_23i0c"]
-[ext_resource type="Texture2D" uid="uid://c22mm8g3dhe77" path="res://assets/images/asuka/Asuka_armsontable.png" id="5_60vxw"]
 [ext_resource type="Script" path="res://scripts/window.gd" id="5_p0u8t"]
-[ext_resource type="Texture2D" uid="uid://722n6qlga4k1" path="res://assets/images/asuka/asuka_03_arms.png" id="6_25xk2"]
-[ext_resource type="Texture2D" uid="uid://der57pjxyh82s" path="res://assets/images/asuka/asuka_exp_pleased.png" id="7_dqynw"]
 [ext_resource type="PackedScene" uid="uid://dg55yu6bit6jt" path="res://scenes/phone_os.tscn" id="7_g2i3f"]
 [ext_resource type="Script" path="res://scripts/phone.gd" id="7_lhypb"]
-[ext_resource type="Texture2D" uid="uid://hj4qx3t8bt0s" path="res://assets/images/asuka/asuka_exp_talking.png" id="8_ingyy"]
 [ext_resource type="Texture2D" uid="uid://7ndlo5c3k4sq" path="res://assets/images/phone_2.png" id="8_kw2w2"]
-[ext_resource type="Texture2D" uid="uid://bvbhrwpow0q30" path="res://assets/images/eyes.png" id="9_fl5a1"]
 [ext_resource type="PackedScene" uid="uid://o0205cjoosgq" path="res://scenes/player.tscn" id="9_o22lg"]
-[ext_resource type="Texture2D" uid="uid://cf1limxyfyrs" path="res://assets/images/asuka/asuka_exp_upset.png" id="9_vu23h"]
-[ext_resource type="Texture2D" uid="uid://lpc65lv8g72l" path="res://assets/images/asuka/asuka_eyes_closed.png" id="10_gjmsp"]
-[ext_resource type="Texture2D" uid="uid://cva28k0te0pa6" path="res://assets/images/asuka/asuka_eyes_lookaway.png" id="11_b37oy"]
 [ext_resource type="PackedScene" uid="uid://cag4fc4uu0krp" path="res://scenes/audio_manager.tscn" id="12_3unc5"]
 [ext_resource type="Shader" path="res://shaders/color_soft_light.gdshader" id="12_ghcqe"]
-[ext_resource type="Texture2D" uid="uid://b8um65qvmuqr0" path="res://assets/images/asuka/asuka_eyes_normal.png" id="12_tpe1b"]
 [ext_resource type="Script" path="res://scripts/color_filter.gd" id="12_x0p2c"]
 [ext_resource type="Script" path="res://scripts/phone_effects.gd" id="13_el7tb"]
 [ext_resource type="Shader" path="res://shaders/blur_and_fisheye.gdshader" id="15_80wp3"]
 [ext_resource type="Script" path="res://scripts/player_effects.gd" id="16_6m8c5"]
 [ext_resource type="Shader" path="res://shaders/blur_vignette.gdshader" id="17_5vfsr"]
 [ext_resource type="Shader" path="res://shaders/vignette_color.gdshader" id="18_bmhia"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pmn2f"]
-atlas = ExtResource("9_fl5a1")
-region = Rect2(6, 62, 109, 62)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ecgh5"]
-atlas = ExtResource("9_fl5a1")
-region = Rect2(115, 124, 109, 62)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_yqvk5"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pmn2f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ecgh5")
-}],
-"loop": false,
-"name": &"default",
-"speed": 5.0
-}]
+[ext_resource type="Texture2D" uid="uid://dytaahhvtp1wg" path="res://assets/sprites/player_legs.png" id="26_qtb8h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4wa7i"]
 radius = 215.058
@@ -93,61 +62,9 @@ collision_mask = 4
 input_pickable = false
 script = ExtResource("4_1kcn2")
 
-[node name="EyesSprite" type="AnimatedSprite2D" parent="Asuka"]
-visible = false
-position = Vector2(-15, -156)
-scale = Vector2(2.72581, 2.72581)
-sprite_frames = SubResource("SpriteFrames_yqvk5")
-
 [node name="AsukaEnterCollision" type="CollisionShape2D" parent="Asuka"]
 position = Vector2(2, -94)
 shape = SubResource("CircleShape2D_4wa7i")
-
-[node name="AsukaSprites" type="Node2D" parent="Asuka"]
-script = ExtResource("5_23i0c")
-
-[node name="Asuka03" type="Sprite2D" parent="Asuka/AsukaSprites"]
-position = Vector2(-113, 513)
-scale = Vector2(0.43, 0.43)
-texture = ExtResource("5_60vxw")
-
-[node name="Asuka03Arms" type="Sprite2D" parent="Asuka/AsukaSprites"]
-position = Vector2(-100, 225)
-scale = Vector2(0.43, 0.43)
-texture = ExtResource("6_25xk2")
-
-[node name="AsukaExpressions" type="Node2D" parent="Asuka/AsukaSprites"]
-position = Vector2(-1, -13)
-
-[node name="ExpPleased" type="Sprite2D" parent="Asuka/AsukaSprites/AsukaExpressions"]
-position = Vector2(-114, -63)
-scale = Vector2(0.43, 0.43)
-texture = ExtResource("7_dqynw")
-
-[node name="ExpTalking" type="Sprite2D" parent="Asuka/AsukaSprites/AsukaExpressions"]
-position = Vector2(-116, -62)
-scale = Vector2(0.43, 0.43)
-texture = ExtResource("8_ingyy")
-
-[node name="ExpUpset" type="Sprite2D" parent="Asuka/AsukaSprites/AsukaExpressions"]
-position = Vector2(-115, -62)
-scale = Vector2(0.43, 0.43)
-texture = ExtResource("9_vu23h")
-
-[node name="AsukaEyes" type="Node2D" parent="Asuka/AsukaSprites"]
-position = Vector2(-116, -64)
-scale = Vector2(0.43, 0.43)
-
-[node name="EyesClosed" type="Sprite2D" parent="Asuka/AsukaSprites/AsukaEyes"]
-position = Vector2(0, -55)
-texture = ExtResource("10_gjmsp")
-
-[node name="EyesLookaway" type="Sprite2D" parent="Asuka/AsukaSprites/AsukaEyes"]
-position = Vector2(0, -86)
-texture = ExtResource("11_b37oy")
-
-[node name="EyesNormal" type="Sprite2D" parent="Asuka/AsukaSprites/AsukaEyes"]
-texture = ExtResource("12_tpe1b")
 
 [node name="Window" type="Area2D" parent="."]
 position = Vector2(1951, -506)
@@ -257,6 +174,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.860369, 0.860369, 0.860369, 1)
+position = Vector2(222, 1696)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("26_qtb8h")
 
 [connection signal="area_entered" from="Asuka" to="Asuka" method="_on_area_entered"]
 [connection signal="area_exited" from="Asuka" to="Asuka" method="_on_area_exited"]

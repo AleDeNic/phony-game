@@ -25,10 +25,6 @@ var is_dialogue_started: bool = false
 
 # ----- INITIALIZATION AND PHYSICS -----
 
-func _ready() -> void:
-	eyes_sprite.frame = 0
-
-
 # ----- INTERACTIONS -----
 
 func _on_area_entered(_area: Area2D) -> void:
@@ -39,7 +35,7 @@ func enter_asuka() -> void:
 	player.set_focus_target(global_position, player.focus_speed_asuka)
 	PlayerManager.set_player_focusing_on_asuka()
 	camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
-	get_eyes_attention()
+	#get_eyes_attention()
 	if !is_dialogue_started:
 		StoryManager.start_dialogue(StoryManager.dialogue_balloon, dialogue_resource, dialogue_start, self, false)
 		is_dialogue_started = true
@@ -50,7 +46,7 @@ func enter_asuka() -> void:
 func exit() -> void:
 	PlayerManager.set_player_focusing_out()
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-	get_eyes_attention()
+	#get_eyes_attention()
 	await get_tree().create_timer(1.0).timeout
 	if PlayerManager.is_player_focusing_out():
 		PlayerManager.set_player_free()
@@ -60,14 +56,11 @@ func exit() -> void:
 func set_asuka_neutral() -> void:
 	mood = AsukaMoods.NEUTRAL
 
-
 func set_asuka_happy() -> void:
 	mood = AsukaMoods.HAPPY
 
-
 func set_asuka_sad() -> void:
 	mood = AsukaMoods.SAD
-
 
 func set_asuka_angry() -> void:
 	mood = AsukaMoods.ANGRY
@@ -93,14 +86,11 @@ func get_asuka_state_value():
 func is_asuka_neutral() -> bool:
 	return mood == AsukaMoods.NEUTRAL
 
-
 func is_asuka_happy() -> bool:
 	return mood == AsukaMoods.HAPPY
 
-
 func is_asuka_sad() -> bool:
 	return mood == AsukaMoods.SAD
-
 
 func is_asuka_angry() -> bool:
 	return mood == AsukaMoods.ANGRY
@@ -108,12 +98,12 @@ func is_asuka_angry() -> bool:
 
 # ----- UTILS -----
 
-func get_eyes_attention() -> void:
-	await get_tree().create_timer(0.3).timeout
-	if PlayerManager.is_player_focusing_on_asuka():
-		eyes_sprite.frame = 1
-	elif PlayerManager.is_player_focusing_out():
-		eyes_sprite.frame = 0
+#func get_eyes_attention() -> void:
+	#await get_tree().create_timer(0.3).timeout
+	#if PlayerManager.is_player_focusing_on_asuka():
+		#eyes_sprite.frame = 1
+	#elif PlayerManager.is_player_focusing_out():
+		#eyes_sprite.frame = 0
 
 
 # ----- A SIGNAL THAT CHANGES THE SPRITE BASED ON THE MOOD -----

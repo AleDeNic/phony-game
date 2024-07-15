@@ -1,8 +1,18 @@
-[gd_scene load_steps=15 format=3 uid="uid://cw0nk6gkudho2"]
+[gd_scene load_steps=27 format=3 uid="uid://cw0nk6gkudho2"]
 
 [ext_resource type="PackedScene" uid="uid://c7j5d8r5sk27h" path="res://scenes/landscape_3d.tscn" id="1_ab0o5"]
 [ext_resource type="Texture2D" uid="uid://bp26i6exw2enj" path="res://assets/images/train_interior_3.png" id="2_86bk8"]
 [ext_resource type="Script" path="res://scripts/train_shake.gd" id="3_wisc5"]
+[ext_resource type="Script" path="res://scripts/asuka_sprites.gd" id="4_ydt1p"]
+[ext_resource type="Texture2D" uid="uid://c22mm8g3dhe77" path="res://assets/images/asuka/Asuka_armsontable.png" id="5_5mk2g"]
+[ext_resource type="Texture2D" uid="uid://der57pjxyh82s" path="res://assets/images/asuka/asuka_exp_pleased.png" id="6_17nrg"]
+[ext_resource type="Texture2D" uid="uid://hj4qx3t8bt0s" path="res://assets/images/asuka/asuka_exp_talking.png" id="7_cgat7"]
+[ext_resource type="Texture2D" uid="uid://cf1limxyfyrs" path="res://assets/images/asuka/asuka_exp_upset.png" id="8_20cjt"]
+[ext_resource type="Texture2D" uid="uid://lpc65lv8g72l" path="res://assets/images/asuka/asuka_eyes_closed.png" id="9_t0gpy"]
+[ext_resource type="Texture2D" uid="uid://cva28k0te0pa6" path="res://assets/images/asuka/asuka_eyes_lookaway.png" id="10_2uxyl"]
+[ext_resource type="Texture2D" uid="uid://b8um65qvmuqr0" path="res://assets/images/asuka/asuka_eyes_normal.png" id="11_3ikg8"]
+[ext_resource type="Texture2D" uid="uid://p8u26rag8l26" path="res://assets/sprites/table.png" id="12_lodsi"]
+[ext_resource type="Texture2D" uid="uid://722n6qlga4k1" path="res://assets/images/asuka/asuka_03_arms.png" id="13_hgjpy"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8wvv8"]
 normal = Vector2(0, 1)
@@ -21,6 +31,13 @@ colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_fkblq"]
 gradient = SubResource("Gradient_h3vsq")
+
+[sub_resource type="Gradient" id="Gradient_bfedf"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_blyts"]
+gradient = SubResource("Gradient_bfedf")
+fill_to = Vector2(0, 1)
 
 [sub_resource type="Gradient" id="Gradient_1jydq"]
 interpolation_mode = 2
@@ -122,6 +139,63 @@ position = Vector2(-140, 349)
 scale = Vector2(0.78875, 0.78875)
 texture = ExtResource("2_86bk8")
 
+[node name="AsukaSprites" type="Node2D" parent="TrainInterior"]
+position = Vector2(-780, 19)
+script = ExtResource("4_ydt1p")
+
+[node name="Asuka03" type="Sprite2D" parent="TrainInterior/AsukaSprites"]
+position = Vector2(-113, 513)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("5_5mk2g")
+
+[node name="AsukaExpressions" type="Node2D" parent="TrainInterior/AsukaSprites"]
+position = Vector2(-1, -13)
+
+[node name="ExpPleased" type="Sprite2D" parent="TrainInterior/AsukaSprites/AsukaExpressions"]
+visible = false
+position = Vector2(-114, -63)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("6_17nrg")
+
+[node name="ExpTalking" type="Sprite2D" parent="TrainInterior/AsukaSprites/AsukaExpressions"]
+visible = false
+position = Vector2(-116, -62)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("7_cgat7")
+
+[node name="ExpUpset" type="Sprite2D" parent="TrainInterior/AsukaSprites/AsukaExpressions"]
+position = Vector2(-115, -62)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("8_20cjt")
+
+[node name="AsukaEyes" type="Node2D" parent="TrainInterior/AsukaSprites"]
+position = Vector2(-116, -64)
+scale = Vector2(0.43, 0.43)
+
+[node name="EyesClosed" type="Sprite2D" parent="TrainInterior/AsukaSprites/AsukaEyes"]
+visible = false
+position = Vector2(0, -55)
+texture = ExtResource("9_t0gpy")
+
+[node name="EyesLookaway" type="Sprite2D" parent="TrainInterior/AsukaSprites/AsukaEyes"]
+visible = false
+position = Vector2(0, -86)
+texture = ExtResource("10_2uxyl")
+
+[node name="EyesNormal" type="Sprite2D" parent="TrainInterior/AsukaSprites/AsukaEyes"]
+texture = ExtResource("11_3ikg8")
+
+[node name="Table" type="Sprite2D" parent="TrainInterior/AsukaSprites"]
+modulate = Color(0.691357, 0.691357, 0.691357, 1)
+position = Vector2(440, 519)
+scale = Vector2(0.876113, 0.876113)
+texture = ExtResource("12_lodsi")
+
+[node name="Asuka03Arms" type="Sprite2D" parent="TrainInterior/AsukaSprites"]
+position = Vector2(-100, 225)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("13_hgjpy")
+
 [node name="Darkness" type="Sprite2D" parent="TrainInterior"]
 modulate = Color(1, 1, 1, 0.690196)
 position = Vector2(-405.936, 1559.65)
@@ -129,9 +203,23 @@ rotation = 2.2131
 scale = Vector2(57.4442, 115.452)
 texture = SubResource("GradientTexture2D_fkblq")
 
+[node name="Darkness2" type="Sprite2D" parent="TrainInterior"]
+modulate = Color(1, 1, 1, 0.666667)
+position = Vector2(376.192, 1129.9)
+rotation = 1.5708
+scale = Vector2(34.7226, 91.4128)
+texture = SubResource("GradientTexture2D_fkblq")
+
+[node name="Darkness3" type="Sprite2D" parent="TrainInterior"]
+modulate = Color(1, 1, 1, 0.690196)
+position = Vector2(-1789.05, -213.398)
+rotation = -0.874923
+scale = Vector2(90.9099, 45.8076)
+texture = SubResource("GradientTexture2D_blyts")
+
 [node name="SunLight" type="Sprite2D" parent="TrainInterior"]
 modulate = Color(1, 1, 1, 0.176471)
-position = Vector2(744, -1423)
+position = Vector2(806, -1515)
 scale = Vector2(101.408, 69.7681)
 texture = SubResource("GradientTexture2D_v17xp")
 offset = Vector2(17.16, -30.975)
