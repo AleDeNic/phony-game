@@ -7,9 +7,9 @@
 	[speed=0.1]Sure. [speed=0.6]I can see that. You were looking better, too!
 - ...
 	[speed=0.3]I guess you don't want to talk about it.
-[speed=0.2]Anyway... [speed=0.6]look up! See how the sky is today? It's exceptionally clear.
+[speed=0.2]Anyway... [speed=0.6]look up! See how the sky is today?[wait=0.5] It's exceptionally clear.
 - It sure does seem so. +
-	[speed=0.5]I can feel the excitement in your words. Yeah... we [wave amp=25 freq=5]love[/wave] the sun, don't we?
+	[speed=0.5]I can feel the excitement in your words. Yeah... [speed=0.3]we [wave amp=25 freq=5]love[/wave] the sun, [wait=0.5][speed=0.5]don't we?
 	[speed=0.3]I mean, the sun is now unbereable from spring to fall. I [shake rate=20 level=10]really[/shake] want to settle in Arcadia Bay when I'll grow up.
 	- Since when you've started to think about your future?
 		[speed=0.3]From the moment I have cared about [speed=0.3]not [speed=1]being miserable.
@@ -25,7 +25,7 @@
 		- You are reaching for something.
 		[speed=1]Could be true. [wait=1]Could not. [wait=1]Who knows.
 - I would really love an option to skip small talks. =
-	[speed=1]Fine. [speed=0.5]I don't really care about the weather anyway. 
+	[speed=1]Fine. [speed=0.5]I don't really care about the weather anyway.
 	I was just trying to act like a normal person with you.[wait=1] You know, at least once in a lifetime.
 	- I'm not normal, though. Or am I?
 		[speed=0.5]You are [speed=0.1][shake rate=20 level=10]not[/shake]. [speed=0.5]Don't take this as an excuse, though.
@@ -46,15 +46,17 @@
 	- Did you ever?
 		[speed=0.5]I did [speed=0.3]everything[speed=1], while you did the bare minimum everytime.
 		[speed=0.1]Everytime.
-		[speed=0.5]But I won't bring in the old "cats vs dogs" debate.
+		[speed=0.5]But, [speed=0.8]you know[speed=0.3]... [wait=0.5][speed=0.5]stray cats and dogs [speed=0.4]can't [speed=0.5]really live together.
 	- Both of us were selfish.
-		[speed=0.5]Caring for others is just a miserable coping mechanism to fill the absence of self-love.
+		[speed=0.5]Caring for others is just a miserable coping mechanism to fill the absence of self-love.[next=0.5]
+		[speed=0.5]Am I right, [wave amp=10 freq=3]Monsieur[/wave]?
 		[speed=0.5]See? I have made my research.
-		- I think people already do "self-love" them a lot.
+		- I think people already do "self-love" themselves a lot.
 		- It has always been "self-hate" for you.
 		- ...
 	- ...
-[speed=0.5]Ok, let's continue our [wave amp=25 freq=5]enjoyable[/wave] conversation.
+...
+[speed=0.5]Ok, let's continue our [speed=0.1][wave amp=25 freq=5]enjoyable[/wave] [speed=0.5]conversation.
 
 ~ asuka_phone
 
