@@ -19,12 +19,14 @@ var focus_speed: float
 # ----- INITIALIZATION -----
 
 func _ready() -> void:
+	add_to_group("player")
 	setup_viewport()
 	current_speed = default_speed
 	focus_speed = focus_speed_phone
 
 func _physics_process(delta: float) -> void:
 	check_viewport()
+	update_camera_zoom()
 	match PlayerManager.get_player_state():
 		PlayerManager.PlayerState.FREE:
 			handle_free_movement(delta)
@@ -48,6 +50,12 @@ func handle_free_movement(delta: float) -> void:
 	reset_mouse_to_center()
 	move_player(delta, movement_vector)
 
+func focus_out(delta: float) -> void:
+	var movement_vector: Vector2 = get_movement_input()
+	target_speed = default_speed
+	move_player(delta, movement_vector)
+	reset_mouse_to_center()
+
 func focus(delta: float) -> void:
 	var movement_vector: Vector2 = (target_position - global_position).normalized()
 	if global_position.distance_to(target_position) >= 5.0:
@@ -55,12 +63,6 @@ func focus(delta: float) -> void:
 		move_player(delta, movement_vector)
 	else:
 		current_speed = 0.0
-
-func focus_out(delta: float) -> void:
-	var movement_vector: Vector2 = get_movement_input()
-	target_speed = default_speed
-	move_player(delta, movement_vector)
-	reset_mouse_to_center()
 
 func move_player(delta: float, movement_vector: Vector2) -> void:
 	current_speed = lerp(current_speed, target_speed, delta * transition_speed)
@@ -71,6 +73,16 @@ func set_focus_target(target_global_position: Vector2, speed: float) -> void:
 	target_position = Vector2(target_global_position)
 	focus_speed = speed
 
+func update_camera_zoom() -> void:
+	match PlayerManager.get_player_state():
+		PlayerManager.PlayerState.FOCUSING_ON_ASUKA, PlayerManager.PlayerState.FOCUSED_ASUKA:
+			camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
+		PlayerManager.PlayerState.FOCUSING_ON_PHONE, PlayerManager.PlayerState.FOCUSED_PHONE:
+			camera.set_camera_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
+		PlayerManager.PlayerState.FREE, PlayerManager.PlayerState.FOCUSING_OUT:
+			camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
+		PlayerManager.PlayerState.DIALOGUE_PAUSED:
+			pass
 
 # ----- INPUT & MOUSE-----
 

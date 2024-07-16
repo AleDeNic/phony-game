@@ -11,17 +11,21 @@ enum PlayerState {
 }
 @export var effects_increase_speed: float = 1.0
 
-@onready var player_state: PlayerState = PlayerState.FREE
+@onready var _current_state: PlayerState = PlayerState.FREE
+var _player: CharacterBody2D = null
 
 # ----- INITIALIZATION AND PHYSICS -----
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	_player = get_tree().get_first_node_in_group("player")
+	if _player == null:
+		push_warning("PlayerManager: Player node not found!")
 
 # ----- STATE SETTERS -----
 
 func set_player_state(new_state: PlayerState) -> void:
-	player_state = new_state
+	_current_state = new_state
 	print("Player -> ", get_player_state_value())
 
 func set_player_free() -> void:
@@ -53,12 +57,14 @@ func set_player_dialogue_paused() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 # ----- STATE GETTERS -----
+func get_player() -> CharacterBody2D:
+	return _player
 
 func get_player_state() -> PlayerState:
-	return player_state
+	return _current_state
 
 func get_player_state_value():
-	match player_state:
+	match _current_state:
 		PlayerState.FREE:
 			return "FREE"
 		PlayerState.FOCUSING_ON_PHONE:
@@ -75,25 +81,25 @@ func get_player_state_value():
 			return "DIALOGUE_PAUSED"
 
 func is_player_free() -> bool:
-	return player_state == PlayerState.FREE
+	return _current_state == PlayerState.FREE
 
 func is_player_focusing_on_phone() -> bool:
-	return player_state == PlayerState.FOCUSING_ON_PHONE
+	return _current_state == PlayerState.FOCUSING_ON_PHONE
 
 func is_player_focusing_on_asuka() -> bool:
-	return player_state == PlayerState.FOCUSING_ON_ASUKA
+	return _current_state == PlayerState.FOCUSING_ON_ASUKA
 
 func is_player_focusing_out() -> bool:
-	return player_state == PlayerState.FOCUSING_OUT
+	return _current_state == PlayerState.FOCUSING_OUT
 
 func is_player_focusing() -> bool:
-	return player_state in [PlayerState.FOCUSING_ON_PHONE, PlayerState.FOCUSING_ON_ASUKA, PlayerState.FOCUSING_OUT]
+	return _current_state in [PlayerState.FOCUSING_ON_PHONE, PlayerState.FOCUSING_ON_ASUKA, PlayerState.FOCUSING_OUT]
 
 func is_player_focused_phone() -> bool:
-	return player_state == PlayerState.FOCUSED_PHONE
+	return _current_state == PlayerState.FOCUSED_PHONE
 
 func is_player_focused_asuka() -> bool:
-	return player_state == PlayerState.FOCUSED_ASUKA
+	return _current_state == PlayerState.FOCUSED_ASUKA
 
 func is_player_dialogue_paused() -> bool:
-	return player_state == PlayerState.DIALOGUE_PAUSED
+	return _current_state == PlayerState.DIALOGUE_PAUSED

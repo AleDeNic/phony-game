@@ -16,28 +16,21 @@ var target_zoom: Vector2
 var is_zooming: bool = false
 var current_zoom_speed: float
 
-
-# ----- INITIALIZATION AND PHYSICS -----
-
 func _ready() -> void:
 	zoom = default_zoom_value
 	current_zoom_speed = asuka_zoom_speed
 	target_zoom = default_zoom_value
 
 func _physics_process(delta: float) -> void:
-	if is_zooming == true:
+	if is_zooming:
 		zoom = zoom.lerp(target_zoom, current_zoom_speed * delta)
-		zoom = clamp(zoom, phone_zoom_value, window_zoom_value)
-		if abs(zoom.x - target_zoom.x) < 0.001:
+		zoom = zoom.clamp(phone_zoom_value, window_zoom_value)
+		if zoom.distance_to(target_zoom) < 0.001:
 			zoom = target_zoom
 			is_zooming = false
 
-
-# ----- SET ZOOM -----
-
-func set_camera_zoom(zoom_value, zoom_speed) -> void:
+func set_camera_zoom(zoom_value: Vector2, zoom_speed: float) -> void:
 	if target_zoom != zoom_value:
 		target_zoom = zoom_value
 		current_zoom_speed = zoom_speed
 		is_zooming = true
-		#print(target_zoom)

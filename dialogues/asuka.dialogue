@@ -8,7 +8,6 @@
 - ...
 	[speed=0.3]I guess you don't want to talk about it.
 do StoryManager.hide_dialogue_balloon(3.0)
-do wait(3.0)
 [speed=0.2]Anyway... [speed=0.6]look up! See how the sky is today?[wait=0.5] It's exceptionally clear.
 - It sure does seem so. +
 	[speed=0.5]I can feel the excitement in your words. Yeah... [speed=0.3]we [wave amp=25 freq=5]love[/wave] the sun, [wait=0.5][speed=0.5]don't we?

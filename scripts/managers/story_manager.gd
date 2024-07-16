@@ -183,12 +183,11 @@ func hide_dialogue_balloon(delay: float = 0.0) -> void:
 		PlayerManager.set_player_dialogue_paused()
 		
 		if delay > 0:
-			get_tree().create_timer(delay).timeout.connect(func():
-				if active_balloon and is_instance_valid(active_balloon):
-					active_balloon.visible = true
-					print("Showing active balloon after delay.")
-					restore_previous_state(previous_state)
-			)
+			await get_tree().create_timer(delay).timeout
+			if active_balloon and is_instance_valid(active_balloon):
+				active_balloon.visible = true
+				print("Showing active balloon after delay.")
+				restore_previous_state(previous_state)
 		else:
 			active_balloon.visible = true
 			print("Immediately showing active balloon.")
@@ -208,6 +207,9 @@ func restore_previous_state(previous_state: PlayerManager.PlayerState) -> void:
 			PlayerManager.set_player_free()
 		_:
 			PlayerManager.set_player_free()
+
+	if is_instance_valid(PlayerManager.get_player()):
+		PlayerManager.get_player().update_camera_zoom()
 
 func start_next_queued_dialogue() -> void:
 	if not dialogue_queue.is_empty():
