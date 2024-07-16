@@ -180,31 +180,34 @@ func hide_dialogue_balloon(delay: float = 0.0) -> void:
 		print("Hiding active balloon.")
 		
 		var previous_state = PlayerManager.get_player_state()
-		PlayerManager.set_player_state(PlayerManager.PlayerState.DIALOGUE_PAUSED)
+		PlayerManager.set_player_dialogue_paused()
 		
 		if delay > 0:
 			get_tree().create_timer(delay).timeout.connect(func():
 				if active_balloon and is_instance_valid(active_balloon):
 					active_balloon.visible = true
 					print("Showing active balloon after delay.")
-					
-					Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-					
-					if previous_state == PlayerManager.PlayerState.FOCUSED_ASUKA: 
-						PlayerManager.set_player_focused_asuka()
-					elif previous_state == PlayerManager.PlayerState.FOCUSED_PHONE:
-						PlayerManager.set_player_focused_phone()
+					restore_previous_state(previous_state)
 			)
 		else:
 			active_balloon.visible = true
 			print("Immediately showing active balloon.")
-			
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			
-			if previous_state == PlayerManager.PlayerState.FOCUSED_ASUKA: 
-				PlayerManager.set_player_focused_asuka()
-			elif previous_state == PlayerManager.PlayerState.FOCUSED_PHONE:
-				PlayerManager.set_player_focused_phone()
+			restore_previous_state(previous_state)
+
+func restore_previous_state(previous_state: PlayerManager.PlayerState) -> void:
+	match previous_state:
+		PlayerManager.PlayerState.FOCUSED_ASUKA:
+			PlayerManager.set_player_focused_asuka()
+		PlayerManager.PlayerState.FOCUSING_ON_ASUKA:
+			PlayerManager.set_player_focusing_on_asuka()
+		PlayerManager.PlayerState.FOCUSING_ON_PHONE:
+			PlayerManager.set_player_focusing_on_phone()
+		PlayerManager.PlayerState.FOCUSED_PHONE:
+			PlayerManager.set_player_focused_phone()
+		PlayerManager.PlayerState.FREE:
+			PlayerManager.set_player_free()
+		_:
+			PlayerManager.set_player_free()
 
 func start_next_queued_dialogue() -> void:
 	if not dialogue_queue.is_empty():
