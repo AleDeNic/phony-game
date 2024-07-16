@@ -3,7 +3,7 @@ shader_type canvas_item;
 uniform float inner_radius : hint_range(0, 1) = 0.17;
 uniform float outer_radius : hint_range(0, 3) = 1.7;
 uniform float vignette_strength : hint_range(0, 3) = 1.7;
-uniform float dither_strength : hint_range(0, 1) = 0.07;
+uniform float dither_strength : hint_range(0, 1) = 0.0;
 uniform vec4 vignette_color: source_color;
 
 

@@ -17,7 +17,7 @@ var phone_sickness: int = 0
 
 # ----- NOTIFICATIONS -----
 
-var notification_probability: float = 5.0
+var notification_probability: float = 0.2
 var asuka_message_probability: float = 20.0
 var notification_probability_increase: float = 2.0
 var are_notifications_cleared: bool = true

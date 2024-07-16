@@ -71,6 +71,7 @@ func enter_phone() -> void:
 	set_phone_rotation(max_rotation, rotation_up_speed)
 
 	phone_effects.set_effects(phone_effects.MAX_LOD, effects_increase_speed)
+	phone_os.turn_on_phone_visuals()
 	
 	if !PhoneManager.is_phone_discharged():
 		phone_os.go_to_screen(phone_os.apps)
@@ -95,6 +96,8 @@ func exit() -> void:
 
 	phone_effects.set_effects(phone_effects.MIN_LOD, effects_decrease_speed)
 	phone_os.hide_cant_leave_alert()
+	
+	phone_os.turn_off_phone_visuals()
 
 	if !PhoneManager.is_phone_discharged():
 		phone_os.reset_screens()

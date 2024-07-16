@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=9 format=3 uid="uid://b0uon3iawrhwg"]
 
-[ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="1_1sxrh"]
+[ext_resource type="FontFile" uid="uid://bc421jf5gpyi4" path="res://ui/fonts/ArialNarrow.TTF" id="1_aw6sw"]
 [ext_resource type="FontFile" uid="uid://d06s8b5831mca" path="res://ui/fonts/LibertinusMono-Regular.otf" id="2_t4hx1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r1mnb"]
@@ -39,7 +39,7 @@ Button/colors/font_hover_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 Button/colors/font_outline_color = Color(0, 0, 0, 0.345098)
 Button/font_sizes/font_size = 32
-Button/fonts/font = ExtResource("1_1sxrh")
+Button/fonts/font = ExtResource("1_aw6sw")
 Button/styles/disabled = SubResource("StyleBoxFlat_r1mnb")
 Button/styles/focus = SubResource("StyleBoxFlat_e2nru")
 Button/styles/hover = SubResource("StyleBoxFlat_vufvh")

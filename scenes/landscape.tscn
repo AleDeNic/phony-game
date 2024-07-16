@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cw0nk6gkudho2"]
+[gd_scene load_steps=28 format=3 uid="uid://cw0nk6gkudho2"]
 
 [ext_resource type="PackedScene" uid="uid://c7j5d8r5sk27h" path="res://scenes/landscape_3d.tscn" id="1_ab0o5"]
 [ext_resource type="Texture2D" uid="uid://ip8dxv4o43su" path="res://assets/sprites/train_interior_4.png" id="3_0xejn"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://b8um65qvmuqr0" path="res://assets/sprites/asuka/asuka_eyes_normal.png" id="11_3ikg8"]
 [ext_resource type="Texture2D" uid="uid://p8u26rag8l26" path="res://assets/sprites/table.png" id="12_lodsi"]
 [ext_resource type="Texture2D" uid="uid://722n6qlga4k1" path="res://assets/sprites/asuka/asuka_03_arms.png" id="13_hgjpy"]
+[ext_resource type="Texture2D" uid="uid://dytaahhvtp1wg" path="res://assets/sprites/player_legs.png" id="14_4k642"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8wvv8"]
 normal = Vector2(0, 1)
@@ -25,12 +26,12 @@ normal = Vector2(-1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_boryj"]
 normal = Vector2(1, 0)
 
-[sub_resource type="Gradient" id="Gradient_h3vsq"]
+[sub_resource type="Gradient" id="Gradient_diw60"]
 interpolation_mode = 2
 colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_fkblq"]
-gradient = SubResource("Gradient_h3vsq")
+gradient = SubResource("Gradient_diw60")
 
 [sub_resource type="Gradient" id="Gradient_bfedf"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
@@ -93,15 +94,15 @@ motion_scale = Vector2(0.6, 0.8)
 [node name="SubViewportContainer" type="SubViewportContainer" parent="ParallaxBackground/ParallaxLayer"]
 z_index = -1
 clip_contents = true
-offset_left = 212.0
-offset_top = -2166.0
-offset_right = 972.0
-offset_bottom = -1066.0
+offset_left = 507.0
+offset_top = -1576.0
+offset_right = 987.0
+offset_bottom = -776.0
 scale = Vector2(4, 4)
 
 [node name="SubViewport" type="SubViewport" parent="ParallaxBackground/ParallaxLayer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(760, 1100)
+size = Vector2i(480, 800)
 render_target_update_mode = 4
 
 [node name="Landscape3D" parent="ParallaxBackground/ParallaxLayer/SubViewportContainer/SubViewport" instance=ExtResource("1_ab0o5")]
@@ -117,7 +118,7 @@ shape = SubResource("WorldBoundaryShape2D_8wvv8")
 
 [node name="BottomBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
 visibility_layer = 2
-position = Vector2(0, 2200)
+position = Vector2(0, 2250)
 shape = SubResource("WorldBoundaryShape2D_neuer")
 
 [node name="RightBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
@@ -197,7 +198,15 @@ position = Vector2(-196, 554)
 scale = Vector2(0.71386, 0.71386)
 texture = ExtResource("12_lodsi")
 
-[node name="Darkness" type="Sprite2D" parent="TrainInterior"]
+[node name="PlayerLegs" type="Sprite2D" parent="TrainInterior"]
+self_modulate = Color(0.860369, 0.860369, 0.860369, 1)
+position = Vector2(282, 1607)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("14_4k642")
+
+[node name="Lighting" type="Node2D" parent="TrainInterior"]
+
+[node name="Darkness" type="Sprite2D" parent="TrainInterior/Lighting"]
 modulate = Color(1, 1, 1, 0.690196)
 z_index = 1
 position = Vector2(-405.936, 1559.65)
@@ -205,15 +214,15 @@ rotation = 2.2131
 scale = Vector2(57.4442, 115.452)
 texture = SubResource("GradientTexture2D_fkblq")
 
-[node name="Darkness2" type="Sprite2D" parent="TrainInterior"]
-modulate = Color(1, 1, 1, 0.666667)
+[node name="Darkness2" type="Sprite2D" parent="TrainInterior/Lighting"]
+modulate = Color(1, 1, 1, 0.403922)
 z_index = 1
 position = Vector2(376.192, 1129.9)
 rotation = 1.5708
 scale = Vector2(34.7226, 91.4128)
 texture = SubResource("GradientTexture2D_fkblq")
 
-[node name="Darkness3" type="Sprite2D" parent="TrainInterior"]
+[node name="Darkness3" type="Sprite2D" parent="TrainInterior/Lighting"]
 modulate = Color(1, 1, 1, 0.690196)
 z_index = 1
 position = Vector2(-1789.05, -213.398)
@@ -221,14 +230,14 @@ rotation = -0.874923
 scale = Vector2(90.9099, 45.8076)
 texture = SubResource("GradientTexture2D_blyts")
 
-[node name="SunLight" type="Sprite2D" parent="TrainInterior"]
+[node name="SunLight" type="Sprite2D" parent="TrainInterior/Lighting"]
 modulate = Color(1, 1, 1, 0.176471)
 position = Vector2(806, -1515)
 scale = Vector2(101.408, 69.7681)
 texture = SubResource("GradientTexture2D_v17xp")
 offset = Vector2(17.16, -30.975)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TrainInterior/SunLight"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TrainInterior/Lighting/SunLight"]
 libraries = {
 "": SubResource("AnimationLibrary_f1jc5")
 }

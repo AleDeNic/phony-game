@@ -1,11 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://bduasgadssrkv"]
+[gd_scene load_steps=25 format=3 uid="uid://bduasgadssrkv"]
 
 [ext_resource type="Script" path="res://scripts/asuka.gd" id="4_1kcn2"]
 [ext_resource type="PackedScene" uid="uid://cw0nk6gkudho2" path="res://scenes/landscape.tscn" id="4_u7jec"]
 [ext_resource type="Script" path="res://scripts/window.gd" id="5_p0u8t"]
+[ext_resource type="Texture2D" uid="uid://dbmspirba0r28" path="res://assets/sprites/player_hand_phone.png" id="6_mhxfc"]
 [ext_resource type="PackedScene" uid="uid://dg55yu6bit6jt" path="res://scenes/phone_os.tscn" id="7_g2i3f"]
 [ext_resource type="Script" path="res://scripts/phone.gd" id="7_lhypb"]
-[ext_resource type="Texture2D" uid="uid://7ndlo5c3k4sq" path="res://assets/sprites/phone_2.png" id="8_kw2w2"]
 [ext_resource type="PackedScene" uid="uid://o0205cjoosgq" path="res://scenes/player.tscn" id="9_o22lg"]
 [ext_resource type="PackedScene" uid="uid://cag4fc4uu0krp" path="res://scenes/audio_manager.tscn" id="12_3unc5"]
 [ext_resource type="Shader" path="res://shaders/color_soft_light.gdshader" id="12_ghcqe"]
@@ -15,16 +15,17 @@
 [ext_resource type="Script" path="res://scripts/player_effects.gd" id="16_6m8c5"]
 [ext_resource type="Shader" path="res://shaders/blur_vignette.gdshader" id="17_5vfsr"]
 [ext_resource type="Shader" path="res://shaders/vignette_color.gdshader" id="18_bmhia"]
-[ext_resource type="Texture2D" uid="uid://dytaahhvtp1wg" path="res://assets/sprites/player_legs.png" id="26_qtb8h"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4wa7i"]
-radius = 215.058
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bgwpj"]
+radius = 186.0
+height = 576.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_klsqp"]
 radius = 30.2653
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qisob"]
-size = Vector2(5.46524, 9.68707)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31m52"]
+radius = 2.87708
+height = 12.1551
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b5tpt"]
 shader = ExtResource("12_ghcqe")
@@ -47,8 +48,15 @@ shader = ExtResource("18_bmhia")
 shader_parameter/inner_radius = 0.17
 shader_parameter/outer_radius = 1.7
 shader_parameter/vignette_strength = 1.7
-shader_parameter/dither_strength = 0.07
+shader_parameter/dither_strength = 0.0
 shader_parameter/vignette_color = null
+
+[sub_resource type="Gradient" id="Gradient_h3vsq"]
+interpolation_mode = 2
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_flse6"]
+gradient = SubResource("Gradient_h3vsq")
 
 [node name="World" type="Node2D"]
 
@@ -57,14 +65,14 @@ shader_parameter/vignette_color = null
 [node name="Landscape" parent="." instance=ExtResource("4_u7jec")]
 
 [node name="Asuka" type="Area2D" parent="."]
-position = Vector2(-779, -3)
+position = Vector2(-779, 119)
 collision_mask = 4
 input_pickable = false
 script = ExtResource("4_1kcn2")
 
 [node name="AsukaEnterCollision" type="CollisionShape2D" parent="Asuka"]
-position = Vector2(2, -94)
-shape = SubResource("CircleShape2D_4wa7i")
+position = Vector2(-13, -94)
+shape = SubResource("CapsuleShape2D_bgwpj")
 
 [node name="Window" type="Area2D" parent="."]
 position = Vector2(1951, -506)
@@ -82,28 +90,28 @@ follow_viewport_enabled = true
 
 [node name="Phone" type="Area2D" parent="PhoneCanvas"]
 z_index = 2
-position = Vector2(0, 1250)
+position = Vector2(381, 1530)
 scale = Vector2(0.7, 0.7)
 collision_mask = 4
 script = ExtResource("7_lhypb")
 
 [node name="PhoneSprite" type="Sprite2D" parent="PhoneCanvas/Phone"]
-position = Vector2(136, 38)
-rotation = -0.0730508
-scale = Vector2(0.786291, 0.797138)
-texture = ExtResource("8_kw2w2")
+modulate = Color(0.727986, 0.727986, 0.727986, 1)
+position = Vector2(490, 542.857)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("6_mhxfc")
 
 [node name="PhoneOS" parent="PhoneCanvas/Phone" instance=ExtResource("7_g2i3f")]
-offset_left = -334.0
-offset_top = -364.0
-offset_right = 1266.0
-offset_bottom = 1236.0
-scale = Vector2(0.419138, 0.419138)
+offset_left = -355.714
+offset_top = -351.428
+offset_right = 1244.29
+offset_bottom = 1248.57
+scale = Vector2(0.44, 0.44)
 
 [node name="PhoneCollision" type="CollisionShape2D" parent="PhoneCanvas/Phone"]
-position = Vector2(0, -2)
+position = Vector2(0, 14.3236)
 scale = Vector2(37.2402, 33.1369)
-shape = SubResource("RectangleShape2D_qisob")
+shape = SubResource("CapsuleShape2D_31m52")
 
 [node name="Player" parent="." instance=ExtResource("9_o22lg")]
 unique_name_in_owner = true
@@ -111,6 +119,7 @@ unique_name_in_owner = true
 [node name="SceneEffects" type="Node2D" parent="."]
 
 [node name="ColorOverlay" type="CanvasLayer" parent="SceneEffects"]
+layer = 5
 script = ExtResource("12_x0p2c")
 
 [node name="ColorOverlay" type="ColorRect" parent="SceneEffects/ColorOverlay"]
@@ -152,7 +161,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="PlayerEffects" type="CanvasLayer" parent="SceneEffects"]
-layer = 6
+layer = 5
 script = ExtResource("16_6m8c5")
 
 [node name="BlurVignette" type="ColorRect" parent="SceneEffects/PlayerEffects"]
@@ -175,11 +184,15 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0.860369, 0.860369, 0.860369, 1)
-position = Vector2(222, 1696)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("26_qtb8h")
+[node name="Shadows" type="CanvasLayer" parent="."]
+layer = 6
+
+[node name="Darkness2" type="Sprite2D" parent="Shadows"]
+modulate = Color(1, 1, 1, 0.666667)
+position = Vector2(376.189, 1842.07)
+rotation = 1.5708
+scale = Vector2(13.5987, 91.4128)
+texture = SubResource("GradientTexture2D_flse6")
 
 [connection signal="area_entered" from="Asuka" to="Asuka" method="_on_area_entered"]
 [connection signal="area_exited" from="Asuka" to="Asuka" method="_on_area_exited"]

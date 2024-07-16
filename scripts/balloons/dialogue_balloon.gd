@@ -89,7 +89,7 @@ func _ready() -> void:
 		responses_menu.next_action = next_action
 	
 	balloon.global_position = asuka.global_position
-	balloon_offset_position = balloon.size * 0.7 / 2
+	balloon_offset_position = balloon.size * 0.75 / 2
 
 func _physics_process(_delta: float) -> void:
 	handle_balloon_movement()

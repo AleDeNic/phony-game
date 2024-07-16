@@ -17,6 +17,10 @@ extends Control
 @onready var scroll_container: ScrollContainer = $PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer
 @onready var input_message: LineEdit = $PhoneSize/Chat/MarginContainer/VBoxContainer/HBoxContainer/InputMessage
 @onready var cant_leave_alert: Label = $CantLeaveAlert
+@onready var phone_frame: Sprite2D = $PhoneSize/PhoneFrame
+@onready var gradient_top: Sprite2D = $PhoneSize/TopBar/GradientTop
+@onready var gradient_bottom: Sprite2D = $PhoneSize/BottomBar/GradientBottom
+
 
 @export var max_battery: float = 30.0
 @export var max_time: float = 59
@@ -33,7 +37,7 @@ func _ready() -> void:
 	reset_screens()
 	battery_and_clock_coroutine()
 	scroll_container.set_deferred("scroll_vertical", 600)
-	background.visible = true
+	turn_off_phone_visuals()
 	cant_leave_alert.visible = false
 	notification_button.visible = false
 	NotificationsManager.connect("notification", Callable(self, "spawn_new_asuka_message"))
@@ -177,6 +181,21 @@ func handle_clock() -> void:
 	clock.text = "8:" + str(int(current_time)).pad_zeros(2) + " am"
 
 
+# ----- PHONE VISUALS -----
+
+func turn_on_phone_visuals() -> void:
+	phone_frame.visible = true
+	background.visible = true
+	gradient_top.visible = true
+	gradient_bottom.visible = true
+
+func turn_off_phone_visuals() -> void:
+	phone_frame.visible = false
+	background.visible = false
+	gradient_top.visible = false
+	gradient_bottom.visible = false
+
+
 # ----- TOOLTIP -----
 
 func display_cant_leave_alert() -> void:
@@ -184,6 +203,7 @@ func display_cant_leave_alert() -> void:
 
 func hide_cant_leave_alert() -> void:
 	cant_leave_alert.visible = false
+
 
 # ----- UTILS -----
 
