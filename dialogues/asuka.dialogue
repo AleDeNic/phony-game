@@ -7,7 +7,6 @@
 	[speed=0.1]Sure. [speed=0.6]I can see that. You were looking better, too!
 - ...
 	[speed=0.3]I guess you don't want to talk about it.
-do StoryManager.hide_dialogue_balloon(3.0)
 [speed=0.2]Anyway... [speed=0.6]look up! See how the sky is today?[wait=0.5] It's exceptionally clear.
 - It sure does seem so. +
 	[speed=0.5]I can feel the excitement in your words. Yeah... [speed=0.3]we [wave amp=25 freq=5]love[/wave] the sun, [wait=0.5][speed=0.5]don't we?
@@ -57,10 +56,9 @@ do StoryManager.hide_dialogue_balloon(3.0)
 		- ...
 	- ...
 ...
-[speed=0.5]Ok, let's continue our [speed=0.1][wave amp=25 freq=5]enjoyable[/wave] [speed=0.5]conversation.
-
-
+do wait(5)
 ~ asuka_phone
+[speed=0.5]Ok, let's continue our [speed=0.1][wave amp=25 freq=5]enjoyable[/wave] [speed=0.5]conversation.
 [speed=0.5]You still have the phone I have given you as a gift. [speed=0.1]That[speed=0.5] was a while ago, huh.
 - I mean, it still works. Why shouldn't I have it? =
 	[speed=0.5]Judging by how much you're using it now, [speed=0.5]I agree with you. [speed=0.3]It does still work. Must be providence or something.

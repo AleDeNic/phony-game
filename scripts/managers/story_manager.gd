@@ -208,9 +208,6 @@ func restore_previous_state(previous_state: PlayerManager.PlayerState) -> void:
 		_:
 			PlayerManager.set_player_free()
 
-	if is_instance_valid(PlayerManager.get_player()):
-		PlayerManager.get_player().update_camera_zoom()
-
 func start_next_queued_dialogue() -> void:
 	if not dialogue_queue.is_empty():
 		var next_dialogue = dialogue_queue.pop_front()
