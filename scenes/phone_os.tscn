@@ -256,6 +256,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("12_fsmwd")
 theme_override_constants/margin_top = 128
+theme_override_constants/margin_bottom = 160
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PhoneSize/Settings/MarginContainer"]
 layout_mode = 2
@@ -387,7 +388,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("12_fsmwd")
 theme_override_constants/margin_top = 128
-theme_override_constants/margin_bottom = 163
+theme_override_constants/margin_bottom = 180
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PhoneSize/Chat/MarginContainer"]
 layout_mode = 2
@@ -515,12 +516,13 @@ label_settings = ExtResource("14_n38hu")
 vertical_alignment = 1
 
 [node name="VSeparator2" type="VSeparator" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
-theme_override_constants/separation = 24
 
 [node name="NotificationButton" type="Button" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 1
@@ -529,8 +531,25 @@ icon = ExtResource("3_jnjbr")
 flat = true
 
 [node name="VSeparator" type="VSeparator" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+
+[node name="Settings" type="Button" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+theme_override_styles/hover = ExtResource("24_4o1io")
+theme_override_styles/pressed = ExtResource("25_a714u")
+icon = ExtResource("17_26q5e")
+flat = true
+icon_alignment = 1
+
+[node name="VSeparator3" type="VSeparator" parent="PhoneSize/TopBar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 
@@ -559,15 +578,15 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -128.0
+offset_top = -160.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
 
 [node name="GradientBottom" type="Sprite2D" parent="PhoneSize/BottomBar"]
 modulate = Color(1, 1, 1, 0.313726)
-position = Vector2(360, 63.9999)
-scale = Vector2(11.25, 2)
+position = Vector2(360, 79.9999)
+scale = Vector2(11.25, 2.5)
 texture = SubResource("GradientTexture2D_0j85k")
 
 [node name="MarginContainer" type="MarginContainer" parent="PhoneSize/BottomBar"]
@@ -607,19 +626,9 @@ theme_override_styles/pressed = ExtResource("25_a714u")
 icon = ExtResource("16_hax3j")
 icon_alignment = 1
 
-[node name="Settings" type="Button" parent="PhoneSize/BottomBar/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 1
-theme = ExtResource("12_fsmwd")
-theme_override_styles/hover = ExtResource("24_4o1io")
-theme_override_styles/pressed = ExtResource("25_a714u")
-icon = ExtResource("17_26q5e")
-icon_alignment = 1
-
 [node name="PhoneFrame" type="Sprite2D" parent="PhoneSize"]
 position = Vector2(359, 750)
-scale = Vector2(1.475, 1.475)
+scale = Vector2(1.465, 1.465)
 texture = ExtResource("27_adyrh")
 
 [connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Camera" to="." method="_on_camera_pressed"]
@@ -630,6 +639,6 @@ texture = ExtResource("27_adyrh")
 [connection signal="text_submitted" from="PhoneSize/Chat/MarginContainer/VBoxContainer/HBoxContainer/InputMessage" to="." method="_on_input_message_text_submitted"]
 [connection signal="pressed" from="PhoneSize/Chat/MarginContainer/VBoxContainer/HBoxContainer/SendMessage" to="." method="_on_send_message_pressed"]
 [connection signal="pressed" from="PhoneSize/TopBar/MarginContainer/HBoxContainer/NotificationButton" to="." method="_on_notification_button_pressed"]
+[connection signal="pressed" from="PhoneSize/TopBar/MarginContainer/HBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="PhoneSize/BottomBar/MarginContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="PhoneSize/BottomBar/MarginContainer/HBoxContainer/Home" to="." method="_on_home_pressed"]
-[connection signal="pressed" from="PhoneSize/BottomBar/MarginContainer/HBoxContainer/Settings" to="." method="_on_settings_pressed"]

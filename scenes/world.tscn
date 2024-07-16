@@ -97,9 +97,10 @@ script = ExtResource("7_lhypb")
 
 [node name="PhoneSprite" type="Sprite2D" parent="PhoneCanvas/Phone"]
 modulate = Color(0.727986, 0.727986, 0.727986, 1)
-position = Vector2(490, 542.857)
-scale = Vector2(0.65, 0.65)
+position = Vector2(-4.28572, 10.0001)
+scale = Vector2(0.646, 0.646)
 texture = ExtResource("6_mhxfc")
+offset = Vector2(760, 820)
 
 [node name="PhoneOS" parent="PhoneCanvas/Phone" instance=ExtResource("7_g2i3f")]
 offset_left = -355.714

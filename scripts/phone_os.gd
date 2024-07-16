@@ -22,7 +22,7 @@ extends Control
 @onready var gradient_bottom: Sprite2D = $PhoneSize/BottomBar/GradientBottom
 
 
-@export var max_battery: float = 30.0
+@export var max_battery: float = 5.0
 @export var max_time: float = 59
 @export var current_time: float = 12.0
 
@@ -57,7 +57,8 @@ func battery_and_clock_coroutine() -> void:
 func go_to_screen(screen: Control) -> void:
 	reset_screens()
 	screen.visible = true
-	PhoneManager.set_phone_state(PhoneManager.PhoneState[screen.name.to_upper()])
+	if !PhoneManager.is_phone_discharged():
+		PhoneManager.set_phone_state(PhoneManager.PhoneState[screen.name.to_upper()])
 	if !PhoneManager.is_phone_in_apps():
 		bottom_bar.visible = true
 
@@ -74,7 +75,6 @@ func turn_off_phone() -> void:
 	PhoneManager.set_phone_discharged()
 	NotificationsManager.clear_notifications()
 	reset_screens()
-	top_bar.visible = false
 
 
 # ----- SIGNALS -----
@@ -175,6 +175,7 @@ func handle_battery() -> void:
 		battery_bar.value = battery_timer.time_left
 		if battery_bar.value == 0:
 			turn_off_phone()
+			turn_off_phone_visuals()
 
 func handle_clock() -> void:
 	current_time = map_range(battery_bar.value, max_battery, 0.0, 12, 59)
