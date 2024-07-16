@@ -87,10 +87,11 @@ layout_mode = 2
 theme = ExtResource("4_3onkd")
 
 [node name="Dialogue" type="MarginContainer" parent="Balloon/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(1100, 0)
+custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_3onkd")
+theme_override_constants/margin_top = 56
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Balloon/MarginContainer/HBoxContainer/Dialogue"]
 layout_mode = 2

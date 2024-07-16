@@ -618,8 +618,8 @@ icon = ExtResource("17_26q5e")
 icon_alignment = 1
 
 [node name="PhoneFrame" type="Sprite2D" parent="PhoneSize"]
-position = Vector2(359.006, 750.026)
-scale = Vector2(0.737919, 0.737919)
+position = Vector2(359, 750)
+scale = Vector2(1.475, 1.475)
 texture = ExtResource("27_adyrh")
 
 [connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Camera" to="." method="_on_camera_pressed"]
