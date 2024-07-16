@@ -13,8 +13,8 @@ func _ready() -> void:
 
 func effects_coroutine() -> void:
 	while true:
-		await get_tree().create_timer(0.5).timeout
 		update_color_filter(landscape_3d.current_sky)
+		await get_tree().create_timer(0.5).timeout
 
 
 # ----- COLOR OVERLAY -----

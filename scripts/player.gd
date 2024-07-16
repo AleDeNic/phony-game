@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var phone: Area2D = $"../PhoneCanvas/Phone"
+@onready var phone: Area2D = $"../PhoneCanvas/ParallaxLayer/Phone"
 
 @export var default_speed: float = 70.0
 @export var transition_speed: float = 10.0

@@ -24,8 +24,8 @@ height = 576.0
 radius = 30.2653
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31m52"]
-radius = 2.87708
-height = 12.1551
+radius = 2.02509
+height = 4.48128
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b5tpt"]
 shader = ExtResource("12_ghcqe")
@@ -84,32 +84,36 @@ script = ExtResource("5_p0u8t")
 scale = Vector2(47.685, 47.685)
 shape = SubResource("CircleShape2D_klsqp")
 
-[node name="PhoneCanvas" type="CanvasLayer" parent="."]
+[node name="PhoneCanvas" type="ParallaxBackground" parent="."]
 layer = 3
 follow_viewport_enabled = true
 
-[node name="Phone" type="Area2D" parent="PhoneCanvas"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="PhoneCanvas"]
+position = Vector2(218, 0)
+motion_scale = Vector2(0.4, 0.1)
+
+[node name="Phone" type="Area2D" parent="PhoneCanvas/ParallaxLayer"]
 z_index = 2
-position = Vector2(381, 1530)
+position = Vector2(-137, 1549)
 scale = Vector2(0.7, 0.7)
 collision_mask = 4
 script = ExtResource("7_lhypb")
 
-[node name="PhoneSprite" type="Sprite2D" parent="PhoneCanvas/Phone"]
+[node name="PhoneSprite" type="Sprite2D" parent="PhoneCanvas/ParallaxLayer/Phone"]
 modulate = Color(0.727986, 0.727986, 0.727986, 1)
 position = Vector2(-4.28572, 10.0001)
 scale = Vector2(0.646, 0.646)
 texture = ExtResource("6_mhxfc")
 offset = Vector2(760, 820)
 
-[node name="PhoneOS" parent="PhoneCanvas/Phone" instance=ExtResource("7_g2i3f")]
+[node name="PhoneOS" parent="PhoneCanvas/ParallaxLayer/Phone" instance=ExtResource("7_g2i3f")]
 offset_left = -355.714
 offset_top = -351.428
 offset_right = 1244.29
 offset_bottom = 1248.57
 scale = Vector2(0.44, 0.44)
 
-[node name="PhoneCollision" type="CollisionShape2D" parent="PhoneCanvas/Phone"]
+[node name="PhoneCollision" type="CollisionShape2D" parent="PhoneCanvas/ParallaxLayer/Phone"]
 position = Vector2(0, 14.3236)
 scale = Vector2(37.2402, 33.1369)
 shape = SubResource("CapsuleShape2D_31m52")
@@ -185,6 +189,15 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
+[node name="FadeColor" type="ColorRect" parent="SceneEffects/PlayerEffects"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="StartupFade" type="CanvasLayer" parent="SceneEffects"]
+visible = false
+
 [node name="Shadows" type="CanvasLayer" parent="."]
 layer = 6
 
@@ -198,5 +211,5 @@ texture = SubResource("GradientTexture2D_flse6")
 [connection signal="area_entered" from="Asuka" to="Asuka" method="_on_area_entered"]
 [connection signal="area_exited" from="Asuka" to="Asuka" method="_on_area_exited"]
 [connection signal="area_entered" from="Window" to="Window" method="_on_area_entered"]
-[connection signal="area_entered" from="PhoneCanvas/Phone" to="PhoneCanvas/Phone" method="_on_area_entered"]
-[connection signal="mouse_exited" from="PhoneCanvas/Phone/PhoneOS" to="PhoneCanvas/Phone" method="_on_phone_os_mouse_exited"]
+[connection signal="area_entered" from="PhoneCanvas/ParallaxLayer/Phone" to="PhoneCanvas/ParallaxLayer/Phone" method="_on_area_entered"]
+[connection signal="mouse_exited" from="PhoneCanvas/ParallaxLayer/Phone/PhoneOS" to="PhoneCanvas/ParallaxLayer/Phone" method="_on_phone_os_mouse_exited"]

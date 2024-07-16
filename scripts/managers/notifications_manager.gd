@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var phone_vibration: AudioStreamPlayer2D = get_node("/root/World/AudioManager/SFX/PhoneVibration")
-@onready var phone_os: Control = get_node("/root/World/PhoneCanvas/Phone/PhoneOS")
+@onready var phone_os: Control = get_node("/root/World/PhoneCanvas/ParallaxLayer/Phone/PhoneOS")
 
 signal notification
 

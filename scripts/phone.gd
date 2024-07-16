@@ -5,10 +5,11 @@ extends Area2D
 @onready var player: CharacterBody2D = %Player
 @onready var phone_os: Control = $PhoneOS
 @export var dialogue_start: String = "angry_asuka_intro"
+@onready var parallax_layer: ParallaxLayer = $".."
 
 @export_group("Scale sizes")
 @export var min_scale: Vector2 = Vector2(0.7, 0.7)
-@export var max_scale: Vector2 = Vector2(1.8, 1.8)
+@export var max_scale: Vector2 = Vector2(2.0, 2.0)
 
 @export_group("Scale speeds")
 @export var scale_up_speed: float = 3.0
@@ -61,7 +62,7 @@ func _on_phone_os_mouse_exited() -> void:
 		phone_os.display_cant_leave_alert()
 
 func enter_phone() -> void:
-	player.set_focus_target(global_position, player.focus_speed_phone)
+	player.set_focus_target(global_position + Vector2(0.0, -600.0), player.focus_speed_phone)
 
 	PlayerManager.set_player_focusing_on_phone()
 
@@ -145,3 +146,9 @@ func update_rotation(delta: float) -> void:
 		var new_rotation = rotation_degrees + sign(rotation_difference) * rotation_step
 		new_rotation = clamp(new_rotation, min_rotation, max_rotation)
 		rotation_degrees = new_rotation
+
+#func decrease_parallax() -> void:
+	#parallax_layer.motion_scale = Vector2(0.0, 0.0)
+#
+#func increase_parallax() -> void:
+	#parallax_layer.motion_scale = Vector2(0.2, 0.2)
