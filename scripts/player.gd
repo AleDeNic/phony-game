@@ -32,8 +32,10 @@ func _physics_process(delta: float) -> void:
 			focus(delta)
 		PlayerManager.PlayerState.FOCUSING_OUT:
 			focus_out(delta)
-		PlayerManager.PlayerState.FOCUSED_PHONE, PlayerManager.PlayerState.FOCUSED_ASUKA:
+		PlayerManager.PlayerState.FOCUSED_PHONE, PlayerManager.PlayerState.FOCUSED_ASUKA, PlayerManager.PlayerState.DIALOGUE_PAUSED:
 			target_speed = 0.0
+			current_speed = 0.0
+			velocity = Vector2.ZERO
 
 
 # ----- INPUT & MOVEMENT -----

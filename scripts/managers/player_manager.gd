@@ -1,7 +1,14 @@
 extends Node
 
-enum PlayerState { FREE, FOCUSING_ON_PHONE, FOCUSING_ON_ASUKA, FOCUSING_OUT, FOCUSED_PHONE, FOCUSED_ASUKA }
-
+enum PlayerState {
+	FREE,
+	FOCUSING_ON_PHONE,
+	FOCUSING_ON_ASUKA,
+	FOCUSING_OUT,
+	FOCUSED_PHONE,
+	FOCUSED_ASUKA,
+	DIALOGUE_PAUSED
+}
 @export var effects_increase_speed: float = 1.0
 
 @onready var player_state: PlayerState = PlayerState.FREE
@@ -41,6 +48,10 @@ func set_player_focused_asuka() -> void:
 	set_player_state(PlayerState.FOCUSED_ASUKA)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+func set_player_dialogue_paused() -> void:
+	set_player_state(PlayerState.DIALOGUE_PAUSED)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
 # ----- STATE GETTERS -----
 
 func get_player_state() -> PlayerState:
@@ -60,6 +71,8 @@ func get_player_state_value():
 			return "FOCUSED_PHONE"
 		PlayerState.FOCUSED_ASUKA:
 			return "FOCUSED_ASUKA"
+		PlayerState.DIALOGUE_PAUSED:
+			return "DIALOGUE_PAUSED"
 
 func is_player_free() -> bool:
 	return player_state == PlayerState.FREE
@@ -81,3 +94,6 @@ func is_player_focused_phone() -> bool:
 
 func is_player_focused_asuka() -> bool:
 	return player_state == PlayerState.FOCUSED_ASUKA
+
+func is_player_dialogue_paused() -> bool:
+	return player_state == PlayerState.DIALOGUE_PAUSED
