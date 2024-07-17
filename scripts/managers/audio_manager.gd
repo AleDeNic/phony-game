@@ -18,10 +18,12 @@ extends Node
 @export var window_area: float = 500
 @export var max_distance: float = 1200.0
 
+@export var transition_duration: float = 2.0
+
 var music_layers: Array[AudioStreamPlayer] = []
 var effects: Array[AudioStreamPlayer]      = []
 
-var layer_paths: Array[String] = [
+@onready var layer_paths: Array[String] = [
 								 "res://assets/music/layer_0.mp3",
 								 "res://assets/music/layer_1.mp3",
 								 "res://assets/music/layer_2.mp3",
@@ -31,7 +33,7 @@ var layer_paths: Array[String] = [
 								 "res://assets/music/layer_6.mp3"
 								 ]
 
-var sfx_paths: Array[String]  = ["res://assets/sfx/phone_vibration.mp3"]
+@onready var sfx_paths: Array[String]  = ["res://assets/sfx/phone_vibration.mp3"]
 var active_layers: Array[int] = []
 var bus_indices: Dictionary   = {}
 
@@ -40,8 +42,8 @@ func _ready() -> void:
 	initialize_bus_indices()
 	create_music_layers()
 	apply_custom_volumes()
+	start_synchronized_playback()
 	add_music_layer(0)
-
 
 func _physics_process(_delta: float) -> void:
 	if player != null and asuka != null and window != null:
@@ -60,6 +62,7 @@ func create_music_layers() -> void:
 		var audio_player = AudioStreamPlayer.new()
 		audio_player.stream = load(layer_paths[i])
 		audio_player.bus = "Music"
+		audio_player.volume_db = -80
 		add_child(audio_player)
 		music_layers.append(audio_player)
 
@@ -89,17 +92,35 @@ func calculate_volume(object: Area2D, max_volume: float, min_volume: float, area
 func add_music_layer(layer_index: int) -> void:
 	if layer_index >= 0 and layer_index < music_layers.size():
 		if layer_index not in active_layers:
-					active_layers.append(layer_index)
-	music_layers[layer_index].play()
+			active_layers.append(layer_index)
+			fade_in_layer(layer_index)
+			print("Fading in layer ", layer_index)
+		else:
+			print("Layer ", layer_index, " is already active")
+	else:
+		print("Invalid layer index: ", layer_index)
+	print("Current active layers: ", active_layers)
 
 
+func start_synchronized_playback() -> void:
+	for layer in music_layers:
+		layer.play()
+	print("All layers started for synchronized playback")
 
 
 func remove_music_layer(layer_index: int) -> void:
 	if layer_index in active_layers:
 		active_layers.erase(layer_index)
-		music_layers[layer_index].stop()
+		fade_out_layer(layer_index)
+		print("Fading out layer ", layer_index)
 
+func fade_in_layer(layer_index: int) -> void:
+	var tween = create_tween()
+	tween.tween_property(music_layers[layer_index], "volume_db", 0, transition_duration).from(-80)
+
+func fade_out_layer(layer_index: int) -> void:
+	var tween = create_tween()
+	tween.tween_property(music_layers[layer_index], "volume_db", -80, transition_duration).from(0)
 
 func play_active_layers() -> void:
 	for layer_index in active_layers:
@@ -127,14 +148,26 @@ func set_music_layer_volume(layer_index: int, volume_db: float) -> void:
 
 
 func play_all_music_layers() -> void:
-	for layer in music_layers:
-		layer.play()
+	start_synchronized_playback()
+	var tween = create_tween()
+	for i in range(music_layers.size()):
+		if i not in active_layers:
+			active_layers.append(i)
+			tween.parallel().tween_property(music_layers[i], "volume_db", 0, transition_duration).from(-80)
+	print("Playing all music layers")
+
 
 
 func stop_all_music_layers() -> void:
+	var tween = create_tween()
 	for layer in music_layers:
-		layer.stop()
-
+		tween.parallel().tween_property(layer, "volume_db", -80, transition_duration)
+	tween.tween_callback(func():
+		for layer in music_layers:
+			layer.stop()
+		active_layers.clear()
+		print("Stopped all music layers")
+	)
 
 # ---- SFX ----
 func play_vibration() -> void:
