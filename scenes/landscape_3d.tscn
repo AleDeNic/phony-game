@@ -112,6 +112,7 @@ transform = Transform3D(1.48608, 0, 0, 0, 1.48608, 0, 0, 0, 1.48608, 403.925, 5.
 transform = Transform3D(1.48608, 0, 0, 0, 1.48608, 0, 0, 0, 1.48608, 499.675, 5.03076, 0)
 
 [node name="Railsss" type="Node3D" parent="MovingObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="Rail" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
 transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 550.236, 4.23732, -0.242004)
@@ -276,6 +277,6 @@ transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -539.598, 4
 transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -560.624, 4.23732, -0.242004)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.573576, 0, 0.819152, 0, 1, 0, -0.819152, 0, 0.573576, -0.0140305, 4.04047, -0.009552)
+transform = Transform3D(0.573576, 0, 0.819152, 0, 1, 0, -0.819152, 0, 0.573576, -0.014, 5, -0.01)
 fov = 90.0
 far = 1000.0
