@@ -200,6 +200,7 @@ texture = ExtResource("10_nrhq7")
 position = Vector2(-708, 19)
 
 [node name="Asuka03" type="Sprite2D" parent="TrainInterior/Asuka03"]
+visible = false
 position = Vector2(-113, 513)
 scale = Vector2(0.43, 0.43)
 texture = ExtResource("5_rrp3l")
@@ -244,6 +245,7 @@ visible = false
 texture = ExtResource("10_dudx7")
 
 [node name="AsukaArms03" type="Sprite2D" parent="TrainInterior/Asuka03"]
+visible = false
 z_index = 1
 position = Vector2(-100, 225)
 scale = Vector2(0.43, 0.43)

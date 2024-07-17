@@ -18,77 +18,81 @@ extends Node
 @onready var asuka_arms_03: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka03/AsukaArms03")
 
 
-enum AsukaPose {
+enum PoseState {
 	ARMS_CROSSED,
 	OVER_TABLE
 }
 
-enum AsukaExpression {
+enum ExpressionState {
 	PLEASED,
 	TALKING,
 	UPSET
 }
 
-enum EyeState {
+enum EyesState {
 	NORMAL,
 	CLOSED,
 	LOOKAWAY
 }
 
-@onready var asuka_pose: AsukaPose = AsukaPose.OVER_TABLE
-@onready var asuka_expression: AsukaExpression = AsukaExpression.PLEASED
-@onready var eye_state: EyeState = EyeState.NORMAL
+@onready var pose_state: PoseState
+@onready var expression_state: ExpressionState
+@onready var eye_state: EyesState
 
 func _ready() -> void:
+	set_pose_state(AsukaManager.PoseState.OVER_TABLE)
+	set_expression_state(AsukaManager.ExpressionState.UPSET)
+	set_eyes_state(AsukaManager.EyesState.LOOKAWAY)
+	
 	asuka_state_coroutine()
 
 func asuka_state_coroutine() -> void:
 	while true:
+		update_asuka_sprites()
 		await get_tree().create_timer(0.2).timeout
-		update_asuka_state()
 
-func update_asuka_state() -> void:
+func update_asuka_sprites() -> void:
 	var pose: Sprite2D
 	var expression: Sprite2D
 	var eyes: Sprite2D
 
 	match AsukaManager.get_asuka_pose():
-		AsukaManager.AsukaPose.ARMS_CROSSED:
+		AsukaManager.PoseState.ARMS_CROSSED:
 			pose = asuka_02
 			
 			match AsukaManager.get_asuka_expression():
-				AsukaManager.AsukaExpression.PLEASED:
+				AsukaManager.ExpressionState.PLEASED:
 					expression = expr_pleased_02
-				AsukaManager.AsukaExpression.TALKING:
+				AsukaManager.ExpressionState.TALKING:
 					expression = expr_talking_02
-				AsukaManager.AsukaExpression.UPSET:
+				AsukaManager.ExpressionState.UPSET:
 					expression = expr_upset_02
 					
 			match AsukaManager.get_eyes_state():
-				AsukaManager.EyeState.NORMAL:
+				AsukaManager.EyesState.NORMAL:
 					eyes = eyes_normal_02
-				AsukaManager.EyeState.CLOSED:
+				AsukaManager.EyesState.CLOSED:
 					eyes = eyes_closed_02
-				AsukaManager.EyeState.LOOKAWAY:
+				AsukaManager.EyesState.LOOKAWAY:
 					eyes = eyes_lookaway_02
 					
-		AsukaManager.AsukaPose.OVER_TABLE:
+		AsukaManager.PoseState.OVER_TABLE:
 			pose = asuka_03
 			
 			match AsukaManager.get_asuka_expression():
-				AsukaManager.AsukaExpression.PLEASED:
+				AsukaManager.ExpressionState.PLEASED:
 					expression = expr_pleased_03
-				AsukaManager.AsukaExpression.TALKING:
+				AsukaManager.ExpressionState.TALKING:
 					expression = expr_talking_03
-				AsukaManager.AsukaExpression.UPSET:
+				AsukaManager.ExpressionState.UPSET:
 					expression = expr_upset_03
 					
 			match AsukaManager.get_eyes_state():
-				AsukaManager.EyeState.NORMAL:
+				AsukaManager.EyesState.NORMAL:
 					eyes = eyes_normal_03
-				AsukaManager.EyeState.CLOSED:
+				AsukaManager.EyesState.CLOSED:
 					eyes = eyes_closed_03
-				AsukaManager.EyeState.LOOKAWAY:
+				AsukaManager.EyesState.LOOKAWAY:
 					eyes = eyes_lookaway_03
 
 	set_asuka(pose, expression, eyes)
@@ -96,16 +100,19 @@ func update_asuka_state() -> void:
 
 # ----- SET POSE -----
 
-func set_asuka(pose: Sprite2D, eyes: Sprite2D, expression: Sprite2D) -> void:
+func set_asuka(pose: Sprite2D, expression: Sprite2D, eyes: Sprite2D) -> void:
 	reset_asuka()
 	pose.visible = true
-	eyes.visible = true
 	expression.visible = true
+	eyes.visible = true
 
 
 # ----- RESET -----
 
 func reset_asuka() -> void:
+	asuka_02.visible = false
+	asuka_03.visible = false
+	
 	expr_pleased_02.visible = false
 	expr_talking_02.visible = false
 	expr_upset_02.visible = false
@@ -121,124 +128,114 @@ func reset_asuka() -> void:
 	eyes_normal_03.visible = false
 	asuka_arms_03.visible = false
 
-func reset_asuka_eyes() -> void:
-	eyes_closed_03.visible = false
-	eyes_lookaway_03.visible = false
-	eyes_normal_03.visible = false
-
-func reset_asuka_expression() -> void:
-	expr_pleased_03.visible = false
-	expr_talking_03.visible = false
-	expr_upset_03.visible = false
-
 
 # ----- EXPRESSION SETTERS -----
 
-func set_asuka_pose(new_pose: AsukaPose) -> void:
-	asuka_pose = new_pose
+func set_pose_state(new_pose: PoseState) -> void:
+	pose_state = new_pose
 	print("Asuka pose -> ", get_asuka_pose_value())
 	
 func set_asuka_arms_crossed() -> void:
-	set_asuka_pose(AsukaPose.ARMS_CROSSED)
+	set_pose_state(PoseState.ARMS_CROSSED)
 	
 func set_asuka_over_table() -> void:
-	set_asuka_pose(AsukaPose.OVER_TABLE)
+	set_pose_state(PoseState.OVER_TABLE)
 
 
 # ----- ASUKA POSE GETTERS -----
 
-func get_asuka_pose() -> AsukaExpression:
-	return asuka_expression
+func get_asuka_pose() -> ExpressionState:
+	return expression_state
 	
 func get_asuka_pose_value():
-	match asuka_pose:
-		AsukaPose.ARMS_CROSSED:
+	match pose_state:
+		PoseState.ARMS_CROSSED:
 			return "ARMS_CROSSED"
-		AsukaPose.OVER_TABLE:
+		PoseState.OVER_TABLE:
 			return "OVER_TABLE"
 
 func is_asuka_arms_crossed() -> bool:
-		return asuka_pose == AsukaPose.ARMS_CROSSED
+		return pose_state == PoseState.ARMS_CROSSED
 	
 func is_asuka_over_table() -> bool:
-		return asuka_pose == AsukaPose.OVER_TABLE
+		return pose_state == PoseState.OVER_TABLE
 
 
 # ----- EXPRESSION SETTERS -----
 
-func set_asuka_expression(new_expression: AsukaExpression) -> void:
-	asuka_expression = new_expression
+func set_expression_state(new_expression: ExpressionState) -> void:
+	expression_state = new_expression
 	print("Asuka -> ", get_asuka_expression_value())
 	
 func set_asuka_pleased() -> void:
-	set_asuka_expression(AsukaExpression.PLEASED)
+	set_expression_state(ExpressionState.PLEASED)
 	
 func set_asuka_talking() -> void:
-	set_asuka_expression(AsukaExpression.TALKING)
+	set_expression_state(ExpressionState.TALKING)
 	
 func set_asuka_upset() -> void:
-	set_asuka_expression(AsukaExpression.UPSET)
+	set_expression_state(ExpressionState.UPSET)
 
 
 # ----- ASUKA EXPRESSION GETTERS -----
 
-func get_asuka_expression() -> AsukaExpression:
-	return asuka_expression
+func get_asuka_expression() -> ExpressionState:
+	return expression_state
 	
 func get_asuka_expression_value():
-	match asuka_expression:
-		AsukaExpression.PLEASED:
+	match expression_state:
+		ExpressionState.PLEASED:
 			return "PLEASED"
-		AsukaExpression.TALKING:
+		ExpressionState.TALKING:
 			return "TALKING"
-		AsukaExpression.UPSET:
+		ExpressionState.UPSET:
 			return "UPSET"
 
 func is_asuka_pleased() -> bool:
-		return asuka_expression == AsukaExpression.PLEASED
+		return expression_state == ExpressionState.PLEASED
 	
 func is_asuka_talking() -> bool:
-		return asuka_expression == AsukaExpression.TALKING
+		return expression_state == ExpressionState.TALKING
 	
 func is_asuka_upset() -> bool:
-		return asuka_expression == AsukaExpression.UPSET
+		return expression_state == ExpressionState.UPSET
 
 
 # ----- EYE STATE SETTERS -----
 
-func set_eyes_state(new_state: EyeState) -> void:
+func set_eyes_state(new_state: EyesState) -> void:
 	eye_state = new_state
 	print("Eyes -> ", get_eyes_state_value())
 	
 func set_eyes_normal() -> void:
-	set_eyes_state(EyeState.NORMAL)
+	set_eyes_state(EyesState.NORMAL)
 	
 func set_eyes_closed() -> void:
-	set_eyes_state(EyeState.CLOSED)
+	set_eyes_state(EyesState.CLOSED)
 	
 func set_eyes_lookaway() -> void:
-	set_eyes_state(EyeState.LOOKAWAY)
+	set_eyes_state(EyesState.LOOKAWAY)
 
 
 # ----- EYE STATE GETTERS -----
 
-func get_eyes_state() -> EyeState:
+func get_eyes_state() -> EyesState:
 	return eye_state
 	
 func get_eyes_state_value():
 	match eye_state:
-		EyeState.NORMAL:
+		EyesState.NORMAL:
 			return "NORMAL"
-		EyeState.CLOSED:
+		EyesState.CLOSED:
 			return "CLOSED"
-		EyeState.LOOKAWAY:
+		EyesState.LOOKAWAY:
 			return "LOOKAWAY"
 
 func are_eyes_normal() -> bool:
-	return eye_state == EyeState.NORMAL
+	return eye_state == EyesState.NORMAL
 	
 func are_eyes_closed() -> bool:
-	return eye_state == EyeState.CLOSED
+	return eye_state == EyesState.CLOSED
 	
 func are_eyes_lookaway() -> bool:
-	return eye_state == EyeState.LOOKAWAY
+	return eye_state == EyesState.LOOKAWAY

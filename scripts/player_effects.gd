@@ -41,7 +41,7 @@ func startup_blur() -> void:
 		color_vignette.set_shader_parameter("inner_radius", vignette_inner)
 		color_vignette.set_shader_parameter("outer_radius", vignette_outer)
 		counter += 1
-		print(counter)
+		#print(counter)
 		await get_tree().create_timer(0.01).timeout
 	print("start coroutine")
 	sickness_filter_coroutine()
