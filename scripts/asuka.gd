@@ -6,14 +6,14 @@ extends Area2D
 @onready var camera: Camera2D = $"../Player/Camera2D"
 @onready var player: CharacterBody2D = %Player
 
-@onready var mood: AsukaMoods = AsukaMoods.NEUTRAL
-
-enum AsukaMoods {
-	NEUTRAL,
-	HAPPY,
-	SAD,
-	ANGRY
-}
+#@onready var mood: AsukaMoods = AsukaMoods.NEUTRAL
+#
+#enum AsukaMoods {
+	#NEUTRAL,
+	#HAPPY,
+	#SAD,
+	#ANGRY
+#}
 
 var is_dialogue_started: bool = false
 

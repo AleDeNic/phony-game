@@ -62,7 +62,7 @@ func _on_phone_os_mouse_exited() -> void:
 		phone_os.display_cant_leave_alert()
 
 func enter_phone() -> void:
-	player.set_focus_target(global_position + Vector2(0.0, -600.0), player.focus_speed_phone)
+	player.set_focus_target(global_position + Vector2(0.0, -500), player.focus_speed_phone)
 
 	PlayerManager.set_player_focusing_on_phone()
 
