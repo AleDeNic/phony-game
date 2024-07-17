@@ -1,10 +1,10 @@
 extends Control
 
-const APPS_SCREEN: String = "APPS"
-const CHAT_SCREEN: String = "CHAT"
-const SETTINGS_SCREEN: String = "SETTINGS"
-const CAMERA_SCREEN: String = "CAMERA"
-const ASUKA_COLOR: String = "#FF3344"
+const APPS_SCREEN: String       = "APPS"
+const CHAT_SCREEN: String       = "CHAT"
+const SETTINGS_SCREEN: String   = "SETTINGS"
+const CAMERA_SCREEN: String     = "CAMERA"
+const ASUKA_COLOR: String       = "#FF3344"
 const MessageScene: PackedScene = preload("res://scenes/balloons/phone_chat.tscn")
 # ---- PHONE LAYOUT ----
 @onready var top_bar: Control = $PhoneSize/TopBar
