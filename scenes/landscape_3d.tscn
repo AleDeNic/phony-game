@@ -1,15 +1,31 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7j5d8r5sk27h"]
+[gd_scene load_steps=10 format=3 uid="uid://c7j5d8r5sk27h"]
 
 [ext_resource type="Script" path="res://scripts/landscape_3d.gd" id="1_5o12r"]
 [ext_resource type="Environment" uid="uid://0mwu8qw6e2x0" path="res://shaders/environment_3d.tres" id="1_7wr4h"]
 [ext_resource type="Material" uid="uid://4agj4rvs7qeo" path="res://assets/materials/water.tres" id="2_ofr4l"]
 [ext_resource type="PackedScene" uid="uid://cqcq84a5nes5i" path="res://scenes/railway.tscn" id="4_vfuov"]
+[ext_resource type="PackedScene" uid="uid://crga5rgqfsp1l" path="res://scenes/rail_piece.tscn" id="5_w2awi"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2wcyk"]
 material = ExtResource("2_ofr4l")
 size = Vector2(600, 600)
 subdivide_width = 32
 subdivide_depth = 32
+
+[sub_resource type="Animation" id="Animation_bt6q6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-550, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_m84n1"]
 resource_name = "movement"
@@ -25,21 +41,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-550, 0, 0), Vector3(118, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_bt6q6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-550, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sh4vl"]
@@ -64,6 +65,13 @@ mesh = SubResource("PlaneMesh_2wcyk")
 
 [node name="MovingObjects" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -550, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingObjects"]
+libraries = {
+"": SubResource("AnimationLibrary_sh4vl")
+}
+autoplay = "movement"
+speed_scale = 0.1
 
 [node name="Node3D" type="Node3D" parent="MovingObjects"]
 
@@ -103,13 +111,171 @@ transform = Transform3D(1.48608, 0, 0, 0, 1.48608, 0, 0, 0, 1.48608, 403.925, 5.
 [node name="Railway6" parent="MovingObjects/Node3D" instance=ExtResource("4_vfuov")]
 transform = Transform3D(1.48608, 0, 0, 0, 1.48608, 0, 0, 0, 1.48608, 499.675, 5.03076, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingObjects"]
-libraries = {
-"": SubResource("AnimationLibrary_sh4vl")
-}
-speed_scale = 0.1
+[node name="Railsss" type="Node3D" parent="MovingObjects"]
+
+[node name="Rail" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 550.236, 4.23732, -0.242004)
+
+[node name="Rail2" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 529.21, 4.23732, -0.242004)
+
+[node name="Rail3" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 508.114, 4.23732, -0.242004)
+
+[node name="Rail4" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 487.116, 4.23732, -0.242004)
+
+[node name="Rail5" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 466.303, 4.23732, -0.242004)
+
+[node name="Rail6" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 445.277, 4.23732, -0.242004)
+
+[node name="Rail7" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 424.181, 4.23732, -0.242004)
+
+[node name="Rail8" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 403.183, 4.23732, -0.242004)
+
+[node name="Rail9" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 383.008, 4.23732, -0.242004)
+
+[node name="Rail10" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 361.982, 4.23732, -0.242004)
+
+[node name="Rail11" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 340.885, 4.23732, -0.242004)
+
+[node name="Rail12" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 319.888, 4.23732, -0.242004)
+
+[node name="Rail13" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 299.074, 4.23732, -0.242004)
+
+[node name="Rail14" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 278.049, 4.23732, -0.242004)
+
+[node name="Rail15" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 256.952, 4.23732, -0.242004)
+
+[node name="Rail16" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 235.955, 4.23732, -0.242004)
+
+[node name="Rail17" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 214.771, 4.23732, -0.242004)
+
+[node name="Rail18" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 193.745, 4.23732, -0.242004)
+
+[node name="Rail19" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 172.649, 4.23732, -0.242004)
+
+[node name="Rail20" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 151.651, 4.23732, -0.242004)
+
+[node name="Rail21" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 130.838, 4.23732, -0.242004)
+
+[node name="Rail22" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 109.812, 4.23732, -0.242004)
+
+[node name="Rail23" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 88.7157, 4.23732, -0.242004)
+
+[node name="Rail24" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 67.7182, 4.23732, -0.242004)
+
+[node name="Rail25" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 47.5426, 4.23732, -0.242004)
+
+[node name="Rail26" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 26.5168, 4.23732, -0.242004)
+
+[node name="Rail27" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, 5.42029, 4.23732, -0.242004)
+
+[node name="Rail28" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -15.5771, 4.23732, -0.242004)
+
+[node name="Rail29" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -36.3905, 4.23732, -0.242004)
+
+[node name="Rail30" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -57.4162, 4.23732, -0.242004)
+
+[node name="Rail31" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -78.5128, 4.23732, -0.242004)
+
+[node name="Rail32" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -99.5103, 4.23732, -0.242004)
+
+[node name="Rail33" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -120.2, 4.23732, -0.242004)
+
+[node name="Rail34" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -141.225, 4.23732, -0.242004)
+
+[node name="Rail35" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -162.322, 4.23732, -0.242004)
+
+[node name="Rail36" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -183.319, 4.23732, -0.242004)
+
+[node name="Rail37" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -204.133, 4.23732, -0.242004)
+
+[node name="Rail38" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -225.158, 4.23732, -0.242004)
+
+[node name="Rail39" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -246.255, 4.23732, -0.242004)
+
+[node name="Rail40" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -267.253, 4.23732, -0.242004)
+
+[node name="Rail41" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -287.428, 4.23732, -0.242004)
+
+[node name="Rail42" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -308.454, 4.23732, -0.242004)
+
+[node name="Rail43" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -329.55, 4.23732, -0.242004)
+
+[node name="Rail44" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -350.548, 4.23732, -0.242004)
+
+[node name="Rail45" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -371.361, 4.23732, -0.242004)
+
+[node name="Rail46" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -392.387, 4.23732, -0.242004)
+
+[node name="Rail47" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -413.484, 4.23732, -0.242004)
+
+[node name="Rail48" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -434.481, 4.23732, -0.242004)
+
+[node name="Rail49" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -455.665, 4.23732, -0.242004)
+
+[node name="Rail50" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -476.69, 4.23732, -0.242004)
+
+[node name="Rail51" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -497.787, 4.23732, -0.242004)
+
+[node name="Rail52" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -518.784, 4.23732, -0.242004)
+
+[node name="Rail53" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -539.598, 4.23732, -0.242004)
+
+[node name="Rail54" parent="MovingObjects/Railsss" instance=ExtResource("5_w2awi")]
+transform = Transform3D(5.85748, 0, 0, 0, 2.81534, 0, 0, 0, 2.81534, -560.624, 4.23732, -0.242004)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.573576, 0, 0.819151, 0, 1, 0, -0.819152, 0, 0.573576, 0, 4, 0)
+transform = Transform3D(0.573576, 0, 0.819152, 0, 1, 0, -0.819152, 0, 0.573576, -0.0140305, 4.04047, -0.009552)
 fov = 90.0
 far = 1000.0
