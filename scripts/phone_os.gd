@@ -76,8 +76,6 @@ func _on_update_timer_timeout() -> void:
 	handle_clock()
 
 
-
-
 func reset_screens() -> void:
 	top_bar.visible = true
 	bottom_bar.visible = false
@@ -104,6 +102,7 @@ func go_to_screen(screen: Control) -> void:
 			bottom_bar.visible = true
 	else:
 		bottom_bar.visible = false
+
 
 func _on_settings_pressed() -> void:
 	go_to_screen(settings)

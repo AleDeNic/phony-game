@@ -1,16 +1,12 @@
-[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://dx5mtol83wobg"]
-
-[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_52fdn"]
-resource_name = "LowPassFilter"
-cutoff_hz = 500.0
+[gd_resource type="AudioBusLayout" format=3 uid="uid://dx5mtol83wobg"]
 
 [resource]
-bus/0/volume_db = -80.0
+bus/0/volume_db = 0.662756
 bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
-bus/1/volume_db = 0.0
+bus/1/volume_db = 0.662756
 bus/1/send = &"Master"
 bus/2/name = &"SFX"
 bus/2/solo = false
@@ -36,11 +32,3 @@ bus/5/mute = false
 bus/5/bypass_fx = false
 bus/5/volume_db = -0.0505047
 bus/5/send = &"Music"
-bus/6/name = &"Song01"
-bus/6/solo = false
-bus/6/mute = false
-bus/6/bypass_fx = false
-bus/6/volume_db = 0.0
-bus/6/send = &"Music"
-bus/6/effect/0/effect = SubResource("AudioEffectLowPassFilter_52fdn")
-bus/6/effect/0/enabled = true
