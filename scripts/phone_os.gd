@@ -30,7 +30,7 @@ const MessageScene: PackedScene = preload("res://scenes/balloons/phone_chat.tscn
 @export var max_time: float = 59
 @export var current_time: float = 12.0
 
-@onready var update_timer: Timer = $UpdateTimer
+@onready var update_timer: Timer
 
 var elapsed_seconds: float = 0.0
 

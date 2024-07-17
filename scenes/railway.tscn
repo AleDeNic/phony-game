@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqcq84a5nes5i"]
+
+[ext_resource type="PackedScene" uid="uid://dcp6xx2d438v6" path="res://assets/models/cable.glb" id="1_1580j"]
+[ext_resource type="PackedScene" uid="uid://lg00sbkm8486" path="res://assets/models/ring.glb" id="2_xbros"]
+[ext_resource type="PackedScene" uid="uid://0uxhv370ajxg" path="res://assets/models/junction.glb" id="3_v38yx"]
+
+[node name="Railway" type="Node3D"]
+
+[node name="Cable02" parent="." instance=ExtResource("1_1580j")]
+transform = Transform3D(-3.0598e-07, 0, -7, 0, 7, 0, 7, 0, -3.0598e-07, 0, 7.93768, -4.53781)
+
+[node name="Cable03" parent="." instance=ExtResource("1_1580j")]
+transform = Transform3D(-3.0598e-07, 0, -7, 0, 7, 0, 7, 0, -3.0598e-07, 0, 2.55397, -7.01728)
+
+[node name="Ring" parent="." instance=ExtResource("2_xbros")]
+transform = Transform3D(-3.0598e-07, 0, 7, 0, 7, 0, -7, 0, -3.0598e-07, 0, 2.66999, 0)
+
+[node name="Junction02" parent="." instance=ExtResource("3_v38yx")]
+transform = Transform3D(-2.95554e-07, 7.91934e-08, 7, -4.8073, 5.0882, -2.60539e-07, -5.0882, -4.8073, -1.60447e-07, 0, 7.93919, -4.5527)
+
+[node name="Junction03" parent="." instance=ExtResource("3_v38yx")]
+transform = Transform3D(-2.64986e-07, 1.5299e-07, 7, 2.97249, 6.33753, -2.59869e-08, -6.33753, 2.97249, -3.04875e-07, 0, 2.5706, -7.01971)

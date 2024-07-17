@@ -3,14 +3,13 @@
 [ext_resource type="Script" path="res://scripts/landscape_3d.gd" id="1_5o12r"]
 [ext_resource type="Environment" uid="uid://0mwu8qw6e2x0" path="res://shaders/environment_3d.tres" id="1_7wr4h"]
 [ext_resource type="Material" uid="uid://4agj4rvs7qeo" path="res://assets/materials/water.tres" id="2_ofr4l"]
+[ext_resource type="PackedScene" uid="uid://cqcq84a5nes5i" path="res://scenes/railway.tscn" id="4_vfuov"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2wcyk"]
 material = ExtResource("2_ofr4l")
 size = Vector2(600, 600)
 subdivide_width = 32
 subdivide_depth = 32
-
-[sub_resource type="BoxMesh" id="BoxMesh_lh51e"]
 
 [sub_resource type="Animation" id="Animation_2tcxc"]
 length = 0.001
@@ -64,30 +63,53 @@ cast_shadow = 0
 mesh = SubResource("PlaneMesh_2wcyk")
 
 [node name="Objects" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -250, 0, 0)
-
-[node name="CubeSmall" type="MeshInstance3D" parent="Objects"]
-transform = Transform3D(6.68374, 0, 0, 0, 6.68374, 0, 0, 0, 6.68374, -44.847, 2.33252, -3.79256)
-mesh = SubResource("BoxMesh_lh51e")
-skeleton = NodePath("../..")
-
-[node name="CubeMedium" type="MeshInstance3D" parent="Objects"]
-transform = Transform3D(14.4, 0, 0, 0, 14.4, 0, 0, 0, 14.4, -44.847, 5.214, -30.198)
-mesh = SubResource("BoxMesh_lh51e")
-skeleton = NodePath("../..")
-
-[node name="CubeBig" type="MeshInstance3D" parent="Objects"]
-transform = Transform3D(74.163, 0, 0, 0, 74.163, 0, 0, 0, 74.163, -40.496, 5.214, -218.13)
-mesh = SubResource("BoxMesh_lh51e")
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -550, 0, 0)
 
 [node name="ObjectsAnimation" type="AnimationPlayer" parent="Objects"]
-root_node = NodePath("../CubeMedium")
+root_node = NodePath("")
 libraries = {
 "": SubResource("AnimationLibrary_1xt5u")
 }
 autoplay = "movement"
 speed_scale = 0.1
+
+[node name="Node3D" type="Node3D" parent="Objects"]
+
+[node name="Railway7" parent="Objects/Node3D" instance=ExtResource("4_vfuov")]
+transform = Transform3D(1.48608, 0, 0, 0, 1.48608, 0, 0, 0, 1.48608, -551.372, 5.03076, 0)
+
+[node name="Railway8" parent="Objects/Node3D" instance=ExtResource("4_vfuov")]
+transform = Transform3D(1.48608, 0, 0, 0, 1.48608, 0, 0, 0, 1.48608, -455.613, 5.03076, 0)
+
+[node name="Railway9" parent="Objects/Node3D" instance=ExtResource("4_vfuov")]
+transform = Transform3D(1.48608, 0, 0, 0, 1.48608, 0, 0, 0, 1.48608, -359.863, 5.03076, 0)
+
+[node name="Railway10" parent="Objects/Node3D" instance=ExtResource("4_vfuov")]
+transform = Transform3D(1.48608, 0, 0, 0, 1.48608, 0, 0, 0, 1.48608, -265.05, 5.03076, 0)
+
+[node name="Railway11" parent="Objects/Node3D" instance=ExtResource("4_vfuov")]
+transform = Transform3D(1.48608, 0, 0, 0, 1.48608, 0, 0, 0, 1.48608, -169.291, 5.03076, 0)
+
+[node name="Railway12" parent="Objects/Node3D" instance=ExtResource("4_vfuov")]
+transform = Transform3D(1.48608, 0, 0, 0, 1.48608, 0, 0, 0, 1.48608, -73.5406, 5.03076, 0)
+
+[node name="Railway" parent="Objects/Node3D" instance=ExtResource("4_vfuov")]
+transform = Transform3D(1.48608, 0, 0, 0, 1.48608, 0, 0, 0, 1.48608, 21.8432, 5.03076, 0)
+
+[node name="Railway2" parent="Objects/Node3D" instance=ExtResource("4_vfuov")]
+transform = Transform3D(1.48608, 0, 0, 0, 1.48608, 0, 0, 0, 1.48608, 117.603, 5.03076, 0)
+
+[node name="Railway3" parent="Objects/Node3D" instance=ExtResource("4_vfuov")]
+transform = Transform3D(1.48608, 0, 0, 0, 1.48608, 0, 0, 0, 1.48608, 213.353, 5.03076, 0)
+
+[node name="Railway4" parent="Objects/Node3D" instance=ExtResource("4_vfuov")]
+transform = Transform3D(1.48608, 0, 0, 0, 1.48608, 0, 0, 0, 1.48608, 308.165, 5.03076, 0)
+
+[node name="Railway5" parent="Objects/Node3D" instance=ExtResource("4_vfuov")]
+transform = Transform3D(1.48608, 0, 0, 0, 1.48608, 0, 0, 0, 1.48608, 403.925, 5.03076, 0)
+
+[node name="Railway6" parent="Objects/Node3D" instance=ExtResource("4_vfuov")]
+transform = Transform3D(1.48608, 0, 0, 0, 1.48608, 0, 0, 0, 1.48608, 499.675, 5.03076, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.573576, 0, 0.819151, 0, 1, 0, -0.819152, 0, 0.573576, 0, 4, 0)
