@@ -10,14 +10,15 @@ signal notification
 
 var phone_sickness_increase: int = 5
 var phone_sickness_decrease: int = 20
+var min_phone_sickness: int = 0
 var max_phone_sickness: int = 100
-var phone_sickness_wait: int = 1
+#var phone_sickness_wait: int = 0
 var phone_sickness: int = 0
 
 
 # ----- NOTIFICATIONS -----
 
-var notification_probability: float = 2
+var notification_probability: float = 2.0
 var asuka_message_probability: float = 20.0
 var notification_probability_increase: float = 2.0
 var are_notifications_cleared: bool = true
@@ -29,6 +30,7 @@ var dialogue_state: int = 1
 # ----- INIT AND PROCESS-----
 
 func _ready() -> void:
+	await get_tree().create_timer(5).timeout
 	notifications_coroutine()
 	sickness_coroutine()
 

@@ -20,10 +20,6 @@ extends CanvasLayer
 func _ready() -> void:
 	startup_blur()
 
-func sickness_filter_coroutine() -> void:
-	handle_phone_sickness_filter()
-	await get_tree().create_timer(0.1).timeout
-
 func startup_blur() -> void:
 	var counter: int = 0
 	while counter < startup_end:
@@ -45,20 +41,23 @@ func startup_blur() -> void:
 		await get_tree().create_timer(0.01).timeout
 	print("start coroutine")
 	sickness_filter_coroutine()
-	pass
+
+func sickness_filter_coroutine() -> void:
+	while true:
+		handle_phone_sickness_filter()
+		print("aaaa")
+		await get_tree().create_timer(0.1).timeout
 
 # ----- HANDLE FILTERS -----
 
 func handle_phone_sickness_filter() -> void:
-	if NotificationsManager.phone_sickness > NotificationsManager.phone_sickness_wait:
-		
-		blur_inner = map_range(NotificationsManager.phone_sickness, NotificationsManager.phone_sickness_wait, NotificationsManager.max_phone_sickness, 0.8, 0.0)
-		blur_radius = map_range(NotificationsManager.phone_sickness, NotificationsManager.phone_sickness_wait, NotificationsManager.max_phone_sickness, 0.25, 0.6)
-		blur_outer = map_range(NotificationsManager.phone_sickness, NotificationsManager.phone_sickness_wait, NotificationsManager.max_phone_sickness, 0.7, 0.35)
-		
-		blur_vignette.set_shader_parameter("blur_inner", blur_inner)
-		blur_vignette.set_shader_parameter("blur_radius", blur_radius)
-		blur_vignette.set_shader_parameter("blur_outer", blur_outer)
+	blur_inner = map_range(NotificationsManager.phone_sickness, NotificationsManager.min_phone_sickness, NotificationsManager.max_phone_sickness, 0.8, 0.0)
+	blur_radius = map_range(NotificationsManager.phone_sickness, NotificationsManager.min_phone_sickness, NotificationsManager.max_phone_sickness, 0.25, 0.6)
+	blur_outer = map_range(NotificationsManager.phone_sickness, NotificationsManager.min_phone_sickness, NotificationsManager.max_phone_sickness, 0.7, 0.35)
+	
+	blur_vignette.set_shader_parameter("blur_inner", blur_inner)
+	blur_vignette.set_shader_parameter("blur_radius", blur_radius)
+	blur_vignette.set_shader_parameter("blur_outer", blur_outer)
 
 
 # ----- UTILS -----

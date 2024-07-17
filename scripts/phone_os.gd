@@ -1,10 +1,10 @@
 extends Control
 
-const APPS_SCREEN: String       = "APPS"
-const CHAT_SCREEN: String       = "CHAT"
-const SETTINGS_SCREEN: String   = "SETTINGS"
-const CAMERA_SCREEN: String     = "CAMERA"
-const ASUKA_COLOR: String       = "#FF3344"
+const APPS_SCREEN: String = "APPS"
+const CHAT_SCREEN: String = "CHAT"
+const SETTINGS_SCREEN: String = "SETTINGS"
+const CAMERA_SCREEN: String = "CAMERA"
+const ASUKA_COLOR: String = "#FF3344"
 const MessageScene: PackedScene = preload("res://scenes/balloons/phone_chat.tscn")
 # ---- PHONE LAYOUT ----
 @onready var top_bar: Control = $PhoneSize/TopBar
@@ -156,24 +156,24 @@ func _on_send_message_pressed() -> void:
 
 func spawn_new_asuka_message() -> void:
 	var new_message: RichTextLabel = default_message.duplicate() as RichTextLabel
-	var parent: Node               = default_message.get_parent()
+	var parent: Node = default_message.get_parent()
 	parent.add_child(new_message)
 	parent.move_child(new_message, parent.get_child_count() - 1)
 	new_message.visible = true
 	var message_sender: String = "Asuka" if NotificationsManager.is_message_from_asuka() else generate_mysterious_words(7, 7)
 
-	new_message.text = "[color=%s]%s:[/color] %s [i][color=gray]8:%02d am[/color][/i]" % [asuka_color, message_sender, generate_mysterious_words(50, 10), int(current_time)]
+	new_message.text = "[color=%s]%s:[/color] %s [i][color=gray]" % [asuka_color, message_sender, generate_mysterious_words(50, 10)] + clock.text + "[/color][/i]"
 	default_message = new_message
 	notification_button.visible = true
 
 
 func spawn_new_player_message(message_text: String) -> void:
 	var new_player_message: RichTextLabel = default_player_message.duplicate() as RichTextLabel
-	var parent: Node                      = default_player_message.get_parent()
+	var parent: Node = default_player_message.get_parent()
 	parent.add_child(new_player_message)
 	parent.move_child(new_player_message, parent.get_child_count() - 1)
 	new_player_message.visible = true
-	new_player_message.text = "%s [i][color=white]8:%02d am[/color][/i]" % [message_text, int(current_time)]
+	new_player_message.text = "%s [i][color=white]" % [message_text] + clock.text + "[/color][/i]"
 	default_player_message = new_player_message
 	call_deferred("scroll_container_to_bottom")
 
@@ -202,7 +202,7 @@ func hide_cant_leave_alert() -> void:
 
 # ---- CLOCK AND BATTERY ----
 func setup_battery() -> void:
-	var dialogue_resource    = load("res://dialogues/asuka.dialogue")
+	var dialogue_resource = load("res://dialogues/asuka.dialogue")
 	var dialogue_length: int = calculate_dialogue_length(dialogue_resource)
 	max_battery = dialogue_length / battery_depletion_dampener
 	battery_bar.max_value = max_battery
@@ -224,8 +224,8 @@ func handle_battery() -> void:
 # AleDeNic! Azazello! QuanticMoth! You can edit the starting time! It's set to 8:00 am by default.
 func handle_clock() -> void:
 	var total_minutes: int = int(elapsed_seconds / 60)
-	var hours: int         = (total_minutes / 60 + 8) % 24
-	var minutes: int       = total_minutes % 60
+	var hours: int = (total_minutes / 60 + 8) % 24
+	var minutes: int = total_minutes % 60
 
 	var period: String = "am" if hours < 12 else "pm"
 	hours = hours % 12
@@ -238,8 +238,8 @@ func handle_clock() -> void:
 # ---- UTILS ----
 func generate_mysterious_words(total_length: int, max_word_length: int) -> String:
 	var characters: String = "!@#$%^&*()_+-=[]{}|;:,.<>?/~★✦✧✩✪✫✬✭✮✯✰†‡✞✟✠"
-	var code: String       = ""
-	var rng                = RandomNumberGenerator.new()
+	var code: String = ""
+	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 
 	var current_word_length: int = 0
