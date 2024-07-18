@@ -71,7 +71,7 @@ func setup_update_timer() -> void:
 func _on_update_timer_timeout() -> void:
 	elapsed_seconds += 0.1
 	handle_battery()
-	handle_clock()
+	handle_clock(10, 30)
 	home_widget.text = clock.text
 
 
@@ -220,9 +220,9 @@ func handle_battery() -> void:
 
 
 # AleDeNic! Azazello! QuanticMoth! You can edit the starting time! It's set to 8:00 am by default.
-func handle_clock() -> void:
-	var total_minutes: int = int(elapsed_seconds / 60)
-	var hours: int = (total_minutes / 60 + 8) % 24
+func handle_clock(starting_hour: int = 8, starting_minute: int = 0) -> void:
+	var total_minutes: int = int(elapsed_seconds / 60) + starting_minute
+	var hours: int = (total_minutes / 60 + starting_hour) % 24
 	var minutes: int = total_minutes % 60
 
 	var period: String = "am" if hours < 12 else "pm"
