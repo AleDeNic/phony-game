@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dg55yu6bit6jt"]
+[gd_scene load_steps=40 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_os.gd" id="1_r0wjl"]
 [ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/textures/clouds.jpg" id="2_hqmi7"]
@@ -8,7 +8,6 @@
 [ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="4_1d7ag"]
 [ext_resource type="Script" path="res://scripts/volume_slider.gd" id="4_5jmmy"]
 [ext_resource type="FontFile" uid="uid://ca4j2u2x7wiml" path="res://ui/fonts/HDArnie-Italic.otf" id="4_pq3r1"]
-[ext_resource type="Texture2D" uid="uid://cjmjkd3h610nf" path="res://1deprecated/video_icon.png" id="6_vmfnf"]
 [ext_resource type="Texture2D" uid="uid://bm2pd3jhn61iq" path="res://assets/sprites/selfie.png" id="7_7bxb7"]
 [ext_resource type="FontFile" uid="uid://d02ygxi1jy6m3" path="res://ui/fonts/neuropol_x.otf" id="7_f3rx8"]
 [ext_resource type="LabelSettings" uid="uid://b0qm7cdafhgra" path="res://ui/settings/app_title.tres" id="8_0yw4n"]
@@ -41,6 +40,20 @@ shader_parameter/lod = 2.0
 shader_parameter/blending = Vector4(1, 1, 1, 1)
 shader_parameter/blend_factor = 0.6
 shader_parameter/overlay = Vector3(1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6s33v"]
+content_margin_left = 32.0
+content_margin_top = 32.0
+content_margin_right = 32.0
+content_margin_bottom = 32.0
+bg_color = Color(1, 1, 1, 0.662745)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1lqkp"]
+draw_center = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6g4p3"]
 draw_center = false
@@ -174,12 +187,10 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0.439216)
 
 [node name="Apps" type="Control" parent="PhoneSize"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 272.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -201,13 +212,21 @@ theme = ExtResource("12_fsmwd")
 layout_mode = 2
 theme = ExtResource("12_fsmwd")
 
-[node name="Camera" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
+[node name="HomeWidget" type="RichTextLabel" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
-mouse_filter = 1
+mouse_filter = 2
 theme = ExtResource("12_fsmwd")
-text = "Camera"
-alignment = 0
+theme_override_fonts/normal_font = ExtResource("7_f3rx8")
+theme_override_font_sizes/normal_font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_6s33v")
+text = "Clock"
+
+[node name="HSeparator2" type="HSeparator" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("12_fsmwd")
+theme_override_constants/separation = 64
 
 [node name="Chat" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
@@ -217,15 +236,48 @@ theme = ExtResource("12_fsmwd")
 text = "Chat"
 alignment = 0
 
+[node name="Camera" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.470588)
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+text = "Camera"
+alignment = 0
+
 [node name="Video" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
-visible = false
+modulate = Color(1, 1, 1, 0.470588)
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 text = "Video"
-icon = ExtResource("6_vmfnf")
 alignment = 0
+
+[node name="Music" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.470588)
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+text = "Music
+"
+alignment = 0
+
+[node name="FlappyBird" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.470588)
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+text = "Gaming"
+alignment = 0
+
+[node name="HSeparator" type="HSeparator" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("12_fsmwd")
+theme_override_constants/separation = 64
 
 [node name="Settings" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
@@ -235,6 +287,36 @@ theme = ExtResource("12_fsmwd")
 text = "Settings
 "
 alignment = 0
+
+[node name="ComingSoon" type="Control" parent="PhoneSize"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/ComingSoon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_fsmwd")
+theme_override_constants/margin_top = 300
+theme_override_constants/margin_bottom = 160
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PhoneSize/ComingSoon/MarginContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+theme_override_fonts/normal_font = ExtResource("4_1d7ag")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1lqkp")
+text = "We’re excited to announce that this app will be available soon in the next update of your phone OS!
+
+Keep an eye out for the update and enjoy all the new features coming your way!"
 
 [node name="Settings" type="Control" parent="PhoneSize"]
 visible = false
@@ -371,6 +453,7 @@ grow_vertical = 0
 layout_mode = 2
 
 [node name="Chat" type="Control" parent="PhoneSize"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -399,7 +482,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("19_dm1ly")
-text = "random chat name"
+text = "Chat"
 label_settings = ExtResource("8_0yw4n")
 
 [node name="HSeparator" type="HSeparator" parent="PhoneSize/Chat/MarginContainer/VBoxContainer"]
@@ -631,8 +714,8 @@ position = Vector2(359, 750)
 scale = Vector2(1.465, 1.465)
 texture = ExtResource("27_adyrh")
 
-[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Camera" to="." method="_on_camera_pressed"]
 [connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Chat" to="." method="_on_chat_pressed"]
+[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Camera" to="." method="_on_camera_pressed"]
 [connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="toggled" from="PhoneSize/Settings/MarginContainer/VBoxContainer2/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="pressed" from="PhoneSize/Settings/MarginContainer/VBoxContainer2/Quit" to="." method="_on_quit_pressed"]

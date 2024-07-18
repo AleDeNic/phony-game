@@ -13,6 +13,7 @@ const MessageScene: PackedScene = preload("res://scenes/balloons/phone_chat.tscn
 @onready var gradient_bottom: Sprite2D = $PhoneSize/BottomBar/GradientBottom
 @onready var clock: Label = $PhoneSize/TopBar/MarginContainer/HBoxContainer/Clock
 @onready var notification_button: Button = $PhoneSize/TopBar/MarginContainer/HBoxContainer/NotificationButton
+@onready var home_widget: RichTextLabel = $PhoneSize/Apps/MarginContainer/VBoxContainer/HomeWidget
 # ---- SCREENS ----
 @onready var apps: Control = $PhoneSize/Apps
 @onready var settings: Control = $PhoneSize/Settings
@@ -26,10 +27,7 @@ const MessageScene: PackedScene = preload("res://scenes/balloons/phone_chat.tscn
 @export var max_battery: float = 5.0
 # max_battery = clamp(dialogue_length / 100.0, 5.0, 60.0) <- this can be useful to clamp the battery life to a max value
 
-# ---- TIMER ----
-@export var max_time: float = 59
-@export var current_time: float = 12.0
-
+#----- TIMER -----
 @onready var update_timer: Timer
 
 var elapsed_seconds: float = 0.0
@@ -58,6 +56,7 @@ func _ready() -> void:
 	turn_off_phone_visuals()
 	cant_leave_alert.visible = false
 	notification_button.visible = false
+	home_widget.text = clock.text
 	NotificationsManager.connect("notification", Callable(self, "spawn_new_asuka_message"))
 
 
@@ -161,7 +160,7 @@ func spawn_new_asuka_message() -> void:
 	new_message.visible = true
 	var message_sender: String = "Asuka" if NotificationsManager.is_message_from_asuka() else generate_mysterious_words(7, 7)
 
-	new_message.text = "[color=%s]%s:[/color] %s [i][color=gray]" % [asuka_color, message_sender, generate_mysterious_words(50, 10)] + clock.text + "[/color][/i]"
+	new_message.text = "[color=%s]%s:[/color] %s    [i][color=gray]" % [asuka_color, message_sender, generate_mysterious_words(50, 10)] + clock.text + "[/color][/i]"
 	default_message = new_message
 	notification_button.visible = true
 
@@ -172,7 +171,7 @@ func spawn_new_player_message(message_text: String) -> void:
 	parent.add_child(new_player_message)
 	parent.move_child(new_player_message, parent.get_child_count() - 1)
 	new_player_message.visible = true
-	new_player_message.text = "%s [i][color=white]" % [message_text] + clock.text + "[/color][/i]"
+	new_player_message.text = "%s    [i][color=white]" % [message_text] + clock.text + "[/color][/i]"
 	default_player_message = new_player_message
 	call_deferred("scroll_container_to_bottom")
 
