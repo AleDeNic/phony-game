@@ -32,6 +32,7 @@ const MessageScene: PackedScene = preload("res://scenes/balloons/phone_chat.tscn
 @onready var update_timer: Timer
 
 var elapsed_seconds: float = 0.0
+@export var minute_dutation: int = 6 # how many seconds a minute lasts in game
 
 # ---- CHAT ----
 @onready var default_message: RichTextLabel = $PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultMessage
@@ -223,7 +224,7 @@ func handle_battery() -> void:
 
 # AleDeNic! Azazello! QuanticMoth! You can edit the starting time! It's set to 8:00 am by default.
 func handle_clock(starting_hour: int = 8, starting_minute: int = 0) -> void:
-	var total_minutes: int = int(elapsed_seconds / 60) + starting_minute
+	var total_minutes: int = int(elapsed_seconds / minute_dutation) + starting_minute
 	var hours: int = (total_minutes / 60 + starting_hour) % 24
 	var minutes: int = total_minutes % 60
 
