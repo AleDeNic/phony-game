@@ -56,18 +56,18 @@ func exit() -> void:
 
 # ----- UTILS -----
 func update_asuka_visuals() -> void:
-	if AsukaManager.are_asuka_arms_crossed():
-		asuka_02.show()
-		asuka_03.hide()
-		asuka_arms_03.hide()
-	elif AsukaManager.are_asuka_over_table():
+	if AsukaManager.is_asuka_pose_2():
 		asuka_02.hide()
 		asuka_03.show()
 		asuka_arms_03.show()
+	elif AsukaManager.is_asuka_pose_3():
+		asuka_02.show()
+		asuka_03.hide()
+		asuka_arms_03.hide()
 
-	var expr_pleased: Sprite2D = expr_pleased_02 if AsukaManager.are_asuka_arms_crossed() else expr_pleased_03
-	var expr_talking: Sprite2D = expr_talking_02 if AsukaManager.are_asuka_arms_crossed() else expr_talking_03
-	var expr_upset: Sprite2D   = expr_upset_02 if AsukaManager.are_asuka_arms_crossed() else expr_upset_03
+	var expr_pleased: Sprite2D = expr_pleased_02 if AsukaManager.is_asuka_pose_3() else expr_pleased_03
+	var expr_talking: Sprite2D = expr_talking_02 if AsukaManager.is_asuka_pose_3() else expr_talking_03
+	var expr_upset: Sprite2D   = expr_upset_02 if AsukaManager.is_asuka_pose_3() else expr_upset_03
 
 	expr_pleased.hide()
 	expr_talking.hide()
@@ -80,9 +80,9 @@ func update_asuka_visuals() -> void:
 	elif AsukaManager.is_expression_upset():
 		expr_upset.show()
 
-	var eyes_normal: Sprite2D   = eyes_normal_02 if AsukaManager.are_asuka_arms_crossed() else eyes_normal_03
-	var eyes_closed: Sprite2D   = eyes_closed_02 if AsukaManager.are_asuka_arms_crossed() else eyes_closed_03
-	var eyes_lookaway: Sprite2D = eyes_lookaway_02 if AsukaManager.are_asuka_arms_crossed() else eyes_lookaway_03
+	var eyes_normal: Sprite2D   = eyes_normal_02 if AsukaManager.is_asuka_pose_3() else eyes_normal_03
+	var eyes_closed: Sprite2D   = eyes_closed_02 if AsukaManager.is_asuka_pose_3() else eyes_closed_03
+	var eyes_lookaway: Sprite2D = eyes_lookaway_02 if AsukaManager.is_asuka_pose_3() else eyes_lookaway_03
 
 	eyes_normal.hide()
 	eyes_closed.hide()

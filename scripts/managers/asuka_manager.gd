@@ -1,8 +1,8 @@
 extends Node
 
 enum PoseState {
-	ARMS_CROSSED,
-	OVER_TABLE
+	OVER_TABLE,
+	ARMS_CROSSED
 }
 
 enum ExpressionState {
@@ -22,10 +22,12 @@ enum EyesState {
 @onready var eye_state: EyesState
 
 func _ready() -> void:
-	set_pose_arms_crossed()
-	set_expression_pleased()
-	set_eyes_normal()
+	set_asuka(PoseState.OVER_TABLE, ExpressionState.PLEASED, EyesState.NORMAL)
 
+func set_asuka(pose: PoseState, expression: ExpressionState, eyes: EyesState) -> void:
+	set_pose_state(pose)
+	set_expression_state(expression)
+	set_eyes_state(eyes)
 
 # ----- POSE SETTERS -----
 func set_pose_state(new_pose: PoseState) -> void:
@@ -33,18 +35,9 @@ func set_pose_state(new_pose: PoseState) -> void:
 	print("Asuka pose -> ", get_asuka_pose_value())
 
 
-func set_pose_arms_crossed() -> void:
-	set_pose_state(PoseState.ARMS_CROSSED)
-
-
-func set_pose_over_table() -> void:
-	set_pose_state(PoseState.OVER_TABLE)
-
-
 # ----- POSE GETTERS -----
 func get_asuka_pose() -> PoseState:
 	return pose_state
-
 
 func get_asuka_pose_value():
 	match pose_state:
@@ -53,13 +46,11 @@ func get_asuka_pose_value():
 		PoseState.OVER_TABLE:
 			return "OVER_TABLE"
 
-
-func are_asuka_arms_crossed() -> bool:
-	return pose_state == PoseState.ARMS_CROSSED
-
-
-func are_asuka_over_table() -> bool:
+func is_asuka_pose_2() -> bool:
 	return pose_state == PoseState.OVER_TABLE
+
+func is_asuka_pose_3() -> bool:
+	return pose_state == PoseState.ARMS_CROSSED
 
 
 # ----- EXPRESSION SETTERS -----
@@ -68,22 +59,9 @@ func set_expression_state(new_expression: ExpressionState) -> void:
 	print("Asuka -> ", get_asuka_expression_value())
 
 
-func set_expression_pleased() -> void:
-	set_expression_state(ExpressionState.PLEASED)
-
-
-func set_expression_talking() -> void:
-	set_expression_state(ExpressionState.TALKING)
-
-
-func set_expression_upset() -> void:
-	set_expression_state(ExpressionState.UPSET)
-
-
 # ----- EXPRESSION GETTERS -----
 func get_asuka_expression() -> ExpressionState:
 	return expression_state
-
 
 func get_asuka_expression_value():
 	match expression_state:
@@ -98,10 +76,8 @@ func get_asuka_expression_value():
 func is_expression_pleased() -> bool:
 	return expression_state == ExpressionState.PLEASED
 
-
 func is_expression_talking() -> bool:
 	return expression_state == ExpressionState.TALKING
-
 
 func is_expression_upset() -> bool:
 	return expression_state == ExpressionState.UPSET
@@ -113,22 +89,9 @@ func set_eyes_state(new_state: EyesState) -> void:
 	print("Eyes -> ", get_eyes_state_value())
 
 
-func set_eyes_normal() -> void:
-	set_eyes_state(EyesState.NORMAL)
-
-
-func set_eyes_closed() -> void:
-	set_eyes_state(EyesState.CLOSED)
-
-
-func set_eyes_lookaway() -> void:
-	set_eyes_state(EyesState.LOOKAWAY)
-
-
 # ----- EYE STATE GETTERS -----
 func get_eyes_state() -> EyesState:
 	return eye_state
-
 
 func get_eyes_state_value():
 	match eye_state:
