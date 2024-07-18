@@ -92,5 +92,5 @@ func is_message_from_asuka() -> bool:
 func set_can_notifications_arrive(value: bool) -> void:
 	can_notifications_arrive = value
 
-func can_notifications_arrive() -> bool:
+func get_can_notifications_arrive() -> bool:
 	return can_notifications_arrive
