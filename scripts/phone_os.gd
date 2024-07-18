@@ -49,6 +49,14 @@ var elapsed_seconds: float = 0.0
 @export var asuka_color: String = ASUKA_COLOR
 @export var random_color: String
 
+var used_message_ids = {}
+var messages = [
+	"Message 1: This is the first message.",
+	"Message 2: This is the second message.",
+	"Message 3: This is the third message.",
+	"Message 4: This is the fourth message.",
+	"Message 5: This is the fifth message."
+]
 
 func _ready() -> void:
 	setup_battery()
@@ -156,16 +164,18 @@ func _on_send_message_pressed() -> void:
 
 
 func spawn_new_asuka_message() -> void:
+	var dialogue_resource = load("res://dialogues/asuka.dialogue")
 	var new_message: RichTextLabel = default_message.duplicate() as RichTextLabel
 	var parent: Node = default_message.get_parent()
 	parent.add_child(new_message)
 	parent.move_child(new_message, parent.get_child_count() - 1)
 	new_message.visible = true
-	var message_sender: String = "Asuka" if NotificationsManager.is_message_from_asuka() else generate_mysterious_words(7, 7)
+	var message_sender: String = "Ersk" if NotificationsManager.is_message_from_asuka() else generate_mysterious_words(7, 7)
 
-	new_message.text = "[color=%s]%s:[/color] %s    [i][color=gray]" % [asuka_color, message_sender, generate_mysterious_words(50, 10)] + clock.text + "[/color][/i]"
+	new_message.text = "[color=%s]%s:[/color] %s    [i][color=gray]" % [asuka_color, message_sender, get_random_asuka_message()] + clock.text + "[/color][/i]"
 	default_message = new_message
 	notification_button.visible = true
+
 
 
 func spawn_new_player_message(message_text: String) -> void:
@@ -271,6 +281,9 @@ func calculate_dialogue_length(resource: DialogueResource) -> int:
 			total_length += line["text"].length()
 	return total_length
 
+# ----- BOTTOLO HELP ME PLS -----
+func get_random_asuka_message() -> String:
+	return "Kingdom Hearts"
 
 func _on_video_pressed() -> void:
 	go_to_screen(coming_soon)
