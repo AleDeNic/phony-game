@@ -6,7 +6,6 @@ const SETTINGS_SCREEN: String   = "SETTINGS"
 const CAMERA_SCREEN: String     = "CAMERA"
 const ASUKA_COLOR: String       = "#FF1A4D"
 const STRANGER_COLOR: String    = "#5973FF"
-const MessageScene: PackedScene = preload("res://scenes/balloons/phone_chat.tscn")
 # ---- PHONE LAYOUT ----
 @onready var top_bar: Control = $PhoneSize/TopBar
 @onready var bottom_bar: Control = $PhoneSize/BottomBar

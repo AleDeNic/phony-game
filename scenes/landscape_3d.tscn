@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scripts/landscape_3d.gd" id="1_5o12r"]
 [ext_resource type="Environment" uid="uid://0mwu8qw6e2x0" path="res://shaders/environment_3d.tres" id="1_7wr4h"]
 [ext_resource type="Material" uid="uid://4agj4rvs7qeo" path="res://assets/materials/water.tres" id="2_ofr4l"]
-[ext_resource type="PackedScene" uid="uid://cqcq84a5nes5i" path="res://scenes/railway.tscn" id="4_vfuov"]
-[ext_resource type="PackedScene" uid="uid://crga5rgqfsp1l" path="res://scenes/rail_piece.tscn" id="5_w2awi"]
+[ext_resource type="PackedScene" uid="uid://cqcq84a5nes5i" path="res://scenes/3d_prefabs/railway.tscn" id="4_vfuov"]
+[ext_resource type="PackedScene" uid="uid://crga5rgqfsp1l" path="res://scenes/3d_prefabs/rail_piece.tscn" id="5_w2awi"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2wcyk"]
 material = ExtResource("2_ofr4l")

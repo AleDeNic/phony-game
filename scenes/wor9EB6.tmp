@@ -1,0 +1,210 @@
+[gd_scene load_steps=23 format=3 uid="uid://bduasgadssrkv"]
+
+[ext_resource type="Script" path="res://scripts/asuka.gd" id="4_1kcn2"]
+[ext_resource type="PackedScene" uid="uid://cw0nk6gkudho2" path="res://scenes/landscape.tscn" id="4_u7jec"]
+[ext_resource type="Texture2D" uid="uid://dbmspirba0r28" path="res://assets/sprites/player_hand_phone.png" id="6_mhxfc"]
+[ext_resource type="PackedScene" uid="uid://dg55yu6bit6jt" path="res://scenes/phone_os.tscn" id="7_g2i3f"]
+[ext_resource type="Script" path="res://scripts/phone.gd" id="7_lhypb"]
+[ext_resource type="PackedScene" uid="uid://o0205cjoosgq" path="res://scenes/player.tscn" id="9_o22lg"]
+[ext_resource type="Shader" path="res://shaders/color_soft_light.gdshader" id="12_ghcqe"]
+[ext_resource type="Script" path="res://scripts/color_filter.gd" id="12_x0p2c"]
+[ext_resource type="Script" path="res://scripts/phone_effects.gd" id="13_el7tb"]
+[ext_resource type="Shader" path="res://shaders/blur_and_fisheye.gdshader" id="15_80wp3"]
+[ext_resource type="Script" path="res://scripts/player_effects.gd" id="16_6m8c5"]
+[ext_resource type="Shader" path="res://shaders/blur_vignette.gdshader" id="17_5vfsr"]
+[ext_resource type="Shader" path="res://shaders/vignette_color.gdshader" id="18_bmhia"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bgwpj"]
+radius = 186.0
+height = 576.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_klsqp"]
+radius = 30.2653
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31m52"]
+radius = 2.02509
+height = 4.48128
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b5tpt"]
+shader = ExtResource("12_ghcqe")
+shader_parameter/overlay_color = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nv2ku"]
+shader = ExtResource("15_80wp3")
+shader_parameter/lod = 0.0
+shader_parameter/effect_amount = -0.0799999
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8rrhg"]
+shader = ExtResource("17_5vfsr")
+shader_parameter/blur_radius = 0.25
+shader_parameter/blur_amount = 4.0
+shader_parameter/blur_inner = 0.8
+shader_parameter/blur_outer = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v2vil"]
+shader = ExtResource("18_bmhia")
+shader_parameter/inner_radius = 0.17
+shader_parameter/outer_radius = 1.7
+shader_parameter/vignette_strength = 1.7
+shader_parameter/dither_strength = 0.0
+shader_parameter/vignette_color = null
+
+[sub_resource type="Gradient" id="Gradient_h3vsq"]
+interpolation_mode = 2
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_flse6"]
+gradient = SubResource("Gradient_h3vsq")
+
+[node name="World" type="Node2D"]
+
+[node name="Landscape" parent="." instance=ExtResource("4_u7jec")]
+
+[node name="Asuka" type="Area2D" parent="."]
+position = Vector2(-779, 81)
+collision_mask = 4
+input_pickable = false
+script = ExtResource("4_1kcn2")
+
+[node name="AsukaEnterCollision" type="CollisionShape2D" parent="Asuka"]
+position = Vector2(-13, -54)
+shape = SubResource("CapsuleShape2D_bgwpj")
+
+[node name="Window" type="Area2D" parent="."]
+position = Vector2(1951, -506)
+collision_mask = 4
+input_pickable = false
+
+[node name="WindowCollision" type="CollisionShape2D" parent="Window"]
+scale = Vector2(47.685, 47.685)
+shape = SubResource("CircleShape2D_klsqp")
+
+[node name="PhoneCanvas" type="ParallaxBackground" parent="."]
+layer = 3
+follow_viewport_enabled = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="PhoneCanvas"]
+position = Vector2(218, 0)
+motion_scale = Vector2(0.4, 0.1)
+
+[node name="Phone" type="Area2D" parent="PhoneCanvas/ParallaxLayer"]
+z_index = 2
+position = Vector2(-137, 1578)
+scale = Vector2(0.7, 0.7)
+collision_mask = 4
+script = ExtResource("7_lhypb")
+
+[node name="PhoneSprite" type="Sprite2D" parent="PhoneCanvas/ParallaxLayer/Phone"]
+modulate = Color(0.727986, 0.727986, 0.727986, 1)
+position = Vector2(-4.28572, 10.0001)
+scale = Vector2(0.646, 0.646)
+texture = ExtResource("6_mhxfc")
+offset = Vector2(760, 820)
+
+[node name="PhoneOS" parent="PhoneCanvas/ParallaxLayer/Phone" instance=ExtResource("7_g2i3f")]
+offset_left = -355.714
+offset_top = -351.428
+offset_right = 1244.29
+offset_bottom = 1248.57
+scale = Vector2(0.44, 0.44)
+
+[node name="PhoneCollision" type="CollisionShape2D" parent="PhoneCanvas/ParallaxLayer/Phone"]
+position = Vector2(0, 14.3236)
+scale = Vector2(37.2402, 33.1369)
+shape = SubResource("CapsuleShape2D_31m52")
+
+[node name="Player" parent="." instance=ExtResource("9_o22lg")]
+unique_name_in_owner = true
+
+[node name="SceneEffects" type="Node2D" parent="."]
+
+[node name="ColorOverlay" type="CanvasLayer" parent="SceneEffects"]
+layer = 5
+script = ExtResource("12_x0p2c")
+
+[node name="ColorOverlay" type="ColorRect" parent="SceneEffects/ColorOverlay"]
+material = SubResource("ShaderMaterial_b5tpt")
+offset_left = -2674.0
+offset_top = -1683.0
+offset_right = 3398.0
+offset_bottom = 2370.0
+mouse_filter = 2
+
+[node name="PhoneEffects" type="CanvasLayer" parent="SceneEffects"]
+script = ExtResource("13_el7tb")
+
+[node name="BlueFilter" type="ColorRect" parent="SceneEffects/PhoneEffects"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2911.0
+offset_top = -1787.0
+offset_right = 1676.0
+offset_bottom = 1363.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.854902)
+
+[node name="BlurFisheye" type="ColorRect" parent="SceneEffects/PhoneEffects"]
+material = SubResource("ShaderMaterial_nv2ku")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2631.0
+offset_top = -1688.0
+offset_right = 1487.0
+offset_bottom = 1289.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PlayerEffects" type="CanvasLayer" parent="SceneEffects"]
+layer = 5
+script = ExtResource("16_6m8c5")
+
+[node name="BlurVignette" type="ColorRect" parent="SceneEffects/PlayerEffects"]
+material = SubResource("ShaderMaterial_8rrhg")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorVignette" type="ColorRect" parent="SceneEffects/PlayerEffects"]
+material = SubResource("ShaderMaterial_v2vil")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="FadeColor" type="ColorRect" parent="SceneEffects/PlayerEffects"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="StartupFade" type="CanvasLayer" parent="SceneEffects"]
+visible = false
+
+[node name="Shadows" type="CanvasLayer" parent="."]
+layer = 6
+
+[node name="Darkness2" type="Sprite2D" parent="Shadows"]
+modulate = Color(1, 1, 1, 0.666667)
+position = Vector2(376.189, 1842.07)
+rotation = 1.5708
+scale = Vector2(13.5987, 91.4128)
+texture = SubResource("GradientTexture2D_flse6")
+
+[connection signal="area_entered" from="Asuka" to="Asuka" method="_on_area_entered"]
+[connection signal="area_exited" from="Asuka" to="Asuka" method="_on_area_exited"]
+[connection signal="area_entered" from="Window" to="Window" method="_on_area_entered"]
+[connection signal="area_entered" from="PhoneCanvas/ParallaxLayer/Phone" to="PhoneCanvas/ParallaxLayer/Phone" method="_on_area_entered"]
+[connection signal="mouse_exited" from="PhoneCanvas/ParallaxLayer/Phone/PhoneOS" to="PhoneCanvas/ParallaxLayer/Phone" method="_on_phone_os_mouse_exited"]

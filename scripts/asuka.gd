@@ -24,7 +24,7 @@ extends Area2D
 
 var is_dialogue_started: bool = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	update_asuka_visuals()
 
 # ----- INTERACTIONS -----
