@@ -4,7 +4,8 @@ const APPS_SCREEN: String       = "APPS"
 const CHAT_SCREEN: String       = "CHAT"
 const SETTINGS_SCREEN: String   = "SETTINGS"
 const CAMERA_SCREEN: String     = "CAMERA"
-const ASUKA_COLOR: String       = "#FF3344"
+const ASUKA_COLOR: String       = "#FF1A4D"
+const STRANGER_COLOR: String    = "#5973FF"
 const MessageScene: PackedScene = preload("res://scenes/balloons/phone_chat.tscn")
 # ---- PHONE LAYOUT ----
 @onready var top_bar: Control = $PhoneSize/TopBar
@@ -50,7 +51,8 @@ var elapsed_seconds: float = 0.0
 
 @export_group("Messages colors")
 @export var asuka_color: String = ASUKA_COLOR
-@export var random_color: String
+@export var stranger_color: String = STRANGER_COLOR
+#@export var random_color: String
 
 var used_message_ids: Dictionary = {}
 var asuka_messages: Array        = []
@@ -172,9 +174,14 @@ func _spawn_new_asuka_message() -> void:
 	parent.add_child(new_message)
 	parent.move_child(new_message, parent.get_child_count() - 1)
 	new_message.visible = true
-	var message_sender: String = "Ersk" if NotificationsManager.is_message_from_asuka() else generate_mysterious_words(7, 7)
-
-	new_message.text = "[color=%s]%s:[/color] %s    [i][color=gray]" % [asuka_color, message_sender, get_random_asuka_message()] + clock.text + "[/color][/i]"
+	
+	var message_sender: String
+	if NotificationsManager.is_message_from_asuka():
+		message_sender = "(✫/~✰?"
+		new_message.text = "[color=%s]%s:[/color] %s    [i][color=gray]" % [asuka_color, message_sender, get_random_asuka_message()] + clock.text + "[/color][/i]"
+	else:
+		message_sender = generate_mysterious_words(7, 7)
+		new_message.text = "[color=%s]%s:[/color] %s    [i][color=gray]" % [stranger_color, message_sender, generate_mysterious_words(50, 8)] + clock.text + "[/color][/i]"
 	default_message = new_message
 	notification_button.visible = true
 
