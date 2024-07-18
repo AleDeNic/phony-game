@@ -13,16 +13,22 @@ extends Node3D
 @export var water_prologue: Color = Color(0.35, 0.45, 1.0, 1.0)
 
 @export_group("Middle")
-@export var sky_middle: Color = Color(0.5, 0.1, 0.3, 1.0)
+@export var sky_middle: Color = Color(.7, 1.0, 0.3, 1.0)
 @export var horizon_middle: Color = Color(1.0, 1.0, 1.0, 1.0)
-@export var ground_middle: Color = Color(0.9, 0.1, 0.5, 1.0)
-@export var water_middle: Color = Color(0.1, 0.9, 0.3, 1.0)
+@export var ground_middle: Color = Color(.9, 0.7, 1.0, 1.0)
+@export var water_middle: Color = Color(0.5, 0.18, 1.0, 1.0)
 
 @export_group("End")
-@export var sky_end: Color = Color(0.5, 0.3, 0.95, 1.0)
+@export var sky_end: Color = Color(1.0, 0.4, 0.7, 1.0)
 @export var horizon_end: Color = Color(1.0, 1.0, 1.0, 1.0)
-@export var ground_end: Color = Color(0.0, 0.0, 0.0, 1.0)
-@export var water_end: Color = Color(0.1, 0.1, 0.1, 1.0)
+@export var ground_end: Color = Color(0.6, 0.0, 0.3, 1.0)
+@export var water_end: Color = Color(1.0, 0.1, 0.3, 1.0)
+
+@export_group("Credits")
+@export var sky_credits: Color = Color(0.0, 0.75, 0.95, 1.0)
+@export var horizon_credits: Color = Color(1.0, 1.0, 1.0, 1.0)
+@export var ground_credits: Color = Color(0.2, 0.3, 1.0, 1.0)
+@export var water_credits: Color = Color(0.35, 0.45, 1.0, 1.0)
 
 @export_group("Speeds")
 var color_speed: float = 0.1
