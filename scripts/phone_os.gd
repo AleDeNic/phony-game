@@ -56,7 +56,6 @@ func _ready() -> void:
 	turn_off_phone_visuals()
 	cant_leave_alert.visible = false
 	notification_button.visible = false
-	home_widget.text = clock.text
 	NotificationsManager.connect("notification", Callable(self, "spawn_new_asuka_message"))
 
 
@@ -73,6 +72,7 @@ func _on_update_timer_timeout() -> void:
 	elapsed_seconds += 0.1
 	handle_battery()
 	handle_clock()
+	home_widget.text = clock.text
 
 
 func reset_screens() -> void:
