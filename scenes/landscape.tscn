@@ -149,7 +149,6 @@ texture = ExtResource("3_0xejn")
 [node name="Asuka02" type="Node2D" parent="TrainInterior"]
 
 [node name="Asuka02" type="Sprite2D" parent="TrainInterior/Asuka02"]
-visible = false
 position = Vector2(-972, 448)
 scale = Vector2(0.43, 0.43)
 texture = ExtResource("4_han2l")
@@ -197,10 +196,10 @@ scale = Vector2(0.43, 0.43)
 texture = ExtResource("10_nrhq7")
 
 [node name="Asuka03" type="Node2D" parent="TrainInterior"]
-position = Vector2(-708, 19)
+visible = false
+position = Vector2(-724, -8)
 
 [node name="Asuka03" type="Sprite2D" parent="TrainInterior/Asuka03"]
-visible = false
 position = Vector2(-113, 513)
 scale = Vector2(0.43, 0.43)
 texture = ExtResource("5_rrp3l")
@@ -245,17 +244,15 @@ visible = false
 texture = ExtResource("10_dudx7")
 
 [node name="AsukaArms03" type="Sprite2D" parent="TrainInterior/Asuka03"]
-visible = false
 z_index = 1
-position = Vector2(-100, 225)
+position = Vector2(-138, 502)
 scale = Vector2(0.43, 0.43)
 texture = ExtResource("11_fdvgb")
 
 [node name="Table" type="Sprite2D" parent="TrainInterior"]
-visible = false
 modulate = Color(0.691357, 0.691357, 0.691357, 1)
-position = Vector2(-196, 554)
-scale = Vector2(0.71386, 0.71386)
+position = Vector2(-99, 338)
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("12_lodsi")
 
 [node name="PlayerLegs" type="Sprite2D" parent="TrainInterior"]
