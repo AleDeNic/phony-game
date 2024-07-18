@@ -17,11 +17,11 @@ var phone_sickness: int = 0
 
 # ----- NOTIFICATIONS -----
 
-var notification_probability: float = 5.0
-var asuka_message_probability: float = 20.0
+var notification_probability: float = 80.0
+var asuka_message_probability: float = 80.0
 var notification_probability_increase: float = 2.0
 var are_notifications_cleared: bool = true
-var can_notifications_arrive: bool = false
+@onready var can_notifications_arrive: bool = true
 var notification_cooldown: int = 10
 var dialogue_state: int = 1
 
@@ -37,14 +37,11 @@ func notifications_coroutine() -> void:
 	while true:
 		await get_tree().create_timer(0.5).timeout
 		handle_notifications()
-		#print("Can notifications arrive?", can_notifications_arrive)
-		#print("Are notification cleared?", are_notifications_cleared)
 
 func sickness_coroutine() -> void:
 	while true:
 		await get_tree().create_timer(0.1).timeout
 		handle_phone_sickness()
-		#print("Player phone_sickness: ", phone_sickness)
 
 func start_notification_cooldown() -> void:
 	await get_tree().create_timer(notification_cooldown).timeout
@@ -72,7 +69,7 @@ func reset_phone_sickness() -> void:
 # ----- RANDOM NOTIFICATIONS -----
 
 func handle_notifications() -> void:
-	if !PlayerManager.is_player_focused_phone() and !PlayerManager.is_player_focusing():
+	if !PlayerManager.is_player_focused_phone() and !PlayerManager.is_player_focusing() and can_notifications_arrive:
 		var random_number: float = randf_range(0.0, 100.0)
 		if random_number <= notification_probability:
 			AudioManager.play_vibration()
@@ -91,3 +88,9 @@ func clear_notifications() -> void:
 func is_message_from_asuka() -> bool:
 	var random_number: int = randi() % 100
 	return random_number <= asuka_message_probability
+
+func set_can_notifications_arrive(value: bool) -> void:
+	can_notifications_arrive = value
+
+func can_notifications_arrive() -> bool:
+	return can_notifications_arrive
