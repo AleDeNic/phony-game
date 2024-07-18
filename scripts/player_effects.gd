@@ -45,7 +45,6 @@ func startup_blur() -> void:
 func sickness_filter_coroutine() -> void:
 	while true:
 		handle_phone_sickness_filter()
-		print("aaaa")
 		await get_tree().create_timer(0.1).timeout
 
 # ----- HANDLE FILTERS -----

@@ -19,6 +19,7 @@ const MessageScene: PackedScene = preload("res://scenes/balloons/phone_chat.tscn
 @onready var settings: Control = $PhoneSize/Settings
 @onready var camera: Control = $PhoneSize/Camera
 @onready var chat: Control = $PhoneSize/Chat
+@onready var coming_soon: Control = $PhoneSize/ComingSoon
 # ---- BATTERY ----
 @onready var battery_depletion_dampener: float = 10.0
 @onready var battery_bar: ProgressBar = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar
@@ -71,7 +72,7 @@ func setup_update_timer() -> void:
 func _on_update_timer_timeout() -> void:
 	elapsed_seconds += 0.1
 	handle_battery()
-	handle_clock(10, 30)
+	handle_clock(8, 12)
 	home_widget.text = clock.text
 
 
@@ -82,6 +83,7 @@ func reset_screens() -> void:
 	settings.visible = false
 	camera.visible = false
 	chat.visible = false
+	coming_soon.visible = false
 
 
 func turn_off_phone() -> void:
@@ -124,7 +126,7 @@ func _on_fullscreen_toggled(toggled_on: bool) -> void:
 
 
 func _on_camera_pressed() -> void:
-	go_to_screen(camera)
+	go_to_screen(coming_soon)
 
 
 func _on_chat_pressed() -> void:
@@ -267,3 +269,13 @@ func calculate_dialogue_length(resource: DialogueResource) -> int:
 		if "type" in line and line["type"] == "dialogue":
 			total_length += line["text"].length()
 	return total_length
+
+
+func _on_video_pressed() -> void:
+	go_to_screen(coming_soon)
+
+func _on_music_pressed() -> void:
+	go_to_screen(coming_soon)
+
+func _on_gaming_pressed() -> void:
+	go_to_screen(coming_soon)

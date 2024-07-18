@@ -42,15 +42,15 @@ shader_parameter/blend_factor = 0.6
 shader_parameter/overlay = Vector3(1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6s33v"]
-content_margin_left = 32.0
-content_margin_top = 32.0
-content_margin_right = 32.0
-content_margin_bottom = 32.0
-bg_color = Color(1, 1, 1, 0.662745)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
+content_margin_left = 64.0
+content_margin_top = 48.0
+content_margin_right = 48.0
+content_margin_bottom = 48.0
+bg_color = Color(1, 1, 1, 0.458824)
+corner_radius_top_left = 4
+corner_radius_top_right = 128
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 128
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1lqkp"]
 draw_center = false
@@ -198,29 +198,28 @@ theme = ExtResource("12_fsmwd")
 
 [node name="MarginContainer" type="MarginContainer" parent="PhoneSize/Apps"]
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -274.0
-offset_bottom = 274.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("12_fsmwd")
+theme_override_constants/margin_top = 160
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PhoneSize/Apps/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("12_fsmwd")
 
 [node name="HomeWidget" type="RichTextLabel" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 300)
+clip_contents = false
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("12_fsmwd")
 theme_override_fonts/normal_font = ExtResource("7_f3rx8")
 theme_override_font_sizes/normal_font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_6s33v")
-text = "Clock"
+text = "8:12 am"
 
 [node name="HSeparator2" type="HSeparator" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -264,7 +263,7 @@ text = "Music
 "
 alignment = 0
 
-[node name="FlappyBird" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+[node name="Gaming" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0.470588)
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
@@ -296,6 +295,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="PhoneSize/ComingSoon"]
 layout_mode = 1
@@ -656,6 +656,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 4
 
 [node name="BottomBar" type="Control" parent="PhoneSize"]
+visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -716,6 +717,9 @@ texture = ExtResource("27_adyrh")
 
 [connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Chat" to="." method="_on_chat_pressed"]
 [connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Camera" to="." method="_on_camera_pressed"]
+[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Video" to="." method="_on_video_pressed"]
+[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Music" to="." method="_on_music_pressed"]
+[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Gaming" to="." method="_on_gaming_pressed"]
 [connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="toggled" from="PhoneSize/Settings/MarginContainer/VBoxContainer2/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="pressed" from="PhoneSize/Settings/MarginContainer/VBoxContainer2/Quit" to="." method="_on_quit_pressed"]

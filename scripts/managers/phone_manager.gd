@@ -1,6 +1,6 @@
 extends Node
 
-enum PhoneState { OFF, APPS, SETTINGS, CAMERA, CHAT, DISCHARGED }
+enum PhoneState { OFF, APPS, SETTINGS, CAMERA, CHAT, DISCHARGED, COMINGSOON }
 
 @onready var phone_state: PhoneState = PhoneState.OFF
 
