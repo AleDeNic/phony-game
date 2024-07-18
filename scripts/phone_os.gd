@@ -13,7 +13,7 @@ const MessageScene: PackedScene = preload("res://scenes/balloons/phone_chat.tscn
 @onready var gradient_bottom: Sprite2D = $PhoneSize/BottomBar/GradientBottom
 @onready var clock: Label = $PhoneSize/TopBar/MarginContainer/HBoxContainer/Clock
 @onready var notification_button: Button = $PhoneSize/TopBar/MarginContainer/HBoxContainer/NotificationButton
-@onready var home_widget: RichTextLabel = $PhoneSize/Apps/MarginContainer/VBoxContainer/HomeWidget
+@onready var home_widget: RichTextLabel = $PhoneSize/Apps/MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HomeWidget
 # ---- SCREENS ----
 @onready var apps: Control = $PhoneSize/Apps
 @onready var settings: Control = $PhoneSize/Settings
