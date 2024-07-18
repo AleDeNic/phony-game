@@ -17,12 +17,12 @@ var phone_sickness: int = 0
 
 # ----- NOTIFICATIONS -----
 
-var notification_probability: float = 80.0
-var asuka_message_probability: float = 80.0
+var notification_probability: float = 5.0
+var asuka_message_probability: float = 40.0
 var notification_probability_increase: float = 2.0
 var are_notifications_cleared: bool = true
 @onready var can_notifications_arrive: bool = true
-var notification_cooldown: int = 10
+var notification_cooldown: int = 20
 var dialogue_state: int = 1
 
 
