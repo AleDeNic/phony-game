@@ -138,5 +138,6 @@ text = "Response example"
 alignment = 0
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
+[connection signal="mouse_entered" from="Balloon" to="." method="_on_balloon_mouse_entered"]
 [connection signal="mouse_exited" from="Balloon" to="." method="_on_balloon_mouse_exited"]
 [connection signal="response_selected" from="Balloon/MarginContainer/HBoxContainer/Responses/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

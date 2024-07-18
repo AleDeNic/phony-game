@@ -87,7 +87,7 @@ func _ready() -> void:
 	# If the responses menu doesn't have a next action set, use this one
 	if responses_menu.next_action.is_empty():
 		responses_menu.next_action = next_action
-	
+
 	balloon.global_position = asuka.global_position
 	balloon_offset_position = balloon.size * 0.75 / 2
 
@@ -95,7 +95,7 @@ func _physics_process(_delta: float) -> void:
 	handle_balloon_movement()
 
 func handle_balloon_movement() -> void:
-	balloon.global_position = balloon.global_position.lerp(player.global_position - balloon_offset_position, 0.2)
+	balloon.global_position = balloon.global_position.slerp(player.global_position - balloon_offset_position, 0.08)
 
 #func handle_balloon_scale() -> void:
 	#var target_balloon_scale: float = 1.0
@@ -176,7 +176,14 @@ func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 func _on_balloon_mouse_exited() -> void:
 	if PlayerManager.is_player_focused_asuka():
 		asuka.exit()
-		
+		# responses_menu.hide()
+
+
+func _on_balloon_mouse_entered() -> void:
+	if PlayerManager.is_player_focused_asuka():
+		# responses_menu.show()
+		asuka.enter_asuka()
+
 #endregion
 
 
