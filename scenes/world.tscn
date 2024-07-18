@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bduasgadssrkv"]
+[gd_scene load_steps=24 format=3 uid="uid://bduasgadssrkv"]
 
 [ext_resource type="Script" path="res://scripts/asuka.gd" id="4_1kcn2"]
 [ext_resource type="PackedScene" uid="uid://cw0nk6gkudho2" path="res://scenes/landscape.tscn" id="4_u7jec"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dg55yu6bit6jt" path="res://scenes/phone_os.tscn" id="7_g2i3f"]
 [ext_resource type="Script" path="res://scripts/phone.gd" id="7_lhypb"]
 [ext_resource type="PackedScene" uid="uid://o0205cjoosgq" path="res://scenes/player.tscn" id="9_o22lg"]
-[ext_resource type="PackedScene" uid="uid://bdnkqacljl6ie" path="res://scenes/audio_manager.tscn" id="12_3unc5"]
 [ext_resource type="Shader" path="res://shaders/color_soft_light.gdshader" id="12_ghcqe"]
 [ext_resource type="Script" path="res://scripts/color_filter.gd" id="12_x0p2c"]
 [ext_resource type="Script" path="res://scripts/phone_effects.gd" id="13_el7tb"]
@@ -59,8 +58,6 @@ colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
 gradient = SubResource("Gradient_h3vsq")
 
 [node name="World" type="Node2D"]
-
-[node name="AudioManager" parent="." instance=ExtResource("12_3unc5")]
 
 [node name="Landscape" parent="." instance=ExtResource("4_u7jec")]
 
