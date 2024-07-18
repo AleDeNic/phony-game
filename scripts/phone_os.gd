@@ -26,15 +26,18 @@ const MessageScene: PackedScene = preload("res://scenes/balloons/phone_chat.tscn
 @onready var battery_timer: Timer = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar/BatteryTimer
 
 @export var max_battery: float = 5.0
+
 # max_battery = clamp(dialogue_length / 100.0, 5.0, 60.0) <- this can be useful to clamp the battery life to a max value
 
 #----- TIMER -----
 @onready var update_timer: Timer
 
 var elapsed_seconds: float = 0.0
+
 @export var minute_dutation: int = 6 # how many seconds a minute lasts in game
 
 # ---- CHAT ----
+@onready var messages_resource          = load("res://dialogues/asuka_messages.dialogue")
 @onready var default_message: RichTextLabel = $PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultMessage
 @onready var default_player_message: RichTextLabel = $PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultPlayerMessage
 # ---- BACKGROUND ----
@@ -49,24 +52,24 @@ var elapsed_seconds: float = 0.0
 @export var asuka_color: String = ASUKA_COLOR
 @export var random_color: String
 
-var used_message_ids = {}
-var messages = [
-	"Message 1: This is the first message.",
-	"Message 2: This is the second message.",
-	"Message 3: This is the third message.",
-	"Message 4: This is the fourth message.",
-	"Message 5: This is the fifth message."
-]
+var used_message_ids: Dictionary = {}
+var asuka_messages: Array        = []
+
 
 func _ready() -> void:
 	setup_battery()
 	reset_screens()
 	setup_update_timer()
+	get_random_asuka_messages(messages_resource)
+
 	scroll_container.set_deferred("scroll_vertical", 600)
+
 	turn_off_phone_visuals()
+
 	cant_leave_alert.visible = false
 	notification_button.visible = false
-	NotificationsManager.connect("notification", Callable(self, "spawn_new_asuka_message"))
+
+	NotificationsManager.connect("notification", Callable(self, "_spawn_new_asuka_message"))
 
 
 func setup_update_timer() -> void:
@@ -163,10 +166,9 @@ func _on_send_message_pressed() -> void:
 	input_message.clear()
 
 
-func spawn_new_asuka_message() -> void:
-	var dialogue_resource = load("res://dialogues/asuka.dialogue")
+func _spawn_new_asuka_message() -> void:
 	var new_message: RichTextLabel = default_message.duplicate() as RichTextLabel
-	var parent: Node = default_message.get_parent()
+	var parent: Node               = default_message.get_parent()
 	parent.add_child(new_message)
 	parent.move_child(new_message, parent.get_child_count() - 1)
 	new_message.visible = true
@@ -177,10 +179,9 @@ func spawn_new_asuka_message() -> void:
 	notification_button.visible = true
 
 
-
 func spawn_new_player_message(message_text: String) -> void:
 	var new_player_message: RichTextLabel = default_player_message.duplicate() as RichTextLabel
-	var parent: Node = default_player_message.get_parent()
+	var parent: Node                      = default_player_message.get_parent()
 	parent.add_child(new_player_message)
 	parent.move_child(new_player_message, parent.get_child_count() - 1)
 	new_player_message.visible = true
@@ -213,7 +214,7 @@ func hide_cant_leave_alert() -> void:
 
 # ---- CLOCK AND BATTERY ----
 func setup_battery() -> void:
-	var dialogue_resource = load("res://dialogues/asuka.dialogue")
+	var dialogue_resource    = load("res://dialogues/asuka.dialogue")
 	var dialogue_length: int = calculate_dialogue_length(dialogue_resource)
 	max_battery = dialogue_length / battery_depletion_dampener
 	battery_bar.max_value = max_battery
@@ -235,8 +236,8 @@ func handle_battery() -> void:
 # AleDeNic! Azazello! QuanticMoth! You can edit the starting time! It's set to 8:00 am by default.
 func handle_clock(starting_hour: int = 8, starting_minute: int = 0) -> void:
 	var total_minutes: int = int(elapsed_seconds / minute_dutation) + starting_minute
-	var hours: int = (total_minutes / 60 + starting_hour) % 24
-	var minutes: int = total_minutes % 60
+	var hours: int         = (total_minutes / 60 + starting_hour) % 24
+	var minutes: int       = total_minutes % 60
 
 	var period: String = "am" if hours < 12 else "pm"
 	hours = hours % 12
@@ -249,8 +250,8 @@ func handle_clock(starting_hour: int = 8, starting_minute: int = 0) -> void:
 # ---- UTILS ----
 func generate_mysterious_words(total_length: int, max_word_length: int) -> String:
 	var characters: String = "!@#$%^&*()_+-=[]{}|;:,.<>?/~★✦✧✩✪✫✬✭✮✯✰†‡✞✟✠"
-	var code: String = ""
-	var rng = RandomNumberGenerator.new()
+	var code: String       = ""
+	var rng                = RandomNumberGenerator.new()
 	rng.randomize()
 
 	var current_word_length: int = 0
@@ -281,15 +282,31 @@ func calculate_dialogue_length(resource: DialogueResource) -> int:
 			total_length += line["text"].length()
 	return total_length
 
-# ----- BOTTOLO HELP ME PLS -----
+
+func get_random_asuka_messages(resource: DialogueResource) -> void:
+	for line_id in resource.lines.keys():
+		var line = resource.lines[line_id]
+		if "type" in line and line["type"] == "dialogue":
+			asuka_messages.append(line["text"])
+	return
+
+
 func get_random_asuka_message() -> String:
-	return "Kingdom Hearts"
+	if asuka_messages.size() > 0:
+		var random_index: int      = randi() % asuka_messages.size()
+		var random_message: String = asuka_messages[random_index]
+		asuka_messages.pop_at(random_index)
+		return random_message
+	return "But he never came."
+
 
 func _on_video_pressed() -> void:
 	go_to_screen(coming_soon)
 
+
 func _on_music_pressed() -> void:
 	go_to_screen(coming_soon)
+
 
 func _on_gaming_pressed() -> void:
 	go_to_screen(coming_soon)

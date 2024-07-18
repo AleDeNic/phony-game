@@ -4,11 +4,13 @@ enum PoseState {
 	ARMS_CROSSED,
 	OVER_TABLE
 }
+
 enum ExpressionState {
 	PLEASED,
 	TALKING,
 	UPSET
 }
+
 enum EyesState {
 	NORMAL,
 	CLOSED,
@@ -26,7 +28,6 @@ func _ready() -> void:
 
 
 # ----- POSE SETTERS -----
-
 func set_pose_state(new_pose: PoseState) -> void:
 	pose_state = new_pose
 	print("Asuka pose -> ", get_asuka_pose_value())
@@ -41,7 +42,6 @@ func set_pose_over_table() -> void:
 
 
 # ----- POSE GETTERS -----
-
 func get_asuka_pose() -> PoseState:
 	return pose_state
 
@@ -63,7 +63,6 @@ func are_asuka_over_table() -> bool:
 
 
 # ----- EXPRESSION SETTERS -----
-
 func set_expression_state(new_expression: ExpressionState) -> void:
 	expression_state = new_expression
 	print("Asuka -> ", get_asuka_expression_value())
@@ -82,7 +81,6 @@ func set_expression_upset() -> void:
 
 
 # ----- EXPRESSION GETTERS -----
-
 func get_asuka_expression() -> ExpressionState:
 	return expression_state
 
@@ -110,7 +108,6 @@ func is_expression_upset() -> bool:
 
 
 # ----- EYE STATE SETTERS -----
-
 func set_eyes_state(new_state: EyesState) -> void:
 	eye_state = new_state
 	print("Eyes -> ", get_eyes_state_value())
@@ -129,7 +126,6 @@ func set_eyes_lookaway() -> void:
 
 
 # ----- EYE STATE GETTERS -----
-
 func get_eyes_state() -> EyesState:
 	return eye_state
 
@@ -146,7 +142,6 @@ func get_eyes_state_value():
 
 func are_eyes_normal() -> bool:
 	return eye_state == EyesState.NORMAL
-
 
 func are_eyes_closed() -> bool:
 	return eye_state == EyesState.CLOSED
