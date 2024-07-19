@@ -1,15 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://cw0nk6gkudho2"]
+[gd_scene load_steps=22 format=3 uid="uid://cw0nk6gkudho2"]
 
 [ext_resource type="PackedScene" uid="uid://c7j5d8r5sk27h" path="res://scenes/landscape_3d.tscn" id="1_ab0o5"]
 [ext_resource type="Texture2D" uid="uid://ip8dxv4o43su" path="res://assets/sprites/train_interior_4.png" id="3_0xejn"]
 [ext_resource type="Script" path="res://scripts/train_shake.gd" id="3_wisc5"]
-[ext_resource type="Texture2D" uid="uid://fsfkmatbo1bi" path="res://assets/sprites/asuka/asuka_02/asuka_02.png" id="4_han2l"]
-[ext_resource type="Texture2D" uid="uid://der57pjxyh82s" path="res://assets/sprites/asuka/asuka_03/asuka_03_expr_pleased.png" id="5_nb12q"]
-[ext_resource type="Texture2D" uid="uid://c1r46l60dmvpa" path="res://assets/sprites/asuka/asuka_02/asuka_02_expr_pleased.png" id="5_r58js"]
-[ext_resource type="Texture2D" uid="uid://caffbwaol2yek" path="res://assets/sprites/asuka/asuka_03/asuka_03.png" id="5_rrp3l"]
-[ext_resource type="Texture2D" uid="uid://cyhjswqg1mdjm" path="res://assets/sprites/asuka/asuka_02/asuka_02_eyes_normal.png" id="8_2eked"]
-[ext_resource type="Texture2D" uid="uid://lpc65lv8g72l" path="res://assets/sprites/asuka/asuka_03/asuka_03_eyes_closed.png" id="8_843uw"]
-[ext_resource type="Texture2D" uid="uid://722n6qlga4k1" path="res://assets/sprites/asuka/asuka_03/asuka_03_arms.png" id="11_fdvgb"]
+[ext_resource type="Texture2D" uid="uid://fsfkmatbo1bi" path="res://assets/sprites/asuka/asuka_pose_2.png" id="4_han2l"]
+[ext_resource type="Texture2D" uid="uid://caffbwaol2yek" path="res://assets/sprites/asuka/asuka_pose_3.png" id="5_rrp3l"]
+[ext_resource type="Texture2D" uid="uid://722n6qlga4k1" path="res://assets/sprites/asuka/asuka_03_arms.png" id="11_fdvgb"]
 [ext_resource type="Texture2D" uid="uid://p8u26rag8l26" path="res://assets/sprites/table.png" id="12_lodsi"]
 [ext_resource type="Texture2D" uid="uid://dytaahhvtp1wg" path="res://assets/sprites/player_legs.png" id="14_4k642"]
 
@@ -82,7 +78,7 @@ _data = {
 "light_rotation": SubResource("Animation_ogtyq")
 }
 
-[node name="Landscape" type="Node2D"]
+[node name="Background" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -148,12 +144,10 @@ texture = ExtResource("4_han2l")
 [node name="AsukaFace2" type="Sprite2D" parent="TrainInterior/Asuka2"]
 position = Vector2(-775, -177)
 scale = Vector2(0.43, 0.43)
-texture = ExtResource("5_r58js")
 
 [node name="AsukaEyes2" type="Sprite2D" parent="TrainInterior/Asuka2"]
 position = Vector2(-774.94, -167.465)
 scale = Vector2(0.43, 0.43)
-texture = ExtResource("8_2eked")
 
 [node name="Asuka3" type="Node2D" parent="TrainInterior"]
 position = Vector2(-724, -8)
@@ -168,13 +162,11 @@ texture = ExtResource("5_rrp3l")
 visible = false
 position = Vector2(-115, -76)
 scale = Vector2(0.43, 0.43)
-texture = ExtResource("5_nb12q")
 
 [node name="AsukaEyes3" type="Sprite2D" parent="TrainInterior/Asuka3"]
 visible = false
 position = Vector2(-116, -87.65)
 scale = Vector2(0.43, 0.43)
-texture = ExtResource("8_843uw")
 
 [node name="AsukaArms3" type="Sprite2D" parent="TrainInterior/Asuka3"]
 visible = false
