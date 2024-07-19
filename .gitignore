@@ -17,8 +17,5 @@ mono_crash.*.json
 # Temporary files
 /temp
 /.idea/
-*.import
 /.vscode/
 /builds
-*.import
-*.import

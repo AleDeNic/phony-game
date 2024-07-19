@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://dgeuvsjx28nt0"
+path="res://.godot/imported/angry_asuka_6.dialogue-f4e755457533f2a98d9be5bcf6cd2a83.tres"
+
+[deps]
+
+source_file="res://dialogues/angry_asuka_6.dialogue"
+dest_files=["res://.godot/imported/angry_asuka_6.dialogue-f4e755457533f2a98d9be5bcf6cd2a83.tres"]
+
+[params]
+
+defaults=true

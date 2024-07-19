@@ -1,9 +1,9 @@
 [gd_scene load_steps=24 format=3 uid="uid://bduasgadssrkv"]
 
 [ext_resource type="Script" path="res://scripts/asuka.gd" id="4_1kcn2"]
-[ext_resource type="PackedScene" uid="uid://cw0nk6gkudho2" path="res://scenes/background.tscn" id="4_u7jec"]
-[ext_resource type="Texture2D" uid="uid://dbmspirba0r28" path="res://assets/sprites/player_hand_phone.png" id="6_mhxfc"]
-[ext_resource type="Texture2D" uid="uid://bfnwscdvinatw" path="res://assets/utils/Screenshot (534).png" id="7_flpj4"]
+[ext_resource type="PackedScene" uid="uid://cix2lesxh03hi" path="res://scenes/background.tscn" id="4_u7jec"]
+[ext_resource type="Texture2D" uid="uid://b3fu3e6jaa486" path="res://assets/sprites/player_hand_phone.png" id="6_mhxfc"]
+[ext_resource type="Texture2D" uid="uid://u64fsii1e5a4" path="res://assets/utils/Screenshot (534).png" id="7_flpj4"]
 [ext_resource type="PackedScene" uid="uid://dg55yu6bit6jt" path="res://scenes/phone_os.tscn" id="7_g2i3f"]
 [ext_resource type="Script" path="res://scripts/phone.gd" id="7_lhypb"]
 [ext_resource type="PackedScene" uid="uid://o0205cjoosgq" path="res://scenes/player.tscn" id="9_o22lg"]
