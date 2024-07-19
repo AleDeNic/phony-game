@@ -25,7 +25,8 @@ var phone_position: Vector2
 
 var max_distance_from_asuka: float = 200.0
 var max_distance_to_window: float = 150.0
-var max_distance_to_phone: float = 50.0
+var max_distance_to_phone: float = 300.0
+var phone_balloon_offset = Vector2(0, -50)
 
 var asuka_balloon_offset: Vector2 = Vector2(-550, -260)
 
@@ -36,7 +37,7 @@ func _ready() -> void:
 	# If the responses menu doesn't have a next action set, use this one
 	if responses_menu.next_action.is_empty():
 		responses_menu.next_action = next_action
-	
+
 	initiate_positions()
 
 
@@ -48,18 +49,20 @@ func initiate_positions():
 	asuka_position = asuka.global_position
 	window_position = window.global_position
 	phone_position = phone.global_position
+
 	balloon.global_position = asuka_position
 	balloon_offset_position = balloon.size * 0.75 / 2
-	
+
 func handle_balloon_movement() -> void:
 	var target_position: Vector2 = player.global_position - balloon_offset_position
 
 	var displacement: Vector2 = target_position - asuka_position
 
-	if Player.is_focused_on_window():
+	if Player.is_focused_on_window() or Player.is_focusing_on_window():
 		displacement = limit_displacement_to_area(displacement, window_position, max_distance_to_window)
-	elif Player.is_focused_on_phone():
+	if Player.is_focused_on_phone() or Player.is_focusing_on_phone():
 		displacement = limit_displacement_to_area(displacement, phone_position, max_distance_to_phone)
+		displacement += phone_balloon_offset
 	else:
 		if displacement.length() > max_distance_from_asuka:
 			displacement = displacement.normalized() * max_distance_from_asuka
@@ -67,7 +70,7 @@ func handle_balloon_movement() -> void:
 
 	var new_position: Vector2 = asuka_position + displacement
 
-	balloon.global_position = balloon.global_position.lerp(new_position, 0.1)
+	balloon.global_position = balloon.global_position.lerp(new_position, 0.01)
 
 func limit_displacement_to_area(displacement: Vector2, area_center: Vector2, max_distance: float) -> Vector2:
 	var area_displacement: Vector2 = area_center - asuka_position

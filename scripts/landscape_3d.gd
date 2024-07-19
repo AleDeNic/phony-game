@@ -33,7 +33,7 @@ extends Node3D
 @export_group("Speeds")
 var color_speed: float = 0.1
 
-var current_sky: Color
+var current_sky: Color = sky_prologue
 var current_horizon: Color
 var current_ground: Color
 var current_water: Color
