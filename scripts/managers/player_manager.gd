@@ -4,9 +4,11 @@ enum State {
 	FREE,
 	FOCUSING_ON_PHONE,
 	FOCUSING_ON_ASUKA,
+	FOCUSING_ON_WINDOW,
 	FOCUSING_OUT,
 	FOCUSED_PHONE,
 	FOCUSED_ASUKA,
+	FOCUSED_WINDOW,
 	DIALOGUE_PAUSED
 }
 @export var effects_increase_speed: float = 1.0
@@ -71,6 +73,12 @@ func set_unfocusing() -> void:
 	set_state(State.FOCUSING_OUT)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
+func set_focusing_on_window() -> void:
+	set_state(State.FOCUSING_ON_WINDOW)
+
+func set_focused_window() -> void:
+	set_state(State.FOCUSED_WINDOW)
+
 
 # ----- STATE -----
 func get_player() -> CharacterBody2D:
@@ -131,3 +139,9 @@ func is_focused_on_asuka() -> bool:
 
 func is_dialogue_paused() -> bool:
 	return _current_state == State.DIALOGUE_PAUSED
+
+func is_focusing_on_window() -> bool:
+	return _current_state == State.FOCUSING_ON_WINDOW
+
+func is_focused_on_window() -> bool:
+	return _current_state == State.FOCUSED_WINDOW
