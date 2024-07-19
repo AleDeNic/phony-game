@@ -283,7 +283,6 @@ scale = Vector2(0.78875, 0.78875)
 texture = ExtResource("3_0xejn")
 
 [node name="Asuka2" type="Node2D" parent="TrainInterior"]
-visible = false
 position = Vector2(-753, 0)
 
 [node name="AsukaPose2" type="Sprite2D" parent="TrainInterior/Asuka2"]

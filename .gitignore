@@ -19,3 +19,5 @@ mono_crash.*.json
 /.idea/
 /.vscode/
 /builds
+*.import
+*.import

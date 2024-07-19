@@ -4,6 +4,8 @@ extends Area2D
 @export var dialogue_start: String = "asuka_intro"
 @export var dialogue_balloon: Resource = load("res://scenes/balloons/dialogue_balloon.tscn")
 
+@onready var asuka_2: Node2D = get_node("/root/World/Background/TrainInterior/Asuka2")
+@onready var asuka_3: Node2D = get_node("/root/World/Background/TrainInterior/Asuka3")
 @onready var pose_2: Sprite2D = get_node("/root/World/Background/TrainInterior/Asuka2/AsukaPose2")
 @onready var pose_3: Sprite2D = get_node("/root/World/Background/TrainInterior/Asuka3/AsukaPose3")
 @onready var face_2: AnimatedSprite2D = get_node("/root/World/Background/TrainInterior/Asuka2/AsukaFace2")
@@ -50,6 +52,42 @@ func exit() -> void:
 	if Player.is_unfocusing():
 		Player.set_free()
 
+
 # ----- UTILS -----
+
 func update_asuka_sprites() -> void:
-	pass
+	match Asuka.get_pose():
+		Asuka.Pose.A2:
+			asuka_3.hide()
+			arms_3.hide()
+			asuka_2.show()
+			set_face(face_2)
+			set_eyes(eyes_2)
+		Asuka.Pose.A3:
+			asuka_2.hide()
+			asuka_3.show()
+			set_face(face_3)
+			set_eyes(eyes_3)
+			arms_3.show()
+
+func set_face(face: AnimatedSprite2D) -> void:
+	match Asuka.get_face():
+		Asuka.Face.UPSET:
+			face.frame = 0
+		Asuka.Face.PLEASED:
+			face.frame = 1
+		Asuka.Face.TALKING:
+			face.frame = 2
+		Asuka.Face.LAUGH:
+			face.frame = 3
+
+func set_eyes(eyes: AnimatedSprite2D) -> void:
+	match Asuka.get_face():
+		Asuka.Eyes.NORMAL:
+			eyes.frame = 0
+		Asuka.Eyes.CLOSED:
+			eyes.frame = 1
+		Asuka.Eyes.LOOKAWAY:
+			eyes.frame = 2
+		Asuka.Eyes.SMILE:
+			eyes.frame = 3
