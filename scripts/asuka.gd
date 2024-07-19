@@ -4,10 +4,10 @@ extends Area2D
 @export var dialogue_start: String = "asuka_intro"
 
 @onready var pose_2: Sprite2D = get_node("/root/World/Background/TrainInterior/Asuka2/AsukaPose2")
-@onready var face_2: Sprite2D = get_node("/root/World/Background/TrainInterior/Asuka2/AsukaFace2")
-@onready var eyes_2: Sprite2D = get_node("/root/World/Background/TrainInterior/Asuka2/AsukaEyes2")
 @onready var pose_3: Sprite2D = get_node("/root/World/Background/TrainInterior/Asuka3/AsukaPose3")
+@onready var face_2: Sprite2D = get_node("/root/World/Background/TrainInterior/Asuka2/AsukaFace2")
 @onready var face_3: Sprite2D = get_node("/root/World/Background/TrainInterior/Asuka3/AsukaFace3")
+@onready var eyes_2: Sprite2D = get_node("/root/World/Background/TrainInterior/Asuka2/AsukaEyes2")
 @onready var eyes_3: Sprite2D = get_node("/root/World/Background/TrainInterior/Asuka3/AsukaEyes3")
 @onready var arms_3: Sprite2D = get_node("/root/World/Background/TrainInterior/Asuka3/AsukaArms3")
 
