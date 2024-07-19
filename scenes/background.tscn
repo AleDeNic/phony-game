@@ -1,9 +1,10 @@
-[gd_scene load_steps=46 format=3 uid="uid://cix2lesxh03hi"]
+[gd_scene load_steps=47 format=3 uid="uid://cix2lesxh03hi"]
 
 [ext_resource type="PackedScene" uid="uid://c7j5d8r5sk27h" path="res://scenes/landscape_3d.tscn" id="1_ab0o5"]
 [ext_resource type="Texture2D" uid="uid://ip8dxv4o43su" path="res://assets/sprites/train_interior_4.png" id="3_0xejn"]
 [ext_resource type="Script" path="res://scripts/train_shake.gd" id="3_wisc5"]
 [ext_resource type="Texture2D" uid="uid://bmwmuurf3j717" path="res://assets/sprites/asuka/asuka_pose_2.png" id="4_han2l"]
+[ext_resource type="Texture2D" uid="uid://c4diutnn3mgf2" path="res://assets/sprites/asuka/asuka_2_full.png" id="4_wo142"]
 [ext_resource type="Texture2D" uid="uid://c5tfjgoav0vwl" path="res://assets/sprites/asuka/AsukaFace2.png" id="5_p1r1l"]
 [ext_resource type="Texture2D" uid="uid://buem7gctx38rw" path="res://assets/sprites/asuka/asuka_pose_3.png" id="5_rrp3l"]
 [ext_resource type="Texture2D" uid="uid://k635br2mcynh" path="res://assets/sprites/asuka/AsukaEyes2.png" id="6_rqnym"]
@@ -285,23 +286,31 @@ texture = ExtResource("3_0xejn")
 [node name="Asuka2" type="Node2D" parent="TrainInterior"]
 position = Vector2(-753, 0)
 
+[node name="Sprite2D" type="Sprite2D" parent="TrainInterior/Asuka2"]
+visible = false
+position = Vector2(-270, 456)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("4_wo142")
+
 [node name="AsukaPose2" type="Sprite2D" parent="TrainInterior/Asuka2"]
 position = Vector2(-204.435, 448)
 scale = Vector2(0.43, 0.43)
 texture = ExtResource("4_han2l")
 
 [node name="AsukaFace2" type="AnimatedSprite2D" parent="TrainInterior/Asuka2"]
-position = Vector2(-7.43494, -171)
-scale = Vector2(0.43, 0.43)
+position = Vector2(-5, -166.8)
+scale = Vector2(0.39, 0.39)
 sprite_frames = SubResource("SpriteFrames_3cad3")
+frame = 1
 
 [node name="AsukaEyes2" type="AnimatedSprite2D" parent="TrainInterior/Asuka2"]
-position = Vector2(-8.43494, -202)
-scale = Vector2(0.43, 0.43)
+position = Vector2(-6, -199.8)
+scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_e4ks2")
 autoplay = "default"
 
 [node name="Asuka3" type="Node2D" parent="TrainInterior"]
+visible = false
 position = Vector2(-796, -8)
 
 [node name="AsukaPose3" type="Sprite2D" parent="TrainInterior/Asuka3"]
@@ -358,7 +367,7 @@ texture = SubResource("GradientTexture2D_fkblq")
 [node name="Darkness3" type="Sprite2D" parent="TrainInterior/Lighting"]
 modulate = Color(1, 1, 1, 0.690196)
 z_index = 1
-position = Vector2(-1789.05, -213.398)
+position = Vector2(-1822, -205)
 rotation = -0.874923
 scale = Vector2(90.9099, 45.8076)
 texture = SubResource("GradientTexture2D_blyts")

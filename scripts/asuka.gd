@@ -68,6 +68,7 @@ func update_asuka_sprites() -> void:
 		Asuka.Pose.A3:
 			asuka_2.hide()
 			asuka_3.show()
+			arms_3.show()
 			set_face(face_3)
 			set_eyes(eyes_3)
 			

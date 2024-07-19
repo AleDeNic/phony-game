@@ -54,5 +54,5 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_pxx8v")
 text = "... a notification arrived.
-I should check your phone..."
+I should check my phone..."
 label_settings = SubResource("LabelSettings_gr4a5")
