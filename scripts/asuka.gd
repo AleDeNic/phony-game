@@ -30,7 +30,7 @@ func _process(_delta: float) -> void:
 # ----- INTERACTIONS -----
 
 func _on_area_entered(_area: Area2D) -> void:
-	if Player.is_free() or Player.is_focusing_out():
+	if Player.is_free() or Player.is_unfocusing():
 		enter_asuka()
 
 
@@ -51,7 +51,7 @@ func exit() -> void:
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 
 	await get_tree().create_timer(1.0).timeout
-	if Player.is_focusing_out():
+	if Player.is_unfocusing():
 		Player.set_free()
 
 # ----- UTILS -----

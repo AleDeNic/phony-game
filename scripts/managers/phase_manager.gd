@@ -1,7 +1,6 @@
 extends Node
 
 enum Phase { SPLASH, PROLOGUE, MIDDLE, END, CREDITS }
-
 @onready var phase_state: Phase = Phase.PROLOGUE
 @onready var points: int = 0
 @onready var threshold: int = 15
@@ -12,75 +11,105 @@ var probability: float = 20.0
 # ----- POINTS -----
 
 func get_points() -> int:
-	return points
-	
-func set_points(new_points: int) -> void:
-	points = new_points
-	print("Points -> ", points)
+    return points
 
-func addPoints(new_points: int) -> void:
-	points += new_points
-	print("Points -> ", points)
+
+func set_points(new_points: int) -> void:
+    points = new_points
+    print("Points -> ", points)
+
+
+func add_points(new_points: int) -> void:
+    points += new_points
+    print("Points -> ", points)
+
 
 func get_threshold() -> int:
-	return threshold
+    return threshold
+
 
 func set_threshold(new_threshold: int) -> void:
-	threshold = new_threshold
-	print("Threshold -> ", threshold)
+    threshold = new_threshold
+    print("Threshold -> ", threshold)
+
 
 # TODO: This is a placeholder. Implement a proper check
 func check_threshold() -> bool:
-	match points:
-		threshold:
-			return true
-		_:
-			return false
+    match points:
+        threshold:
+            return true
+        _:
+            return false
+
+
 # ----- PHASE -----
 func set_phase(new_phase: Phase) -> void:
-	phase_state = new_phase
-	print("Phase -> ", get_phase_value())
+    phase_state = new_phase
+    print("Phase -> ", get_phase_value())
+
 
 func get_phase() -> Phase:
-	return phase_state
-	
-func get_phase_value():
-	match phase_state:
-		Phase.SPLASH:
-			return "SPLASH"
-		Phase.PROLOGUE:
-			return "PROLOGUE"
-		Phase.MIDDLE:
-			return "MIDDLE"
-		Phase.END:
-			return "END"
+    return phase_state
+
+
+func get_phase_value() -> String:
+    match phase_state:
+        Phase.SPLASH:
+            return "SPLASH"
+        Phase.PROLOGUE:
+            return "PROLOGUE"
+        Phase.MIDDLE:
+            return "MIDDLE"
+        Phase.END:
+            return "END"
+        Phase.CREDITS:
+            return "CREDITS"
+        _:
+            return "UNKNOWN"
+
+func is_splash() -> bool:
+    return phase_state == Phase.SPLASH
+
+func is_prologue() -> bool:
+    return phase_state == Phase.PROLOGUE
+
+func is_middle() -> bool:
+    return phase_state == Phase.MIDDLE
+
+func is_end() -> bool:
+    return phase_state == Phase.END
+
+func is_credits() -> bool:
+    return phase_state == Phase.CREDITS
 
 # TODO: Funny. Very funny. But I'm not laughing.
 func advance() -> void:
-	match phase_state:
-		Phase.SPLASH:
-			set_phase(Phase.PROLOGUE)
-			print("probability: ", probability)
-		Phase.PROLOGUE:
-			set_phase(Phase.MIDDLE)
-			probability += 20.0
-			print("probability: ", probability)
-		Phase.MIDDLE:
-			set_phase(Phase.END)
-			probability += 20.0
-			print("probability: ", probability)
-		Phase.END:
-			set_phase(Phase.CREDITS)
+    match phase_state:
+        Phase.SPLASH:
+            set_phase(Phase.PROLOGUE)
+            print("probability: ", probability)
+        Phase.PROLOGUE:
+            set_phase(Phase.MIDDLE)
+            probability += 20.0
+            print("probability: ", probability)
+        Phase.MIDDLE:
+            set_phase(Phase.END)
+            probability += 20.0
+            print("probability: ", probability)
+        Phase.END:
+            set_phase(Phase.CREDITS)
+        Phase.CREDITS:
+            pass
 
 # ----- UTILS -----
 
 func can_dialogue_spawn() -> bool:
-	if StoryManager.angry_dialogue_active:
-		print("Angry dialogue active, skipping spawn check")
-		return false
-	
-	print("Probability: ", probability)
-	var frankiePie: float = RandomNumberGenerator.new().randf_range(0.0, 100.0)
-	
-	print("frankiePie:fereacotr: _> refunct _> YouCanNot(new Anatichember) roooxane (toto) i lvoe tprogramign: -> ", frankiePie)
-	return frankiePie <= probability
+    if Story.angry_dialogue_active:
+        print("Angry dialogue active, skipping spawn check")
+        return false
+
+    print("Probability: ", probability)
+    var frankiePie: float = RandomNumberGenerator.new().randf_range(0.0, 100.0)
+
+    print("frankiePie:fereacotr: _> refunct _> YouCanNot(new Anatichember) roooxane (toto) i lvoe tprogramign: -> ", frankiePie)
+    return frankiePie <= probability

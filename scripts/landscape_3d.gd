@@ -79,15 +79,15 @@ func handle_water() -> void:
 	water.set_shader_parameter("water_color", current_water)
 
 func handle_target_colors() -> void:
-	match PhaseManager.get_phase():
-		PhaseManager.Phase.PROLOGUE:
+	match Phases.get_phase():
+		Phases.is_prologue():
 			change_target_colors(sky_prologue, horizon_prologue, ground_prologue, water_prologue)
-		PhaseManager.Phase.MIDDLE:
+		Phases.is_middle():
 			change_target_colors(sky_middle, horizon_middle, ground_middle, water_middle)
-		PhaseManager.Phase.END:
+		Phases.is_end():
 			change_target_colors(sky_end, horizon_end, ground_end, water_end)
 
-func change_target_colors(new_sky, new_horizon, new_ground, new_water): 
+func change_target_colors(new_sky, new_horizon, new_ground, new_water):
 	target_sky = new_sky
 	target_horizon = new_horizon
 	target_ground = new_ground

@@ -38,13 +38,13 @@ var angry_dialogue_index: int = 0
 
 # ----- INITIALIZATION AND PHYSICS -----
 
-func _ready() -> void:	
+func _ready() -> void:
 	current_scale_speed = scale_up_speed
 	current_rotation_speed = rotation_up_speed
 	rotation_degrees = min_rotation
 
 func _physics_process(delta: float) -> void:
-	if PlayerManager.is_player_focusing():
+	if Player.is_focusing():
 		update_scale(delta)
 		update_rotation(delta)
 
@@ -52,11 +52,11 @@ func _physics_process(delta: float) -> void:
 # --------- PHONE INTERACTIONS -----------
 
 func _on_area_entered(_area: Area2D) -> void:
-	if PlayerManager.is_player_free() or PlayerManager.is_player_focusing_out():
+	if Player.is_free() or Player.is_unfocusing():
 		enter_phone()
 
 func _on_phone_os_mouse_exited() -> void:
-	if !PlayerManager.is_player_free() and NotificationsManager.are_notifications_cleared:
+	if !Player.is_free() and Notifications.are_notifications_cleared:
 		exit()
 	else:
 		phone_os.display_cant_leave_alert()
@@ -64,7 +64,7 @@ func _on_phone_os_mouse_exited() -> void:
 func enter_phone() -> void:
 	player.set_focus_target(global_position + Vector2(0.0, -500), player.focus_speed_phone)
 
-	PlayerManager.set_player_focusing_on_phone()
+	Player.set_focusing_on_phone()
 
 	camera.set_camera_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
 
@@ -72,23 +72,23 @@ func enter_phone() -> void:
 	set_phone_rotation(max_rotation, rotation_up_speed)
 
 	phone_effects.set_effects(phone_effects.MAX_LOD, effects_increase_speed)
-	
-	if !PhoneManager.is_phone_discharged():
+
+	if !Phone.is_discharged():
 		phone_os.go_to_screen(phone_os.apps)
 		phone_os.turn_on_phone_visuals()
-	
-	if PhaseManager.can_dialogue_spawn():
+
+	if Phases.can_dialogue_spawn():
 		start_angry_dialogue()
-	
+
 	await get_tree().create_timer(1.0).timeout
-	if PlayerManager.is_player_focusing_on_phone():
-		PlayerManager.set_player_focused_phone()
+	if Player.is_focusing_on_phone():
+		Player.set_focus_on_phone()
 
 func exit() -> void:
 	player.current_speed = 0.0
 
-	PlayerManager.set_player_focusing_out()
-	PhoneManager.set_phone_off()
+	Player.set_unfocusing()
+	Phone.set_phone_off()
 
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 
@@ -97,22 +97,22 @@ func exit() -> void:
 
 	phone_effects.set_effects(phone_effects.MIN_LOD, effects_decrease_speed)
 	phone_os.hide_cant_leave_alert()
-	
-	if !PhoneManager.is_phone_discharged():
+
+	if !Phone.is_discharged():
 		phone_os.reset_screens()
 		phone_os.turn_off_phone_visuals()
 
 	await get_tree().create_timer(1.0).timeout
-	
-	if PlayerManager.is_player_focusing_out():
-		PlayerManager.set_player_free()
+
+	if Player.is_unfocusing():
+		Player.set_free()
 
 func start_angry_dialogue() -> void:
 	var dialogue_path: String = "res://dialogues/angry_asuka_%d.dialogue" % angry_dialogue_index
 	var dialogue_resource = load(dialogue_path)
-	
+
 	if dialogue_resource:
-		StoryManager.start_dialogue(StoryManager.dialogue_balloon, dialogue_resource, dialogue_start, self, true, true)
+		Story.start_dialogue(Story.dialogue_balloon, dialogue_resource, dialogue_start, self, true, true)
 		angry_dialogue_index += 1
 	else:
 		print("Dialogue resource not found: ", dialogue_path)
@@ -141,7 +141,7 @@ func update_scale(delta: float) -> void:
 func update_rotation(delta: float) -> void:
 	var rotation_difference: float = wrapf(target_rotation - rotation_degrees, -180.0, 180.0)
 	var rotation_step: float       = current_rotation_speed * delta
-	
+
 	if abs(rotation_difference) > 0.1:
 		var new_rotation = rotation_degrees + sign(rotation_difference) * rotation_step
 		new_rotation = clamp(new_rotation, min_rotation, max_rotation)

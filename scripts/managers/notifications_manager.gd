@@ -50,7 +50,7 @@ func start_notification_cooldown() -> void:
 # ----- PHONE SICKNESS -----
 
 func handle_phone_sickness() -> void:
-	if PlayerManager.is_player_focused_phone() or PlayerManager.is_player_focusing_on_phone():
+	if Player.is_focused_on_phone() or Player.is_focusing_on_phone():
 		reset_phone_sickness()
 	elif are_notifications_cleared == false:
 		increase_phone_sickness()

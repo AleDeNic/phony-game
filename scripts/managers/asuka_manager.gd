@@ -24,13 +24,13 @@ func _ready() -> void:
 
 
 func set_state(pose: Pose, expression: Expressions, eyes: Eyes) -> void:
-	set_pose_state(pose)
+	set_pose(pose)
 	set_expression(expression)
 	set_eyes(eyes)
 
 
 ## ----- POSE -----
-func set_pose_state(new_pose: Pose) -> void:
+func set_pose(new_pose: Pose) -> void:
 	pose_state = new_pose
 	print("Asuka pose -> ", get_pose_value())
 
@@ -39,7 +39,7 @@ func get_pose() -> Pose:
 	return pose_state
 
 
-func get_pose_value():
+func get_pose_value() -> String:
 	match pose_state:
 		Pose.ARMS_CROSSED:
 			return "ARMS_CROSSED"
@@ -57,7 +57,7 @@ func are_arms_crossed() -> bool:
 	return pose_state == Pose.ARMS_CROSSED
 
 
-## ----- EXPRESSION -----
+## ----- EXPRESSIONS -----
 func set_expression(new_expression: Expressions) -> void:
 	expression_state = new_expression
 	print("Asuka -> ", get_expression_value())
@@ -67,7 +67,7 @@ func get_expression() -> Expressions:
 	return expression_state
 
 
-func get_expression_value():
+func get_expression_value() -> String:
 	match expression_state:
 		Expressions.PLEASED:
 			return "PLEASED"
@@ -101,7 +101,7 @@ func get_eyes() -> Eyes:
 	return eye_state
 
 
-func get_eyes_value():
+func get_eyes_value() -> String:
 	match eye_state:
 		Eyes.NORMAL:
 			return "NORMAL"

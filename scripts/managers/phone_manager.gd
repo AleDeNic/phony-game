@@ -1,74 +1,78 @@
 extends Node
 
-enum PhoneState { OFF, APPS, SETTINGS, CAMERA, CHAT, DISCHARGED, COMINGSOON }
+enum State { OFF, APPS, SETTINGS, CAMERA, CHAT, DISCHARGED, COMINGSOON }
 
-@onready var phone_state: PhoneState = PhoneState.OFF
+@onready var phone_state: State = State.OFF
 
 # ----- INITIALIZERS -----
 # ...
 
 # ----- STATE SETTERS -----
 
-func set_phone_state(new_state: PhoneState) -> void:
+func set_phone_state(new_state: State) -> void:
 	phone_state = new_state
-	print("Phone -> ", get_phone_state_value())
-	
+	print("Phone -> ", get_state_value())
+
 func set_phone_off() -> void:
-	set_phone_state(PhoneState.OFF)
+	set_phone_state(State.OFF)
 
 func set_phone_in_apps() -> void:
-	set_phone_state(PhoneState.APPS)
-	
+	set_phone_state(State.APPS)
+
 func set_phone_in_settings() -> void:
-	set_phone_state(PhoneState.SETTINGS)
-	
+	set_phone_state(State.SETTINGS)
+
 func set_phone_in_camera() -> void:
-	set_phone_state(PhoneState.CAMERA)
-	
+	set_phone_state(State.CAMERA)
+
 func set_phone_in_chat() -> void:
-	set_phone_state(PhoneState.CHAT)
+	set_phone_state(State.CHAT)
 
 func set_phone_discharged() -> void:
-	set_phone_state(PhoneState.DISCHARGED)
+	set_phone_state(State.DISCHARGED)
 
 
 # ----- STATE GETTERS -----
 
-func get_phone_state() -> PhoneState:
+func get_state() -> State:
 	return phone_state
 
-func get_phone_state_value():
+func get_state_value() -> String:
 	match phone_state:
-		PhoneState.OFF:
+		State.OFF:
 			return "OFF"
-		PhoneState.APPS:
+		State.APPS:
 			return "APPS"
-		PhoneState.SETTINGS:
+		State.SETTINGS:
 			return "SETTINGS"
-		PhoneState.CAMERA:
+		State.CAMERA:
 			return "CAMERA"
-		PhoneState.CHAT:
+		State.CHAT:
 			return "CHAT"
-		PhoneState.DISCHARGED:
+		State.DISCHARGED:
 			return "DISCHARGED"
-			
-func is_phone_off() -> bool:
-	return phone_state == PhoneState.OFF
-	
-func is_phone_in_apps() -> bool:
-	return phone_state == PhoneState.APPS
-	
-func is_phone_in_settings() -> bool:
-	return phone_state == PhoneState.SETTINGS
-	
-func is_phone_in_camera() -> bool:
-	return phone_state == PhoneState.CAMERA
-	
-func is_phone_in_chat() -> bool:
-	return phone_state == PhoneState.CHAT
-	
-func is_battery_active() -> bool:
-	return phone_state not in [PhoneState.OFF, PhoneState.SETTINGS]
+		State.COMINGSOON:
+			return "COMINGSOON"
+		_:
+			return "COMINGSOON"
 
-func is_phone_discharged() -> bool:
-	return phone_state == PhoneState.DISCHARGED
+func is_off() -> bool:
+	return phone_state == State.OFF
+
+func in_apps() -> bool:
+	return phone_state == State.APPS
+
+func in_settings() -> bool:
+	return phone_state == State.SETTINGS
+
+func in_camera() -> bool:
+	return phone_state == State.CAMERA
+
+func in_chat() -> bool:
+	return phone_state == State.CHAT
+
+func is_battery_active() -> bool:
+	return phone_state not in [State.OFF, State.SETTINGS, State.DISCHARGED]
+
+func is_discharged() -> bool:
+	return phone_state == State.DISCHARGED

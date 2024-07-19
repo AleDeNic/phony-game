@@ -17,8 +17,8 @@ const MAX_LOD: float = 3.5
 # ----- INITIALIZATION AND PHYSICS -----
 
 func _ready() -> void:
-	if not PlayerManager.is_node_ready():
-		await PlayerManager.ready
+	if not Player.is_node_ready():
+		await Player.ready
 	setup_phone_filters()
 
 func _physics_process(delta: float) -> void:
@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 # ----- EFFECTS -----
 
 func handle_phone_filters(delta: float) -> void:
-	if PlayerManager.is_player_focusing():
+	if Player.is_focusing():
 		var new_lod = lerp(current_lod, target_lod, current_lod_speed * delta)
 		if abs(new_lod - current_lod) > 0.001:
 			new_lod = clamp(new_lod, MIN_LOD, MAX_LOD)
@@ -40,7 +40,7 @@ func handle_phone_filters(delta: float) -> void:
 			new_lod = target_lod
 
 func setup_phone_filters() -> void:
-	current_lod_speed = PlayerManager.effects_increase_speed
+	current_lod_speed = Player.effects_increase_speed
 	current_lod = blur_fisheye.get_shader_parameter("lod")
 	target_lod = MIN_LOD
 

@@ -70,7 +70,7 @@ func _ready() -> void:
 	cant_leave_alert.visible = false
 	notification_button.visible = false
 
-	NotificationsManager.connect("notification", Callable(self, "_spawn_new_asuka_message"))
+	Notifications.connect("notification", Callable(self, "_spawn_new_asuka_message"))
 
 
 func setup_update_timer() -> void:
@@ -100,8 +100,8 @@ func reset_screens() -> void:
 
 
 func turn_off_phone() -> void:
-	PhoneManager.set_phone_discharged()
-	NotificationsManager.clear_notifications()
+	Phone.set_phone_discharged()
+	Notifications.clear_notifications()
 	reset_screens()
 	bottom_bar.visible = false
 
@@ -110,9 +110,9 @@ func turn_off_phone() -> void:
 func go_to_screen(screen: Control) -> void:
 	reset_screens()
 	screen.visible = true
-	if !PhoneManager.is_phone_discharged():
-		PhoneManager.set_phone_state(PhoneManager.PhoneState[screen.name.to_upper()])
-		if !PhoneManager.is_phone_in_apps():
+	if !Phone.is_discharged():
+		Phone.set_phone_state(Phone.State[screen.name.to_upper()])
+		if !Phone.is_in_apps():
 			bottom_bar.visible = true
 	else:
 		bottom_bar.visible = false
@@ -144,14 +144,14 @@ func _on_camera_pressed() -> void:
 
 func _on_chat_pressed() -> void:
 	go_to_screen(chat)
-	NotificationsManager.clear_notifications()
+	Notifications.clear_notifications()
 	notification_button.visible = false
 	scroll_container_to_bottom()
 
 
 func _on_notification_button_pressed() -> void:
 	go_to_screen(chat)
-	NotificationsManager.clear_notifications()
+	Notifications.clear_notifications()
 	notification_button.visible = false
 	scroll_container_to_bottom()
 
@@ -173,9 +173,9 @@ func _spawn_new_asuka_message() -> void:
 	parent.add_child(new_message)
 	parent.move_child(new_message, parent.get_child_count() - 1)
 	new_message.visible = true
-	
+
 	var message_sender: String
-	if NotificationsManager.is_message_from_asuka():
+	if Notifications.is_message_from_asuka():
 		message_sender = "(✫/~✰?"
 		new_message.text = "[color=%s]%s:[/color] %s    [i][color=gray]" % [asuka_color, message_sender, get_random_asuka_message()] + clock.text + "[/color][/i]"
 	else:
@@ -231,8 +231,8 @@ func setup_battery() -> void:
 
 
 func handle_battery() -> void:
-	if !PhoneManager.is_phone_discharged():
-		battery_timer.paused = !PhoneManager.is_battery_active()
+	if !Phone.is_discharged():
+		battery_timer.paused = !Phone.is_battery_active()
 		battery_bar.value = battery_timer.time_left
 		if battery_bar.value == 0:
 			turn_off_phone()

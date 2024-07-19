@@ -72,7 +72,7 @@ func start_dialogue(dialogue_scene: String, dialogue_resource: Resource, start_f
 	if is_angry and angry_dialogue_active:
 		print("An angry dialogue is already active. Ignoring this request.")
 		return
-	
+
 	if prioritized_dialogue and not prioritize:
 		print("A prioritized dialogue is active. Queueing this dialogue.")
 		dialogue_queue.append({
@@ -83,7 +83,7 @@ func start_dialogue(dialogue_scene: String, dialogue_resource: Resource, start_f
 		})
 		print("Dialogue queued. Current queue size: ", dialogue_queue.size())
 		return
-	
+
 	if prioritize:
 		if dialogue_resource != prioritized_dialogue:
 			if prioritized_dialogue == null:
@@ -101,7 +101,7 @@ func start_dialogue(dialogue_scene: String, dialogue_resource: Resource, start_f
 		prioritized_dialogue = dialogue_resource
 		dialogue_queue.clear()
 		print("Prioritized dialogue set. Queue cleared.")
-	
+
 	if is_angry:
 		angry_dialogue_active = true
 		print("Angry dialogue started.")
@@ -109,17 +109,17 @@ func start_dialogue(dialogue_scene: String, dialogue_resource: Resource, start_f
 	if active_balloon and is_instance_valid(active_balloon):
 		active_balloon.queue_free()
 		print("Previous active balloon freed.")
-	
+
 	set_dialogue_resource(dialogue_resource)
 	set_dialogue_scene(dialogue_scene)
 	set_dialogue_start(start_from)
-	
+
 	var start_id = dialogue_last_lines.get(dialogue_resource.resource_path, start_from)
 	print("Starting dialogue at ID: ", start_id)
-	
+
 	active_balloon = DialogueManager.show_dialogue_balloon_scene(dialogue_scene, dialogue_resource, start_id)
 	current_dialogue_area = dialogue_area
-	
+
 	if not DialogueManager.got_dialogue.is_connected(_on_got_dialogue):
 		DialogueManager.got_dialogue.connect(_on_got_dialogue)
 		print("Connected to DialogueManager.got_dialogue signal.")
@@ -135,15 +135,15 @@ func end_dialogue() -> void:
 		active_balloon.queue_free()
 		print("Active balloon freed.")
 	active_balloon = null
-	
+
 	if current_dialogue_area and is_instance_valid(current_dialogue_area):
 		if current_dialogue_area.has_method("exit"):
 			current_dialogue_area.exit()
 		print("Current dialogue area exited.")
 	current_dialogue_area = null
-	
+
 	print("Current ID for dialogue: ", current_line_id)
-	
+
 	var was_prioritized = (dialogue_resource == prioritized_dialogue)
 	if was_prioritized:
 		prioritized_dialogue = null
@@ -171,17 +171,17 @@ func end_dialogue() -> void:
 		get_tree().create_timer(0.1).timeout.connect(start_next_queued_dialogue)
 	else:
 		print("No prioritized dialogue or queued dialogue.")
-	
+
 	current_line_id = ""
 
 func hide_dialogue_balloon(delay: float = 0.0) -> void:
 	if active_balloon and is_instance_valid(active_balloon):
 		active_balloon.visible = false
 		print("Hiding active balloon.")
-		
-		var previous_state = PlayerManager.get_player_state()
-		PlayerManager.set_player_dialogue_paused()
-		
+
+		var previous_state: Player.State = Player.get_state()
+		Player.set_on_pause()
+
 		if delay > 0:
 			await get_tree().create_timer(delay).timeout
 			if active_balloon and is_instance_valid(active_balloon):
@@ -193,20 +193,9 @@ func hide_dialogue_balloon(delay: float = 0.0) -> void:
 			print("Immediately showing active balloon.")
 			restore_previous_state(previous_state)
 
-func restore_previous_state(previous_state: PlayerManager.PlayerState) -> void:
-	match previous_state:
-		PlayerManager.PlayerState.FOCUSED_ASUKA:
-			PlayerManager.set_player_focused_asuka()
-		PlayerManager.PlayerState.FOCUSING_ON_ASUKA:
-			PlayerManager.set_player_focusing_on_asuka()
-		PlayerManager.PlayerState.FOCUSING_ON_PHONE:
-			PlayerManager.set_player_focusing_on_phone()
-		PlayerManager.PlayerState.FOCUSED_PHONE:
-			PlayerManager.set_player_focused_phone()
-		PlayerManager.PlayerState.FREE:
-			PlayerManager.set_player_free()
-		_:
-			PlayerManager.set_player_free()
+func restore_previous_state(previous_state: Player.State) -> void:
+	Player.set_state(previous_state)
+
 
 func start_next_queued_dialogue() -> void:
 	if not dialogue_queue.is_empty():
@@ -223,14 +212,14 @@ func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	end_dialogue()
 	if prioritized_dialogue == null:
 		print("No prioritized dialogue active.")
-	
+
 func _on_got_dialogue(line: DialogueLine) -> void:
 	current_line_id = line.id
 	print("Received dialogue line: ", line.id)
 	if dialogue_resource != null:
 		dialogue_last_lines[dialogue_resource.resource_path] = line.id
 		print("Updated dialogue last line ID for resource: ", dialogue_resource.resource_path)
-	
+
 	if dialogue_resource != prioritized_dialogue and last_non_prioritized_dialogue:
 		last_non_prioritized_dialogue["start_from"] = line.id
 		print("Updated last non-prioritized dialogue start from ID: ", line.id)

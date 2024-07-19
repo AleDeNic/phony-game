@@ -116,7 +116,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 func _notification(what: int) -> void:
 	# Detect a change of locale and update the current dialogue line to show the new language
 	if what == NOTIFICATION_TRANSLATION_CHANGED and is_instance_valid(dialogue_label):
-		var visible_ratio = dialogue_label.visible_ratio
+		var visible_ratio: float = dialogue_label.visible_ratio
 		self.dialogue_line = await resource.get_next_dialogue_line(dialogue_line.id)
 		if visible_ratio < 1:
 			dialogue_label.skip_typing()
@@ -174,13 +174,13 @@ func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
 
 func _on_balloon_mouse_exited() -> void:
-	if PlayerManager.is_player_focused_asuka():
+	if Player.is_focused_on_asuka():
 		asuka.exit()
 		# responses_menu.hide()
 
 
 func _on_balloon_mouse_entered() -> void:
-	if PlayerManager.is_player_focused_asuka():
+	if Player.is_focused_on_asuka():
 		# responses_menu.show()
 		asuka.enter_asuka()
 

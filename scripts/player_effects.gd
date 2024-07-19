@@ -15,7 +15,7 @@ extends CanvasLayer
 @export var startup_begin: int = 0
 @export var startup_end: int = 60
 
-# ----- PROCESSING!!! ----
+## ----- PROCESSING!!! ----
 
 func _ready() -> void:
 	startup_blur()
@@ -50,9 +50,9 @@ func sickness_filter_coroutine() -> void:
 # ----- HANDLE FILTERS -----
 
 func handle_phone_sickness_filter() -> void:
-	blur_inner = map_range(NotificationsManager.phone_sickness, NotificationsManager.min_phone_sickness, NotificationsManager.max_phone_sickness, 0.8, 0.4)
-	blur_radius = map_range(NotificationsManager.phone_sickness, NotificationsManager.min_phone_sickness, NotificationsManager.max_phone_sickness, 0.25, 0.3)
-	blur_outer = map_range(NotificationsManager.phone_sickness, NotificationsManager.min_phone_sickness, NotificationsManager.max_phone_sickness, 0.7, 0.5)
+	blur_inner = map_range(Notifications.phone_sickness, Notifications.min_phone_sickness, Notifications.max_phone_sickness, 0.8, 0.4)
+	blur_radius = map_range(Notifications.phone_sickness, Notifications.min_phone_sickness, Notifications.max_phone_sickness, 0.25, 0.3)
+	blur_outer = map_range(Notifications.phone_sickness, Notifications.min_phone_sickness, Notifications.max_phone_sickness, 0.7, 0.5)
 
 	blur_vignette.set_shader_parameter("blur_inner", blur_inner)
 	blur_vignette.set_shader_parameter("blur_radius", blur_radius)
@@ -63,13 +63,13 @@ func handle_phone_sickness_filter() -> void:
 
 #func map_range(value: float, from_min: float, from_max: float, to_min: float, to_max: float) -> float:
 	#return (value - from_min) / (from_max - from_min) * (to_max - to_min) + to_min
-	
+
 func map_range(value: float, from_min: float, from_max: float, to_min: float, to_max: float) -> float:
 	if from_max == from_min:
 		return to_min  # Avoid division by zero
 
 	# Normalize the input value within the source range
-	var normalized_value = (value - from_min) / (from_max - from_min)
+	var normalized_value: float = (value - from_min) / (from_max - from_min)
 
 	# Calculate the mapped value within the target range
 	if to_max > to_min:
