@@ -2,7 +2,7 @@ extends CanvasLayer
 
 @onready var asuka: Area2D = get_node("/root/World/Asuka")
 @onready var window: Area2D = get_node("/root/World/Window")
-@onready var phone: Area2D = get_node("/root/World/Phone")
+@onready var phone: Area2D = get_node("/root/World/PhoneCanvas/ParallaxLayer/Phone")
 @onready var player: CharacterBody2D = get_node("/root/World/Player")
 
 ## The action to use for advancing the dialogue
