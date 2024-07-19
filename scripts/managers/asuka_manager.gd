@@ -1,113 +1,125 @@
 extends Node
 
-enum PoseState {
+enum Pose {
 	OVER_TABLE,
 	ARMS_CROSSED
 }
-
-enum ExpressionState {
+enum Expressions {
 	PLEASED,
 	TALKING,
 	UPSET
 }
-
-enum EyesState {
+enum Eyes {
 	NORMAL,
 	CLOSED,
 	LOOKAWAY
 }
+@onready var pose_state: Pose
+@onready var expression_state: Expressions
+@onready var eye_state: Eyes
 
-@onready var pose_state: PoseState
-@onready var expression_state: ExpressionState
-@onready var eye_state: EyesState
 
 func _ready() -> void:
-	set_asuka(PoseState.OVER_TABLE, ExpressionState.PLEASED, EyesState.NORMAL)
+	set_state(Pose.OVER_TABLE, Expressions.PLEASED, Eyes.NORMAL)
 
-func set_asuka(pose: PoseState, expression: ExpressionState, eyes: EyesState) -> void:
+
+func set_state(pose: Pose, expression: Expressions, eyes: Eyes) -> void:
 	set_pose_state(pose)
-	set_expression_state(expression)
-	set_eyes_state(eyes)
+	set_expression(expression)
+	set_eyes(eyes)
 
-# ----- POSE SETTERS -----
-func set_pose_state(new_pose: PoseState) -> void:
+
+## ----- POSE -----
+func set_pose_state(new_pose: Pose) -> void:
 	pose_state = new_pose
-	print("Asuka pose -> ", get_asuka_pose_value())
+	print("Asuka pose -> ", get_pose_value())
 
 
-# ----- POSE GETTERS -----
-func get_asuka_pose() -> PoseState:
+func get_pose() -> Pose:
 	return pose_state
 
-func get_asuka_pose_value():
+
+func get_pose_value():
 	match pose_state:
-		PoseState.ARMS_CROSSED:
+		Pose.ARMS_CROSSED:
 			return "ARMS_CROSSED"
-		PoseState.OVER_TABLE:
+		Pose.OVER_TABLE:
 			return "OVER_TABLE"
-
-func is_asuka_pose_2() -> bool:
-	return pose_state == PoseState.OVER_TABLE
-
-func is_asuka_pose_3() -> bool:
-	return pose_state == PoseState.ARMS_CROSSED
+		_:
+			return "UNKNOWN"
 
 
-# ----- EXPRESSION SETTERS -----
-func set_expression_state(new_expression: ExpressionState) -> void:
+func is_over_table() -> bool:
+	return pose_state == Pose.OVER_TABLE
+
+
+func are_arms_crossed() -> bool:
+	return pose_state == Pose.ARMS_CROSSED
+
+
+## ----- EXPRESSION -----
+func set_expression(new_expression: Expressions) -> void:
 	expression_state = new_expression
-	print("Asuka -> ", get_asuka_expression_value())
+	print("Asuka -> ", get_expression_value())
 
 
-# ----- EXPRESSION GETTERS -----
-func get_asuka_expression() -> ExpressionState:
+func get_expression() -> Expressions:
 	return expression_state
 
-func get_asuka_expression_value():
+
+func get_expression_value():
 	match expression_state:
-		ExpressionState.PLEASED:
+		Expressions.PLEASED:
 			return "PLEASED"
-		ExpressionState.TALKING:
+		Expressions.TALKING:
 			return "TALKING"
-		ExpressionState.UPSET:
+		Expressions.UPSET:
 			return "UPSET"
+		_:
+			return "UNKNOWN"
 
 
-func is_expression_pleased() -> bool:
-	return expression_state == ExpressionState.PLEASED
-
-func is_expression_talking() -> bool:
-	return expression_state == ExpressionState.TALKING
-
-func is_expression_upset() -> bool:
-	return expression_state == ExpressionState.UPSET
+func is_pleased() -> bool:
+	return expression_state == Expressions.PLEASED
 
 
-# ----- EYE STATE SETTERS -----
-func set_eyes_state(new_state: EyesState) -> void:
+func is_talking() -> bool:
+	return expression_state == Expressions.TALKING
+
+
+func is_upset() -> bool:
+	return expression_state == Expressions.UPSET
+
+
+# ----- EYES -----
+func set_eyes(new_state: Eyes) -> void:
 	eye_state = new_state
-	print("Eyes -> ", get_eyes_state_value())
+	print("Eyes -> ", get_eyes_value())
 
 
-# ----- EYE STATE GETTERS -----
-func get_eyes_state() -> EyesState:
+func get_eyes() -> Eyes:
 	return eye_state
 
-func get_eyes_state_value():
+
+func get_eyes_value():
 	match eye_state:
-		EyesState.NORMAL:
+		Eyes.NORMAL:
 			return "NORMAL"
-		EyesState.CLOSED:
+		Eyes.CLOSED:
 			return "CLOSED"
-		EyesState.LOOKAWAY:
+		Eyes.LOOKAWAY:
 			return "LOOKAWAY"
+		_:
+			return "UNKNOWN"
 
 
 func are_eyes_normal() -> bool:
-	return eye_state == EyesState.NORMAL
+	return eye_state == Eyes.NORMAL
+
 
 func are_eyes_closed() -> bool:
-	return eye_state == EyesState.CLOSED
+	return eye_state == Eyes.CLOSED
+
 
 func are_eyes_lookaway() -> bool:
-	return eye_state == EyesState.LOOKAWAY
+	return eye_state == Eyes.LOOKAWAY

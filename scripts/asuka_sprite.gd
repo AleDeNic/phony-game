@@ -40,11 +40,11 @@ func update() -> void:
 	expr_talking.hide()
 	expr_upset.hide()
 
-	if AsukaManager.is_expression_pleased():
+	if AsukaManager.is_pleased():
 		expr_pleased.show()
-	elif AsukaManager.is_expression_talking():
+	elif AsukaManager.is_talking():
 		expr_talking.show()
-	elif AsukaManager.is_expression_upset():
+	elif AsukaManager.is_upset():
 		expr_upset.show()
 
 	var eyes_normal: Sprite2D   = eyes_normal_02 if AsukaManager.are_asuka_arms_crossed() else eyes_normal_03
