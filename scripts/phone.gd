@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_entered(_area: Area2D) -> void:
 	if Player.is_free() or Player.is_unfocusing():
-		enter_phone()
+		enter()
 
 func _on_phone_os_mouse_exited() -> void:
 	if !Player.is_free() and Notifications.are_notifications_cleared:
@@ -61,7 +61,7 @@ func _on_phone_os_mouse_exited() -> void:
 	else:
 		phone_os.display_cant_leave_alert()
 
-func enter_phone() -> void:
+func enter() -> void:
 	player.set_target(global_position + Vector2(0.0, -500), player.focus_speed_phone)
 
 	Player.set_focusing_on_phone()
@@ -76,9 +76,6 @@ func enter_phone() -> void:
 	if !Phone.is_discharged():
 		phone_os.go_to_screen(phone_os.apps)
 		phone_os.turn_on_phone_visuals()
-
-	if Phases.can_dialogue_spawn():
-		start_angry_dialogue()
 
 	await get_tree().create_timer(1.0).timeout
 	if Player.is_focusing_on_phone():
@@ -106,16 +103,6 @@ func exit() -> void:
 
 	if Player.is_unfocusing():
 		Player.set_free()
-
-func start_angry_dialogue() -> void:
-	var dialogue_path: String = "res://dialogues/angry_asuka_%d.dialogue" % angry_dialogue_index
-	var dialogue_resource = load(dialogue_path)
-
-	if dialogue_resource:
-		Story.start_dialogue(Story.dialogue_balloon, dialogue_resource, dialogue_start, self, true, true)
-		angry_dialogue_index += 1
-	else:
-		print("Dialogue resource not found: ", dialogue_path)
 
 
 # ----- SET ANIMATIONS -----

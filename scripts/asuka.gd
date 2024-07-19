@@ -31,15 +31,15 @@ func _process(_delta: float) -> void:
 
 func _on_area_entered(_area: Area2D) -> void:
 	if Player.is_free() or Player.is_unfocusing():
-		enter_asuka()
+		enter()
 
 
-func enter_asuka() -> void:
+func enter() -> void:
 	player.set_target(global_position, player.focus_speed_asuka)
 	Player.set_focusing_on_asuka()
 
 	if !is_dialogue_started:
-		Story.start_dialogue(Story.dialogue_balloon, dialogue_resource, dialogue_start, self, false)
+		Story.start_dialogue(Story.dialogue_balloon, dialogue_resource, dialogue_start, self)
 		is_dialogue_started = true
 	await get_tree().create_timer(1.0).timeout
 	if Player.is_focusing_on_asuka():
