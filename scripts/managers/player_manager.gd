@@ -22,7 +22,7 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	_player = get_tree().get_first_node_in_group("player")
 	if _player == null:
-		push_warning("PlayerManager: Player node not found!")
+		push_warning("Player node not found!")
 
 
 # ----- STATE SETTERS -----

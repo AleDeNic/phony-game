@@ -17,7 +17,6 @@ extends Area2D
 
 var is_dialogue_started: bool = false
 
-
 # ----- READY AND PROCESS -----
 
 func _process(_delta: float) -> void:
@@ -34,7 +33,9 @@ func enter() -> void:
 	player.set_target(global_position, player.focus_speed_asuka)
 	Player.set_focusing_on_asuka()
 
-	DialogueManager.show_dialogue_balloon_scene(dialogue_balloon, dialogue_resource, dialogue_start)
+	if !is_dialogue_started:
+		DialogueManager.show_dialogue_balloon_scene(dialogue_balloon, dialogue_resource, dialogue_start)
+		is_dialogue_started = true
 
 	await get_tree().create_timer(1.0).timeout
 	if Player.is_focusing_on_asuka():
@@ -44,7 +45,7 @@ func enter() -> void:
 func exit() -> void:
 	Player.set_unfocus()
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-
+	
 	await get_tree().create_timer(1.0).timeout
 	if Player.is_unfocusing():
 		Player.set_free()

@@ -1,20 +1,13 @@
 ~ asuka_intro
 
 [speed=0.3]Hey. Is everything alright?
-- Well... Kinda. Why?
-	[speed=0.3]You seemed a bit off. [wait=1][wave amp=25 freq=5]But if you say so...[/wave]
-- I was feeling better before.
-	[speed=0.1]Sure. [speed=0.6]I can see that. You were looking better, too!
-- ...
-	[speed=0.3]I guess you don't want to talk about it. 
-do AudioManager.add_music_layer(1)
-do AsukaManager.set_asuka(PoseState.ARMS_CROSSED, ExpressionState.UPSET, EyesState.NORMAL)
+do Audio.add_music_layer(1)
 [speed=0.2]Anyway... [speed=0.6]look up! See how the sky is today?[wait=0.5] It's exceptionally clear.
 - It sure does seem so.
 	[speed=0.5]I can feel the excitement in your words. Yeah... [speed=0.3]we [wave amp=25 freq=5]love[/wave] the sun, [wait=0.5][speed=0.5]don't we?
-	do AudioManager.add_music_layer(2)
+	do Audio.add_music_layer(2)
 	[speed=0.3]I mean, the sun is now unbereable from spring to fall. I [shake rate=20 level=10]really[/shake] want to settle in Arcadia Bay when I'll grow up.
-	- Since when you've started to think about your future? [do AudioManager.add_music_layer(3)]
+	- Since when you've started to think about your future? [do Audio.add_music_layer(3)]
 		[speed=0.3]From the moment I have cared about [speed=0.3]not [speed=1]being miserable.
 		- That makes my past miserable.
 		- That makes my future miserable.
@@ -27,7 +20,7 @@ do AsukaManager.set_asuka(PoseState.ARMS_CROSSED, ExpressionState.UPSET, EyesSta
 		- You are running from something.
 		- You are reaching for something.
 		[speed=1]Could be true. [wait=1]Could not. [wait=1]Who knows.
-- I would really love an option to skip small talks. [do AudioManager.add_music_layer(2)]
+- I would really love an option to skip small talks. [do Audio.add_music_layer(2)]
 	[speed=1]Fine. [speed=0.5]I don't really care about the weather anyway.
 	I was just trying to act like a normal person with you.[wait=1] You know, at least once in a lifetime.
 	- I'm not normal, though. Or am I?
@@ -60,9 +53,9 @@ do AsukaManager.set_asuka(PoseState.ARMS_CROSSED, ExpressionState.UPSET, EyesSta
 	- ...
 ...
 do wait(5)
-do AudioManager.add_music_layer(5)
-do AudioManager.add_music_layer(6)
-do PhaseManager.advance()
+do Audio.add_music_layer(5)
+do Audio.add_music_layer(6)
+do Phases.advance()
 ~ asuka_phone
 [speed=0.5]Ok, let's continue our [speed=0.1][wave amp=25 freq=5]enjoyable[/wave] [speed=0.5]conversation.
 [speed=0.5]You still have the phone I have given you as a gift. [speed=0.1]That[speed=0.5] was a while ago, huh.
@@ -118,7 +111,7 @@ do PhaseManager.advance()
 	- Then why?
 		...
 
-do PhaseManager.advance()
+do Phases.advance()
 [wait=30]
 
 

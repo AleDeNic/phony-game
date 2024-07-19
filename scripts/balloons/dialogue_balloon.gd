@@ -97,16 +97,6 @@ func _physics_process(_delta: float) -> void:
 func handle_balloon_movement() -> void:
 	balloon.global_position = balloon.global_position.slerp(player.global_position - balloon_offset_position, 0.08)
 
-#func handle_balloon_scale() -> void:
-	#var target_balloon_scale: float = 1.0
-	#match PlayerManager.get_player_state():
-		#PlayerManager.PlayerState.FREE, PlayerManager.PlayerState.FOCUSING_OUT, PlayerManager.PlayerState.FOCUSING_ON_PHONE:
-			#target_balloon_scale = 1.0
-		#PlayerManager.PlayerState.FOCUSING_ON_ASUKA, PlayerManager.PlayerState.FOCUSED_ASUKA:
-			#target_balloon_scale = 0.6
-	##balloon.pivot_offset = balloon.size / 2
-	#balloon.scale = balloon.scale.lerp(Vector2(target_balloon_scale, target_balloon_scale), 0.1)
-
 
 func _unhandled_input(_event: InputEvent) -> void:
 	# Only the balloon is allowed to handle input while it's showing

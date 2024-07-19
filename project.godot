@@ -17,14 +17,13 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-AudioManager="*res://scripts/managers/audio_manager.gd"
-NotificationsManager="*res://scripts/managers/notifications_manager.gd"
-PhaseManager="*res://scripts/managers/phase_manager.gd"
-PhoneManager="*res://scripts/managers/phone_manager.gd"
-PlayerManager="*res://scripts/managers/player_manager.gd"
-StoryManager="*res://scripts/managers/story_manager.gd"
+Audio="*res://scripts/managers/audio_manager.gd"
+Notifications="*res://scripts/managers/notifications_manager.gd"
+Phases="*res://scripts/managers/phase_manager.gd"
+Phone="*res://scripts/managers/phone_manager.gd"
+Player="*res://scripts/managers/player_manager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-AsukaManager="*res://scripts/managers/asuka_manager.gd"
+Asuka="*res://scripts/managers/asuka_manager.gd"
 
 [dialogic]
 
