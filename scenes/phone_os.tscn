@@ -1,9 +1,8 @@
-[gd_scene load_steps=41 format=3 uid="uid://dg55yu6bit6jt"]
+[gd_scene load_steps=40 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_os.gd" id="1_r0wjl"]
-[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/utils/clouds.jpg" id="2_hqmi7"]
 [ext_resource type="Shader" path="res://shaders/blur_color.gdshader" id="3_2wg1f"]
-[ext_resource type="Texture2D" uid="uid://dbmspirba0r28" path="res://assets/sprites/player_hand_phone.png" id="3_6d0u2"]
+[ext_resource type="Texture2D" uid="uid://b3fu3e6jaa486" path="res://assets/sprites/player_hand_phone.png" id="3_6d0u2"]
 [ext_resource type="Texture2D" uid="uid://bfg0lk6kvgptl" path="res://assets/ui/notification_icon.png" id="3_jnjbr"]
 [ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="4_1d7ag"]
 [ext_resource type="Script" path="res://scripts/volume_slider.gd" id="4_5jmmy"]
@@ -15,7 +14,7 @@
 [ext_resource type="StyleBox" uid="uid://duct66cpghgeh" path="res://ui/styles/separator.tres" id="8_y0en8"]
 [ext_resource type="StyleBox" uid="uid://c4lw5oyyq5657" path="res://ui/styles/battery_bar_fill.tres" id="9_6yc02"]
 [ext_resource type="Theme" uid="uid://v3wqj6dvklo0" path="res://ui/themes/phone_os.tres" id="12_fsmwd"]
-[ext_resource type="Texture2D" uid="uid://bfvektdy41l3v" path="res://assets/ui/send.png" id="13_hdb4n"]
+[ext_resource type="Texture2D" uid="uid://c0n6yi64tlmmt" path="res://assets/ui/send.png" id="13_hdb4n"]
 [ext_resource type="StyleBox" uid="uid://bkskyjp3vt3rs" path="res://ui/styles/bubble_chat.tres" id="13_o3gel"]
 [ext_resource type="LabelSettings" uid="uid://do3s44f43vkkm" path="res://ui/settings/os_text.tres" id="14_n38hu"]
 [ext_resource type="StyleBox" uid="uid://jgie8qpxs0gh" path="res://ui/styles/bubble_player.tres" id="14_yaw3x"]
@@ -25,7 +24,7 @@
 [ext_resource type="Theme" uid="uid://b0uon3iawrhwg" path="res://ui/themes/asuka_dialogue.tres" id="19_dm1ly"]
 [ext_resource type="StyleBox" uid="uid://c6yj5nlxgbf6q" path="res://ui/styles/bottom_bar_hover.tres" id="24_4o1io"]
 [ext_resource type="StyleBox" uid="uid://drw7cjkbby3nk" path="res://ui/styles/bottom_bar_pressed.tres" id="25_a714u"]
-[ext_resource type="Texture2D" uid="uid://bb5is1ltcuyog" path="res://assets/sprites/phone_frame.png" id="27_adyrh"]
+[ext_resource type="Texture2D" uid="uid://iqgyqnqsy84n" path="res://assets/sprites/phone_frame.png" id="27_adyrh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_eymc1"]
 line_spacing = -10.0
@@ -126,12 +125,6 @@ modulate = Color(0.727986, 0.727986, 0.727986, 1)
 position = Vector2(1925, 2033)
 scale = Vector2(1.48, 1.48)
 texture = ExtResource("3_6d0u2")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(1497.78, 842.5)
-scale = Vector2(0.693415, 0.780093)
-texture = ExtResource("2_hqmi7")
 
 [node name="CantLeaveAlert" type="Label" parent="."]
 layout_mode = 1
