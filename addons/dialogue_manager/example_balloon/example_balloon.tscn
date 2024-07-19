@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/dialogue_manager/example_balloon/example_balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
-[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/textures/clouds.jpg" id="2_wcv7c"]
+[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/utils/clouds.jpg" id="2_wcv7c"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="3_72ixx"]
 [ext_resource type="Shader" path="res://shaders/blur.gdshader" id="3_kn4n2"]
 [ext_resource type="Theme" uid="uid://b0uon3iawrhwg" path="res://ui/themes/asuka_dialogue.tres" id="4_a7i8o"]

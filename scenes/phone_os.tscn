@@ -1,7 +1,7 @@
 [gd_scene load_steps=41 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_os.gd" id="1_r0wjl"]
-[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/textures/clouds.jpg" id="2_hqmi7"]
+[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/utils/clouds.jpg" id="2_hqmi7"]
 [ext_resource type="Shader" path="res://shaders/blur_color.gdshader" id="3_2wg1f"]
 [ext_resource type="Texture2D" uid="uid://dbmspirba0r28" path="res://assets/sprites/player_hand_phone.png" id="3_6d0u2"]
 [ext_resource type="Texture2D" uid="uid://bfg0lk6kvgptl" path="res://assets/ui/notification_icon.png" id="3_jnjbr"]

@@ -50,10 +50,10 @@ func sickness_filter_coroutine() -> void:
 # ----- HANDLE FILTERS -----
 
 func handle_phone_sickness_filter() -> void:
-	blur_inner = map_range(NotificationsManager.phone_sickness, NotificationsManager.min_phone_sickness, NotificationsManager.max_phone_sickness, 0.8, 0.0)
-	blur_radius = map_range(NotificationsManager.phone_sickness, NotificationsManager.min_phone_sickness, NotificationsManager.max_phone_sickness, 0.25, 0.6)
-	blur_outer = map_range(NotificationsManager.phone_sickness, NotificationsManager.min_phone_sickness, NotificationsManager.max_phone_sickness, 0.7, 0.35)
-	
+	blur_inner = map_range(NotificationsManager.phone_sickness, NotificationsManager.min_phone_sickness, NotificationsManager.max_phone_sickness, 0.8, 0.4)
+	blur_radius = map_range(NotificationsManager.phone_sickness, NotificationsManager.min_phone_sickness, NotificationsManager.max_phone_sickness, 0.25, 0.3)
+	blur_outer = map_range(NotificationsManager.phone_sickness, NotificationsManager.min_phone_sickness, NotificationsManager.max_phone_sickness, 0.7, 0.5)
+
 	blur_vignette.set_shader_parameter("blur_inner", blur_inner)
 	blur_vignette.set_shader_parameter("blur_radius", blur_radius)
 	blur_vignette.set_shader_parameter("blur_outer", blur_outer)
