@@ -103,17 +103,16 @@ func check_viewport() -> void:
 
 
 func update_player(_delta: float) -> void:
-	match Player.get_state():
-		Player.is_focusing_on_asuka(), Player.is_focused_on_asuka():
-			camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
-			handle_movement(_delta)
-		Player.is_focusing_on_phone(), Player.is_focused_on_phone():
-			camera.set_camera_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
-			focus(_delta)
-		Player.is_free(), Player.is_unfocusing():
-			camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-			target_speed = 0.0
-			current_speed = 0.0
-			velocity = Vector2.ZERO
-		Player.is_dialogue_paused():
-			pass
+	if Player.is_focusing_on_asuka() or Player.is_focused_on_asuka():
+		camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
+		handle_movement(_delta)
+	elif Player.is_focusing_on_phone() or Player.is_focused_on_phone():
+		camera.set_camera_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
+		focus(_delta)
+	elif Player.is_free() or Player.is_unfocusing():
+		camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
+		target_speed = 0.0
+		current_speed = 0.0
+		velocity = Vector2.ZERO
+	elif Player.is_dialogue_paused():
+		pass

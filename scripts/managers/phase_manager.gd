@@ -53,19 +53,18 @@ func get_phase() -> State:
 
 
 func get_phase_value() -> String:
-	match Phases.get_phase():
-		Phases.is_splash():
-			return "SPLASH"
-		Phases.is_prologue():
-			return "PROLOGUE"
-		Phases.is_middle():
-			return "MIDDLE"
-		Phases.is_end():
-			return "END"
-		Phases.is_credits():
-			return "CREDITS"
-		_:
-			return "UNKNOWN"
+	if Phases.is_splash():
+		return "SPLASH"
+	elif Phases.is_prologue():
+		return "PROLOGUE"
+	elif Phases.is_middle():
+		return "MIDDLE"
+	elif Phases.is_end():
+		return "END"
+	elif Phases.is_credits():
+		return "CREDITS"
+	else:
+		return "UNKNOWN"
 
 
 func set_splash() -> void:
@@ -110,22 +109,21 @@ func is_credits() -> bool:
 
 # TODO: Funny. Very funny. But I'm not laughing.
 func advance() -> void:
-	match Phases.get_phase():
-		Phases.is_splash():
-			set_prologue()
-			print("probability: ", probability)
-		Phases.is_prologue():
-			set_middle()
-			probability += 20.0
-			print("probability: ", probability)
-		Phases.is_middle():
-			set_end()
-			probability += 20.0
-			print("probability: ", probability)
-		Phases.is_end():
-			set_credits()
-		Phases.is_credits():
-			pass
+	if Phases.is_splash():
+		set_prologue()
+		print("probability: ", probability)
+	elif Phases.is_prologue():
+		set_middle()
+		probability += 20.0
+		print("probability: ", probability)
+	elif Phases.is_middle():
+		set_end()
+		probability += 20.0
+		print("probability: ", probability)
+	elif Phases.is_end():
+		set_credits()
+	elif Phases.is_credits():
+		pass
 
 
 # ----- UTILS -----
