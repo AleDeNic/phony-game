@@ -80,11 +80,11 @@ func handle_water() -> void:
 
 func handle_target_colors() -> void:
 	match Phases.get_phase():
-		Phases.is_prologue():
+		Phases.State.PROLOGUE:
 			change_target_colors(sky_prologue, horizon_prologue, ground_prologue, water_prologue)
-		Phases.is_middle():
+		Phases.State.MIDDLE:
 			change_target_colors(sky_middle, horizon_middle, ground_middle, water_middle)
-		Phases.is_end():
+		Phases.State.END:
 			change_target_colors(sky_end, horizon_end, ground_end, water_end)
 
 func change_target_colors(new_sky, new_horizon, new_ground, new_water):

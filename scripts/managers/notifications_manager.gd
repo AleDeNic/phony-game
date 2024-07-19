@@ -69,10 +69,10 @@ func reset_phone_sickness() -> void:
 # ----- RANDOM NOTIFICATIONS -----
 
 func handle_notifications() -> void:
-	if !PlayerManager.is_player_focused_phone() and !PlayerManager.is_player_focusing() and can_notifications_arrive:
+	if !Player.is_focused_on_phone() and !Player.is_focused_on_asuka() and can_notifications_arrive:
 		var random_number: float = randf_range(0.0, 100.0)
 		if random_number <= notification_probability:
-			AudioManager.play_vibration()
+			Audio.play_vibration()
 			are_notifications_cleared = false
 			can_notifications_arrive = false
 			start_notification_cooldown()

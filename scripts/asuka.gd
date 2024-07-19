@@ -35,7 +35,7 @@ func _on_area_entered(_area: Area2D) -> void:
 
 
 func enter_asuka() -> void:
-	player.set_focus_target(global_position, player.focus_speed_asuka)
+	player.set_target(global_position, player.focus_speed_asuka)
 	Player.set_focusing_on_asuka()
 
 	if !is_dialogue_started:

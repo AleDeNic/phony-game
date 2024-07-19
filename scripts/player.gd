@@ -26,19 +26,20 @@ func _ready() -> void:
 	focus_speed = focus_speed_phone
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	check_viewport()
-	update_player(_delta)
+	update_camera(_delta)
+	move_player(_delta)
 
 
 ## ----- MOVEMENT -----
 
-func handle_movement(delta: float) -> void:
+func free_up(_delta: float) -> void:
 	var movement_vector: Vector2 = get_movement_input()
 	target_speed = default_speed
 	reset_mouse_to_center()
-	current_speed = lerp(current_speed, target_speed, delta * transition_speed)
-	velocity = velocity.lerp(movement_vector * current_speed, delta * transition_speed)
+	current_speed = lerp(current_speed, target_speed, _delta * transition_speed)
+	velocity = velocity.lerp(movement_vector * current_speed, _delta * transition_speed)
 	move_and_slide()
 
 
@@ -102,17 +103,24 @@ func check_viewport() -> void:
 		return
 
 
-func update_player(_delta: float) -> void:
+func update_camera(_delta: float) -> void:
 	if Player.is_focusing_on_asuka() or Player.is_focused_on_asuka():
 		camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
-		handle_movement(_delta)
 	elif Player.is_focusing_on_phone() or Player.is_focused_on_phone():
 		camera.set_camera_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
-		focus(_delta)
 	elif Player.is_free() or Player.is_unfocusing():
 		camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-		target_speed = 0.0
-		current_speed = 0.0
-		velocity = Vector2.ZERO
 	elif Player.is_dialogue_paused():
 		pass
+
+
+func move_player(_delta: float):
+	match Player.get_state():
+		Player.State.FREE:
+			free_up(_delta)
+		Player.State.FOCUSING_ON_PHONE, Player.State.FOCUSING_ON_ASUKA:
+			focus(_delta)
+		Player.State.FOCUSING_OUT:
+			unfocus(_delta)
+		Player.State.DIALOGUE_PAUSED:
+			pass
