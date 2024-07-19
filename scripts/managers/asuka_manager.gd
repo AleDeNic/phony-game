@@ -22,7 +22,7 @@ enum Eyes {
 
 
 func _ready() -> void:
-	set_asuka(Pose.A3, Face.PLEASED, Eyes.NORMAL)
+	set_asuka(Pose.A2, Face.PLEASED, Eyes.NORMAL)
 
 func set_asuka(pose: Pose, face: Face, eyes: Eyes) -> void:
 	set_pose(pose)
@@ -50,11 +50,12 @@ func get_pose_value() -> String:
 			return "UNKNOWN"
 
 
+func is_a2() -> bool:
+	return pose_state == Pose.A2
+
 func is_a3() -> bool:
 	return pose_state == Pose.A3
 
-func is_a2() -> bool:
-	return pose_state == Pose.A2
 
 
 ## ----- FACE -----

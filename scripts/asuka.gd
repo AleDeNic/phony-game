@@ -19,10 +19,12 @@ extends Area2D
 
 var is_dialogue_started: bool = false
 
+
 # ----- READY AND PROCESS -----
 
 func _process(_delta: float) -> void:
 	update_asuka_sprites()
+
 
 # ----- INTERACTIONS -----
 
@@ -68,7 +70,7 @@ func update_asuka_sprites() -> void:
 			asuka_3.show()
 			set_face(face_3)
 			set_eyes(eyes_3)
-			arms_3.show()
+			
 
 func set_face(face: AnimatedSprite2D) -> void:
 	match Asuka.get_face():

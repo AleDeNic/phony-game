@@ -132,36 +132,36 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1en08"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7svb"]
 atlas = ExtResource("9_050qn")
 region = Rect2(0, 0, 320, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j3taa"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqagi"]
 atlas = ExtResource("9_050qn")
 region = Rect2(320, 0, 320, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wkr05"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ol0om"]
 atlas = ExtResource("9_050qn")
 region = Rect2(640, 0, 320, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7iogb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8ce5"]
 atlas = ExtResource("9_050qn")
 region = Rect2(960, 0, 320, 100)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_aie53"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_mpsev"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1en08")
+"texture": SubResource("AtlasTexture_p7svb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_j3taa")
+"texture": SubResource("AtlasTexture_fqagi")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wkr05")
+"texture": SubResource("AtlasTexture_ol0om")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7iogb")
+"texture": SubResource("AtlasTexture_p8ce5")
 }],
 "loop": true,
 "name": &"default",
@@ -316,7 +316,7 @@ sprite_frames = SubResource("SpriteFrames_d1t00")
 [node name="AsukaEyes3" type="AnimatedSprite2D" parent="TrainInterior/Asuka3"]
 position = Vector2(-33.6, -100)
 scale = Vector2(0.43, 0.43)
-sprite_frames = SubResource("SpriteFrames_aie53")
+sprite_frames = SubResource("SpriteFrames_mpsev")
 
 [node name="AsukaArms3" type="Sprite2D" parent="TrainInterior/Asuka3"]
 z_index = 1
