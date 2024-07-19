@@ -1,35 +1,37 @@
 extends Node
 
 enum Pose {
-	OVER_TABLE,
-	ARMS_CROSSED
+	A2,
+	A3
 }
-enum Expressions {
+enum Face {
+	UPSET,
 	PLEASED,
 	TALKING,
-	UPSET
+	LAUGH
 }
 enum Eyes {
 	NORMAL,
 	CLOSED,
-	LOOKAWAY
+	LOOKAWAY,
+	SMILE
 }
 @onready var pose_state: Pose
-@onready var expression_state: Expressions
+@onready var face_state: Face
 @onready var eye_state: Eyes
 
 
 func _ready() -> void:
-	set_state(Pose.OVER_TABLE, Expressions.PLEASED, Eyes.NORMAL)
+	set_asuka(Pose.A3, Face.UPSET, Eyes.LOOKAWAY)
 
-
-func set_state(pose: Pose, expression: Expressions, eyes: Eyes) -> void:
+func set_asuka(pose: Pose, face: Face, eyes: Eyes) -> void:
 	set_pose(pose)
-	set_expression(expression)
+	set_face(face)
 	set_eyes(eyes)
 
 
 ## ----- POSE -----
+
 func set_pose(new_pose: Pose) -> void:
 	pose_state = new_pose
 	print("Asuka pose -> ", get_pose_value())
@@ -38,68 +40,63 @@ func set_pose(new_pose: Pose) -> void:
 func get_pose() -> Pose:
 	return pose_state
 
-
 func get_pose_value() -> String:
 	match pose_state:
-		Pose.ARMS_CROSSED:
-			return "ARMS_CROSSED"
-		Pose.OVER_TABLE:
-			return "OVER_TABLE"
+		Pose.A2:
+			return "A2"
+		Pose.A3:
+			return "A3"
 		_:
 			return "UNKNOWN"
 
 
-func is_over_table() -> bool:
-	return pose_state == Pose.OVER_TABLE
+func is_a2() -> bool:
+	return pose_state == Pose.A2
+
+func is_a3() -> bool:
+	return pose_state == Pose.A3
 
 
-func are_arms_crossed() -> bool:
-	return pose_state == Pose.ARMS_CROSSED
 
+## ----- FACE -----
 
-## ----- EXPRESSIONS -----
-func set_expression(new_expression: Expressions) -> void:
-	expression_state = new_expression
-	print("Asuka -> ", get_expression_value())
+func set_face(new_face: Face) -> void:
+	face_state = new_face
+	print("Asuka -> ", get_face_value())
 
+func get_face() -> Face:
+	return face_state
 
-func get_expression() -> Expressions:
-	return expression_state
-
-
-func get_expression_value() -> String:
-	match expression_state:
-		Expressions.PLEASED:
+func get_face_value() -> String:
+	match face_state:
+		Face.PLEASED:
 			return "PLEASED"
-		Expressions.TALKING:
+		Face.TALKING:
 			return "TALKING"
-		Expressions.UPSET:
+		Face.UPSET:
 			return "UPSET"
 		_:
 			return "UNKNOWN"
 
 
 func is_pleased() -> bool:
-	return expression_state == Expressions.PLEASED
-
+	return face_state == Face.PLEASED
 
 func is_talking() -> bool:
-	return expression_state == Expressions.TALKING
-
+	return face_state == Face.TALKING
 
 func is_upset() -> bool:
-	return expression_state == Expressions.UPSET
+	return face_state == Face.UPSET
 
 
 # ----- EYES -----
+
 func set_eyes(new_state: Eyes) -> void:
 	eye_state = new_state
 	print("Eyes -> ", get_eyes_value())
 
-
 func get_eyes() -> Eyes:
 	return eye_state
-
 
 func get_eyes_value() -> String:
 	match eye_state:
@@ -116,10 +113,8 @@ func get_eyes_value() -> String:
 func are_eyes_normal() -> bool:
 	return eye_state == Eyes.NORMAL
 
-
 func are_eyes_closed() -> bool:
 	return eye_state == Eyes.CLOSED
-
 
 func are_eyes_lookaway() -> bool:
 	return eye_state == Eyes.LOOKAWAY
