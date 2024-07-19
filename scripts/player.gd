@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var phone: Area2D = $"../PhoneCanvas/ParallaxLayer/Phone"
+@onready var control: Control = $Control
 
 @export var default_speed: float = 70.0
 @export var transition_speed: float = 10.0
@@ -24,6 +25,7 @@ func _ready() -> void:
 	setup_viewport()
 	current_speed = default_speed
 	focus_speed = focus_speed_phone
+	control.hide()
 
 
 func _process(_delta: float) -> void:

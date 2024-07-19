@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var phone_os: Control = get_node("/root/World/PhoneCanvas/ParallaxLayer/Phone/PhoneOS")
+@onready var player: CharacterBody2D = get_node("/root/World/Player")
 
 signal notification
 
@@ -75,6 +76,7 @@ func handle_notifications() -> void:
 			Audio.play_vibration()
 			are_notifications_cleared = false
 			can_notifications_arrive = false
+			player.control.show()
 			start_notification_cooldown()
 			emit_signal("notification")
 
@@ -84,6 +86,7 @@ func increase_probability() -> void:
 
 func clear_notifications() -> void:
 	are_notifications_cleared = true
+	player.control.hide()
 
 func is_message_from_asuka() -> bool:
 	var random_number: int = randi() % 100
