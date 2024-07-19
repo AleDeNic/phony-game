@@ -1,5 +1,6 @@
 extends Node
 
+#region Variables
 enum State {
 	FREE,
 	FOCUSING_ON_PHONE,
@@ -16,19 +17,17 @@ enum State {
 @onready var _current_state: State = State.FREE
 
 var _player: CharacterBody2D       = null
+#endregion
 
-
-# ----- INITIALIZATION AND PHYSICS -----
-
+#region Lifecycle
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	_player = get_tree().get_first_node_in_group("player")
 	if _player == null:
 		push_warning("Player node not found!")
+#endregion
 
-
-# ----- STATE SETTERS -----
-
+#region Setters
 func set_state(new_state: State) -> void:
 	_current_state = new_state
 	print("Player -> ", get_state_value())
@@ -78,9 +77,9 @@ func set_focusing_on_window() -> void:
 
 func set_focused_window() -> void:
 	set_state(State.FOCUSED_WINDOW)
+#endregion
 
-
-# ----- STATE -----
+#region Getters
 func get_player() -> CharacterBody2D:
 	return _player
 
@@ -145,3 +144,4 @@ func is_focusing_on_window() -> bool:
 
 func is_focused_on_window() -> bool:
 	return _current_state == State.FOCUSED_WINDOW
+#endregion

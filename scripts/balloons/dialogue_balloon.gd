@@ -29,8 +29,6 @@ var max_distance_to_phone: float = 50.0
 
 var asuka_balloon_offset: Vector2 = Vector2(-550, -260)
 
-
-
 func _ready() -> void:
 	balloon.hide()
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
