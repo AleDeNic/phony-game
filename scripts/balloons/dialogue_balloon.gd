@@ -1,6 +1,8 @@
 extends CanvasLayer
 
 @onready var asuka: Area2D = get_node("/root/World/Asuka")
+@onready var window: Area2D = get_node("/root/World/Window")
+@onready var phone: Area2D = get_node("/root/World/Phone")
 @onready var player: CharacterBody2D = get_node("/root/World/Player")
 
 ## The action to use for advancing the dialogue
@@ -67,7 +69,7 @@ var dialogue_line: DialogueLine:
 			balloon.focus_mode = Control.FOCUS_NONE
 			responses_menu.show()
 		elif dialogue_line.time != "":
-			var time = dialogue_line.text.length() * 0.02 if dialogue_line.time == "auto" else dialogue_line.time.to_float()
+			var time: float = dialogue_line.text.length() * 0.02 if dialogue_line.time == "auto" else dialogue_line.time.to_float()
 			await get_tree().create_timer(time).timeout
 			next(dialogue_line.next_id)
 		else:
@@ -80,6 +82,9 @@ var dialogue_line: DialogueLine:
 var balloon_position: Vector2
 var balloon_offset_position: Vector2
 
+var asuka_position: Vector2
+var max_distance_from_asuka: float = 200.0
+
 func _ready() -> void:
 	balloon.hide()
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
@@ -88,14 +93,24 @@ func _ready() -> void:
 	if responses_menu.next_action.is_empty():
 		responses_menu.next_action = next_action
 
-	balloon.global_position = asuka.global_position
+	asuka_position = asuka.global_position
+	balloon.global_position = asuka_position
 	balloon_offset_position = balloon.size * 0.75 / 2
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	handle_balloon_movement()
 
 func handle_balloon_movement() -> void:
-	balloon.global_position = balloon.global_position.slerp(player.global_position - balloon_offset_position, 0.08)
+	var target_position: Vector2 = player.global_position - balloon_offset_position
+
+	var displacement: Vector2 = target_position - asuka_position
+
+	if displacement.length() > max_distance_from_asuka:
+		displacement = displacement.normalized() * max_distance_from_asuka
+
+	var new_position: Vector2 = asuka_position + displacement
+
+	balloon.global_position = balloon.global_position.lerp(new_position, 0.1)
 
 
 func _unhandled_input(_event: InputEvent) -> void:
