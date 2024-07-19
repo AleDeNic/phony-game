@@ -112,7 +112,7 @@ func go_to_screen(screen: Control) -> void:
 	screen.visible = true
 	if !Phone.is_discharged():
 		Phone.set_phone_state(Phone.State[screen.name.to_upper()])
-		if !Phone.is_in_apps():
+		if !Phone.in_apps():
 			bottom_bar.visible = true
 	else:
 		bottom_bar.visible = false
