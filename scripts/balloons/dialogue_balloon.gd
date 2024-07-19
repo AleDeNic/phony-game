@@ -178,11 +178,10 @@ func _on_balloon_mouse_exited() -> void:
 		asuka.exit()
 		# responses_menu.hide()
 
-
 func _on_balloon_mouse_entered() -> void:
 	if Player.is_focused_on_asuka():
 		# responses_menu.show()
-		asuka.enter_asuka()
+		asuka.enter()
 
 #endregion
 
