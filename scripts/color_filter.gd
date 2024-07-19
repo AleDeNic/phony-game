@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var landscape_3d: Node3D = get_node("/root/World/Landscape/ParallaxBackground/ParallaxLayer/SubViewportContainer/SubViewport/Landscape3D")
+@onready var landscape_3d: Node3D = get_node("/root/World/Background/ParallaxBackground/ParallaxLayer/SubViewportContainer/SubViewport/Landscape3D")
 @onready var color_overlay: ShaderMaterial = $ColorOverlay.material as ShaderMaterial
 
 @export var color_amount: float = 0.6
