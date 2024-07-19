@@ -22,7 +22,7 @@ enum Eyes {
 
 
 func _ready() -> void:
-	set_asuka(Pose.A2, Face.PLEASED, Eyes.NORMAL)
+	set_asuka(Pose.A3, Face.UPSET, Eyes.LOOKAWAY)
 
 func set_asuka(pose: Pose, face: Face, eyes: Eyes) -> void:
 	set_pose(pose)

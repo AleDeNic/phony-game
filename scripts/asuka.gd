@@ -84,7 +84,7 @@ func set_face(face: AnimatedSprite2D) -> void:
 			face.frame = 3
 
 func set_eyes(eyes: AnimatedSprite2D) -> void:
-	match Asuka.get_face():
+	match Asuka.get_eyes():
 		Asuka.Eyes.NORMAL:
 			eyes.frame = 0
 		Asuka.Eyes.CLOSED:

@@ -299,6 +299,7 @@ sprite_frames = SubResource("SpriteFrames_3cad3")
 position = Vector2(-8.43494, -202)
 scale = Vector2(0.43, 0.43)
 sprite_frames = SubResource("SpriteFrames_e4ks2")
+autoplay = "default"
 
 [node name="Asuka3" type="Node2D" parent="TrainInterior"]
 position = Vector2(-796, -8)
