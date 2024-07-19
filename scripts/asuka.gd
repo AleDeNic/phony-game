@@ -3,21 +3,13 @@ extends Area2D
 @export var dialogue_resource: Resource = load("res://dialogues/asuka.dialogue")
 @export var dialogue_start: String = "asuka_intro"
 
-@onready var asuka_02: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka02/Asuka02")
-@onready var expr_pleased_02: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka02/AsukaExpressions02/ExpPleased02")
-@onready var expr_talking_02: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka02/AsukaExpressions02/ExpTalking02")
-@onready var expr_upset_02: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka02/AsukaExpressions02/ExpUpset02")
-@onready var eyes_closed_02: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka02/AsukaEyes02/EyesClosed02")
-@onready var eyes_lookaway_02: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka02/AsukaEyes02/EyesLookaway02")
-@onready var eyes_normal_02: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka02/AsukaEyes02/EyesNormal02")
-@onready var asuka_03: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka03/Asuka03")
-@onready var expr_pleased_03: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka03/AsukaExpressions03/ExprPleased03")
-@onready var expr_talking_03: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka03/AsukaExpressions03/ExprTalking03")
-@onready var expr_upset_03: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka03/AsukaExpressions03/ExprUpset03")
-@onready var eyes_closed_03: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka03/AsukaEyes03/EyesClosed03")
-@onready var eyes_lookaway_03: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka03/AsukaEyes03/EyesLookaway03")
-@onready var eyes_normal_03: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka03/AsukaEyes03/EyesNormal03")
-@onready var asuka_arms_03: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka03/AsukaArms03")
+@onready var pose_2: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka2/AsukaPose2")
+@onready var face_2: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka2/AsukaFace2")
+@onready var eyes_2: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka2/AsukaEyes2")
+@onready var pose_3: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka3/AsukaPose3")
+@onready var face_3: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka3/AsukaFace3")
+@onready var eyes_3: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka3/AsukaEyes3")
+@onready var arms_3: Sprite2D = get_node("/root/World/Landscape/TrainInterior/Asuka3/AsukaArms3")
 
 @onready var camera: Camera2D = $"../Player/Camera2D"
 @onready var player: CharacterBody2D = %Player
@@ -56,6 +48,7 @@ func exit() -> void:
 
 # ----- UTILS -----
 func update_asuka_visuals() -> void:
+<<<<<<< Updated upstream
 	if AsukaManager.is_asuka_pose_2():
 		asuka_02.hide()
 		asuka_03.show()
@@ -64,6 +57,16 @@ func update_asuka_visuals() -> void:
 		asuka_02.show()
 		asuka_03.hide()
 		asuka_arms_03.hide()
+=======
+	if AsukaManager.are_asuka_arms_crossed():
+		pose_2.show()
+		pose_3.hide()
+		arms_3.hide()
+	elif AsukaManager.are_asuka_over_table():
+		pose_2.hide()
+		pose_3.show()
+		arms_3.show()
+>>>>>>> Stashed changes
 
 	var expr_pleased: Sprite2D = expr_pleased_02 if AsukaManager.is_asuka_pose_3() else expr_pleased_03
 	var expr_talking: Sprite2D = expr_talking_02 if AsukaManager.is_asuka_pose_3() else expr_talking_03

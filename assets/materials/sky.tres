@@ -1,6 +1,6 @@
 [gd_resource type="ProceduralSkyMaterial" load_steps=2 format=3 uid="uid://bj34hqlv2vq53"]
 
-[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/textures/clouds.jpg" id="1_wecmv"]
+[ext_resource type="Texture2D" uid="uid://dol7joclo1ryi" path="res://assets/utils/clouds.jpg" id="1_wecmv"]
 
 [resource]
 sky_top_color = Color(1.07813e-05, 0.751362, 0.944015, 1)
