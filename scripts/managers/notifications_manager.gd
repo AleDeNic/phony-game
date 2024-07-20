@@ -32,7 +32,7 @@ var notifications_amount: int = 0
 var notification_cooldown: int = 20
 var dialogue_state: int = 1
 
-var probability: float                   = 50.0
+var probability: float                   = 5.0
 var probability_of_asuka_messages: float = 40.0
 var probability_increment: float         = 2.0
 #endregion
@@ -60,7 +60,7 @@ func update_phone_sickness() -> void:
 	phone_sickness = calculate_sickness()
 
 func calculate_sickness() -> int:
-	var sickness = notifications_amount * notification_weight
+	var sickness: int = notifications_amount * notification_weight
 	return min(sickness, max_phone_sickness)
 
 func reset_phone_sickness() -> void:
@@ -78,7 +78,8 @@ func handle_notifications() -> void:
 			set_inbox_incoming()
 			set_cannot_arrive()
 
-			player.control.show()
+			if is_instance_valid(player) and player.has_node("control"):
+				player.control.show()
 			start_notification_cooldown()
 			emit_signal("notification")
 
@@ -98,7 +99,8 @@ func start_notification_cooldown() -> void:
 func clear_notifications() -> void:
 	reset_amount()
 	set_inbox_cleared()
-	player.control.hide()
+	if is_instance_valid(player) and player.has_node("control"):
+		player.control.hide()
 
 func is_message_from_asuka() -> bool:
 	var random_number: int = randi() % 100
@@ -165,3 +167,10 @@ func set_amount(new_value: int) -> void:
 func reset_amount() -> void:
 	notifications_amount = 0
 #endregion
+
+func reset_all() -> void:
+	reset_amount()
+	set_inbox_cleared()
+	set_can_arrive()
+	reset_phone_sickness()
+	

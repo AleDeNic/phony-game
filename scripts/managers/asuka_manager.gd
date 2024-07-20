@@ -169,3 +169,9 @@ func are_eyes_closed() -> bool:
 func are_eyes_lookaway() -> bool:
 	return eye_state == Eyes.LOOKAWAY
 	#endregion
+
+#region Reset
+func reset_all() -> void:
+	set_asuka(Pose.A2, Face.PLEASED, Eyes.NORMAL)
+	set_dialogue_inactive()
+#endregion

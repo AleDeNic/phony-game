@@ -76,3 +76,6 @@ func is_battery_active() -> bool:
 
 func is_discharged() -> bool:
 	return phone_state == State.DISCHARGED
+
+func reset_all() -> void:
+	set_phone_off()

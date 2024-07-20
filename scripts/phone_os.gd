@@ -139,7 +139,14 @@ func _on_fullscreen_toggled(toggled_on: bool) -> void:
 	DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN if toggled_on else DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
 
 func _on_reset_pressed() -> void:
-	pass # Replace with function body.
+	Asuka.reset_all()
+	Phone.reset_all()
+	Player.reset_all()
+	Notifications.reset_all()
+	Phases.reset_all()
+	Audio.reset_all()
+	get_tree().reload_current_scene()
+	pass
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()

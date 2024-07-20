@@ -138,3 +138,7 @@ func is_focused_on_window() -> bool:
 func is_drifting_to_phone() -> bool:
 	return _current_state == State.DRIFTING_TO_PHONE
 #endregion
+
+func reset_all() -> void:
+	set_free()
+	pass

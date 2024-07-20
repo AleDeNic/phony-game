@@ -134,3 +134,10 @@ func can_dialogue_spawn() -> bool:
 
 	print("frankiePie:fereacotr: _> refunct _> YouCanNot(new Anatichember) roooxane (toto) i lvoe tprogramign: -> ", frankiePie)
 	return frankiePie <= probability
+
+func reset_all() -> void:
+	set_points(0)
+	set_threshold(15)
+	set_phase(State.PROLOGUE)
+	probability = 20.0
+	print("Reset all -> ", get_phase_value())

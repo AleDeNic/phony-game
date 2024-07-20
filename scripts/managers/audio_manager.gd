@@ -177,3 +177,24 @@ func play_vibration() -> void:
 	add_child(vibration)
 	vibration.play()
 	effects.append(vibration)
+
+func reset_all_effects() -> void:
+	for effect in effects:
+		effect.stop()
+		effect.queue_free()
+	effects.clear()
+
+func reset_all_music_layers() -> void:
+	for layer in music_layers:
+		layer.stop()
+		layer.queue_free()
+	music_layers.clear()
+	create_music_layers()
+	start_synchronized_playback()
+	active_layers.clear()
+	print("All music layers reset")
+
+func reset_all() -> void:
+	reset_all_effects()
+	reset_all_music_layers()
+	print("All audio reset")
