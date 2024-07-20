@@ -1,5 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://bduasgadssrkv"]
+[gd_scene load_steps=25 format=3 uid="uid://bduasgadssrkv"]
 
+[ext_resource type="Script" path="res://scripts/window.gd" id="3_hvl1r"]
 [ext_resource type="Script" path="res://scripts/asuka.gd" id="4_1kcn2"]
 [ext_resource type="PackedScene" uid="uid://cix2lesxh03hi" path="res://scenes/background.tscn" id="4_u7jec"]
 [ext_resource type="Texture2D" uid="uid://b3fu3e6jaa486" path="res://assets/sprites/player_hand_phone.png" id="6_mhxfc"]
@@ -75,6 +76,7 @@ shape = SubResource("CapsuleShape2D_bgwpj")
 position = Vector2(1951, -506)
 collision_mask = 4
 input_pickable = false
+script = ExtResource("3_hvl1r")
 
 [node name="WindowCollision" type="CollisionShape2D" parent="Window"]
 scale = Vector2(47.685, 47.685)
@@ -209,5 +211,6 @@ mouse_filter = 2
 [connection signal="area_entered" from="Asuka" to="Asuka" method="_on_area_entered"]
 [connection signal="area_exited" from="Asuka" to="Asuka" method="_on_area_exited"]
 [connection signal="area_entered" from="Window" to="Window" method="_on_area_entered"]
+[connection signal="area_exited" from="Window" to="Window" method="_on_area_exited"]
 [connection signal="area_entered" from="PhoneCanvas/ParallaxLayer/Phone" to="PhoneCanvas/ParallaxLayer/Phone" method="_on_area_entered"]
 [connection signal="mouse_exited" from="PhoneCanvas/ParallaxLayer/Phone/PhoneOS" to="PhoneCanvas/ParallaxLayer/Phone" method="_on_phone_os_mouse_exited"]
