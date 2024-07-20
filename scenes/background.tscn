@@ -196,7 +196,7 @@ shader_parameter/speed = 1.0
 shader_parameter/ray1_density = 1.325
 shader_parameter/ray2_density = 23.505
 shader_parameter/ray2_intensity = 0.3
-shader_parameter/color = Vector4(1, 1, 1, 0.5)
+shader_parameter/color = Vector4(1, 1, 1, 0.4)
 shader_parameter/hdr = false
 shader_parameter/seed = 10.0
 
@@ -260,12 +260,13 @@ shape = SubResource("WorldBoundaryShape2D_boryj")
 script = ExtResource("3_wisc5")
 
 [node name="TrainSprite" type="Sprite2D" parent="TrainInterior"]
-modulate = Color(0.688043, 0.688043, 0.688043, 1)
+modulate = Color(0.425956, 0.425956, 0.425956, 1)
 position = Vector2(-140, 349)
 scale = Vector2(0.78875, 0.78875)
 texture = ExtResource("3_0xejn")
 
 [node name="Asuka2" type="Node2D" parent="TrainInterior"]
+modulate = Color(0.940198, 0.940198, 0.940198, 1)
 position = Vector2(-753, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="TrainInterior/Asuka2"]
@@ -293,6 +294,7 @@ autoplay = "default"
 
 [node name="Asuka3" type="Node2D" parent="TrainInterior"]
 visible = false
+modulate = Color(0.940198, 0.940198, 0.940198, 1)
 position = Vector2(-796, -8)
 
 [node name="AsukaPose3" type="Sprite2D" parent="TrainInterior/Asuka3"]
