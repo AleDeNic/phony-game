@@ -47,8 +47,6 @@ func _ready() -> void:
 	rotation_degrees = min_rotation
 
 func _physics_process(delta: float) -> void:
-	if Player.is_free():
-		exit()
 	if Player.is_focusing():
 		update_scale(delta)
 		update_rotation(delta)

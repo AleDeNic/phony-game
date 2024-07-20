@@ -1,5 +1,7 @@
 extends Control
 
+#TODO: Handle phone exit in a clearer way
+@onready var phone: Area2D = get_node("/root/World/PhoneCanvas/ParallaxLayer/Phone")
 #region VARIABLES
 const APPS_SCREEN: String       = "APPS"
 const CHAT_SCREEN: String       = "CHAT"
@@ -145,6 +147,7 @@ func _on_reset_pressed() -> void:
 	Notifications.reset_all()
 	Phases.reset_all()
 	Audio.reset_all()
+	phone.exit()
 	get_tree().reload_current_scene()
 	pass
 

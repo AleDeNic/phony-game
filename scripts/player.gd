@@ -87,7 +87,7 @@ func drift_to_phone(delta: float) -> void:
 		velocity = velocity.lerp(movement_vector * current_speed, delta * transition_speed)
 	
 	move_and_slide()
-	print("Drift speed: ", current_speed)
+	# print("Drift speed: ", current_speed)
 
 
 ## ----- INPUT -----
