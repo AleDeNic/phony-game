@@ -1,5 +1,6 @@
 extends Node
 
+#region Variables
 enum Pose {
 	A2,
 	A3
@@ -16,10 +17,18 @@ enum Eyes {
 	LOOKAWAY,
 	SMILE
 }
+enum Dialogue {
+	INACTIVE,
+	ACTIVE,
+	ENDED
+}
 @onready var pose_state: Pose
 @onready var face_state: Face
 @onready var eye_state: Eyes
+@onready var dialogue_state: Dialogue = Dialogue.INACTIVE
 
+
+#endregion
 
 func _ready() -> void:
 	set_asuka(Pose.A2, Face.PLEASED, Eyes.NORMAL)
@@ -29,9 +38,45 @@ func set_asuka(pose: Pose, face: Face, eyes: Eyes) -> void:
 	set_face(face)
 	set_eyes(eyes)
 
+#region Dialogue
+func set_dialogue(new_state: Dialogue) -> void:
+	dialogue_state = new_state
+	print("Dialogue -> ", get_dialogue_value())
 
-## ----- POSE -----
+func get_dialogue() -> Dialogue:
+	return dialogue_state
 
+func get_dialogue_value() -> String:
+	match dialogue_state:
+		Dialogue.INACTIVE:
+			return "INACTIVE"
+		Dialogue.ACTIVE:
+			return "ACTIVE"
+		Dialogue.ENDED:
+			return "ENDED"
+		_:
+			return "UNKNOWN"
+
+func set_dialogue_inactive() -> void:
+	set_dialogue(Dialogue.INACTIVE)
+
+func set_dialogue_active() -> void:
+	set_dialogue(Dialogue.ACTIVE)
+
+func set_dialogue_ended() -> void:
+	set_dialogue(Dialogue.ENDED)
+
+func is_dialogue_inactive() -> bool:
+	return dialogue_state == Dialogue.INACTIVE
+
+func is_dialogue_active() -> bool:
+	return dialogue_state == Dialogue.ACTIVE
+
+func is_dialogue_ended() -> bool:
+	return dialogue_state == Dialogue.ENDED
+#endregion
+
+#region Pose
 func set_pose(new_pose: Pose) -> void:
 	pose_state = new_pose
 	print("Asuka pose -> ", get_pose_value())
@@ -39,6 +84,7 @@ func set_pose(new_pose: Pose) -> void:
 
 func get_pose() -> Pose:
 	return pose_state
+
 
 func get_pose_value() -> String:
 	match pose_state:
@@ -53,19 +99,22 @@ func get_pose_value() -> String:
 func is_a2() -> bool:
 	return pose_state == Pose.A2
 
+
 func is_a3() -> bool:
 	return pose_state == Pose.A3
 
 
+#endregion
 
-## ----- FACE -----
-
+#region Face
 func set_face(new_face: Face) -> void:
 	face_state = new_face
 	print("Asuka -> ", get_face_value())
 
+
 func get_face() -> Face:
 	return face_state
+
 
 func get_face_value() -> String:
 	match face_state:
@@ -82,21 +131,26 @@ func get_face_value() -> String:
 func is_pleased() -> bool:
 	return face_state == Face.PLEASED
 
+
 func is_talking() -> bool:
 	return face_state == Face.TALKING
+
 
 func is_upset() -> bool:
 	return face_state == Face.UPSET
 
 
-# ----- EYES -----
+#endregion
 
+#region Eyes
 func set_eyes(new_state: Eyes) -> void:
 	eye_state = new_state
 	print("Eyes -> ", get_eyes_value())
 
+
 func get_eyes() -> Eyes:
 	return eye_state
+
 
 func get_eyes_value() -> String:
 	match eye_state:
@@ -113,8 +167,11 @@ func get_eyes_value() -> String:
 func are_eyes_normal() -> bool:
 	return eye_state == Eyes.NORMAL
 
+
 func are_eyes_closed() -> bool:
 	return eye_state == Eyes.CLOSED
 
+
 func are_eyes_lookaway() -> bool:
 	return eye_state == Eyes.LOOKAWAY
+	#endregion

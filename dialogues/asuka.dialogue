@@ -114,8 +114,9 @@ do Asuka.set_asuka(Asuka.Pose.A3, Asuka.Face.PLEASED, Asuka.Eyes.SMILE)
 	- Then why?
 		...
 
+do Asuka.set_dialogue_ended()
 do Phases.advance()
+do Player.set_free()
 [wait=30]
-
 
 => END

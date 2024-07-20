@@ -1,5 +1,6 @@
 extends Area2D
 
+#region Variables
 @export var dialogue_resource: Resource = load("res://dialogues/asuka.dialogue")
 @export var dialogue_start: String = "asuka_intro"
 @export var dialogue_balloon: Resource = load("res://scenes/balloons/dialogue_balloon.tscn")
@@ -18,7 +19,7 @@ extends Area2D
 @onready var player: CharacterBody2D = %Player
 
 var is_dialogue_started: bool = false
-
+#endregion
 
 # ----- READY AND PROCESS -----
 
@@ -26,37 +27,39 @@ func _process(_delta: float) -> void:
 	update_asuka_sprites()
 
 
-# ----- INTERACTIONS -----
-
+#region Interaction
 func _on_area_entered(_area: Area2D) -> void:
-	if Player.is_free() or Player.is_unfocusing():
-		enter()
-
+	enter()
 
 func enter() -> void:
-	player.set_target(global_position, player.focus_speed_asuka)
-	Player.set_focusing_on_asuka()
-
-	if !is_dialogue_started:
-		DialogueManager.show_dialogue_balloon_scene(dialogue_balloon, dialogue_resource, dialogue_start)
-		is_dialogue_started = true
-
-	await get_tree().create_timer(1.0).timeout
-	if Player.is_focusing_on_asuka():
-		Player.set_focus_on_asuka()
-
+	match Asuka.get_dialogue():
+		Asuka.Dialogue.INACTIVE:
+			player.set_target(global_position, player.focus_speed_asuka)
+			Player.set_focusing_on_asuka()
+			await get_tree().create_timer(1.0).timeout
+			DialogueManager.show_dialogue_balloon_scene(dialogue_balloon, dialogue_resource, dialogue_start)
+			Asuka.set_dialogue_active()
+			Player.set_focus_on_asuka()
+		Asuka.Dialogue.ACTIVE:
+			player.set_target(global_position, player.focus_speed_asuka)
+			Player.set_focusing_on_asuka()
+			await get_tree().create_timer(1.0).timeout
+			Player.set_focus_on_asuka()
+		Asuka.Dialogue.ENDED:
+			pass
+	
+	camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
 
 func exit() -> void:
 	Player.set_unfocus()
 	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-	
+
 	await get_tree().create_timer(1.0).timeout
 	if Player.is_unfocusing():
 		Player.set_free()
+#endregion
 
-
-# ----- UTILS -----
-
+#region Sprites
 func update_asuka_sprites() -> void:
 	match Asuka.get_pose():
 		Asuka.Pose.A2:
@@ -71,7 +74,7 @@ func update_asuka_sprites() -> void:
 			arms_3.show()
 			set_face(face_3)
 			set_eyes(eyes_3)
-			
+
 
 func set_face(face: AnimatedSprite2D) -> void:
 	match Asuka.get_face():
@@ -94,3 +97,4 @@ func set_eyes(eyes: AnimatedSprite2D) -> void:
 			eyes.frame = 2
 		Asuka.Eyes.SMILE:
 			eyes.frame = 3
+#endregion
