@@ -47,16 +47,16 @@ func enter() -> void:
 			Player.set_focus_on_asuka()
 		Asuka.Dialogue.ENDED:
 			pass
-	
+
 	camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
 
 func exit() -> void:
-	Player.set_unfocus()
-	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
-
-	await get_tree().create_timer(1.0).timeout
 	if Player.is_unfocusing():
-		Player.set_free()
+		camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
+		await get_tree().create_timer(1.0).timeout
+
+	Player.set_unfocus()
+	Player.set_free()
 #endregion
 
 #region Sprites
