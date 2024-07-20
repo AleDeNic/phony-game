@@ -286,14 +286,14 @@ func show_dialogue_balloon_scene(x_offset: float, y_offset: float, balloon_scene
 		balloon_scene = balloon_scene.instantiate()
 	var balloon: CanvasLayer = balloon_scene
 	get_current_scene.call().add_child(balloon)
-	
+
 	if balloon.has_node("Balloon"):
-		var balloon_content = balloon.get_node("Balloon")
-		var viewport_size = get_viewport().get_visible_rect().size
+		var balloon_content: Node  = balloon.get_node("Balloon")
+		var viewport_size: Vector2 = get_viewport().get_visible_rect().size
 		balloon_content.position.x = (viewport_size.x / 2) + x_offset * 100
 		balloon_content.position.y = viewport_size.y - balloon_content.size.y - (y_offset * 100)
 
-	
+
 	if balloon.has_method(&"start"):
 		balloon.start(resource, title, extra_game_states)
 	elif balloon.has_method(&"Start"):
