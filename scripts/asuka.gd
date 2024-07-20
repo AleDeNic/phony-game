@@ -38,7 +38,7 @@ func enter() -> void:
 				player.set_target(global_position, player.focus_speed_asuka)
 				Player.set_focusing_on_asuka()
 				await get_tree().create_timer(1.0).timeout
-				DialogueManager.show_dialogue_balloon_scene(dialogue_balloon, dialogue_resource, dialogue_start)
+				DialogueManager.show_dialogue_balloon_scene(-24, 0, dialogue_balloon, dialogue_resource, dialogue_start)
 				Asuka.set_dialogue_active()
 				Player.set_focus_on_asuka()
 			Asuka.Dialogue.ACTIVE:
