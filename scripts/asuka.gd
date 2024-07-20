@@ -32,23 +32,26 @@ func _on_area_entered(_area: Area2D) -> void:
 	enter()
 
 func enter() -> void:
-	match Asuka.get_dialogue():
-		Asuka.Dialogue.INACTIVE:
-			player.set_target(global_position, player.focus_speed_asuka)
-			Player.set_focusing_on_asuka()
-			await get_tree().create_timer(1.0).timeout
-			DialogueManager.show_dialogue_balloon_scene(dialogue_balloon, dialogue_resource, dialogue_start)
-			Asuka.set_dialogue_active()
-			Player.set_focus_on_asuka()
-		Asuka.Dialogue.ACTIVE:
-			player.set_target(global_position, player.focus_speed_asuka)
-			Player.set_focusing_on_asuka()
-			await get_tree().create_timer(1.0).timeout
-			Player.set_focus_on_asuka()
-		Asuka.Dialogue.ENDED:
-			pass
+	if Player.is_free() and not Player.is_drifting_to_phone():
+		match Asuka.get_dialogue():
+			Asuka.Dialogue.INACTIVE:
+				player.set_target(global_position, player.focus_speed_asuka)
+				Player.set_focusing_on_asuka()
+				await get_tree().create_timer(1.0).timeout
+				DialogueManager.show_dialogue_balloon_scene(dialogue_balloon, dialogue_resource, dialogue_start)
+				Asuka.set_dialogue_active()
+				Player.set_focus_on_asuka()
+			Asuka.Dialogue.ACTIVE:
+				player.set_target(global_position, player.focus_speed_asuka)
+				Player.set_focusing_on_asuka()
+				await get_tree().create_timer(1.0).timeout
+				Player.set_focus_on_asuka()
+			Asuka.Dialogue.ENDED:
+				pass
 
-	camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
+		camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
+	else:
+		return
 
 func exit() -> void:
 	if Player.is_unfocusing():

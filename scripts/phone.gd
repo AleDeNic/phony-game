@@ -56,7 +56,7 @@ func _on_area_entered(_area: Area2D) -> void:
 		enter()
 
 func _on_phone_os_mouse_exited() -> void:
-	if !Player.is_free() and Notifications.are_notifications_cleared:
+	if !Player.is_free() and Notifications.is_inbox_cleared():
 		exit()
 	else:
 		phone_os.display_cant_leave_alert()
