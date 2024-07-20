@@ -75,7 +75,7 @@ func set_target(target_global_position: Vector2, speed: float) -> void:
 func drift_to_phone(delta: float) -> void:
 	var movement_vector: Vector2 = get_movement_input()
 	var attraction_vector: Vector2 = Vector2.ZERO
-	var drift_multiplier: float = Notifications.notifications_amount * 0.5
+	var drift_multiplier: float = Notifications.notifications_amount * 0.3
 
 	if movement_vector.length() < 0.1:
 		attraction_vector = (phone.global_position - global_position).normalized()
