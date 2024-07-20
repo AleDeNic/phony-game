@@ -138,8 +138,6 @@ func is_talking() -> bool:
 
 func is_upset() -> bool:
 	return face_state == Face.UPSET
-
-
 #endregion
 
 #region Eyes
@@ -147,10 +145,8 @@ func set_eyes(new_state: Eyes) -> void:
 	eye_state = new_state
 	print("Eyes -> ", get_eyes_value())
 
-
 func get_eyes() -> Eyes:
 	return eye_state
-
 
 func get_eyes_value() -> String:
 	match eye_state:
@@ -167,10 +163,8 @@ func get_eyes_value() -> String:
 func are_eyes_normal() -> bool:
 	return eye_state == Eyes.NORMAL
 
-
 func are_eyes_closed() -> bool:
 	return eye_state == Eyes.CLOSED
-
 
 func are_eyes_lookaway() -> bool:
 	return eye_state == Eyes.LOOKAWAY
