@@ -15,6 +15,7 @@ extends CanvasLayer
 @export var startup_begin: int = 0
 @export var startup_end: int = 60
 
+
 ## ----- PROCESSING!!! ----
 
 func _ready() -> void:
@@ -61,20 +62,13 @@ func handle_phone_sickness_filter() -> void:
 
 # ----- UTILS -----
 
-#func map_range(value: float, from_min: float, from_max: float, to_min: float, to_max: float) -> float:
-	#return (value - from_min) / (from_max - from_min) * (to_max - to_min) + to_min
-
 func map_range(value: float, from_min: float, from_max: float, to_min: float, to_max: float) -> float:
 	if from_max == from_min:
-		return to_min  # Avoid division by zero
+		return to_min
 
-	# Normalize the input value within the source range
 	var normalized_value: float = (value - from_min) / (from_max - from_min)
 
-	# Calculate the mapped value within the target range
 	if to_max > to_min:
 		return normalized_value * (to_max - to_min) + to_min
 	else:
 		return (1.0 - normalized_value) * (to_min - to_max) + to_max
-
-
