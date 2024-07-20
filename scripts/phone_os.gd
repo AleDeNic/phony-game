@@ -1,9 +1,11 @@
 extends Control
 
+#region VARIABLES
 const APPS_SCREEN: String       = "APPS"
 const CHAT_SCREEN: String       = "CHAT"
 const SETTINGS_SCREEN: String   = "SETTINGS"
 const CAMERA_SCREEN: String     = "CAMERA"
+# ----- COLORS -----
 const ASUKA_COLOR: String       = "#FF1A4D"
 const STRANGER_COLOR: String    = "#5973FF"
 # ---- PHONE LAYOUT ----
@@ -24,18 +26,12 @@ const STRANGER_COLOR: String    = "#5973FF"
 @onready var battery_depletion_dampener: float = 10.0
 @onready var battery_bar: ProgressBar = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar
 @onready var battery_timer: Timer = $PhoneSize/TopBar/MarginContainer/HBoxContainer/BatteryBar/BatteryTimer
-
 @export var max_battery: float = 5.0
-
 # max_battery = clamp(dialogue_length / 100.0, 5.0, 60.0) <- this can be useful to clamp the battery life to a max value
-
-#----- TIMER -----
+# ----- TIMER -----
 @onready var update_timer: Timer
-
-var elapsed_seconds: float = 0.0
-
 @export var minute_dutation: int = 6 # how many seconds a minute lasts in game
-
+var elapsed_seconds: float = 0.0
 # ---- CHAT ----
 @onready var messages_resource          = load("res://dialogues/asuka_messages.dialogue")
 @onready var default_message: RichTextLabel = $PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultMessage
@@ -47,32 +43,27 @@ var elapsed_seconds: float = 0.0
 @onready var input_message: LineEdit = $PhoneSize/Chat/MarginContainer/VBoxContainer/HBoxContainer/InputMessage
 @onready var cant_leave_alert: Label = $CantLeaveAlert
 @onready var phone_frame: Sprite2D = $PhoneSize/PhoneFrame
-
-@export_group("Messages colors")
-@export var asuka_color: String = ASUKA_COLOR
-@export var stranger_color: String = STRANGER_COLOR
-#@export var random_color: String
-
+# ----- MESSAGES -----
 var used_message_ids: Dictionary = {}
 var asuka_messages: Array        = []
+#endregion
 
 
+#region SETUP
 func _ready() -> void:
 	setup_battery()
 	reset_screens()
 	setup_update_timer()
-	get_random_asuka_messages(messages_resource)
-
+	load_asuka_messages(messages_resource)
 	scroll_container.set_deferred("scroll_vertical", 600)
-
 	turn_off_phone_visuals()
-
-	cant_leave_alert.visible = false
-	notification_button.visible = false
-
+	cant_leave_alert.hide()
+	notification_button.hide()
 	Notifications.connect("notification", Callable(self, "_spawn_new_asuka_message"))
+#endregion
 
 
+#region TIMER
 func setup_update_timer() -> void:
 	if not has_node("UpdateTimer"):
 		update_timer = Timer.new()
@@ -81,144 +72,110 @@ func setup_update_timer() -> void:
 	update_timer.connect("timeout", Callable(self, "_on_update_timer_timeout"))
 	update_timer.start(0.1)
 
-
 func _on_update_timer_timeout() -> void:
 	elapsed_seconds += 0.1
 	handle_battery()
 	handle_clock(8, 12)
 	home_widget.text = clock.text
+#endregion
 
 
+#region NAVIGATION
 func reset_screens() -> void:
-	top_bar.visible = true
-	bottom_bar.visible = false
-	apps.visible = false
-	settings.visible = false
-	camera.visible = false
-	chat.visible = false
-	coming_soon.visible = false
-
+	top_bar.show()
+	bottom_bar.hide()
+	apps.hide()
+	settings.hide()
+	camera.hide()
+	chat.hide()
+	coming_soon.hide()
 
 func turn_off_phone() -> void:
 	Phone.set_phone_discharged()
 	Notifications.clear_notifications()
 	reset_screens()
-	bottom_bar.visible = false
+	bottom_bar.hide()
 
 
 # ---- NAVIGATION ----
 func go_to_screen(screen: Control) -> void:
 	reset_screens()
-	screen.visible = true
+	screen.show()
 	if !Phone.is_discharged():
 		Phone.set_phone_state(Phone.State[screen.name.to_upper()])
 		if !Phone.in_apps():
-			bottom_bar.visible = true
+			bottom_bar.show()
 	else:
-		bottom_bar.visible = false
+		bottom_bar.show()
+#endregion
 
 
+#region BUTTONS
+
+# ----- HOME APPS -----
 func _on_settings_pressed() -> void:
 	go_to_screen(settings)
-
-
-func _on_back_pressed() -> void:
-	go_to_screen(apps)
-
-
-func _on_home_pressed() -> void:
-	go_to_screen(apps)
-
-
-func _on_quit_pressed() -> void:
-	get_tree().quit()
-
-
-func _on_fullscreen_toggled(toggled_on: bool) -> void:
-	DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN if toggled_on else DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
-
 
 func _on_camera_pressed() -> void:
 	go_to_screen(coming_soon)
 
+func _on_video_pressed() -> void:
+	go_to_screen(coming_soon)
+
+func _on_music_pressed() -> void:
+	go_to_screen(coming_soon)
+
+func _on_gaming_pressed() -> void:
+	go_to_screen(coming_soon)
 
 func _on_chat_pressed() -> void:
 	go_to_screen(chat)
 	Notifications.clear_notifications()
-	notification_button.visible = false
+	notification_button.hide()
 	scroll_container_to_bottom()
 
+# ----- SETTINGS -----
+func _on_fullscreen_toggled(toggled_on: bool) -> void:
+	DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN if toggled_on else DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
 
+func _on_reset_pressed() -> void:
+	pass # Replace with function body.
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()
+
+# ----- TOP BAR -----
 func _on_notification_button_pressed() -> void:
 	go_to_screen(chat)
 	Notifications.clear_notifications()
-	notification_button.visible = false
+	notification_button.hide()
 	scroll_container_to_bottom()
 
+# ----- BOTTOM BAR -----
+func _on_back_pressed() -> void:
+	go_to_screen(apps)
 
-# ---- CHAT ----
-func _on_input_message_text_submitted(new_text: String) -> void:
-	spawn_new_player_message(new_text)
-	input_message.clear()
-
-
-func _on_send_message_pressed() -> void:
-	spawn_new_player_message(input_message.text)
-	input_message.clear()
+func _on_home_pressed() -> void:
+	go_to_screen(apps)
+#endregion
 
 
-func _spawn_new_asuka_message() -> void:
-	var new_message: RichTextLabel = default_message.duplicate() as RichTextLabel
-	var parent: Node               = default_message.get_parent()
-	parent.add_child(new_message)
-	parent.move_child(new_message, parent.get_child_count() - 1)
-	new_message.visible = true
-
-	var message_sender: String
-	if Notifications.is_message_from_asuka():
-		message_sender = "(✫/~✰?"
-		new_message.text = "[color=%s]%s:[/color] %s    [i][color=gray]" % [asuka_color, message_sender, get_random_asuka_message()] + clock.text + "[/color][/i]"
-	else:
-		message_sender = generate_mysterious_words(7, 7)
-		new_message.text = "[color=%s]%s:[/color] %s    [i][color=gray]" % [stranger_color, message_sender, generate_mysterious_words(50, 8)] + clock.text + "[/color][/i]"
-	default_message = new_message
-	notification_button.visible = true
-
-
-func spawn_new_player_message(message_text: String) -> void:
-	var new_player_message: RichTextLabel = default_player_message.duplicate() as RichTextLabel
-	var parent: Node                      = default_player_message.get_parent()
-	parent.add_child(new_player_message)
-	parent.move_child(new_player_message, parent.get_child_count() - 1)
-	new_player_message.visible = true
-	new_player_message.text = "%s    [i][color=white]" % [message_text] + clock.text + "[/color][/i]"
-	default_player_message = new_player_message
-	call_deferred("scroll_container_to_bottom")
-
-
+#region PHONE VISUALS
 func turn_on_phone_visuals() -> void:
-	phone_frame.visible = true
-	background.visible = true
-	gradient_top.visible = true
-	gradient_bottom.visible = true
-
+	phone_frame.show()
+	background.show()
+	gradient_top.show()
+	gradient_bottom.show()
 
 func turn_off_phone_visuals() -> void:
-	phone_frame.visible = false
-	background.visible = false
-	gradient_top.visible = false
-	gradient_bottom.visible = false
+	phone_frame.hide()
+	background.hide()
+	gradient_top.hide()
+	gradient_bottom.hide()
+#endregion
 
 
-func display_cant_leave_alert() -> void:
-	cant_leave_alert.visible = true
-
-
-func hide_cant_leave_alert() -> void:
-	cant_leave_alert.visible = false
-
-
-# ---- CLOCK AND BATTERY ----
+#region CLOCK & BATTERY
 func setup_battery() -> void:
 	var dialogue_resource    = load("res://dialogues/asuka.dialogue")
 	var dialogue_length: int = calculate_dialogue_length(dialogue_resource)
@@ -229,7 +186,6 @@ func setup_battery() -> void:
 	battery_timer.paused = true
 	handle_battery()
 
-
 func handle_battery() -> void:
 	if !Phone.is_discharged():
 		battery_timer.paused = !Phone.is_battery_active()
@@ -238,8 +194,6 @@ func handle_battery() -> void:
 			turn_off_phone()
 			turn_off_phone_visuals()
 
-
-# AleDeNic! Azazello! QuanticMoth! You can edit the starting time! It's set to 8:00 am by default.
 func handle_clock(starting_hour: int = 8, starting_minute: int = 0) -> void:
 	var total_minutes: int = int(elapsed_seconds / minute_dutation) + starting_minute
 	var hours: int         = (total_minutes / 60 + starting_hour) % 24
@@ -251,9 +205,10 @@ func handle_clock(starting_hour: int = 8, starting_minute: int = 0) -> void:
 		hours = 12
 
 	clock.text = "%d:%02d %s" % [hours, minutes, period]
+#endregion
 
 
-# ---- UTILS ----
+#region UTILS
 func generate_mysterious_words(total_length: int, max_word_length: int) -> String:
 	var characters: String = "!@#$%^&*()_+-=[]{}|;:,.<>?/~★✦✧✩✪✫✬✭✮✯✰†‡✞✟✠"
 	var code: String       = ""
@@ -273,13 +228,48 @@ func generate_mysterious_words(total_length: int, max_word_length: int) -> Strin
 
 	return code.strip_edges().substr(0, total_length)
 
-
 func scroll_container_to_bottom() -> void:
 	await get_tree().create_timer(0.1).timeout
 	scroll_container.scroll_vertical = scroll_container.get_v_scroll_bar().max_value
+#endregion
 
 
-# Calculates the length of the dialogue based on the dialogue resource!
+#region MESSAGES
+func _on_input_message_text_submitted(new_text: String) -> void:
+	spawn_new_player_message(new_text)
+	input_message.clear()
+
+func _on_send_message_pressed() -> void:
+	spawn_new_player_message(input_message.text)
+	input_message.clear()
+
+func _spawn_new_asuka_message() -> void:
+	var new_message: RichTextLabel = default_message.duplicate() as RichTextLabel
+	var parent: Node               = default_message.get_parent()
+	parent.add_child(new_message)
+	parent.move_child(new_message, parent.get_child_count() - 1)
+	new_message.show()
+
+	var message_sender: String
+	if Notifications.is_message_from_asuka():
+		message_sender = "(✫/~✰?"
+		new_message.text = "[color=%s]%s:[/color] %s    [i][color=gray]" % [ASUKA_COLOR, message_sender, pick_random_asuka_message()] + clock.text + "[/color][/i]"
+	else:
+		message_sender = generate_mysterious_words(7, 7)
+		new_message.text = "[color=%s]%s:[/color] %s    [i][color=gray]" % [STRANGER_COLOR, message_sender, generate_mysterious_words(50, 8)] + clock.text + "[/color][/i]"
+	default_message = new_message
+	notification_button.show()
+
+func spawn_new_player_message(message_text: String) -> void:
+	var new_player_message: RichTextLabel = default_player_message.duplicate() as RichTextLabel
+	var parent: Node                      = default_player_message.get_parent()
+	parent.add_child(new_player_message)
+	parent.move_child(new_player_message, parent.get_child_count() - 1)
+	new_player_message.show()
+	new_player_message.text = "%s    [i][color=white]" % [message_text] + clock.text + "[/color][/i]"
+	default_player_message = new_player_message
+	call_deferred("scroll_container_to_bottom")
+
 func calculate_dialogue_length(resource: DialogueResource) -> int:
 	var total_length: int = 0
 	for line_id in resource.lines.keys():
@@ -288,31 +278,24 @@ func calculate_dialogue_length(resource: DialogueResource) -> int:
 			total_length += line["text"].length()
 	return total_length
 
-
-func get_random_asuka_messages(resource: DialogueResource) -> void:
+func load_asuka_messages(resource: DialogueResource) -> void:
 	for line_id in resource.lines.keys():
 		var line = resource.lines[line_id]
 		if "type" in line and line["type"] == "dialogue":
 			asuka_messages.append(line["text"])
 	return
 
-
-func get_random_asuka_message() -> String:
+func pick_random_asuka_message() -> String:
 	if asuka_messages.size() > 0:
-		var random_index: int      = randi() % asuka_messages.size()
+		var random_index: int = randi() % asuka_messages.size()
 		var random_message: String = asuka_messages[random_index]
 		asuka_messages.pop_at(random_index)
 		return random_message
 	return "But he never came."
+#endregion
 
+func display_cant_leave_alert() -> void:
+	cant_leave_alert.show()
 
-func _on_video_pressed() -> void:
-	go_to_screen(coming_soon)
-
-
-func _on_music_pressed() -> void:
-	go_to_screen(coming_soon)
-
-
-func _on_gaming_pressed() -> void:
-	go_to_screen(coming_soon)
+func hide_cant_leave_alert() -> void:
+	cant_leave_alert.hide()

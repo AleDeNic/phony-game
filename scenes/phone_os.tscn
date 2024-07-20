@@ -179,6 +179,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0.439216)
 
 [node name="Apps" type="Control" parent="PhoneSize"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -354,7 +355,6 @@ text = "We are pleased to inform you that this application will be available in 
 Thank you for your understanding and continued support."
 
 [node name="Settings" type="Control" parent="PhoneSize"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -435,6 +435,14 @@ theme = ExtResource("12_fsmwd")
 toggle_mode = true
 button_pressed = true
 text = "Fullscreen"
+alignment = 0
+
+[node name="Reset" type="Button" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+text = "Reset"
 alignment = 0
 
 [node name="Quit" type="Button" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2"]
@@ -757,6 +765,7 @@ texture = ExtResource("27_adyrh")
 [connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Gaming" to="." method="_on_gaming_pressed"]
 [connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="toggled" from="PhoneSize/Settings/MarginContainer/VBoxContainer2/Fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="pressed" from="PhoneSize/Settings/MarginContainer/VBoxContainer2/Reset" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="PhoneSize/Settings/MarginContainer/VBoxContainer2/Quit" to="." method="_on_quit_pressed"]
 [connection signal="text_submitted" from="PhoneSize/Chat/MarginContainer/VBoxContainer/HBoxContainer/InputMessage" to="." method="_on_input_message_text_submitted"]
 [connection signal="pressed" from="PhoneSize/Chat/MarginContainer/VBoxContainer/HBoxContainer/SendMessage" to="." method="_on_send_message_pressed"]
