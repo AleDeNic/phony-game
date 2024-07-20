@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cix2lesxh03hi"]
+[gd_scene load_steps=46 format=3 uid="uid://cix2lesxh03hi"]
 
 [ext_resource type="PackedScene" uid="uid://c7j5d8r5sk27h" path="res://scenes/landscape_3d.tscn" id="1_ab0o5"]
 [ext_resource type="Texture2D" uid="uid://ip8dxv4o43su" path="res://assets/sprites/train_interior_4.png" id="3_0xejn"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c37e61wxony0k" path="res://assets/sprites/asuka/asuka_3_arms.png" id="11_fdvgb"]
 [ext_resource type="Texture2D" uid="uid://p8u26rag8l26" path="res://assets/sprites/table.png" id="12_lodsi"]
 [ext_resource type="Texture2D" uid="uid://dytaahhvtp1wg" path="res://assets/sprites/player_legs.png" id="14_4k642"]
+[ext_resource type="Shader" path="res://shaders/god_rays.gdshader" id="14_wc5p1"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8wvv8"]
 normal = Vector2(0, 1)
@@ -183,6 +184,22 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
 gradient = SubResource("Gradient_bfedf")
 fill_to = Vector2(0, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e6ao8"]
+shader = ExtResource("14_wc5p1")
+shader_parameter/angle = 1.025
+shader_parameter/position = 0.265
+shader_parameter/spread = 0.428
+shader_parameter/cutoff = -0.231
+shader_parameter/falloff = 0.607
+shader_parameter/edge_fade = 0.503
+shader_parameter/speed = 0.49
+shader_parameter/ray1_density = 11.57
+shader_parameter/ray2_density = 24.25
+shader_parameter/ray2_intensity = 0.3
+shader_parameter/color = Vector4(1, 1, 1, 0.7)
+shader_parameter/hdr = false
+shader_parameter/seed = 5.0
+
 [sub_resource type="Gradient" id="Gradient_1jydq"]
 interpolation_mode = 2
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
@@ -191,41 +208,6 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
 gradient = SubResource("Gradient_1jydq")
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0.976068)
-
-[sub_resource type="Animation" id="Animation_xaolg"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(2.213, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="Animation" id="Animation_ogtyq"]
-resource_name = "light_rotation"
-loop_mode = 2
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(2.21308, -0.25, 0, 0.25, 0, 2.02982, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1)
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_f1jc5"]
-_data = {
-"RESET": SubResource("Animation_xaolg"),
-"light_rotation": SubResource("Animation_ogtyq")
-}
 
 [node name="Background" type="Node2D"]
 
@@ -373,16 +355,8 @@ scale = Vector2(90.9099, 45.8076)
 texture = SubResource("GradientTexture2D_blyts")
 
 [node name="SunLight" type="Sprite2D" parent="TrainInterior/Lighting"]
-modulate = Color(1, 1, 1, 0.176471)
-position = Vector2(806, -1515)
-rotation = 2.213
-scale = Vector2(101.408, 69.7681)
+material = SubResource("ShaderMaterial_e6ao8")
+position = Vector2(-1471.39, 2242.34)
+scale = Vector2(75.9844, 61.1351)
 texture = SubResource("GradientTexture2D_v17xp")
 offset = Vector2(17.16, -30.975)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TrainInterior/Lighting/SunLight"]
-libraries = {
-"": SubResource("AnimationLibrary_f1jc5")
-}
-autoplay = "light_rotation"
-speed_scale = 0.1
