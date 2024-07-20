@@ -52,7 +52,7 @@ func _physics_process(delta: float) -> void:
 # --------- PHONE INTERACTIONS -----------
 
 func _on_area_entered(_area: Area2D) -> void:
-	if Player.is_free() or Player.is_unfocusing():
+	if Player.is_free() or Player.is_unfocusing() or Player.is_drifting_to_phone():
 		enter()
 
 func _on_phone_os_mouse_exited() -> void:

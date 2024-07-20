@@ -3,11 +3,16 @@ extends CharacterBody2D
 @onready var phone: Area2D = $"../PhoneCanvas/ParallaxLayer/Phone"
 @onready var control: Control = $Control
 
+@export_group("Player speeds")
 @export var default_speed: float = 70.0
 @export var transition_speed: float = 10.0
+@export var drift_to_phone_speed: float = 200
 @export var focus_speed_phone: float = 200.0
 @export var focus_speed_asuka: float = 400.0
+
+@export_group("Other")
 @export var dead_zone_radius: float = 1.0
+#@export var attraction_weight: float = 10.0
 
 @onready var camera: Camera2D = $"../Player/Camera2D"
 
@@ -27,23 +32,21 @@ func _ready() -> void:
 	focus_speed = focus_speed_phone
 	control.hide()
 
-
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	check_viewport()
-	update_camera(_delta)
-	move_player(_delta)
+	update_camera(delta)
+	move_player(delta)
 
 
 ## ----- MOVEMENT -----
 
-func free_up(_delta: float) -> void:
+func free_up(delta: float) -> void:
 	var movement_vector: Vector2 = get_movement_input()
 	target_speed = default_speed
 	reset_mouse_to_center()
-	current_speed = lerp(current_speed, target_speed, _delta * transition_speed)
-	velocity = velocity.lerp(movement_vector * current_speed, _delta * transition_speed)
+	current_speed = lerp(current_speed, target_speed, delta * transition_speed)
+	velocity = velocity.lerp(movement_vector * current_speed, delta * transition_speed)
 	move_and_slide()
-
 
 func focus(delta: float) -> void:
 	var movement_vector: Vector2 = (target_position - global_position).normalized()
@@ -53,23 +56,35 @@ func focus(delta: float) -> void:
 	else:
 		current_speed = 0.0
 
-
 func unfocus(delta: float) -> void:
 	var movement_vector: Vector2 = get_movement_input()
 	target_speed = default_speed
 	move(delta, movement_vector)
 	reset_mouse_to_center()
 
-
 func move(delta: float, movement_vector: Vector2) -> void:
 	current_speed = lerp(current_speed, target_speed, delta * transition_speed)
 	velocity = velocity.lerp(movement_vector * current_speed, delta * transition_speed)
 	move_and_slide()
 
-
 func set_target(target_global_position: Vector2, speed: float) -> void:
 	target_position = Vector2(target_global_position)
 	focus_speed = speed
+
+func drift_to_phone(delta: float) -> void:
+	var movement_vector: Vector2 = get_movement_input()
+	var attraction_vector: Vector2 = Vector2.ZERO
+
+	if movement_vector.length() < 0.1:
+		attraction_vector = (phone.global_position - global_position).normalized()
+		current_speed = lerp(current_speed, drift_to_phone_speed, delta * transition_speed)
+		velocity = velocity.lerp(attraction_vector * current_speed, delta * transition_speed)
+	else:
+		reset_mouse_to_center()
+		current_speed = lerp(current_speed, default_speed, delta * transition_speed)
+		velocity = velocity.lerp(movement_vector * current_speed, delta * transition_speed)
+	
+	move_and_slide()
 
 
 ## ----- INPUT -----
@@ -105,7 +120,7 @@ func check_viewport() -> void:
 		return
 
 
-func update_camera(_delta: float) -> void:
+func update_camera(delta: float) -> void:
 	if Player.is_focusing_on_asuka() or Player.is_focused_on_asuka():
 		camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
 	elif Player.is_focusing_on_phone() or Player.is_focused_on_phone():
@@ -116,13 +131,15 @@ func update_camera(_delta: float) -> void:
 		pass
 
 
-func move_player(_delta: float):
+func move_player(delta: float):
 	match Player.get_state():
 		Player.State.FREE:
-			free_up(_delta)
+			free_up(delta)
 		Player.State.FOCUSING_ON_PHONE, Player.State.FOCUSING_ON_ASUKA:
-			focus(_delta)
+			focus(delta)
 		Player.State.FOCUSING_OUT:
-			unfocus(_delta)
+			unfocus(delta)
 		Player.State.DIALOGUE_PAUSED:
 			pass
+		Player.State.DRIFTING_TO_PHONE:
+			drift_to_phone(delta)
