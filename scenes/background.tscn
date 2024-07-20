@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://cix2lesxh03hi"]
+[gd_scene load_steps=54 format=3 uid="uid://cix2lesxh03hi"]
 
 [ext_resource type="PackedScene" uid="uid://c7j5d8r5sk27h" path="res://scenes/landscape_3d.tscn" id="1_ab0o5"]
 [ext_resource type="Texture2D" uid="uid://ip8dxv4o43su" path="res://assets/sprites/train_interior_4.png" id="3_0xejn"]
@@ -62,6 +62,22 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_h340k"]
+atlas = ExtResource("6_rqnym")
+region = Rect2(640, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l74th"]
+atlas = ExtResource("6_rqnym")
+region = Rect2(320, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cuwro"]
+atlas = ExtResource("6_rqnym")
+region = Rect2(0, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycdjo"]
+atlas = ExtResource("6_rqnym")
+region = Rect2(320, 0, 320, 100)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_thaih"]
 atlas = ExtResource("6_rqnym")
 region = Rect2(0, 0, 320, 100)
@@ -80,6 +96,28 @@ region = Rect2(960, 0, 320, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e4ks2"]
 animations = [{
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_h340k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l74th")
+}],
+"loop": true,
+"name": &"blink_lookaway",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_cuwro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycdjo")
+}],
+"loop": true,
+"name": &"blink_normal",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_thaih")
@@ -134,6 +172,22 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_13fad"]
+atlas = ExtResource("9_050qn")
+region = Rect2(640, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wo6kp"]
+atlas = ExtResource("9_050qn")
+region = Rect2(320, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mikp"]
+atlas = ExtResource("9_050qn")
+region = Rect2(0, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjw8x"]
+atlas = ExtResource("9_050qn")
+region = Rect2(320, 0, 320, 100)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_p7svb"]
 atlas = ExtResource("9_050qn")
 region = Rect2(0, 0, 320, 100)
@@ -152,6 +206,28 @@ region = Rect2(960, 0, 320, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mpsev"]
 animations = [{
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_13fad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wo6kp")
+}],
+"loop": true,
+"name": &"blink_lookaway",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_8mikp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjw8x")
+}],
+"loop": true,
+"name": &"blink_normal",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p7svb")
@@ -266,6 +342,7 @@ scale = Vector2(0.78875, 0.78875)
 texture = ExtResource("3_0xejn")
 
 [node name="Asuka2" type="Node2D" parent="TrainInterior"]
+visible = false
 modulate = Color(0.940198, 0.940198, 0.940198, 1)
 position = Vector2(-753, 0)
 
@@ -290,10 +367,10 @@ frame = 1
 position = Vector2(-6, -199.8)
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_e4ks2")
-autoplay = "default"
+animation = &"blink_lookaway"
+autoplay = "blink_normal"
 
 [node name="Asuka3" type="Node2D" parent="TrainInterior"]
-visible = false
 modulate = Color(0.940198, 0.940198, 0.940198, 1)
 position = Vector2(-796, -8)
 
@@ -311,6 +388,8 @@ sprite_frames = SubResource("SpriteFrames_d1t00")
 position = Vector2(-33.6, -100)
 scale = Vector2(0.43, 0.43)
 sprite_frames = SubResource("SpriteFrames_mpsev")
+animation = &"blink_lookaway"
+autoplay = "blink_normal"
 
 [node name="AsukaArms3" type="Sprite2D" parent="TrainInterior/Asuka3"]
 z_index = 1
@@ -357,6 +436,7 @@ scale = Vector2(90.9099, 45.8076)
 texture = SubResource("GradientTexture2D_blyts")
 
 [node name="GodRays" type="Sprite2D" parent="TrainInterior/Lighting"]
+z_index = 1
 material = SubResource("ShaderMaterial_e6ao8")
 position = Vector2(-1471.39, 2242.34)
 scale = Vector2(75.9844, 61.1351)

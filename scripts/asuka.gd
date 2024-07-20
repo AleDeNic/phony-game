@@ -93,11 +93,11 @@ func set_face(face: AnimatedSprite2D) -> void:
 func set_eyes(eyes: AnimatedSprite2D) -> void:
 	match Asuka.get_eyes():
 		Asuka.Eyes.NORMAL:
-			eyes.frame = 0
+			eyes.play("blink_normal")
 		Asuka.Eyes.CLOSED:
 			eyes.frame = 1
 		Asuka.Eyes.LOOKAWAY:
-			eyes.frame = 2
+			eyes.play("blink_lookaway")
 		Asuka.Eyes.SMILE:
 			eyes.frame = 3
 #endregion

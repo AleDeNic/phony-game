@@ -2,8 +2,10 @@
 
 [speed=0.3]Hey. Is everything alright?
 do Audio.add_music_layer(1)
+do Asuka.set_asuka(Asuka.Pose.A3, Asuka.Face.LAUGH, Asuka.Eyes.NORMAL)
 [speed=0.2]Anyway... [speed=0.6]look out of the window. See how the sky is today?[wait=0.5] And the sea level seem more elevated as well.
 - It sure does seem so.
+	do Asuka.set_asuka(Asuka.Pose.A2, Asuka.Face.LAUGH, Asuka.Eyes.LOOKAWAY)
 	[speed=0.5]I can feel the excitement in your words. Yeah... [speed=0.3]we [wave amp=25 freq=5]love[/wave] the ocean and the sun, [wait=0.5][speed=0.5]don't we?
 	do Audio.add_music_layer(2)
 	[speed=0.3]I mean, the sun is now unbereable from spring to fall. I [shake rate=20 level=10]really[/shake] want to settle in Arcadia Bay when I'll grow up.
