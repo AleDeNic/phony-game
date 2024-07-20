@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export_group("Player speeds")
 @export var default_speed: float = 140.0
 @export var transition_speed: float = 10.0
-@export var drift_to_phone_speed: float = 200
+@export var drift_to_phone_speed: float = 100
 @export var focus_speed_phone: float = 200.0
 @export var focus_speed_asuka: float = 400.0
 
@@ -75,10 +75,11 @@ func set_target(target_global_position: Vector2, speed: float) -> void:
 func drift_to_phone(delta: float) -> void:
 	var movement_vector: Vector2 = get_movement_input()
 	var attraction_vector: Vector2 = Vector2.ZERO
+	var drift_multiplier: float = Notifications.notifications_amount * 0.5
 
 	if movement_vector.length() < 0.1:
 		attraction_vector = (phone.global_position - global_position).normalized()
-		current_speed = lerp(current_speed, drift_to_phone_speed, delta * transition_speed)
+		current_speed = lerp(current_speed, drift_to_phone_speed * drift_multiplier, delta * transition_speed)
 		velocity = velocity.lerp(attraction_vector * current_speed, delta * transition_speed)
 	else:
 		reset_mouse_to_center()
@@ -86,6 +87,7 @@ func drift_to_phone(delta: float) -> void:
 		velocity = velocity.lerp(movement_vector * current_speed, delta * transition_speed)
 	
 	move_and_slide()
+	print("Drift speed: ", current_speed)
 
 
 ## ----- INPUT -----
