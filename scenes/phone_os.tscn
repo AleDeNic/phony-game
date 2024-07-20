@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dg55yu6bit6jt"]
+[gd_scene load_steps=41 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_os.gd" id="1_r0wjl"]
 [ext_resource type="Shader" path="res://shaders/blur_color.gdshader" id="3_2wg1f"]
@@ -13,6 +13,7 @@
 [ext_resource type="StyleBox" uid="uid://bdnuw0by175th" path="res://ui/styles/battery_bar.tres" id="8_v8ae1"]
 [ext_resource type="StyleBox" uid="uid://duct66cpghgeh" path="res://ui/styles/separator.tres" id="8_y0en8"]
 [ext_resource type="StyleBox" uid="uid://c4lw5oyyq5657" path="res://ui/styles/battery_bar_fill.tres" id="9_6yc02"]
+[ext_resource type="Script" path="res://scripts/mouse_sensitivity.gd" id="12_50gsk"]
 [ext_resource type="Theme" uid="uid://v3wqj6dvklo0" path="res://ui/themes/phone_os.tres" id="12_fsmwd"]
 [ext_resource type="Texture2D" uid="uid://c0n6yi64tlmmt" path="res://assets/ui/send.png" id="13_hdb4n"]
 [ext_resource type="StyleBox" uid="uid://bkskyjp3vt3rs" path="res://ui/styles/bubble_chat.tres" id="13_o3gel"]
@@ -426,6 +427,37 @@ max_value = 1.0
 step = 0.05
 script = ExtResource("4_5jmmy")
 bus_name = "Master"
+
+[node name="VBoxContainer2" type="HBoxContainer" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="SensitivityLabel" type="Label" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_6g4p3")
+text = "Sensitivity"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/separation = 48
+theme_override_styles/separator = ExtResource("8_y0en8")
+
+[node name="SensitivitySlider" type="HSlider" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+max_value = 1.0
+step = 0.05
+script = ExtResource("12_50gsk")
 
 [node name="Fullscreen" type="Button" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 100)

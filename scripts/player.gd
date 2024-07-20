@@ -4,13 +4,14 @@ extends CharacterBody2D
 @onready var control: Control = $Control
 
 @export_group("Player speeds")
-@export var default_speed: float = 70.0
+@export var default_speed: float = 140.0
 @export var transition_speed: float = 10.0
 @export var drift_to_phone_speed: float = 200
 @export var focus_speed_phone: float = 200.0
 @export var focus_speed_asuka: float = 400.0
 
 @export_group("Other")
+@export var mouse_sensitivity: float = 0.5
 @export var dead_zone_radius: float = 1.0
 #@export var attraction_weight: float = 10.0
 
@@ -42,7 +43,7 @@ func _process(delta: float) -> void:
 
 func free_up(delta: float) -> void:
 	var movement_vector: Vector2 = get_movement_input()
-	target_speed = default_speed
+	target_speed = default_speed * mouse_sensitivity
 	reset_mouse_to_center()
 	current_speed = lerp(current_speed, target_speed, delta * transition_speed)
 	velocity = velocity.lerp(movement_vector * current_speed, delta * transition_speed)
@@ -58,7 +59,7 @@ func focus(delta: float) -> void:
 
 func unfocus(delta: float) -> void:
 	var movement_vector: Vector2 = get_movement_input()
-	target_speed = default_speed
+	target_speed = default_speed * mouse_sensitivity
 	move(delta, movement_vector)
 	reset_mouse_to_center()
 
@@ -81,7 +82,7 @@ func drift_to_phone(delta: float) -> void:
 		velocity = velocity.lerp(attraction_vector * current_speed, delta * transition_speed)
 	else:
 		reset_mouse_to_center()
-		current_speed = lerp(current_speed, default_speed, delta * transition_speed)
+		current_speed = lerp(current_speed, default_speed * mouse_sensitivity, delta * transition_speed)
 		velocity = velocity.lerp(movement_vector * current_speed, delta * transition_speed)
 	
 	move_and_slide()
