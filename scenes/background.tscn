@@ -192,13 +192,13 @@ shader_parameter/spread = 0.428
 shader_parameter/cutoff = -0.231
 shader_parameter/falloff = 0.607
 shader_parameter/edge_fade = 0.503
-shader_parameter/speed = 0.49
-shader_parameter/ray1_density = 11.57
-shader_parameter/ray2_density = 24.25
+shader_parameter/speed = 1.0
+shader_parameter/ray1_density = 1.325
+shader_parameter/ray2_density = 23.505
 shader_parameter/ray2_intensity = 0.3
-shader_parameter/color = Vector4(1, 1, 1, 0.7)
+shader_parameter/color = Vector4(1, 1, 1, 0.5)
 shader_parameter/hdr = false
-shader_parameter/seed = 5.0
+shader_parameter/seed = 10.0
 
 [sub_resource type="Gradient" id="Gradient_1jydq"]
 interpolation_mode = 2
@@ -354,7 +354,7 @@ rotation = -0.874923
 scale = Vector2(90.9099, 45.8076)
 texture = SubResource("GradientTexture2D_blyts")
 
-[node name="SunLight" type="Sprite2D" parent="TrainInterior/Lighting"]
+[node name="GodRays" type="Sprite2D" parent="TrainInterior/Lighting"]
 material = SubResource("ShaderMaterial_e6ao8")
 position = Vector2(-1471.39, 2242.34)
 scale = Vector2(75.9844, 61.1351)

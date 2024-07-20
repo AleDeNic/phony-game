@@ -17,7 +17,7 @@ enum State {
 
 @onready var _current_state: State = State.FREE
 
-var _player: CharacterBody2D       = null
+var _player: CharacterBody2D = null
 #endregion
 
 #region Lifecycle
