@@ -38,6 +38,7 @@ input_pickable = false
 shape = SubResource("CircleShape2D_h1w0k")
 
 [node name="Control" type="Control" parent="."]
+z_index = 2
 layout_mode = 3
 anchors_preset = 0
 offset_left = -148.0

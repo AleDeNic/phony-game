@@ -30,6 +30,9 @@ extends Area2D
 @export var rotation_up_speed: float = 16.0
 @export var rotation_down_speed: float = 10.0
 
+@onready var asuka: Area2D = $"../../../Asuka"
+
+
 var current_scale_speed: float = 0.0
 var target_scale: Vector2 = min_scale
 var current_rotation_speed: float = 0.0
@@ -45,6 +48,7 @@ func _ready() -> void:
 	current_scale_speed = scale_up_speed
 	current_rotation_speed = rotation_up_speed
 	rotation_degrees = min_rotation
+	asuka.hide()
 
 func _physics_process(delta: float) -> void:
 	if Player.is_focusing():
@@ -88,6 +92,8 @@ func enter() -> void:
 			await get_tree().create_timer(5.0).timeout
 			await Asuka.set_dialogue_active()
 			DialogueManager.show_dialogue_balloon_scene(-24, 0, dialogue_balloon, dialogue_resource, dialogue_start)
+			Asuka.set_asuka(Asuka.Pose.A2, Asuka.Face.PLEASED, Asuka.Eyes.NORMAL)
+			asuka.show()
 
 func exit() -> void:
 	player.current_speed = 0.0

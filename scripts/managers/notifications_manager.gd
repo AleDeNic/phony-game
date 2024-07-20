@@ -33,7 +33,7 @@ var notification_cooldown: int = 20
 var dialogue_state: int = 1
 
 var probability: float                   = 5.0
-var probability_of_asuka_messages: float = 40.0
+var probability_of_asuka_messages: float = 60.0
 var probability_increment: float         = 2.0
 #endregion
 #endregion
@@ -173,4 +173,3 @@ func reset_all() -> void:
 	set_inbox_cleared()
 	set_can_arrive()
 	reset_phone_sickness()
-	

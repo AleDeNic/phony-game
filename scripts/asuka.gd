@@ -65,6 +65,9 @@ func exit() -> void:
 #region Sprites
 func update_asuka_sprites() -> void:
 	match Asuka.get_pose():
+		Asuka.Pose.ABSENT:
+			asuka_2.hide()
+			asuka_3.hide()
 		Asuka.Pose.A2:
 			asuka_3.hide()
 			arms_3.hide()

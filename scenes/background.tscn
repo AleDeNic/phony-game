@@ -336,14 +336,14 @@ shape = SubResource("WorldBoundaryShape2D_boryj")
 script = ExtResource("3_wisc5")
 
 [node name="TrainSprite" type="Sprite2D" parent="TrainInterior"]
-modulate = Color(0.425956, 0.425956, 0.425956, 1)
+modulate = Color(0.317279, 0.317279, 0.317279, 1)
 position = Vector2(-140, 349)
 scale = Vector2(0.78875, 0.78875)
 texture = ExtResource("3_0xejn")
 
 [node name="Asuka2" type="Node2D" parent="TrainInterior"]
 visible = false
-modulate = Color(0.940198, 0.940198, 0.940198, 1)
+modulate = Color(0.898391, 0.898391, 0.898391, 1)
 position = Vector2(-753, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="TrainInterior/Asuka2"]
@@ -371,7 +371,8 @@ animation = &"blink_lookaway"
 autoplay = "blink_normal"
 
 [node name="Asuka3" type="Node2D" parent="TrainInterior"]
-modulate = Color(0.940198, 0.940198, 0.940198, 1)
+visible = false
+modulate = Color(0.898391, 0.898391, 0.898391, 1)
 position = Vector2(-796, -8)
 
 [node name="AsukaPose3" type="Sprite2D" parent="TrainInterior/Asuka3"]
@@ -404,7 +405,7 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("12_lodsi")
 
 [node name="PlayerLegs" type="Sprite2D" parent="TrainInterior"]
-self_modulate = Color(0.860369, 0.860369, 0.860369, 1)
+self_modulate = Color(0.694674, 0.694674, 0.694673, 1)
 position = Vector2(282, 1607)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("14_4k642")
