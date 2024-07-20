@@ -12,13 +12,12 @@ var phone_sickness_increase: int = 5
 var phone_sickness_decrease: int = 20
 var min_phone_sickness: int = 0
 var max_phone_sickness: int = 100
-#var phone_sickness_wait: int = 0
 var phone_sickness: int = 0
 
 
 # ----- NOTIFICATIONS -----
 
-var notification_probability: float = 5.0
+var notification_probability: float = 50.0
 var asuka_message_probability: float = 40.0
 var notification_probability_increase: float = 2.0
 var are_notifications_cleared: bool = true
@@ -73,6 +72,7 @@ func handle_notifications() -> void:
 	if !Player.is_focused_on_phone() and !Player.is_focused_on_asuka() and can_notifications_arrive:
 		var random_number: float = randf_range(0.0, 100.0)
 		if random_number <= notification_probability:
+			Player.set_drifting_to_phone()
 			Audio.play_vibration()
 			are_notifications_cleared = false
 			can_notifications_arrive = false
