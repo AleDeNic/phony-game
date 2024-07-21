@@ -31,7 +31,7 @@ extends Node3D
 @export var water_credits: Color = Color(0.35, 0.45, 1.0, 1.0)
 
 @export_group("Speeds")
-var color_speed: float = 0.1
+const COLOR_SPEED: float = 0.1
 
 var current_sky: Color = sky_prologue
 var current_horizon: Color
@@ -63,19 +63,19 @@ func colors_coroutine() -> void:
 # ----- COLOR HANDLING -----
 
 func handle_sky_and_ground() -> void:
-	current_sky = lerp_color(current_sky, target_sky, color_speed)
-	current_ground = lerp_color(current_ground, target_ground, color_speed)
+	current_sky = lerp_color(current_sky, target_sky, COLOR_SPEED)
+	current_ground = lerp_color(current_ground, target_ground, COLOR_SPEED)
 	sky.sky_top_color = current_sky
 	sky.ground_bottom_color = current_ground
 
 func handle_horizon() -> void:
-	current_horizon = lerp_color(current_horizon, target_horizon, color_speed)
+	current_horizon = lerp_color(current_horizon, target_horizon, COLOR_SPEED)
 	sky.sky_horizon_color = current_horizon
 	sky.ground_horizon_color = current_horizon
 	environment.fog_light_color = current_horizon
 
 func handle_water() -> void:
-	current_water = lerp_color(current_water, target_water, color_speed)
+	current_water = lerp_color(current_water, target_water, COLOR_SPEED)
 	water.set_shader_parameter("water_color", current_water)
 
 func handle_target_colors() -> void:

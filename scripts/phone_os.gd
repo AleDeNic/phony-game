@@ -61,7 +61,7 @@ func _ready() -> void:
 	turn_off_phone_visuals()
 	cant_leave_alert.hide()
 	notification_button.hide()
-	Notifications.connect("notification", Callable(self, "_spawn_new_asuka_message"))
+	Notifications.connect("notification_arrived", Callable(self, "_spawn_new_asuka_message"))
 #endregion
 
 

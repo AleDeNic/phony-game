@@ -3,15 +3,16 @@ extends Node2D
 @onready var phone_os: Control = get_node("/root/World/PhoneCanvas/ParallaxLayer/Phone/PhoneOS")
 @onready var player: CharacterBody2D = get_node("/root/World/Player")
 
-signal notification
+signal notification_arrived
 
 #region variables
 #region variables.sickness
-var notification_weight: int = 15
-var max_phone_sickness: int = 100
-var min_phone_sickness: int = 0
-var phone_sickness: int = 0
-var phone_sickness_decrease: int = 20
+const NOTIFICATION_WEIGHT: int = 15
+const MAX_PHONE_SICKNESS: int = 100
+const MIN_PHONE_SICKNESS: int = 0
+const PHONE_SICKNESS_DECREASE: int = 20
+
+var current_phone_sickness: int = 0
 #endregion
 
 #region variables.notifications
@@ -57,14 +58,14 @@ func handle_phone_sickness() -> void:
 		update_phone_sickness()
 
 func update_phone_sickness() -> void:
-	phone_sickness = calculate_sickness()
+	current_phone_sickness = calculate_sickness()
 
 func calculate_sickness() -> int:
-	var sickness: int = notifications_amount * notification_weight
-	return min(sickness, max_phone_sickness)
+	var sickness: int = notifications_amount * NOTIFICATION_WEIGHT
+	return min(sickness, MAX_PHONE_SICKNESS)
 
 func reset_phone_sickness() -> void:
-	phone_sickness = max(phone_sickness - phone_sickness_decrease, 0)
+	current_phone_sickness = max(current_phone_sickness - PHONE_SICKNESS_DECREASE, 0)
 #endregion
 
 #region Notifications
@@ -81,7 +82,7 @@ func handle_notifications() -> void:
 			if is_instance_valid(player) and player.has_node("control"):
 				player.control.show()
 			start_notification_cooldown()
-			emit_signal("notification")
+			emit_signal("notification_arrived")
 
 func increase_probability() -> void:
 	probability += dialogue_state * probability_increment
