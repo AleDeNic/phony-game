@@ -1,15 +1,16 @@
-[gd_scene load_steps=54 format=3 uid="uid://cix2lesxh03hi"]
+[gd_scene load_steps=55 format=3 uid="uid://cix2lesxh03hi"]
 
 [ext_resource type="PackedScene" uid="uid://c7j5d8r5sk27h" path="res://scenes/landscape_3d.tscn" id="1_ab0o5"]
 [ext_resource type="Texture2D" uid="uid://ip8dxv4o43su" path="res://assets/sprites/train_interior_4.png" id="3_0xejn"]
 [ext_resource type="Script" path="res://scripts/train_shake.gd" id="3_wisc5"]
+[ext_resource type="Texture2D" uid="uid://ov4f4sw15511" path="res://assets/sprites/window_bloom.png" id="4_5yoab"]
 [ext_resource type="Texture2D" uid="uid://bmwmuurf3j717" path="res://assets/sprites/asuka/asuka_pose_2.png" id="4_han2l"]
 [ext_resource type="Texture2D" uid="uid://c4diutnn3mgf2" path="res://assets/sprites/asuka/asuka_2_full.png" id="4_wo142"]
-[ext_resource type="Texture2D" uid="uid://c5tfjgoav0vwl" path="res://assets/sprites/asuka/AsukaFace2.png" id="5_p1r1l"]
+[ext_resource type="Texture2D" uid="uid://bcrsaek2pemhn" path="res://assets/sprites/asuka/AsukaFace2.png" id="5_p1r1l"]
 [ext_resource type="Texture2D" uid="uid://buem7gctx38rw" path="res://assets/sprites/asuka/asuka_pose_3.png" id="5_rrp3l"]
-[ext_resource type="Texture2D" uid="uid://k635br2mcynh" path="res://assets/sprites/asuka/AsukaEyes2.png" id="6_rqnym"]
-[ext_resource type="Texture2D" uid="uid://bei5hvtmqpa0y" path="res://assets/sprites/asuka/AsukaFace3.png" id="8_1h3so"]
-[ext_resource type="Texture2D" uid="uid://csmpfd51w3vg6" path="res://assets/sprites/asuka/AsukaEyes3.png" id="9_050qn"]
+[ext_resource type="Texture2D" uid="uid://tjvml2dc0u5f" path="res://assets/sprites/asuka/AsukaEyes2.png" id="6_rqnym"]
+[ext_resource type="Texture2D" uid="uid://ce5vpwtyw6nlq" path="res://assets/sprites/asuka/AsukaFace3.png" id="8_1h3so"]
+[ext_resource type="Texture2D" uid="uid://be7sfk8c7tle" path="res://assets/sprites/asuka/AsukaEyes3.png" id="9_050qn"]
 [ext_resource type="Texture2D" uid="uid://c37e61wxony0k" path="res://assets/sprites/asuka/asuka_3_arms.png" id="11_fdvgb"]
 [ext_resource type="Texture2D" uid="uid://p8u26rag8l26" path="res://assets/sprites/table.png" id="12_lodsi"]
 [ext_resource type="Texture2D" uid="uid://dytaahhvtp1wg" path="res://assets/sprites/player_legs.png" id="14_4k642"]
@@ -272,7 +273,7 @@ shader_parameter/speed = 1.0
 shader_parameter/ray1_density = 1.325
 shader_parameter/ray2_density = 23.505
 shader_parameter/ray2_intensity = 0.3
-shader_parameter/color = Vector4(1, 1, 1, 0.4)
+shader_parameter/color = Vector4(1, 1, 1, 0.3)
 shader_parameter/hdr = false
 shader_parameter/seed = 10.0
 
@@ -340,6 +341,11 @@ modulate = Color(0.425956, 0.425956, 0.425956, 1)
 position = Vector2(-140, 349)
 scale = Vector2(0.78875, 0.78875)
 texture = ExtResource("3_0xejn")
+
+[node name="Sprite2D" type="Sprite2D" parent="TrainInterior"]
+position = Vector2(1383, 11)
+scale = Vector2(1.0767, 1.0767)
+texture = ExtResource("4_5yoab")
 
 [node name="Asuka2" type="Node2D" parent="TrainInterior"]
 visible = false

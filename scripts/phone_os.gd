@@ -3,13 +3,13 @@ extends Control
 #TODO: Handle phone exit in a clearer way
 @onready var phone: Area2D = get_node("/root/World/PhoneCanvas/ParallaxLayer/Phone")
 #region VARIABLES
-const APPS_SCREEN: String       = "APPS"
-const CHAT_SCREEN: String       = "CHAT"
-const SETTINGS_SCREEN: String   = "SETTINGS"
-const CAMERA_SCREEN: String     = "CAMERA"
+const APPS_SCREEN: String = "APPS"
+const CHAT_SCREEN: String = "CHAT"
+const SETTINGS_SCREEN: String = "SETTINGS"
+const CAMERA_SCREEN: String = "CAMERA"
 # ----- COLORS -----
-const ASUKA_COLOR: String       = "#FF1A4D"
-const STRANGER_COLOR: String    = "#5973FF"
+const ASUKA_COLOR: String = "#FF1A4D"
+const STRANGER_COLOR: String = "#5973FF"
 # ---- PHONE LAYOUT ----
 @onready var top_bar: Control = $PhoneSize/TopBar
 @onready var bottom_bar: Control = $PhoneSize/BottomBar
@@ -35,7 +35,7 @@ const STRANGER_COLOR: String    = "#5973FF"
 @export var minute_dutation: int = 6 # how many seconds a minute lasts in game
 var elapsed_seconds: float = 0.0
 # ---- CHAT ----
-@onready var messages_resource          = load("res://dialogues/asuka_messages.dialogue")
+@onready var messages_resource = load("res://dialogues/asuka_messages.dialogue")
 @onready var default_message: RichTextLabel = $PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultMessage
 @onready var default_player_message: RichTextLabel = $PhoneSize/Chat/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/DefaultPlayerMessage
 # ---- BACKGROUND ----
@@ -47,7 +47,7 @@ var elapsed_seconds: float = 0.0
 @onready var phone_frame: Sprite2D = $PhoneSize/PhoneFrame
 # ----- MESSAGES -----
 var used_message_ids: Dictionary = {}
-var asuka_messages: Array        = []
+var asuka_messages: Array = []
 #endregion
 
 
@@ -103,9 +103,9 @@ func turn_off_phone() -> void:
 func go_to_screen(screen: Control) -> void:
 	reset_screens()
 	screen.show()
-	if !Phone.is_discharged():
+	if not Phone.is_discharged():
 		Phone.set_phone_state(Phone.State[screen.name.to_upper()])
-		if !Phone.in_apps():
+		if not Phone.in_apps():
 			bottom_bar.show()
 	else:
 		bottom_bar.show()
@@ -187,7 +187,7 @@ func turn_off_phone_visuals() -> void:
 
 #region CLOCK & BATTERY
 func setup_battery() -> void:
-	var dialogue_resource    = load("res://dialogues/asuka.dialogue")
+	var dialogue_resource = load("res://dialogues/asuka.dialogue")
 	var dialogue_length: int = calculate_dialogue_length(dialogue_resource)
 	max_battery = dialogue_length / battery_depletion_dampener
 	battery_bar.max_value = max_battery
@@ -197,8 +197,8 @@ func setup_battery() -> void:
 	handle_battery()
 
 func handle_battery() -> void:
-	if !Phone.is_discharged():
-		battery_timer.paused = !Phone.is_battery_active()
+	if not Phone.is_discharged():
+		battery_timer.paused = not Phone.is_battery_active()
 		battery_bar.value = battery_timer.time_left
 		if battery_bar.value == 0:
 			turn_off_phone()
@@ -206,8 +206,8 @@ func handle_battery() -> void:
 
 func handle_clock(starting_hour: int = 8, starting_minute: int = 0) -> void:
 	var total_minutes: int = int(elapsed_seconds / minute_dutation) + starting_minute
-	var hours: int         = (total_minutes / 60 + starting_hour) % 24
-	var minutes: int       = total_minutes % 60
+	var hours: int = (total_minutes / 60 + starting_hour) % 24
+	var minutes: int = total_minutes % 60
 
 	var period: String = "am" if hours < 12 else "pm"
 	hours = hours % 12
@@ -221,8 +221,8 @@ func handle_clock(starting_hour: int = 8, starting_minute: int = 0) -> void:
 #region UTILS
 func generate_mysterious_words(total_length: int, max_word_length: int) -> String:
 	var characters: String = "!@#$%^&*()_+-=[]{}|;:,.<>?/~★✦✧✩✪✫✬✭✮✯✰†‡✞✟✠"
-	var code: String       = ""
-	var rng                = RandomNumberGenerator.new()
+	var code: String = ""
+	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 
 	var current_word_length: int = 0
@@ -255,7 +255,7 @@ func _on_send_message_pressed() -> void:
 
 func _spawn_new_asuka_message() -> void:
 	var new_message: RichTextLabel = default_message.duplicate() as RichTextLabel
-	var parent: Node               = default_message.get_parent()
+	var parent: Node = default_message.get_parent()
 	parent.add_child(new_message)
 	parent.move_child(new_message, parent.get_child_count() - 1)
 	new_message.show()
@@ -272,7 +272,7 @@ func _spawn_new_asuka_message() -> void:
 
 func spawn_new_player_message(message_text: String) -> void:
 	var new_player_message: RichTextLabel = default_player_message.duplicate() as RichTextLabel
-	var parent: Node                      = default_player_message.get_parent()
+	var parent: Node = default_player_message.get_parent()
 	parent.add_child(new_player_message)
 	parent.move_child(new_player_message, parent.get_child_count() - 1)
 	new_player_message.show()

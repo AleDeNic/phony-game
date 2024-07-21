@@ -21,21 +21,21 @@ extends Area2D
 var is_dialogue_started: bool = false
 #endregion
 
-# ----- READY AND PROCESS -----
 
 func _process(_delta: float) -> void:
 	update_asuka_sprites()
 
 
-#region Interaction
+#region INTERACTION
 func _on_area_entered(_area: Area2D) -> void:
 	enter()
+
 
 func enter() -> void:
 	if Player.is_free() and not Player.is_drifting_to_phone():
 		match Asuka.get_dialogue():
 			Asuka.Dialogue.INACTIVE:
-				player.set_target(global_position, player.focus_speed_asuka)
+				player.set_target(global_position, player.ASUKA_FOCUS_SPEED)
 				Player.set_focusing_on_asuka()
 				await get_tree().create_timer(1.0).timeout
 				DialogueManager.show_dialogue_balloon_scene(-24, 0, dialogue_balloon, dialogue_resource, dialogue_start)
@@ -48,21 +48,18 @@ func enter() -> void:
 				Player.set_focus_on_asuka()
 			Asuka.Dialogue.ENDED:
 				pass
-
-		camera.set_camera_zoom(camera.asuka_zoom_value, camera.asuka_zoom_speed)
 	else:
 		return
 
 func exit() -> void:
 	if Player.is_unfocusing():
-		camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
 		await get_tree().create_timer(1.0).timeout
 
 	Player.set_unfocus()
 	Player.set_free()
 #endregion
 
-#region Sprites
+#region SPRITES
 func update_asuka_sprites() -> void:
 	match Asuka.get_pose():
 		Asuka.Pose.A2:
@@ -89,6 +86,7 @@ func set_face(face: AnimatedSprite2D) -> void:
 			face.frame = 2
 		Asuka.Face.LAUGH:
 			face.frame = 3
+
 
 func set_eyes(eyes: AnimatedSprite2D) -> void:
 	match Asuka.get_eyes():

@@ -10,30 +10,27 @@ extends Area2D
 @onready var phone_os: Control = $PhoneOS
 @onready var parallax_layer: ParallaxLayer = $".."
 
-@export_group("Scale sizes")
-@export var min_scale: Vector2 = Vector2(0.7, 0.7)
-@export var max_scale: Vector2 = Vector2(2.0, 2.0)
 
-@export_group("Scale speeds")
-@export var scale_up_speed: float = 3.0
-@export var scale_down_speed: float = 3.0
+const MIN_SCALE: Vector2 = Vector2(0.7, 0.7)
+const MAX_SCALE: Vector2 = Vector2(2.0, 2.0)
 
-@export_group("Effects speeds")
-@export var effects_increase_speed: float = 2.5
-@export var effects_decrease_speed: float = 3.5
+const SCALE_UP_SPEED: float = 3.0
+const SCALE_DOWN_SPEED: float = 3.0
 
-@export_group("Rotation angles")
-@export var min_rotation: float = -6.0
-@export var max_rotation: float = 0.0
+const EFFECTS_INCREASE_SPEED: float = 2.5
+const EFFECTS_DECREASE_SPEED: float = 3.5
 
-@export_group("Rotation speeds")
-@export var rotation_up_speed: float = 16.0
-@export var rotation_down_speed: float = 10.0
+const MIN_ROTATION: float = -6.0
+const MAX_ROTATION: float = 0.0
+
+const ROTATION_UP_SPEED: float = 16.0
+const ROTATION_DOWN_SPEED: float = 10.0
+
 
 var current_scale_speed: float = 0.0
-var target_scale: Vector2 = min_scale
+var target_scale: Vector2 = MIN_SCALE
 var current_rotation_speed: float = 0.0
-var target_rotation: float = min_rotation
+var target_rotation: float = MIN_ROTATION
 
 var is_dialogue_started: bool = false
 var angry_dialogue_index: int = 0
@@ -42,9 +39,9 @@ var angry_dialogue_index: int = 0
 #region Processing
 
 func _ready() -> void:
-	current_scale_speed = scale_up_speed
-	current_rotation_speed = rotation_up_speed
-	rotation_degrees = min_rotation
+	current_scale_speed = SCALE_UP_SPEED
+	current_rotation_speed = ROTATION_UP_SPEED
+	rotation_degrees = MIN_ROTATION
 
 func _physics_process(delta: float) -> void:
 	if Player.is_focusing():
@@ -58,7 +55,7 @@ func _on_area_entered(_area: Area2D) -> void:
 		enter()
 
 func _on_phone_os_mouse_exited() -> void:
-	if !Player.is_free() and Notifications.is_inbox_cleared():
+	if not Player.is_free() and Notifications.is_inbox_cleared():
 		exit()
 	else:
 		phone_os.display_cant_leave_alert()
@@ -66,18 +63,16 @@ func _on_phone_os_mouse_exited() -> void:
 
 #region Area Handler
 func enter() -> void:
-	player.set_target(global_position + Vector2(0.0, -500), player.focus_speed_phone)
+	player.set_target(global_position + Vector2(0.0, -500), player.PHONE_FOCUS_SPEED)
 
 	Player.set_focusing_on_phone()
 
-	camera.set_camera_zoom(camera.phone_zoom_value, camera.phone_zoom_speed)
+	set_phone_scale(MAX_SCALE, SCALE_UP_SPEED)
+	set_phone_rotation(MAX_ROTATION, ROTATION_UP_SPEED)
 
-	set_phone_scale(max_scale, scale_up_speed)
-	set_phone_rotation(max_rotation, rotation_up_speed)
+	phone_effects.set_effects(phone_effects.MAX_LOD, EFFECTS_INCREASE_SPEED)
 
-	phone_effects.set_effects(phone_effects.MAX_LOD, effects_increase_speed)
-
-	if !Phone.is_discharged():
+	if not Phone.is_discharged():
 		phone_os.go_to_screen(phone_os.apps)
 		phone_os.turn_on_phone_visuals()
 
@@ -95,15 +90,13 @@ func exit() -> void:
 	Player.set_unfocusing()
 	Phone.set_phone_off()
 
-	camera.set_camera_zoom(camera.default_zoom_value, camera.reset_zoom_speed)
+	set_phone_scale(MIN_SCALE, SCALE_DOWN_SPEED)
+	set_phone_rotation(MIN_ROTATION, ROTATION_DOWN_SPEED)
 
-	set_phone_scale(min_scale, scale_down_speed)
-	set_phone_rotation(min_rotation, rotation_down_speed)
-
-	phone_effects.set_effects(phone_effects.MIN_LOD, effects_decrease_speed)
+	phone_effects.set_effects(phone_effects.MIN_LOD, EFFECTS_DECREASE_SPEED)
 	phone_os.hide_cant_leave_alert()
 
-	if !Phone.is_discharged():
+	if not Phone.is_discharged():
 		phone_os.reset_screens()
 		phone_os.turn_off_phone_visuals()
 
@@ -130,7 +123,7 @@ func set_phone_rotation(rotation_value: float, rotation_speed: float) -> void:
 func update_scale(delta: float) -> void:
 	var new_scale: Vector2 = scale.slerp(target_scale, current_scale_speed * delta)
 	if abs((scale - new_scale).length()) > 0.001:
-		scale = clamp(new_scale, min_scale, max_scale)
+		scale = clamp(new_scale, MIN_SCALE, MAX_SCALE)
 
 func update_rotation(delta: float) -> void:
 	var rotation_difference: float = wrapf(target_rotation - rotation_degrees, -180.0, 180.0)
@@ -138,7 +131,7 @@ func update_rotation(delta: float) -> void:
 
 	if abs(rotation_difference) > 0.1:
 		var new_rotation = rotation_degrees + sign(rotation_difference) * rotation_step
-		new_rotation = clamp(new_rotation, min_rotation, max_rotation)
+		new_rotation = clamp(new_rotation, MIN_ROTATION, MAX_ROTATION)
 		rotation_degrees = new_rotation
 #endregion
 #func decrease_parallax() -> void:
