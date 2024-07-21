@@ -1,5 +1,6 @@
 extends Area2D
 
+#region VARIABLES
 @export var dialogue_resource: Resource = load("res://dialogues/asuka.dialogue")
 @export var dialogue_start: String = "asuka_intro"
 @export var dialogue_balloon: Resource = load("res://scenes/balloons/dialogue_balloon.tscn")
@@ -9,7 +10,6 @@ extends Area2D
 @onready var player: CharacterBody2D = %Player
 @onready var phone_os: Control = $PhoneOS
 @onready var parallax_layer: ParallaxLayer = $".."
-
 
 const MIN_SCALE: Vector2 = Vector2(0.7, 0.7)
 const MAX_SCALE: Vector2 = Vector2(2.0, 2.0)
@@ -26,22 +26,23 @@ const MAX_ROTATION: float = 0.0
 const ROTATION_UP_SPEED: float = 16.0
 const ROTATION_DOWN_SPEED: float = 10.0
 
-
 var current_scale_speed: float = 0.0
-var target_scale: Vector2 = MIN_SCALE
 var current_rotation_speed: float = 0.0
+
+var target_scale: Vector2 = MIN_SCALE
 var target_rotation: float = MIN_ROTATION
 
 var is_dialogue_started: bool = false
 var angry_dialogue_index: int = 0
+#endregion
 
 
 #region Processing
-
 func _ready() -> void:
 	current_scale_speed = SCALE_UP_SPEED
 	current_rotation_speed = ROTATION_UP_SPEED
 	rotation_degrees = MIN_ROTATION
+
 
 func _physics_process(delta: float) -> void:
 	if Player.is_focusing():
@@ -49,10 +50,12 @@ func _physics_process(delta: float) -> void:
 		update_rotation(delta)
 #endregion
 
+
 #region Interactions
 func _on_area_entered(_area: Area2D) -> void:
 	if Player.is_free() or Player.is_unfocusing() or Player.is_drifting_to_phone():
 		enter()
+
 
 func _on_phone_os_mouse_exited() -> void:
 	if not Player.is_free() and Notifications.is_inbox_cleared():
@@ -60,6 +63,7 @@ func _on_phone_os_mouse_exited() -> void:
 	else:
 		phone_os.display_cant_leave_alert()
 #endregion
+
 
 #region Area Handler
 func enter() -> void:
@@ -84,6 +88,7 @@ func enter() -> void:
 			await Asuka.set_dialogue_active()
 			DialogueManager.show_dialogue_balloon_scene(-24, 0, dialogue_balloon, dialogue_resource, dialogue_start)
 
+
 func exit() -> void:
 	player.current_speed = 0.0
 
@@ -106,12 +111,13 @@ func exit() -> void:
 		Player.set_free()
 #endregion
 
-#region Animations
 
+#region Animations
 func set_phone_scale(scale_value: Vector2, scale_speed: float) -> void:
 	if target_scale != scale_value:
 		target_scale = scale_value
 		current_scale_speed = scale_speed
+
 
 func set_phone_rotation(rotation_value: float, rotation_speed: float) -> void:
 	if target_rotation != rotation_value:
@@ -119,11 +125,13 @@ func set_phone_rotation(rotation_value: float, rotation_speed: float) -> void:
 		current_rotation_speed = rotation_speed
 #endregion
 
+
 #region Scale and rotation
 func update_scale(delta: float) -> void:
 	var new_scale: Vector2 = scale.slerp(target_scale, current_scale_speed * delta)
 	if abs((scale - new_scale).length()) > 0.001:
 		scale = clamp(new_scale, MIN_SCALE, MAX_SCALE)
+
 
 func update_rotation(delta: float) -> void:
 	var rotation_difference: float = wrapf(target_rotation - rotation_degrees, -180.0, 180.0)
@@ -134,6 +142,7 @@ func update_rotation(delta: float) -> void:
 		new_rotation = clamp(new_rotation, MIN_ROTATION, MAX_ROTATION)
 		rotation_degrees = new_rotation
 #endregion
+
 #func decrease_parallax() -> void:
 	#parallax_layer.motion_scale = Vector2(0.0, 0.0)
 #

@@ -1,5 +1,6 @@
 extends Node
 
+#region VARIABLES
 @onready var player: CharacterBody2D = get_node("/root/World/Player")
 @onready var asuka: Area2D = get_node("/root/World/Asuka")
 @onready var window: Area2D = get_node("/root/World/Window")
@@ -22,7 +23,7 @@ extends Node
 @export var transition_duration: float = 2.0
 
 var music_layers: Array[AudioStreamPlayer] = []
-var effects: Array[AudioStreamPlayer]      = []
+var effects: Array[AudioStreamPlayer] = []
 
 @onready var layer_paths: Array[String] = [
 								 "res://assets/music/layer_0.mp3",
@@ -34,11 +35,13 @@ var effects: Array[AudioStreamPlayer]      = []
 								 "res://assets/music/layer_6.mp3"
 								 ]
 
-@onready var sfx_paths: Array[String]  = ["res://assets/sfx/phone_vibration.mp3"]
+@onready var sfx_paths: Array[String] = ["res://assets/sfx/phone_vibration.mp3"]
 var active_layers: Array[int] = []
-var bus_indices: Dictionary   = {}
+var bus_indices: Dictionary = {}
+#endregion
 
 
+#region INIT & PROCESS
 func _ready() -> void:
 	initialize_bus_indices()
 	create_music_layers()
@@ -46,10 +49,12 @@ func _ready() -> void:
 	start_synchronized_playback()
 	add_music_layer(0)
 
+
 func _physics_process(_delta: float) -> void:
 	if player != null and asuka != null and window != null:
 		AudioServer.set_bus_volume_db(bus_indices["Asuka"], calculate_volume(asuka, asuka_max_volume, asuka_min_volume, asuka_area))
 		AudioServer.set_bus_volume_db(bus_indices["Window"], calculate_volume(window, window_max_volume, window_min_volume, window_area))
+#endregion
 
 
 func initialize_bus_indices() -> void:
@@ -75,11 +80,11 @@ func apply_custom_volumes() -> void:
 
 
 func calculate_volume(object: Area2D, max_volume: float, min_volume: float, area: float) -> float:
-	var transition_distance: float         = area
-	var squared_distance: float            = player.position.distance_squared_to(object.position)
-	var max_distance_squared: float        = max_distance * max_distance
+	var transition_distance: float = area
+	var squared_distance: float = player.position.distance_squared_to(object.position)
+	var max_distance_squared: float = max_distance * max_distance
 	var transition_distance_squared: float = transition_distance * transition_distance
-	var dB_value: float                    = max_volume
+	var dB_value: float = max_volume
 
 	if squared_distance > transition_distance_squared:
 		dB_value = lerp(max_volume, min_volume, (squared_distance - transition_distance_squared) / (max_distance_squared - transition_distance_squared))
