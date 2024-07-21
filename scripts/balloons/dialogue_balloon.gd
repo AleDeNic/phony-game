@@ -15,7 +15,7 @@ extends CanvasLayer
 #@onready var character_label: RichTextLabel = %CharacterLabel
 @onready var dialogue_label: DialogueLabel = %DialogueLabel
 @onready var responses_menu: DialogueResponsesMenu = %ResponsesMenu
-
+@onready var responses_container: Control = $Balloon/MarginContainer/HBoxContainer/Responses
 var balloon_position: Vector2
 var balloon_offset_position: Vector2
 
@@ -27,8 +27,11 @@ var max_distance_from_asuka: float = 200.0
 var max_distance_to_window: float = 150.0
 var max_distance_to_phone: float  = 400.0
 var phone_balloon_offset: Vector2 = Vector2(0, 0)
+var asuka_balloon_offset: Vector2 = Vector2(-520, -230)
 
-var asuka_balloon_offset: Vector2 = Vector2(-550, -260)
+var time: float = 0.0
+var float_amplitude: Vector2 = Vector2(15, 15)
+var float_frequency: Vector2 = Vector2(2, 1)
 
 func _ready() -> void:
 	balloon.hide()
@@ -44,6 +47,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	handle_balloon_movement(delta)
 
+
 #region Movement
 func initiate_positions():
 	asuka_position = asuka.global_position
@@ -53,26 +57,34 @@ func initiate_positions():
 	balloon.global_position = asuka_position
 	balloon_offset_position = balloon.size * 0.75 / 2
 
-#TODO: Let's see if the displacement can be fixed
+
 func handle_balloon_movement(delta: float) -> void:
+	time += delta
+	
 	var target_position: Vector2 = player.global_position - balloon_offset_position
 	var displacement: Vector2 = target_position - asuka_position
-
 	displacement.x = clamp(displacement.x, -max_distance_from_asuka, max_distance_from_asuka)
 	displacement.y = clamp(displacement.y, -max_distance_from_asuka, max_distance_to_phone)
-
+	
 	if Player.is_focused_on_window() or Player.is_focusing_on_window():
 		displacement.x = clamp(displacement.x, 0, max_distance_to_window)
 	elif Player.is_focused_on_phone() or Player.is_focusing_on_phone():
 		displacement += phone_balloon_offset
 	else:
 		displacement += asuka_balloon_offset
-
+	
 	var new_position: Vector2 = asuka_position + displacement
-
-	var lerp_speed: float = 0.7
+	
+	var float_offset = Vector2(
+		sin(time * float_frequency.x) * float_amplitude.x,
+		cos(time * float_frequency.y) * float_amplitude.y
+	)
+	new_position += float_offset
+	
+	var lerp_speed: float = 1.0
 	balloon.global_position = balloon.global_position.lerp(new_position, lerp_speed * delta)
 #endregion
+
 
 #region Dialogue Logic
 #region Lines
@@ -195,11 +207,9 @@ func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 func _on_balloon_mouse_exited() -> void:
 	if Player.is_focused_on_asuka():
 		asuka.exit()
-		# responses_menu.hide()
 
 func _on_balloon_mouse_entered() -> void:
 	if Player.is_focused_on_asuka():
-		# responses_menu.show()
 		asuka.enter()
 
 #endregion

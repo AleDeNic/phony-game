@@ -31,7 +31,7 @@ var responses: Array = []:
 			if item == response_template: continue
 			remove_child(item)
 			item.queue_free()
-	
+
 	# Add new items
 		if responses.size() > 0:
 			for response in responses:
@@ -52,8 +52,9 @@ var responses: Array = []:
 				item.set_meta("response", response)
 				add_child(item)
 			configure_focus()
-	
+
 		update_visibility(0)
+
 
 func configure_focus() -> void:
 	var items = get_menu_items()
@@ -79,32 +80,40 @@ func configure_focus() -> void:
 	if items.size() > 0:
 		items[0].grab_focus()
 
+
 func _ready() -> void:
 	visibility_changed.connect(func():
 		if visible and get_menu_items().size() > 0:
 			get_menu_items()[0].grab_focus()
 	)
 
+
 	if is_instance_valid(response_template):
 		response_template.hide()
-	
+
 func _process(delta) -> void:
 	update_visibility(delta)
-	
+
+
 func update_visibility(delta: float) -> void:
 	target_opacity = 1.0 if Player.is_focused_on_asuka() else 0.3
-	
+
 	current_opacity = move_toward(current_opacity, target_opacity, delta / transition_duration)
-	
-	if Player.is_focused_on_asuka():
+
+	if Player.is_focused_on_asuka() and responses.size() > 0:
+		get_parent().visible = true
 		for child in get_children():
 			if child != response_template:
 				child.show()
+				child.modulate.a = 0
 				child.modulate.a = current_opacity
 	else:
+		await get_tree().create_timer(0.3).timeout
 		for child in get_children():
 			if child != response_template:
+				child.modulate.a = move_toward(100, 0, delta / transition_duration)
 				child.hide()
+		get_parent().visible = false
 
 ## Get the selectable items in the menu.
 func get_menu_items() -> Array:
@@ -161,13 +170,13 @@ func _configure_focus() -> void:
 
 func _on_response_mouse_entered(item: Control) -> void:
 	if "Disallowed" in item.name: return
-		
+
 	item.grab_focus()
 
 
 func _on_response_gui_input(event: InputEvent, item: Control, response) -> void:
 	if "Disallowed" in item.name: return
-	
+
 	if not Player.is_focused_on_asuka(): return
 
 	get_viewport().set_input_as_handled()
