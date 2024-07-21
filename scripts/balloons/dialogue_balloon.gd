@@ -25,7 +25,7 @@ var phone_position: Vector2
 
 var max_distance_from_asuka: float = 200.0
 var max_distance_to_window: float = 150.0
-var max_distance_to_phone: float  = 300.0
+var max_distance_to_phone: float  = 400.0
 var phone_balloon_offset: Vector2 = Vector2(0, 0)
 
 var asuka_balloon_offset: Vector2 = Vector2(-550, -260)
@@ -57,31 +57,21 @@ func initiate_positions():
 func handle_balloon_movement(delta: float) -> void:
 	var target_position: Vector2 = player.global_position - balloon_offset_position
 	var displacement: Vector2 = target_position - asuka_position
+
+	displacement.x = clamp(displacement.x, -max_distance_from_asuka, max_distance_from_asuka)
+	displacement.y = clamp(displacement.y, -max_distance_from_asuka, max_distance_to_phone)
+
 	if Player.is_focused_on_window() or Player.is_focusing_on_window():
-		displacement = limit_displacement_to_area(displacement, window_position, max_distance_to_window)
-	if Player.is_focused_on_phone() or Player.is_focusing_on_phone() and Player.is_drifting_to_phone():
-		displacement = limit_displacement_to_area(displacement, phone_position, max_distance_to_phone)
+		displacement.x = clamp(displacement.x, 0, max_distance_to_window)
+	elif Player.is_focused_on_phone() or Player.is_focusing_on_phone():
 		displacement += phone_balloon_offset
 	else:
-		if displacement.length() > max_distance_from_asuka:
-			displacement = displacement.normalized() * max_distance_from_asuka
 		displacement += asuka_balloon_offset
+
 	var new_position: Vector2 = asuka_position + displacement
 
-	var lerp_speed: float = 5.0
+	var lerp_speed: float = 0.7
 	balloon.global_position = balloon.global_position.lerp(new_position, lerp_speed * delta)
-
-func limit_displacement_to_area(displacement: Vector2, area_center: Vector2, max_distance: float) -> Vector2:
-	var area_displacement: Vector2 = area_center - asuka_position
-	var target_displacement: Vector2 = displacement.project(area_displacement)
-
-	if target_displacement.length() > area_displacement.length():
-		target_displacement = area_displacement
-
-	if target_displacement.length() > max_distance:
-		target_displacement = target_displacement.normalized() * max_distance
-
-	return target_displacement
 #endregion
 
 #region Dialogue Logic

@@ -42,7 +42,7 @@ func enter() -> void:
 				Asuka.set_dialogue_active()
 				Player.set_focus_on_asuka()
 			Asuka.Dialogue.ACTIVE:
-				player.set_target(global_position, player.focus_speed_asuka)
+				player.set_target(global_position, player.ASUKA_FOCUS_SPEED)
 				Player.set_focusing_on_asuka()
 				await get_tree().create_timer(1.0).timeout
 				Player.set_focus_on_asuka()
