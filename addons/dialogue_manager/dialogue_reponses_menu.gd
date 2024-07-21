@@ -1,5 +1,6 @@
 @icon("./assets/responses_menu.svg")
 
+#TODO: Shrink the Responses menu
 ## A [Container] for dialogue responses provided by [b]Dialogue Manager[/b].
 class_name DialogueResponsesMenu extends Container
 
@@ -13,6 +14,10 @@ signal response_selected(response)
 
 ## The action for accepting a response (is possibly overridden by parent dialogue balloon).
 @export var next_action: StringName = &""
+@export var transition_duration: float = 0.3
+
+var current_opacity: float = 1.0
+var target_opacity: float = 1.0
 
 ## The list of dialogue responses.
 var responses: Array = []:
@@ -24,11 +29,10 @@ var responses: Array = []:
 		# Remove any current items
 		for item in get_children():
 			if item == response_template: continue
-
 			remove_child(item)
 			item.queue_free()
-
-		# Add new items
+	
+	# Add new items
 		if responses.size() > 0:
 			for response in responses:
 				var item: Control
@@ -41,20 +45,39 @@ var responses: Array = []:
 				if not response.is_allowed:
 					item.name = String(item.name) + "Disallowed"
 					item.disabled = true
-
-				# If the item has a response property then use that
 				if "response" in item:
 					item.response = response
-				# Otherwise assume we can just set the text
 				else:
 					item.text = response.text
-
 				item.set_meta("response", response)
-
 				add_child(item)
+			configure_focus()
+	
+		update_visibility(0)
 
-			_configure_focus()
-
+func configure_focus() -> void:
+	var items = get_menu_items()
+	for i in items.size():
+		var item: Control = items[i]
+		item.focus_mode = Control.FOCUS_ALL
+		item.focus_neighbor_left = item.get_path()
+		item.focus_neighbor_right = item.get_path()
+		if i == 0:
+			item.focus_neighbor_top = item.get_path()
+			item.focus_previous = item.get_path()
+		else:
+			item.focus_neighbor_top = items[i - 1].get_path()
+			item.focus_previous = items[i - 1].get_path()
+		if i == items.size() - 1:
+			item.focus_neighbor_bottom = item.get_path()
+			item.focus_next = item.get_path()
+		else:
+			item.focus_neighbor_bottom = items[i + 1].get_path()
+			item.focus_next = items[i + 1].get_path()
+		item.mouse_entered.connect(_on_response_mouse_entered.bind(item))
+		item.gui_input.connect(_on_response_gui_input.bind(item, item.get_meta("response")))
+	if items.size() > 0:
+		items[0].grab_focus()
 
 func _ready() -> void:
 	visibility_changed.connect(func():
@@ -64,7 +87,24 @@ func _ready() -> void:
 
 	if is_instance_valid(response_template):
 		response_template.hide()
-
+	
+func _process(delta) -> void:
+	update_visibility(delta)
+	
+func update_visibility(delta: float) -> void:
+	target_opacity = 1.0 if Player.is_focused_on_asuka() else 0.3
+	
+	current_opacity = move_toward(current_opacity, target_opacity, delta / transition_duration)
+	
+	if Player.is_focused_on_asuka():
+		for child in get_children():
+			if child != response_template:
+				child.show()
+				child.modulate.a = current_opacity
+	else:
+		for child in get_children():
+			if child != response_template:
+				child.hide()
 
 ## Get the selectable items in the menu.
 func get_menu_items() -> Array:
@@ -83,8 +123,6 @@ func set_responses(next_responses: Array) -> void:
 
 
 #region Internal
-
-
 # Prepare the menu for keyboard and mouse navigation.
 func _configure_focus() -> void:
 	var items = get_menu_items()
@@ -123,12 +161,14 @@ func _configure_focus() -> void:
 
 func _on_response_mouse_entered(item: Control) -> void:
 	if "Disallowed" in item.name: return
-
+		
 	item.grab_focus()
 
 
 func _on_response_gui_input(event: InputEvent, item: Control, response) -> void:
 	if "Disallowed" in item.name: return
+	
+	if not Player.is_focused_on_asuka(): return
 
 	get_viewport().set_input_as_handled()
 
