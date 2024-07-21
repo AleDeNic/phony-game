@@ -2,7 +2,7 @@ extends CanvasLayer
 
 #region VARIABLES
 @onready var blur_fisheye: ShaderMaterial = $BlurFisheye.material as ShaderMaterial
-@onready var blue_filter: ColorRect = $BlueFilter
+@onready var dark_filter: ColorRect = $DarkFilter
 
 const MIN_BLUE: float = 0.0
 const MAX_BLUE: float = 1.0
@@ -38,7 +38,7 @@ func handle_phone_filters(delta: float) -> void:
 			current_lod = new_lod
 			blur_fisheye.set_shader_parameter("lod", current_lod)
 			current_blue = map_range(current_lod, MIN_LOD, MAX_LOD, MIN_BLUE, MAX_BLUE)
-			blue_filter.modulate.a = current_blue
+			dark_filter.modulate.a = current_blue
 		else:
 			new_lod = target_lod
 

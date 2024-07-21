@@ -313,7 +313,7 @@ height = 13.7933
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nv2ku"]
 shader = ExtResource("15_80wp3")
 shader_parameter/lod = 0.0
-shader_parameter/effect_amount = -0.0799999
+shader_parameter/effect_amount = -0.12
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8rrhg"]
 shader = ExtResource("17_5vfsr")
@@ -368,7 +368,7 @@ render_target_update_mode = 4
 [node name="Landscape3D" parent="Parallax/Outside/SubViewportContainer/SubViewport" instance=ExtResource("1_ai645")]
 
 [node name="Interior" type="ParallaxLayer" parent="Parallax"]
-motion_scale = Vector2(0.6, 0.8)
+motion_scale = Vector2(0.4, 0.533)
 
 [node name="WorldBoundaries" type="StaticBody2D" parent="Parallax/Interior"]
 collision_layer = 2
@@ -491,7 +491,6 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("14_2c2yt")
 
 [node name="Lighting" type="Node2D" parent="Parallax/Interior"]
-visible = false
 
 [node name="Darkness" type="Sprite2D" parent="Parallax/Interior/Lighting"]
 modulate = Color(1, 1, 1, 0.690196)
@@ -574,15 +573,15 @@ texture = ExtResource("7_flpj4")
 [node name="PhoneEffects" type="CanvasLayer" parent="SceneEffects"]
 script = ExtResource("13_el7tb")
 
-[node name="BlueFilter" type="ColorRect" parent="SceneEffects/PhoneEffects"]
+[node name="DarkFilter" type="ColorRect" parent="SceneEffects/PhoneEffects"]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -2823.0
 offset_top = -1570.0
-offset_right = 2042.0
-offset_bottom = 2407.0
+offset_right = 427.0
+offset_bottom = 1288.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -595,8 +594,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -2801.0
 offset_top = -1688.0
-offset_right = 2097.0
-offset_bottom = 2333.0
+offset_right = 429.0
+offset_bottom = 1289.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
