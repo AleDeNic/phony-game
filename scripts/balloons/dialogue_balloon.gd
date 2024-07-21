@@ -53,6 +53,7 @@ func initiate_positions():
 	balloon.global_position = asuka_position
 	balloon_offset_position = balloon.size * 0.75 / 2
 
+#TODO: Let's see if the displacement can be fixed
 func handle_balloon_movement(delta: float) -> void:
 	var target_position: Vector2 = player.global_position - balloon_offset_position
 	var displacement: Vector2 = target_position - asuka_position
@@ -160,9 +161,8 @@ func start(dialogue_resource: DialogueResource, title: String, extra_game_states
 func next(next_id: String) -> void:
 	self.dialogue_line = await resource.get_next_dialogue_line(next_id, temporary_game_states)
 #endregion
+
 #region Signals
-
-
 func _on_mutated(_mutation: Dictionary) -> void:
 	is_waiting_for_input = false
 	will_hide_balloon = true
@@ -174,6 +174,9 @@ func _on_mutated(_mutation: Dictionary) -> void:
 
 
 func _on_balloon_gui_input(event: InputEvent) -> void:
+	if not Player.is_focused_on_asuka():
+		return
+
 	# See if we need to skip typing of the dialogue
 	if dialogue_label.is_typing:
 		var mouse_was_clicked: bool = event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed()
@@ -196,7 +199,8 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 
 
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
-	next(response.next_id)
+	if not Player.is_free() or Player.is_focused_on_phone() or Player.is_focused_on_window():
+		next(response.next_id)
 
 func _on_balloon_mouse_exited() -> void:
 	if Player.is_focused_on_asuka():
