@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 #region VARIABLES
 @onready var blur_fisheye: ShaderMaterial = $BlurFisheye.material as ShaderMaterial

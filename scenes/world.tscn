@@ -306,14 +306,14 @@ gradient = SubResource("Gradient_1jydq")
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0.976068)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31m52"]
-radius = 3.6443
-height = 13.7933
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nv2ku"]
 shader = ExtResource("15_80wp3")
 shader_parameter/lod = 0.0
 shader_parameter/effect_amount = -0.0799999
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31m52"]
+radius = 3.6443
+height = 13.7933
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8rrhg"]
 shader = ExtResource("17_5vfsr")
@@ -343,38 +343,16 @@ shader_parameter/overlay_color = Vector4(0, 0, 0, 0)
 
 [node name="World" type="Node2D"]
 
-[node name="WorldBoundaries" type="StaticBody2D" parent="."]
-collision_layer = 2
-collision_mask = 8
-
-[node name="TopBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
-visibility_layer = 2
-position = Vector2(0, -1500)
-shape = SubResource("WorldBoundaryShape2D_8wvv8")
-
-[node name="BottomBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
-visibility_layer = 2
-position = Vector2(0, 2250)
-shape = SubResource("WorldBoundaryShape2D_neuer")
-
-[node name="RightBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
-visibility_layer = 2
-position = Vector2(2250, 0)
-shape = SubResource("WorldBoundaryShape2D_674om")
-
-[node name="LeftBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
-visibility_layer = 2
-position = Vector2(-2500, 0)
-shape = SubResource("WorldBoundaryShape2D_boryj")
-
 [node name="Parallax" type="ParallaxBackground" parent="."]
 layer = 0
 follow_viewport_enabled = true
 
 [node name="Outside" type="ParallaxLayer" parent="Parallax"]
+z_index = -1
 motion_scale = Vector2(0, 0)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Parallax/Outside"]
+visible = false
 z_index = -1
 clip_contents = true
 offset_left = 507.0
@@ -386,12 +364,36 @@ scale = Vector2(4, 4)
 [node name="SubViewport" type="SubViewport" parent="Parallax/Outside/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(480, 800)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Landscape3D" parent="Parallax/Outside/SubViewportContainer/SubViewport" instance=ExtResource("1_ai645")]
 
 [node name="Interior" type="ParallaxLayer" parent="Parallax"]
 motion_scale = Vector2(0.6, 0.8)
+
+[node name="WorldBoundaries" type="StaticBody2D" parent="Parallax/Interior"]
+collision_layer = 2
+collision_mask = 8
+
+[node name="TopBoundary" type="CollisionShape2D" parent="Parallax/Interior/WorldBoundaries"]
+visibility_layer = 2
+position = Vector2(0, -1500)
+shape = SubResource("WorldBoundaryShape2D_8wvv8")
+
+[node name="BottomBoundary" type="CollisionShape2D" parent="Parallax/Interior/WorldBoundaries"]
+visibility_layer = 2
+position = Vector2(0, 2250)
+shape = SubResource("WorldBoundaryShape2D_neuer")
+
+[node name="RightBoundary" type="CollisionShape2D" parent="Parallax/Interior/WorldBoundaries"]
+visibility_layer = 2
+position = Vector2(2250, 0)
+shape = SubResource("WorldBoundaryShape2D_674om")
+
+[node name="LeftBoundary" type="CollisionShape2D" parent="Parallax/Interior/WorldBoundaries"]
+visibility_layer = 2
+position = Vector2(-2500, 0)
+shape = SubResource("WorldBoundaryShape2D_boryj")
 
 [node name="TrainInterior" type="Node2D" parent="Parallax/Interior"]
 script = ExtResource("2_7fjtw")
@@ -490,6 +492,7 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("14_2c2yt")
 
 [node name="Lighting" type="Node2D" parent="Parallax/Interior"]
+visible = false
 
 [node name="Darkness" type="Sprite2D" parent="Parallax/Interior/Lighting"]
 modulate = Color(1, 1, 1, 0.690196)
@@ -530,10 +533,43 @@ texture = ExtResource("4_eoyyj")
 
 [node name="Phone" type="ParallaxLayer" parent="Parallax"]
 position = Vector2(218, 0)
-motion_scale = Vector2(0.8, 1)
+
+[node name="PhoneEffects" type="Control" parent="Parallax/Phone"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("13_el7tb")
+
+[node name="BlueFilter" type="ColorRect" parent="Parallax/Phone/PhoneEffects"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2823.0
+offset_top = -1570.0
+offset_right = 2042.0
+offset_bottom = 2407.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.854902)
+
+[node name="BlurFisheye" type="ColorRect" parent="Parallax/Phone/PhoneEffects"]
+material = SubResource("ShaderMaterial_nv2ku")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2801.0
+offset_top = -1688.0
+offset_right = 2097.0
+offset_bottom = 2333.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Phone" type="Area2D" parent="Parallax/Phone"]
-z_index = 2
+z_index = 3
 position = Vector2(-137, 1578)
 scale = Vector2(0.7, 0.7)
 collision_mask = 4
@@ -567,36 +603,6 @@ unique_name_in_owner = true
 visible = false
 position = Vector2(970, 529)
 texture = ExtResource("7_flpj4")
-
-[node name="PhoneEffects" type="CanvasLayer" parent="SceneEffects"]
-script = ExtResource("13_el7tb")
-
-[node name="BlueFilter" type="ColorRect" parent="SceneEffects/PhoneEffects"]
-modulate = Color(1, 1, 1, 0)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -2911.0
-offset_top = -1787.0
-offset_right = 1676.0
-offset_bottom = 1363.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 0.854902)
-
-[node name="BlurFisheye" type="ColorRect" parent="SceneEffects/PhoneEffects"]
-material = SubResource("ShaderMaterial_nv2ku")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -2631.0
-offset_top = -1688.0
-offset_right = 1487.0
-offset_bottom = 1289.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
 
 [node name="PlayerEffects" type="CanvasLayer" parent="SceneEffects"]
 layer = 2
@@ -633,9 +639,9 @@ layer = 4
 
 [node name="PhoneShadow" type="Sprite2D" parent="SceneEffects/PhoneShadow"]
 modulate = Color(1, 1, 1, 0.666667)
-position = Vector2(376.189, 1842.07)
+position = Vector2(-151.97, 1842.07)
 rotation = 1.5708
-scale = Vector2(13.5987, 91.4128)
+scale = Vector2(13.5987, 74.9078)
 texture = SubResource("GradientTexture2D_flse6")
 
 [node name="ColorOverlay" type="CanvasLayer" parent="SceneEffects"]

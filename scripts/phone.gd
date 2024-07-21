@@ -5,7 +5,7 @@ extends Area2D
 @export var dialogue_start: String = "asuka_intro"
 @export var dialogue_balloon: Resource = load("res://scenes/balloons/dialogue_balloon.tscn")
 
-@onready var phone_effects: CanvasLayer = get_node("/root/World/SceneEffects/PhoneEffects")
+@onready var phone_effects: Control = get_node("/root/World/Parallax/Phone/PhoneEffects")
 @onready var camera: Camera2D = get_node("/root/World/Player/Camera2D")
 @onready var player: CharacterBody2D = %Player
 @onready var phone_os: Control = $PhoneOS
