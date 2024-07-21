@@ -2,8 +2,8 @@ extends Node
 
 #region VARIABLES
 @onready var player: CharacterBody2D = get_node("/root/World/Player")
-@onready var asuka: Area2D = get_node("/root/World/Asuka")
-@onready var window: Area2D = get_node("/root/World/Window")
+@onready var asuka: Area2D = get_node("/root/World/Parallax/Interior/TrainInterior/Asuka")
+@onready var window: Area2D = get_node("/root/World/Parallax/Interior/TrainInterior/Window")
 
 @export_group("Volumes")
 @export var master_volume: float = -80.0

@@ -1,20 +1,264 @@
-[gd_scene load_steps=25 format=3 uid="uid://bduasgadssrkv"]
+[gd_scene load_steps=77 format=3 uid="uid://bduasgadssrkv"]
 
-[ext_resource type="Script" path="res://scripts/window.gd" id="3_hvl1r"]
+[ext_resource type="PackedScene" uid="uid://c7j5d8r5sk27h" path="res://scenes/landscape_3d.tscn" id="1_ai645"]
+[ext_resource type="Script" path="res://scripts/train_shake.gd" id="2_7fjtw"]
+[ext_resource type="Texture2D" uid="uid://ip8dxv4o43su" path="res://assets/sprites/train_interior_4.png" id="3_7ts8l"]
 [ext_resource type="Script" path="res://scripts/asuka.gd" id="4_1kcn2"]
-[ext_resource type="PackedScene" uid="uid://cix2lesxh03hi" path="res://scenes/background.tscn" id="4_u7jec"]
+[ext_resource type="Texture2D" uid="uid://ov4f4sw15511" path="res://assets/sprites/window_bloom.png" id="4_eoyyj"]
+[ext_resource type="Texture2D" uid="uid://c4diutnn3mgf2" path="res://assets/sprites/asuka/asuka_2_full.png" id="5_lrgvi"]
 [ext_resource type="Texture2D" uid="uid://b3fu3e6jaa486" path="res://assets/sprites/player_hand_phone.png" id="6_mhxfc"]
+[ext_resource type="Texture2D" uid="uid://bmwmuurf3j717" path="res://assets/sprites/asuka/asuka_pose_2.png" id="6_p54hs"]
 [ext_resource type="Texture2D" uid="uid://u64fsii1e5a4" path="res://assets/utils/Screenshot (534).png" id="7_flpj4"]
 [ext_resource type="PackedScene" uid="uid://dg55yu6bit6jt" path="res://scenes/phone_os.tscn" id="7_g2i3f"]
 [ext_resource type="Script" path="res://scripts/phone.gd" id="7_lhypb"]
+[ext_resource type="Texture2D" uid="uid://bcrsaek2pemhn" path="res://assets/sprites/asuka/AsukaFace2.png" id="7_oum2k"]
+[ext_resource type="Texture2D" uid="uid://tjvml2dc0u5f" path="res://assets/sprites/asuka/AsukaEyes2.png" id="8_8jj4k"]
+[ext_resource type="Texture2D" uid="uid://buem7gctx38rw" path="res://assets/sprites/asuka/asuka_pose_3.png" id="9_n1wo8"]
 [ext_resource type="PackedScene" uid="uid://o0205cjoosgq" path="res://scenes/player.tscn" id="9_o22lg"]
+[ext_resource type="Texture2D" uid="uid://ce5vpwtyw6nlq" path="res://assets/sprites/asuka/AsukaFace3.png" id="10_jbubx"]
+[ext_resource type="Texture2D" uid="uid://be7sfk8c7tle" path="res://assets/sprites/asuka/AsukaEyes3.png" id="11_cxplx"]
 [ext_resource type="Shader" path="res://shaders/color_soft_light.gdshader" id="12_ghcqe"]
 [ext_resource type="Script" path="res://scripts/color_filter.gd" id="12_x0p2c"]
+[ext_resource type="Texture2D" uid="uid://c37e61wxony0k" path="res://assets/sprites/asuka/asuka_3_arms.png" id="12_xkv3r"]
 [ext_resource type="Script" path="res://scripts/phone_effects.gd" id="13_el7tb"]
+[ext_resource type="Texture2D" uid="uid://p8u26rag8l26" path="res://assets/sprites/table.png" id="13_ytkff"]
+[ext_resource type="Texture2D" uid="uid://dytaahhvtp1wg" path="res://assets/sprites/player_legs.png" id="14_2c2yt"]
+[ext_resource type="Shader" path="res://shaders/god_rays.gdshader" id="15_2eder"]
 [ext_resource type="Shader" path="res://shaders/blur_and_fisheye.gdshader" id="15_80wp3"]
 [ext_resource type="Script" path="res://scripts/player_effects.gd" id="16_6m8c5"]
 [ext_resource type="Shader" path="res://shaders/blur_vignette.gdshader" id="17_5vfsr"]
 [ext_resource type="Shader" path="res://shaders/vignette_color.gdshader" id="18_bmhia"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8wvv8"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_neuer"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_674om"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_boryj"]
+normal = Vector2(1, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4pbus"]
+atlas = ExtResource("7_oum2k")
+region = Rect2(0, 0, 400, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slcnr"]
+atlas = ExtResource("7_oum2k")
+region = Rect2(400, 0, 400, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wokji"]
+atlas = ExtResource("7_oum2k")
+region = Rect2(800, 0, 400, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eoxti"]
+atlas = ExtResource("7_oum2k")
+region = Rect2(1200, 0, 400, 360)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3cad3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4pbus")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slcnr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wokji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eoxti")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h340k"]
+atlas = ExtResource("8_8jj4k")
+region = Rect2(640, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l74th"]
+atlas = ExtResource("8_8jj4k")
+region = Rect2(320, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cuwro"]
+atlas = ExtResource("8_8jj4k")
+region = Rect2(0, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycdjo"]
+atlas = ExtResource("8_8jj4k")
+region = Rect2(320, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thaih"]
+atlas = ExtResource("8_8jj4k")
+region = Rect2(0, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmiyb"]
+atlas = ExtResource("8_8jj4k")
+region = Rect2(320, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f84kw"]
+atlas = ExtResource("8_8jj4k")
+region = Rect2(640, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6im2"]
+atlas = ExtResource("8_8jj4k")
+region = Rect2(960, 0, 320, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e4ks2"]
+animations = [{
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_h340k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l74th")
+}],
+"loop": true,
+"name": &"blink_lookaway",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_cuwro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycdjo")
+}],
+"loop": true,
+"name": &"blink_normal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thaih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmiyb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f84kw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6im2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvtum"]
+atlas = ExtResource("10_jbubx")
+region = Rect2(0, 0, 400, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgyed"]
+atlas = ExtResource("10_jbubx")
+region = Rect2(400, 0, 400, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jvyw"]
+atlas = ExtResource("10_jbubx")
+region = Rect2(800, 0, 400, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgo75"]
+atlas = ExtResource("10_jbubx")
+region = Rect2(1200, 0, 400, 360)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d1t00"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvtum")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgyed")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jvyw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgo75")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13fad"]
+atlas = ExtResource("11_cxplx")
+region = Rect2(640, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wo6kp"]
+atlas = ExtResource("11_cxplx")
+region = Rect2(320, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mikp"]
+atlas = ExtResource("11_cxplx")
+region = Rect2(0, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjw8x"]
+atlas = ExtResource("11_cxplx")
+region = Rect2(320, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7svb"]
+atlas = ExtResource("11_cxplx")
+region = Rect2(0, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqagi"]
+atlas = ExtResource("11_cxplx")
+region = Rect2(320, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ol0om"]
+atlas = ExtResource("11_cxplx")
+region = Rect2(640, 0, 320, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8ce5"]
+atlas = ExtResource("11_cxplx")
+region = Rect2(960, 0, 320, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mpsev"]
+animations = [{
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_13fad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wo6kp")
+}],
+"loop": true,
+"name": &"blink_lookaway",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_8mikp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjw8x")
+}],
+"loop": true,
+"name": &"blink_normal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7svb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqagi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ol0om")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8ce5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bgwpj"]
 radius = 186.0
@@ -22,6 +266,45 @@ height = 576.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_klsqp"]
 radius = 30.2653
+
+[sub_resource type="Gradient" id="Gradient_diw60"]
+interpolation_mode = 2
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fkblq"]
+gradient = SubResource("Gradient_diw60")
+
+[sub_resource type="Gradient" id="Gradient_bfedf"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_blyts"]
+gradient = SubResource("Gradient_bfedf")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e6ao8"]
+shader = ExtResource("15_2eder")
+shader_parameter/angle = 1.025
+shader_parameter/position = 0.265
+shader_parameter/spread = 0.428
+shader_parameter/cutoff = -0.231
+shader_parameter/falloff = 0.607
+shader_parameter/edge_fade = 0.503
+shader_parameter/speed = 1.0
+shader_parameter/ray1_density = 1.325
+shader_parameter/ray2_density = 23.505
+shader_parameter/ray2_intensity = 0.3
+shader_parameter/color = Vector4(1, 1, 1, 0.3)
+shader_parameter/hdr = false
+shader_parameter/seed = 10.0
+
+[sub_resource type="Gradient" id="Gradient_1jydq"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v17xp"]
+gradient = SubResource("Gradient_1jydq")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0.976068)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31m52"]
 radius = 3.6443
@@ -60,58 +343,217 @@ shader_parameter/overlay_color = Vector4(0, 0, 0, 0)
 
 [node name="World" type="Node2D"]
 
-[node name="Background" parent="." instance=ExtResource("4_u7jec")]
+[node name="WorldBoundaries" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 8
 
-[node name="Asuka" type="Area2D" parent="."]
+[node name="TopBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
+visibility_layer = 2
+position = Vector2(0, -1500)
+shape = SubResource("WorldBoundaryShape2D_8wvv8")
+
+[node name="BottomBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
+visibility_layer = 2
+position = Vector2(0, 2250)
+shape = SubResource("WorldBoundaryShape2D_neuer")
+
+[node name="RightBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
+visibility_layer = 2
+position = Vector2(2250, 0)
+shape = SubResource("WorldBoundaryShape2D_674om")
+
+[node name="LeftBoundary" type="CollisionShape2D" parent="WorldBoundaries"]
+visibility_layer = 2
+position = Vector2(-2500, 0)
+shape = SubResource("WorldBoundaryShape2D_boryj")
+
+[node name="Parallax" type="ParallaxBackground" parent="."]
+layer = 0
+follow_viewport_enabled = true
+
+[node name="Outside" type="ParallaxLayer" parent="Parallax"]
+motion_scale = Vector2(0, 0)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Parallax/Outside"]
+z_index = -1
+clip_contents = true
+offset_left = 507.0
+offset_top = -1576.0
+offset_right = 987.0
+offset_bottom = -776.0
+scale = Vector2(4, 4)
+
+[node name="SubViewport" type="SubViewport" parent="Parallax/Outside/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(480, 800)
+render_target_update_mode = 4
+
+[node name="Landscape3D" parent="Parallax/Outside/SubViewportContainer/SubViewport" instance=ExtResource("1_ai645")]
+
+[node name="Interior" type="ParallaxLayer" parent="Parallax"]
+motion_scale = Vector2(0.6, 0.8)
+
+[node name="TrainInterior" type="Node2D" parent="Parallax/Interior"]
+script = ExtResource("2_7fjtw")
+
+[node name="TrainSprite" type="Sprite2D" parent="Parallax/Interior/TrainInterior"]
+modulate = Color(0.425956, 0.425956, 0.425956, 1)
+position = Vector2(-140, 349)
+scale = Vector2(0.78875, 0.78875)
+texture = ExtResource("3_7ts8l")
+
+[node name="Asuka" type="Area2D" parent="Parallax/Interior/TrainInterior"]
 position = Vector2(-779, 81)
 collision_mask = 4
 input_pickable = false
 script = ExtResource("4_1kcn2")
 
-[node name="AsukaEnterCollision" type="CollisionShape2D" parent="Asuka"]
+[node name="Asuka2" type="Node2D" parent="Parallax/Interior/TrainInterior/Asuka"]
+visible = false
+modulate = Color(0.940198, 0.940198, 0.940198, 1)
+position = Vector2(26, -81)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Interior/TrainInterior/Asuka/Asuka2"]
+visible = false
+position = Vector2(-270, 456)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("5_lrgvi")
+
+[node name="AsukaPose2" type="Sprite2D" parent="Parallax/Interior/TrainInterior/Asuka/Asuka2"]
+position = Vector2(-204.435, 448)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("6_p54hs")
+
+[node name="AsukaFace2" type="AnimatedSprite2D" parent="Parallax/Interior/TrainInterior/Asuka/Asuka2"]
+position = Vector2(-5, -166.8)
+scale = Vector2(0.39, 0.39)
+sprite_frames = SubResource("SpriteFrames_3cad3")
+frame = 1
+
+[node name="AsukaEyes2" type="AnimatedSprite2D" parent="Parallax/Interior/TrainInterior/Asuka/Asuka2"]
+position = Vector2(-6, -199.8)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_e4ks2")
+animation = &"blink_lookaway"
+autoplay = "blink_normal"
+
+[node name="Asuka3" type="Node2D" parent="Parallax/Interior/TrainInterior/Asuka"]
+modulate = Color(0.940198, 0.940198, 0.940198, 1)
+position = Vector2(-17, -89)
+
+[node name="AsukaPose3" type="Sprite2D" parent="Parallax/Interior/TrainInterior/Asuka/Asuka3"]
+position = Vector2(-30.6, 513)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("9_n1wo8")
+
+[node name="AsukaFace3" type="AnimatedSprite2D" parent="Parallax/Interior/TrainInterior/Asuka/Asuka3"]
+position = Vector2(-32.6, -73)
+scale = Vector2(0.43, 0.43)
+sprite_frames = SubResource("SpriteFrames_d1t00")
+
+[node name="AsukaEyes3" type="AnimatedSprite2D" parent="Parallax/Interior/TrainInterior/Asuka/Asuka3"]
+position = Vector2(-33.6, -100)
+scale = Vector2(0.43, 0.43)
+sprite_frames = SubResource("SpriteFrames_mpsev")
+animation = &"blink_lookaway"
+autoplay = "blink_normal"
+
+[node name="AsukaArms3" type="Sprite2D" parent="Parallax/Interior/TrainInterior/Asuka/Asuka3"]
+z_index = 1
+position = Vector2(-55.6, 502)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("12_xkv3r")
+
+[node name="AsukaEnterCollision" type="CollisionShape2D" parent="Parallax/Interior/TrainInterior/Asuka"]
 position = Vector2(-13, -54)
 shape = SubResource("CapsuleShape2D_bgwpj")
 
-[node name="Window" type="Area2D" parent="."]
+[node name="Window" type="Area2D" parent="Parallax/Interior/TrainInterior"]
 position = Vector2(1951, -506)
 collision_mask = 4
 input_pickable = false
-script = ExtResource("3_hvl1r")
 
-[node name="WindowCollision" type="CollisionShape2D" parent="Window"]
+[node name="WindowCollision" type="CollisionShape2D" parent="Parallax/Interior/TrainInterior/Window"]
 scale = Vector2(47.685, 47.685)
 shape = SubResource("CircleShape2D_klsqp")
 
-[node name="PhoneCanvas" type="ParallaxBackground" parent="."]
-layer = 3
-follow_viewport_enabled = true
+[node name="Table" type="Sprite2D" parent="Parallax/Interior/TrainInterior"]
+modulate = Color(0.691357, 0.691357, 0.691357, 1)
+position = Vector2(-99, 338)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("13_ytkff")
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="PhoneCanvas"]
+[node name="PlayerLegs" type="Sprite2D" parent="Parallax/Interior/TrainInterior"]
+self_modulate = Color(0.860369, 0.860369, 0.860369, 1)
+position = Vector2(282, 1607)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("14_2c2yt")
+
+[node name="Lighting" type="Node2D" parent="Parallax/Interior"]
+
+[node name="Darkness" type="Sprite2D" parent="Parallax/Interior/Lighting"]
+modulate = Color(1, 1, 1, 0.690196)
+z_index = 1
+position = Vector2(-405.936, 1559.65)
+rotation = 2.2131
+scale = Vector2(57.4442, 115.452)
+texture = SubResource("GradientTexture2D_fkblq")
+
+[node name="Darkness2" type="Sprite2D" parent="Parallax/Interior/Lighting"]
+modulate = Color(1, 1, 1, 0.403922)
+z_index = 1
+position = Vector2(376.192, 1129.9)
+rotation = 1.5708
+scale = Vector2(34.7226, 91.4128)
+texture = SubResource("GradientTexture2D_fkblq")
+
+[node name="Darkness3" type="Sprite2D" parent="Parallax/Interior/Lighting"]
+modulate = Color(1, 1, 1, 0.690196)
+z_index = 1
+position = Vector2(-1822, -205)
+rotation = -0.874923
+scale = Vector2(90.9099, 45.8076)
+texture = SubResource("GradientTexture2D_blyts")
+
+[node name="GodRays" type="Sprite2D" parent="Parallax/Interior/Lighting"]
+z_index = 1
+material = SubResource("ShaderMaterial_e6ao8")
+position = Vector2(-1471.39, 2242.34)
+scale = Vector2(75.9844, 61.1351)
+texture = SubResource("GradientTexture2D_v17xp")
+offset = Vector2(17.16, -30.975)
+
+[node name="WindowLight" type="Sprite2D" parent="Parallax/Interior/Lighting"]
+position = Vector2(1383, 11)
+scale = Vector2(1.0767, 1.0767)
+texture = ExtResource("4_eoyyj")
+
+[node name="Phone" type="ParallaxLayer" parent="Parallax"]
 position = Vector2(218, 0)
-motion_scale = Vector2(0.4, 0.1)
+motion_scale = Vector2(0.8, 1)
 
-[node name="Phone" type="Area2D" parent="PhoneCanvas/ParallaxLayer"]
+[node name="Phone" type="Area2D" parent="Parallax/Phone"]
 z_index = 2
 position = Vector2(-137, 1578)
 scale = Vector2(0.7, 0.7)
 collision_mask = 4
 script = ExtResource("7_lhypb")
 
-[node name="PhoneSprite" type="Sprite2D" parent="PhoneCanvas/ParallaxLayer/Phone"]
+[node name="PhoneSprite" type="Sprite2D" parent="Parallax/Phone/Phone"]
 modulate = Color(0.727986, 0.727986, 0.727986, 1)
 position = Vector2(-4.28572, 10.0001)
 scale = Vector2(0.646, 0.646)
 texture = ExtResource("6_mhxfc")
 offset = Vector2(760, 820)
 
-[node name="PhoneOS" parent="PhoneCanvas/ParallaxLayer/Phone" instance=ExtResource("7_g2i3f")]
+[node name="PhoneOS" parent="Parallax/Phone/Phone" instance=ExtResource("7_g2i3f")]
 offset_left = -355.714
 offset_top = -351.428
 offset_right = 1244.29
 offset_bottom = 1248.57
 scale = Vector2(0.44, 0.44)
 
-[node name="PhoneCollision" type="CollisionShape2D" parent="PhoneCanvas/ParallaxLayer/Phone"]
+[node name="PhoneCollision" type="CollisionShape2D" parent="Parallax/Phone/Phone"]
 position = Vector2(0, 14.3236)
 scale = Vector2(37.2402, 33.1369)
 shape = SubResource("CapsuleShape2D_31m52")
@@ -208,9 +650,7 @@ offset_right = 3403.0
 offset_bottom = 2388.0
 mouse_filter = 2
 
-[connection signal="area_entered" from="Asuka" to="Asuka" method="_on_area_entered"]
-[connection signal="area_exited" from="Asuka" to="Asuka" method="_on_area_exited"]
-[connection signal="area_entered" from="Window" to="Window" method="_on_area_entered"]
-[connection signal="area_exited" from="Window" to="Window" method="_on_area_exited"]
-[connection signal="area_entered" from="PhoneCanvas/ParallaxLayer/Phone" to="PhoneCanvas/ParallaxLayer/Phone" method="_on_area_entered"]
-[connection signal="mouse_exited" from="PhoneCanvas/ParallaxLayer/Phone/PhoneOS" to="PhoneCanvas/ParallaxLayer/Phone" method="_on_phone_os_mouse_exited"]
+[connection signal="area_entered" from="Parallax/Interior/TrainInterior/Asuka" to="Parallax/Interior/TrainInterior/Asuka" method="_on_area_entered"]
+[connection signal="area_exited" from="Parallax/Interior/TrainInterior/Asuka" to="Parallax/Interior/TrainInterior/Asuka" method="_on_area_exited"]
+[connection signal="area_entered" from="Parallax/Phone/Phone" to="Parallax/Phone/Phone" method="_on_area_entered"]
+[connection signal="mouse_exited" from="Parallax/Phone/Phone/PhoneOS" to="Parallax/Phone/Phone" method="_on_phone_os_mouse_exited"]

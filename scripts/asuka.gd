@@ -5,17 +5,19 @@ extends Area2D
 @export var dialogue_start: String = "asuka_intro"
 @export var dialogue_balloon: Resource = load("res://scenes/balloons/dialogue_balloon.tscn")
 
-@onready var asuka_2: Node2D = get_node("/root/World/Background/TrainInterior/Asuka2")
-@onready var asuka_3: Node2D = get_node("/root/World/Background/TrainInterior/Asuka3")
-@onready var pose_2: Sprite2D = get_node("/root/World/Background/TrainInterior/Asuka2/AsukaPose2")
-@onready var pose_3: Sprite2D = get_node("/root/World/Background/TrainInterior/Asuka3/AsukaPose3")
-@onready var face_2: AnimatedSprite2D = get_node("/root/World/Background/TrainInterior/Asuka2/AsukaFace2")
-@onready var face_3: AnimatedSprite2D = get_node("/root/World/Background/TrainInterior/Asuka3/AsukaFace3")
-@onready var eyes_2: AnimatedSprite2D = get_node("/root/World/Background/TrainInterior/Asuka2/AsukaEyes2")
-@onready var eyes_3: AnimatedSprite2D = get_node("/root/World/Background/TrainInterior/Asuka3/AsukaEyes3")
-@onready var arms_3: Sprite2D = get_node("/root/World/Background/TrainInterior/Asuka3/AsukaArms3")
+@onready var asuka_2: Node2D = $Asuka2
+@onready var asuka_3: Node2D = $Asuka3
 
-@onready var camera: Camera2D = $"../Player/Camera2D"
+@onready var pose_3: Sprite2D = $Asuka3/AsukaPose3
+@onready var face_3: AnimatedSprite2D = $Asuka3/AsukaFace3
+@onready var eyes_3: AnimatedSprite2D = $Asuka3/AsukaEyes3
+@onready var arms_3: Sprite2D = $Asuka3/AsukaArms3
+
+@onready var pose_2: Sprite2D = $Asuka2/AsukaPose2
+@onready var face_2: AnimatedSprite2D = $Asuka2/AsukaFace2
+@onready var eyes_2: AnimatedSprite2D = $Asuka2/AsukaEyes2
+
+@onready var camera: Camera2D = $"../../../../Player/Camera2D"
 @onready var player: CharacterBody2D = %Player
 
 var is_dialogue_started: bool = false

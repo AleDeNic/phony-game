@@ -1,9 +1,8 @@
 extends CharacterBody2D
 
-@onready var phone: Area2D = $"../PhoneCanvas/ParallaxLayer/Phone"
+@onready var phone: Area2D = $"../Parallax/Phone/Phone"
 @onready var control: Control = $Control
-@onready var camera: Camera2D = $"../Player/Camera2D"
-
+@onready var camera: Camera2D = $Camera2D
 
 const DEFAULT_SPEED: float = 140.0
 const TRANSITION_SPEED: float = 10.0

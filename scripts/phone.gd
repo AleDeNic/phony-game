@@ -9,7 +9,6 @@ extends Area2D
 @onready var camera: Camera2D = get_node("/root/World/Player/Camera2D")
 @onready var player: CharacterBody2D = %Player
 @onready var phone_os: Control = $PhoneOS
-@onready var parallax_layer: ParallaxLayer = $".."
 
 const MIN_SCALE: Vector2 = Vector2(0.7, 0.7)
 const MAX_SCALE: Vector2 = Vector2(2.0, 2.0)
@@ -142,9 +141,3 @@ func update_rotation(delta: float) -> void:
 		new_rotation = clamp(new_rotation, MIN_ROTATION, MAX_ROTATION)
 		rotation_degrees = new_rotation
 #endregion
-
-#func decrease_parallax() -> void:
-	#parallax_layer.motion_scale = Vector2(0.0, 0.0)
-#
-#func increase_parallax() -> void:
-	#parallax_layer.motion_scale = Vector2(0.2, 0.2)
