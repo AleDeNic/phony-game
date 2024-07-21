@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var phone: Area2D = $"../Parallax/Phone/Phone"
+@onready var phone: Area2D = $"../PhoneParallax/PhoneLayer/Phone"
 @onready var control: Control = $Control
 @onready var camera: Camera2D = $Camera2D
 

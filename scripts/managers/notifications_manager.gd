@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var phone_os: Control = get_node("/root/World/Parallax/Phone/Phone/PhoneOS")
+@onready var phone_os: Control = get_node("/root/World/PhoneParallax/PhoneLayer/Phone/PhoneOS")
 @onready var player: CharacterBody2D = get_node("/root/World/Player")
 
 signal notification_arrived

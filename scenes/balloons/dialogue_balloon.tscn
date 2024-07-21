@@ -38,8 +38,6 @@ expand_margin_bottom = 6.0
 layer = 0
 follow_viewport_enabled = true
 script = ExtResource("1_cwkdr")
-next_action = null
-skip_action = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false

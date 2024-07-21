@@ -306,14 +306,14 @@ gradient = SubResource("Gradient_1jydq")
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0.976068)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31m52"]
+radius = 3.6443
+height = 13.7933
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nv2ku"]
 shader = ExtResource("15_80wp3")
 shader_parameter/lod = 0.0
 shader_parameter/effect_amount = -0.0799999
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31m52"]
-radius = 3.6443
-height = 13.7933
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8rrhg"]
 shader = ExtResource("17_5vfsr")
@@ -352,7 +352,6 @@ z_index = -1
 motion_scale = Vector2(0, 0)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Parallax/Outside"]
-visible = false
 z_index = -1
 clip_contents = true
 offset_left = 507.0
@@ -364,7 +363,7 @@ scale = Vector2(4, 4)
 [node name="SubViewport" type="SubViewport" parent="Parallax/Outside/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(480, 800)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="Landscape3D" parent="Parallax/Outside/SubViewportContainer/SubViewport" instance=ExtResource("1_ai645")]
 
@@ -531,65 +530,33 @@ position = Vector2(1383, 11)
 scale = Vector2(1.0767, 1.0767)
 texture = ExtResource("4_eoyyj")
 
-[node name="Phone" type="ParallaxLayer" parent="Parallax"]
-position = Vector2(218, 0)
+[node name="PhoneParallax" type="ParallaxBackground" parent="."]
+layer = 3
+follow_viewport_enabled = true
 
-[node name="PhoneEffects" type="Control" parent="Parallax/Phone"]
-layout_mode = 3
-anchors_preset = 0
-script = ExtResource("13_el7tb")
+[node name="PhoneLayer" type="ParallaxLayer" parent="PhoneParallax"]
 
-[node name="BlueFilter" type="ColorRect" parent="Parallax/Phone/PhoneEffects"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -2823.0
-offset_top = -1570.0
-offset_right = 2042.0
-offset_bottom = 2407.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 0.854902)
-
-[node name="BlurFisheye" type="ColorRect" parent="Parallax/Phone/PhoneEffects"]
-material = SubResource("ShaderMaterial_nv2ku")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -2801.0
-offset_top = -1688.0
-offset_right = 2097.0
-offset_bottom = 2333.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Phone" type="Area2D" parent="Parallax/Phone"]
-z_index = 3
-position = Vector2(-137, 1578)
+[node name="Phone" type="Area2D" parent="PhoneParallax/PhoneLayer"]
+position = Vector2(324, 1471)
 scale = Vector2(0.7, 0.7)
 collision_mask = 4
 script = ExtResource("7_lhypb")
 
-[node name="PhoneSprite" type="Sprite2D" parent="Parallax/Phone/Phone"]
+[node name="PhoneSprite" type="Sprite2D" parent="PhoneParallax/PhoneLayer/Phone"]
 modulate = Color(0.727986, 0.727986, 0.727986, 1)
 position = Vector2(-4.28572, 10.0001)
 scale = Vector2(0.646, 0.646)
 texture = ExtResource("6_mhxfc")
 offset = Vector2(760, 820)
 
-[node name="PhoneOS" parent="Parallax/Phone/Phone" instance=ExtResource("7_g2i3f")]
+[node name="PhoneOS" parent="PhoneParallax/PhoneLayer/Phone" instance=ExtResource("7_g2i3f")]
 offset_left = -355.714
 offset_top = -351.428
 offset_right = 1244.29
 offset_bottom = 1248.57
 scale = Vector2(0.44, 0.44)
 
-[node name="PhoneCollision" type="CollisionShape2D" parent="Parallax/Phone/Phone"]
+[node name="PhoneCollision" type="CollisionShape2D" parent="PhoneParallax/PhoneLayer/Phone"]
 position = Vector2(0, 14.3236)
 scale = Vector2(37.2402, 33.1369)
 shape = SubResource("CapsuleShape2D_31m52")
@@ -603,6 +570,36 @@ unique_name_in_owner = true
 visible = false
 position = Vector2(970, 529)
 texture = ExtResource("7_flpj4")
+
+[node name="PhoneEffects" type="CanvasLayer" parent="SceneEffects"]
+script = ExtResource("13_el7tb")
+
+[node name="BlueFilter" type="ColorRect" parent="SceneEffects/PhoneEffects"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2823.0
+offset_top = -1570.0
+offset_right = 2042.0
+offset_bottom = 2407.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.854902)
+
+[node name="BlurFisheye" type="ColorRect" parent="SceneEffects/PhoneEffects"]
+material = SubResource("ShaderMaterial_nv2ku")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2801.0
+offset_top = -1688.0
+offset_right = 2097.0
+offset_bottom = 2333.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="PlayerEffects" type="CanvasLayer" parent="SceneEffects"]
 layer = 2
@@ -658,5 +655,5 @@ mouse_filter = 2
 
 [connection signal="area_entered" from="Parallax/Interior/TrainInterior/Asuka" to="Parallax/Interior/TrainInterior/Asuka" method="_on_area_entered"]
 [connection signal="area_exited" from="Parallax/Interior/TrainInterior/Asuka" to="Parallax/Interior/TrainInterior/Asuka" method="_on_area_exited"]
-[connection signal="area_entered" from="Parallax/Phone/Phone" to="Parallax/Phone/Phone" method="_on_area_entered"]
-[connection signal="mouse_exited" from="Parallax/Phone/Phone/PhoneOS" to="Parallax/Phone/Phone" method="_on_phone_os_mouse_exited"]
+[connection signal="area_entered" from="PhoneParallax/PhoneLayer/Phone" to="PhoneParallax/PhoneLayer/Phone" method="_on_area_entered"]
+[connection signal="mouse_exited" from="PhoneParallax/PhoneLayer/Phone/PhoneOS" to="PhoneParallax/PhoneLayer/Phone" method="_on_phone_os_mouse_exited"]
