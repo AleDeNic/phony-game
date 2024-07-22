@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://u7setssrv4jy"]
+
+[ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="1_35phq"]
+
+[resource]
+font = ExtResource("1_35phq")
+font_size = 48
+font_color = Color(0, 0, 0, 0.941176)

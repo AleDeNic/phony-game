@@ -21,6 +21,7 @@ const STRANGER_COLOR: String = "#5973FF"
 # ---- SCREENS ----
 @onready var apps: Control = $PhoneSize/Apps
 @onready var settings: Control = $PhoneSize/Settings
+@onready var music: Control = $PhoneSize/Music
 @onready var camera: Control = $PhoneSize/Camera
 @onready var chat: Control = $PhoneSize/Chat
 @onready var coming_soon: Control = $PhoneSize/ComingSoon
@@ -88,6 +89,7 @@ func reset_screens() -> void:
 	bottom_bar.hide()
 	apps.hide()
 	settings.hide()
+	music.hide()
 	camera.hide()
 	chat.hide()
 	coming_soon.hide()
@@ -125,7 +127,7 @@ func _on_video_pressed() -> void:
 	go_to_screen(coming_soon)
 
 func _on_music_pressed() -> void:
-	go_to_screen(coming_soon)
+	go_to_screen(music)
 
 func _on_gaming_pressed() -> void:
 	go_to_screen(coming_soon)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dg55yu6bit6jt"]
+[gd_scene load_steps=47 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_os.gd" id="1_r0wjl"]
 [ext_resource type="Shader" path="res://shaders/blur_color.gdshader" id="3_2wg1f"]
@@ -17,11 +17,16 @@
 [ext_resource type="Theme" uid="uid://v3wqj6dvklo0" path="res://ui/themes/phone_os.tres" id="12_fsmwd"]
 [ext_resource type="Texture2D" uid="uid://c0n6yi64tlmmt" path="res://assets/ui/send.png" id="13_hdb4n"]
 [ext_resource type="StyleBox" uid="uid://bkskyjp3vt3rs" path="res://ui/styles/bubble_chat.tres" id="13_o3gel"]
+[ext_resource type="LabelSettings" uid="uid://dwf7rk65q3tue" path="res://ui/settings/artist_label.tres" id="13_tlvqr"]
+[ext_resource type="LabelSettings" uid="uid://u7setssrv4jy" path="res://ui/settings/song_label.tres" id="14_57ane"]
 [ext_resource type="LabelSettings" uid="uid://do3s44f43vkkm" path="res://ui/settings/os_text.tres" id="14_n38hu"]
 [ext_resource type="StyleBox" uid="uid://jgie8qpxs0gh" path="res://ui/styles/bubble_player.tres" id="14_yaw3x"]
 [ext_resource type="Texture2D" uid="uid://b535qnl8st5wi" path="res://assets/ui/back.png" id="15_0cf0y"]
+[ext_resource type="Texture2D" uid="uid://kk1jxtqbj1tk" path="res://assets/ui/skip_back.png" id="16_484hk"]
 [ext_resource type="Texture2D" uid="uid://dhc8q2h36kxwr" path="res://assets/ui/home.png" id="16_hax3j"]
+[ext_resource type="Texture2D" uid="uid://dus4f2b4kjak4" path="res://assets/ui/play.png" id="17_1q1nn"]
 [ext_resource type="Texture2D" uid="uid://cewdbxx36id1s" path="res://assets/ui/settings.png" id="17_26q5e"]
+[ext_resource type="Texture2D" uid="uid://b6pdrk6ys3jwb" path="res://assets/ui/skip_forward.png" id="18_d7wym"]
 [ext_resource type="Theme" uid="uid://b0uon3iawrhwg" path="res://ui/themes/asuka_dialogue.tres" id="19_dm1ly"]
 [ext_resource type="StyleBox" uid="uid://c6yj5nlxgbf6q" path="res://ui/styles/bottom_bar_hover.tres" id="24_4o1io"]
 [ext_resource type="StyleBox" uid="uid://drw7cjkbby3nk" path="res://ui/styles/bottom_bar_pressed.tres" id="25_a714u"]
@@ -61,6 +66,12 @@ draw_center = false
 bg_color = Color(0.945098, 0, 0.32549, 0.470588)
 expand_margin_left = 48.0
 expand_margin_right = 48.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3rock"]
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="Gradient" id="Gradient_p7c3o"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
@@ -356,6 +367,7 @@ text = "We are pleased to inform you that this application will be available in 
 Thank you for your understanding and continued support."
 
 [node name="Settings" type="Control" parent="PhoneSize"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -388,7 +400,6 @@ theme = ExtResource("12_fsmwd")
 theme_override_font_sizes/font_size = 48
 text = "Settings"
 label_settings = ExtResource("8_0yw4n")
-horizontal_alignment = 3
 vertical_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="PhoneSize/Settings/MarginContainer/VBoxContainer2"]
@@ -487,6 +498,132 @@ theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_styles/hover = SubResource("StyleBoxFlat_ssxcj")
 text = "Quit"
 alignment = 0
+
+[node name="Music" type="Control" parent="PhoneSize"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/Music"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_fsmwd")
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_bottom = 160
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PhoneSize/Music/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("12_fsmwd")
+
+[node name="MyMusic" type="Label" parent="PhoneSize/Music/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+theme_override_font_sizes/font_size = 48
+text = "My music"
+label_settings = ExtResource("8_0yw4n")
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PhoneSize/Music/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+theme_override_constants/separation = 48
+
+[node name="ColorRect" type="PanelContainer" parent="PhoneSize/Music/MarginContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 624)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+theme_override_styles/panel = SubResource("StyleBoxFlat_3rock")
+
+[node name="Sprite2D" type="Sprite2D" parent="PhoneSize/Music/MarginContainer/VBoxContainer/ColorRect"]
+position = Vector2(384, 519)
+texture = ExtResource("7_7bxb7")
+
+[node name="HSeparator4" type="HSeparator" parent="PhoneSize/Music/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+theme_override_constants/separation = 40
+
+[node name="Artist" type="Label" parent="PhoneSize/Music/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+theme_override_font_sizes/font_size = 48
+text = "bottolo"
+label_settings = ExtResource("13_tlvqr")
+vertical_alignment = 1
+
+[node name="Song" type="Label" parent="PhoneSize/Music/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+theme_override_font_sizes/font_size = 48
+text = "Phony Game OST"
+label_settings = ExtResource("14_57ane")
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="PhoneSize/Music/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+theme_override_constants/separation = 48
+
+[node name="HSlider" type="HSlider" parent="PhoneSize/Music/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+
+[node name="HSeparator3" type="HSeparator" parent="PhoneSize/Music/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+theme_override_constants/separation = 48
+
+[node name="PlaybackButtons" type="HBoxContainer" parent="PhoneSize/Music/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("12_fsmwd")
+
+[node name="SkipBack" type="Button" parent="PhoneSize/Music/MarginContainer/VBoxContainer/PlaybackButtons"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+icon = ExtResource("16_484hk")
+icon_alignment = 1
+
+[node name="PlayPause" type="Button" parent="PhoneSize/Music/MarginContainer/VBoxContainer/PlaybackButtons"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+icon = ExtResource("17_1q1nn")
+icon_alignment = 1
+
+[node name="SkipForward" type="Button" parent="PhoneSize/Music/MarginContainer/VBoxContainer/PlaybackButtons"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+icon = ExtResource("18_d7wym")
+icon_alignment = 1
 
 [node name="Camera" type="Control" parent="PhoneSize"]
 visible = false
@@ -731,7 +868,6 @@ size_flags_horizontal = 8
 size_flags_vertical = 4
 
 [node name="BottomBar" type="Control" parent="PhoneSize"]
-visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0

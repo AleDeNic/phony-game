@@ -1,6 +1,6 @@
 extends Node
 
-enum State { OFF, APPS, SETTINGS, CAMERA, CHAT, DISCHARGED, COMINGSOON }
+enum State { OFF, APPS, SETTINGS, MUSIC, CAMERA, CHAT, DISCHARGED, COMINGSOON }
 
 @onready var phone_state: State = State.OFF
 
@@ -21,6 +21,9 @@ func set_phone_in_apps() -> void:
 
 func set_phone_in_settings() -> void:
 	set_phone_state(State.SETTINGS)
+
+func set_phone_in_music() -> void:
+	set_phone_state(State.MUSIC)
 
 func set_phone_in_camera() -> void:
 	set_phone_state(State.CAMERA)
@@ -45,6 +48,8 @@ func get_state_value() -> String:
 			return "APPS"
 		State.SETTINGS:
 			return "SETTINGS"
+		State.MUSIC:
+			return "MUSIC"
 		State.CAMERA:
 			return "CAMERA"
 		State.CHAT:
@@ -64,6 +69,9 @@ func in_apps() -> bool:
 
 func in_settings() -> bool:
 	return phone_state == State.SETTINGS
+
+func in_music() -> bool:
+	return phone_state == State.MUSIC
 
 func in_camera() -> bool:
 	return phone_state == State.CAMERA
