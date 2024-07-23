@@ -1,9 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://bduasgadssrkv"]
+[gd_scene load_steps=26 format=3 uid="uid://bduasgadssrkv"]
 
 [ext_resource type="Script" path="res://scripts/window.gd" id="3_hvl1r"]
 [ext_resource type="Script" path="res://scripts/asuka.gd" id="4_1kcn2"]
 [ext_resource type="PackedScene" uid="uid://cix2lesxh03hi" path="res://scenes/background.tscn" id="4_u7jec"]
 [ext_resource type="Texture2D" uid="uid://b3fu3e6jaa486" path="res://assets/sprites/player_hand_phone.png" id="6_mhxfc"]
+[ext_resource type="Texture2D" uid="uid://b3xxpjgju12c" path="res://assets/sprites/player_hand_phone_camera.png" id="6_vx2a6"]
 [ext_resource type="Texture2D" uid="uid://u64fsii1e5a4" path="res://assets/utils/Screenshot (534).png" id="7_flpj4"]
 [ext_resource type="PackedScene" uid="uid://dg55yu6bit6jt" path="res://scenes/phone_os.tscn" id="7_g2i3f"]
 [ext_resource type="Script" path="res://scripts/phone.gd" id="7_lhypb"]
@@ -102,6 +103,14 @@ modulate = Color(0.727986, 0.727986, 0.727986, 1)
 position = Vector2(-4.28572, 10.0001)
 scale = Vector2(0.646, 0.646)
 texture = ExtResource("6_mhxfc")
+offset = Vector2(760, 820)
+
+[node name="PhoneCameraSprite" type="Sprite2D" parent="PhoneCanvas/ParallaxLayer/Phone"]
+visible = false
+modulate = Color(0.729412, 0.729412, 0.729412, 1)
+position = Vector2(-4.28571, 10)
+scale = Vector2(0.646, 0.646)
+texture = ExtResource("6_vx2a6")
 offset = Vector2(760, 820)
 
 [node name="PhoneOS" parent="PhoneCanvas/ParallaxLayer/Phone" instance=ExtResource("7_g2i3f")]

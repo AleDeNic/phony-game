@@ -46,6 +46,9 @@ var elapsed_seconds: float = 0.0
 @onready var input_message: LineEdit = $PhoneSize/Chat/MarginContainer/VBoxContainer/HBoxContainer/InputMessage
 @onready var cant_leave_alert: Label = $CantLeaveAlert
 @onready var phone_frame: Sprite2D = $PhoneSize/PhoneFrame
+@onready var phone_camera_sprite: Sprite2D = get_node("/root/World/PhoneCanvas/ParallaxLayer/Phone/PhoneCameraSprite")
+@onready var phone_sprite: Sprite2D = get_node("/root/World/PhoneCanvas/ParallaxLayer/Phone/PhoneSprite")
+
 # ----- MESSAGES -----
 var used_message_ids: Dictionary = {}
 var asuka_messages: Array = []
@@ -85,6 +88,9 @@ func _on_update_timer_timeout() -> void:
 
 #region NAVIGATION
 func reset_screens() -> void:
+	background.show()
+	phone_camera_sprite.hide()
+	phone_sprite.show()
 	top_bar.show()
 	bottom_bar.hide()
 	apps.hide()
@@ -121,7 +127,10 @@ func _on_settings_pressed() -> void:
 	go_to_screen(settings)
 
 func _on_camera_pressed() -> void:
-	go_to_screen(coming_soon)
+	go_to_screen(camera)
+	background.hide()
+	phone_sprite.hide()
+	phone_camera_sprite.show()
 
 func _on_video_pressed() -> void:
 	go_to_screen(coming_soon)

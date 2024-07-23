@@ -1,9 +1,9 @@
-[gd_scene load_steps=47 format=3 uid="uid://dg55yu6bit6jt"]
+[gd_scene load_steps=51 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_os.gd" id="1_r0wjl"]
 [ext_resource type="Shader" path="res://shaders/blur_color.gdshader" id="3_2wg1f"]
-[ext_resource type="Texture2D" uid="uid://b3fu3e6jaa486" path="res://assets/sprites/player_hand_phone.png" id="3_6d0u2"]
 [ext_resource type="Texture2D" uid="uid://bfg0lk6kvgptl" path="res://assets/ui/notification_icon.png" id="3_jnjbr"]
+[ext_resource type="Texture2D" uid="uid://b3xxpjgju12c" path="res://assets/sprites/player_hand_phone_camera.png" id="3_t5ecp"]
 [ext_resource type="FontFile" uid="uid://dllrqm3ycpbnt" path="res://ui/fonts/HDArnie-Regular.otf" id="4_1d7ag"]
 [ext_resource type="Script" path="res://scripts/volume_slider.gd" id="4_5jmmy"]
 [ext_resource type="FontFile" uid="uid://ca4j2u2x7wiml" path="res://ui/fonts/HDArnie-Italic.otf" id="4_pq3r1"]
@@ -28,6 +28,9 @@
 [ext_resource type="Texture2D" uid="uid://cewdbxx36id1s" path="res://assets/ui/settings.png" id="17_26q5e"]
 [ext_resource type="Texture2D" uid="uid://b6pdrk6ys3jwb" path="res://assets/ui/skip_forward.png" id="18_d7wym"]
 [ext_resource type="Theme" uid="uid://b0uon3iawrhwg" path="res://ui/themes/asuka_dialogue.tres" id="19_dm1ly"]
+[ext_resource type="Texture2D" uid="uid://c1wwwqduem2br" path="res://assets/ui/photos.png" id="19_nlh7j"]
+[ext_resource type="Texture2D" uid="uid://dodj2p1sq5q4o" path="res://assets/ui/shoot.png" id="20_fvnae"]
+[ext_resource type="Texture2D" uid="uid://b42uagmopsftq" path="res://assets/ui/switch_camera.png" id="21_3yoxr"]
 [ext_resource type="StyleBox" uid="uid://c6yj5nlxgbf6q" path="res://ui/styles/bottom_bar_hover.tres" id="24_4o1io"]
 [ext_resource type="StyleBox" uid="uid://drw7cjkbby3nk" path="res://ui/styles/bottom_bar_pressed.tres" id="25_a714u"]
 [ext_resource type="Texture2D" uid="uid://iqgyqnqsy84n" path="res://assets/sprites/phone_frame.png" id="27_adyrh"]
@@ -72,6 +75,12 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3jftv"]
+draw_center = false
+border_width_top = 6
+border_width_bottom = 6
+border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Gradient" id="Gradient_p7c3o"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
@@ -136,7 +145,7 @@ visible = false
 modulate = Color(0.727986, 0.727986, 0.727986, 1)
 position = Vector2(1925, 2033)
 scale = Vector2(1.48, 1.48)
-texture = ExtResource("3_6d0u2")
+texture = ExtResource("3_t5ecp")
 
 [node name="CantLeaveAlert" type="Label" parent="."]
 layout_mode = 1
@@ -170,6 +179,7 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="Background" type="ColorRect" parent="PhoneSize"]
+visible = false
 material = SubResource("ShaderMaterial_gne0p")
 layout_mode = 1
 anchors_preset = 15
@@ -216,7 +226,7 @@ layout_mode = 2
 theme = ExtResource("12_fsmwd")
 
 [node name="Panel" type="Panel" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 240)
+custom_minimum_size = Vector2(0, 260)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
@@ -244,7 +254,7 @@ size_flags_vertical = 3
 mouse_filter = 2
 theme = ExtResource("12_fsmwd")
 theme_override_fonts/normal_font = ExtResource("7_f3rx8")
-theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/normal_font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxFlat_xqtwr")
 text = "8:12 am"
 
@@ -268,7 +278,6 @@ text = "Chat"
 alignment = 0
 
 [node name="Camera" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
-modulate = Color(1, 1, 1, 0.470588)
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 mouse_filter = 1
@@ -286,7 +295,6 @@ text = "Video"
 alignment = 0
 
 [node name="Music" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
-modulate = Color(1, 1, 1, 0.470588)
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 mouse_filter = 1
@@ -500,6 +508,7 @@ text = "Quit"
 alignment = 0
 
 [node name="Music" type="Control" parent="PhoneSize"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -626,7 +635,6 @@ icon = ExtResource("18_d7wym")
 icon_alignment = 1
 
 [node name="Camera" type="Control" parent="PhoneSize"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -635,34 +643,89 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="ColorRect" type="ColorRect" parent="PhoneSize/Camera"]
+[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/Camera"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
+theme = ExtResource("12_fsmwd")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="PhoneSize/Camera"]
-position = Vector2(360.5, 608.507)
-scale = Vector2(0.958667, 0.958667)
-texture = ExtResource("7_7bxb7")
-region_enabled = true
-region_rect = Rect2(420.241, 0, 750.256, 1040)
-
-[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/Camera"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/Camera/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PhoneSize/Camera/MarginContainer"]
 layout_mode = 2
+theme = ExtResource("12_fsmwd")
+
+[node name="BackgroundTop" type="ColorRect" parent="PhoneSize/Camera/MarginContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_gne0p")
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="PhoneSize/Camera/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 960)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+theme_override_styles/panel = SubResource("StyleBoxFlat_3jftv")
+
+[node name="BackgroundBottom" type="ColorRect" parent="PhoneSize/Camera/MarginContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_gne0p")
+custom_minimum_size = Vector2(0, 181.005)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/Camera/MarginContainer/VBoxContainer/BackgroundBottom"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 47.0
+offset_right = 200.0
+offset_bottom = 247.0
+grow_horizontal = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 32
+
+[node name="Photos" type="Button" parent="PhoneSize/Camera/MarginContainer/VBoxContainer/BackgroundBottom/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+text = "
+"
+icon = ExtResource("19_nlh7j")
+flat = true
+icon_alignment = 1
+
+[node name="Shoot" type="Button" parent="PhoneSize/Camera/MarginContainer/VBoxContainer/BackgroundBottom/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+icon = ExtResource("20_fvnae")
+flat = true
+icon_alignment = 1
+
+[node name="SwitchCamera" type="Button" parent="PhoneSize/Camera/MarginContainer/VBoxContainer/BackgroundBottom/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+icon = ExtResource("21_3yoxr")
+flat = true
+icon_alignment = 1
 
 [node name="Chat" type="Control" parent="PhoneSize"]
 visible = false
@@ -921,6 +984,16 @@ theme_override_styles/pressed = ExtResource("25_a714u")
 icon = ExtResource("16_hax3j")
 icon_alignment = 1
 
+[node name="Settings" type="Button" parent="PhoneSize/BottomBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+theme_override_styles/hover = ExtResource("24_4o1io")
+theme_override_styles/pressed = ExtResource("25_a714u")
+icon = ExtResource("17_26q5e")
+icon_alignment = 1
+
 [node name="PhoneFrame" type="Sprite2D" parent="PhoneSize"]
 position = Vector2(359, 750)
 scale = Vector2(1.465, 1.465)
@@ -941,3 +1014,4 @@ texture = ExtResource("27_adyrh")
 [connection signal="pressed" from="PhoneSize/TopBar/MarginContainer/HBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="PhoneSize/BottomBar/MarginContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="PhoneSize/BottomBar/MarginContainer/HBoxContainer/Home" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="PhoneSize/BottomBar/MarginContainer/HBoxContainer/Settings" to="." method="_on_settings_pressed"]
