@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://dg55yu6bit6jt"]
+[gd_scene load_steps=50 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_os.gd" id="1_r0wjl"]
 [ext_resource type="Shader" path="res://shaders/blur_color.gdshader" id="3_2wg1f"]
@@ -49,6 +49,13 @@ shader_parameter/blending = Vector4(1, 1, 1, 1)
 shader_parameter/blend_factor = 0.6
 shader_parameter/overlay = Vector3(1, 1, 1)
 
+[sub_resource type="Gradient" id="Gradient_p7c3o"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tenqg"]
+gradient = SubResource("Gradient_p7c3o")
+fill_to = Vector2(0, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q5mat"]
 bg_color = Color(1, 1, 1, 0.415686)
 corner_radius_top_left = 8
@@ -82,13 +89,6 @@ border_width_top = 6
 border_width_bottom = 6
 border_color = Color(1, 1, 1, 1)
 
-[sub_resource type="Gradient" id="Gradient_p7c3o"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_tenqg"]
-gradient = SubResource("Gradient_p7c3o")
-fill_to = Vector2(0, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n8he5"]
 bg_color = Color(1, 1, 1, 1)
 expand_margin_left = 24.0
@@ -121,13 +121,20 @@ ProgressBar/styles/background = ExtResource("8_v8ae1")
 ProgressBar/styles/fill = ExtResource("9_6yc02")
 VBoxContainer/constants/separation = 16
 
-[sub_resource type="Gradient" id="Gradient_um8yg"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_0j85k"]
-gradient = SubResource("Gradient_um8yg")
-fill_from = Vector2(0, 1)
-fill_to = Vector2(0, 0)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xribh"]
+bg_color = Color(0, 0, 0, 0.188235)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 48
+corner_radius_top_right = 48
+corner_radius_bottom_right = 48
+corner_radius_bottom_left = 48
+expand_margin_left = 6.0
+expand_margin_right = 6.0
+expand_margin_bottom = 6.0
 
 [node name="PhoneOS" type="Control"]
 layout_mode = 3
@@ -179,7 +186,6 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="Background" type="ColorRect" parent="PhoneSize"]
-visible = false
 material = SubResource("ShaderMaterial_gne0p")
 layout_mode = 1
 anchors_preset = 15
@@ -188,6 +194,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="GradientTop" type="Sprite2D" parent="PhoneSize"]
+modulate = Color(1, 1, 1, 0.501961)
+position = Vector2(360, 333)
+scale = Vector2(11.25, 10.4063)
+texture = SubResource("GradientTexture2D_tenqg")
 
 [node name="BlackBackground" type="ColorRect" parent="PhoneSize"]
 visible = false
@@ -635,6 +647,7 @@ icon = ExtResource("18_d7wym")
 icon_alignment = 1
 
 [node name="Camera" type="Control" parent="PhoneSize"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -687,10 +700,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -200.0
-offset_top = 47.0
-offset_right = 200.0
-offset_bottom = 247.0
+offset_left = -232.0
+offset_top = 20.0
+offset_right = 232.0
+offset_bottom = 220.0
 grow_horizontal = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 32
@@ -728,7 +741,6 @@ flat = true
 icon_alignment = 1
 
 [node name="Chat" type="Control" parent="PhoneSize"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -746,7 +758,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("12_fsmwd")
 theme_override_constants/margin_top = 128
-theme_override_constants/margin_bottom = 180
+theme_override_constants/margin_bottom = 200
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PhoneSize/Chat/MarginContainer"]
 layout_mode = 2
@@ -815,6 +827,7 @@ mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/Chat/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme = ExtResource("12_fsmwd")
 theme_override_constants/separation = 24
@@ -846,12 +859,6 @@ offset_bottom = 106.0
 grow_horizontal = 2
 mouse_filter = 2
 theme = ExtResource("12_fsmwd")
-
-[node name="GradientTop" type="Sprite2D" parent="PhoneSize/TopBar"]
-modulate = Color(1, 1, 1, 0.313726)
-position = Vector2(360, 64)
-scale = Vector2(11.25, 2)
-texture = SubResource("GradientTexture2D_tenqg")
 
 [node name="MarginContainer" type="MarginContainer" parent="PhoneSize/TopBar"]
 layout_mode = 1
@@ -941,13 +948,19 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
 
-[node name="GradientBottom" type="Sprite2D" parent="PhoneSize/BottomBar"]
-modulate = Color(1, 1, 1, 0.313726)
-position = Vector2(360, 79.9999)
-scale = Vector2(11.25, 2.5)
-texture = SubResource("GradientTexture2D_0j85k")
+[node name="Panel" type="Panel" parent="PhoneSize/BottomBar"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("12_fsmwd")
+theme_override_styles/panel = SubResource("StyleBoxFlat_xribh")
 
-[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/BottomBar"]
+[node name="MarginContainer" type="MarginContainer" parent="PhoneSize/BottomBar/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -960,11 +973,11 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/BottomBar/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/BottomBar/Panel/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("12_fsmwd")
 
-[node name="Back" type="Button" parent="PhoneSize/BottomBar/MarginContainer/HBoxContainer"]
+[node name="Back" type="Button" parent="PhoneSize/BottomBar/Panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
@@ -974,7 +987,7 @@ theme_override_styles/pressed = ExtResource("25_a714u")
 icon = ExtResource("15_0cf0y")
 icon_alignment = 1
 
-[node name="Home" type="Button" parent="PhoneSize/BottomBar/MarginContainer/HBoxContainer"]
+[node name="Home" type="Button" parent="PhoneSize/BottomBar/Panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
@@ -984,7 +997,7 @@ theme_override_styles/pressed = ExtResource("25_a714u")
 icon = ExtResource("16_hax3j")
 icon_alignment = 1
 
-[node name="Settings" type="Button" parent="PhoneSize/BottomBar/MarginContainer/HBoxContainer"]
+[node name="Settings" type="Button" parent="PhoneSize/BottomBar/Panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
@@ -1012,6 +1025,6 @@ texture = ExtResource("27_adyrh")
 [connection signal="pressed" from="PhoneSize/Chat/MarginContainer/VBoxContainer/HBoxContainer/SendMessage" to="." method="_on_send_message_pressed"]
 [connection signal="pressed" from="PhoneSize/TopBar/MarginContainer/HBoxContainer/NotificationButton" to="." method="_on_notification_button_pressed"]
 [connection signal="pressed" from="PhoneSize/TopBar/MarginContainer/HBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="PhoneSize/BottomBar/MarginContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="PhoneSize/BottomBar/MarginContainer/HBoxContainer/Home" to="." method="_on_home_pressed"]
-[connection signal="pressed" from="PhoneSize/BottomBar/MarginContainer/HBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="PhoneSize/BottomBar/Panel/MarginContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="PhoneSize/BottomBar/Panel/MarginContainer/HBoxContainer/Home" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="PhoneSize/BottomBar/Panel/MarginContainer/HBoxContainer/Settings" to="." method="_on_settings_pressed"]

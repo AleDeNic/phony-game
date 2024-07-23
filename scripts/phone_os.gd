@@ -13,8 +13,7 @@ const STRANGER_COLOR: String = "#5973FF"
 # ---- PHONE LAYOUT ----
 @onready var top_bar: Control = $PhoneSize/TopBar
 @onready var bottom_bar: Control = $PhoneSize/BottomBar
-@onready var gradient_top: Sprite2D = $PhoneSize/TopBar/GradientTop
-@onready var gradient_bottom: Sprite2D = $PhoneSize/BottomBar/GradientBottom
+@onready var gradient_top: Sprite2D = $PhoneSize/GradientTop
 @onready var clock: Label = $PhoneSize/TopBar/MarginContainer/HBoxContainer/Clock
 @onready var notification_button: Button = $PhoneSize/TopBar/MarginContainer/HBoxContainer/NotificationButton
 @onready var home_widget: RichTextLabel = $PhoneSize/Apps/MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HomeWidget
@@ -186,13 +185,11 @@ func turn_on_phone_visuals() -> void:
 	phone_frame.show()
 	background.show()
 	gradient_top.show()
-	gradient_bottom.show()
 
 func turn_off_phone_visuals() -> void:
 	phone_frame.hide()
 	background.hide()
 	gradient_top.hide()
-	gradient_bottom.hide()
 #endregion
 
 

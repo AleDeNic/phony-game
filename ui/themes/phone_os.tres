@@ -45,12 +45,27 @@ border_color = Color(1, 1, 1, 0.407843)
 draw_center = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i0k52"]
-draw_center = false
+bg_color = Color(0, 0, 0, 0.188235)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_llnov"]
 content_margin_left = 32.0
 content_margin_right = 32.0
-bg_color = Color(0, 0, 0, 0.27451)
+bg_color = Color(1, 1, 1, 0.54902)
+draw_center = false
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
@@ -132,7 +147,8 @@ Label/fonts/font = ExtResource("1_husnp")
 Label/styles/bubble_chat = ExtResource("3_legdh")
 Label/styles/bubble_player = ExtResource("4_syer0")
 Label/styles/normal = SubResource("StyleBoxFlat_i8c8n")
-LineEdit/colors/font_color = Color(1, 1, 1, 0.92549)
+LineEdit/colors/font_color = Color(0, 0, 0, 0.784314)
+LineEdit/colors/font_placeholder_color = Color(0, 0, 0, 0.25098)
 LineEdit/constants/caret_width = 5
 LineEdit/font_sizes/font_size = 40
 LineEdit/fonts/font = ExtResource("8_kqulh")
