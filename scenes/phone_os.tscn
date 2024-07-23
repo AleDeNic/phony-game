@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://dg55yu6bit6jt"]
+[gd_scene load_steps=56 format=3 uid="uid://dg55yu6bit6jt"]
 
 [ext_resource type="Script" path="res://scripts/phone_os.gd" id="1_r0wjl"]
 [ext_resource type="Shader" path="res://shaders/blur_color.gdshader" id="3_2wg1f"]
@@ -9,10 +9,14 @@
 [ext_resource type="FontFile" uid="uid://ca4j2u2x7wiml" path="res://ui/fonts/HDArnie-Italic.otf" id="4_pq3r1"]
 [ext_resource type="Texture2D" uid="uid://bm2pd3jhn61iq" path="res://assets/sprites/selfie.png" id="7_7bxb7"]
 [ext_resource type="FontFile" uid="uid://d02ygxi1jy6m3" path="res://ui/fonts/neuropol_x.otf" id="7_f3rx8"]
+[ext_resource type="Texture2D" uid="uid://cwg37xplaaewh" path="res://assets/ui/chat.png" id="7_ihnjk"]
 [ext_resource type="LabelSettings" uid="uid://b0qm7cdafhgra" path="res://ui/settings/app_title.tres" id="8_0yw4n"]
 [ext_resource type="StyleBox" uid="uid://bdnuw0by175th" path="res://ui/styles/battery_bar.tres" id="8_v8ae1"]
+[ext_resource type="Texture2D" uid="uid://dlrecsm1m0svw" path="res://assets/ui/camera.png" id="8_wxtyf"]
 [ext_resource type="StyleBox" uid="uid://duct66cpghgeh" path="res://ui/styles/separator.tres" id="8_y0en8"]
 [ext_resource type="StyleBox" uid="uid://c4lw5oyyq5657" path="res://ui/styles/battery_bar_fill.tres" id="9_6yc02"]
+[ext_resource type="Texture2D" uid="uid://h2jjvwcos175" path="res://assets/ui/video.png" id="9_vjtlr"]
+[ext_resource type="Texture2D" uid="uid://c6kdp5t8cxd3q" path="res://assets/ui/music.png" id="10_f1gm8"]
 [ext_resource type="Script" path="res://scripts/mouse_sensitivity.gd" id="12_50gsk"]
 [ext_resource type="Theme" uid="uid://v3wqj6dvklo0" path="res://ui/themes/phone_os.tres" id="12_fsmwd"]
 [ext_resource type="Texture2D" uid="uid://c0n6yi64tlmmt" path="res://assets/ui/send.png" id="13_hdb4n"]
@@ -136,6 +140,14 @@ expand_margin_left = 6.0
 expand_margin_right = 6.0
 expand_margin_bottom = 6.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6l4lb"]
+bg_color = Color(1, 1, 1, 0.627451)
+corner_radius_top_left = 48
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nujam"]
+bg_color = Color(1, 1, 1, 0.627451)
+corner_radius_top_right = 48
+
 [node name="PhoneOS" type="Control"]
 layout_mode = 3
 anchors_preset = 0
@@ -213,7 +225,6 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0.439216)
 
 [node name="Apps" type="Control" parent="PhoneSize"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -272,67 +283,82 @@ text = "8:12 am"
 
 [node name="Day" type="Label" parent="PhoneSize/Apps/MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Monday, 18 April"
+text = "Monday, 18 April 2095"
 horizontal_alignment = 2
 
 [node name="HSeparator2" type="HSeparator" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("12_fsmwd")
-theme_override_constants/separation = 300
+theme_override_constants/separation = 200
 
-[node name="Chat" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
+[node name="HBoxContainer" type="HBoxContainer" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
+
+[node name="Chat" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
-text = "Chat"
+icon = ExtResource("7_ihnjk")
 alignment = 0
+icon_alignment = 1
 
-[node name="Camera" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+[node name="Camera" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
-text = "Camera"
+icon = ExtResource("8_wxtyf")
 alignment = 0
+icon_alignment = 1
 
-[node name="Video" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="Video" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer/HBoxContainer2"]
 modulate = Color(1, 1, 1, 0.470588)
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
-text = "Video"
+icon = ExtResource("9_vjtlr")
 alignment = 0
+icon_alignment = 1
 
-[node name="Music" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+[node name="Music" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
-text = "Music
+text = "
 "
+icon = ExtResource("10_f1gm8")
 alignment = 0
+icon_alignment = 1
 
-[node name="Gaming" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Gaming" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer/HBoxContainer3"]
 modulate = Color(1, 1, 1, 0.470588)
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 text = "Gaming"
 alignment = 0
 
-[node name="HSeparator" type="HSeparator" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-theme = ExtResource("12_fsmwd")
-theme_override_constants/separation = 64
-
-[node name="Settings" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer"]
+[node name="Settings" type="Button" parent="PhoneSize/Apps/MarginContainer/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
 text = "Settings
@@ -741,6 +767,7 @@ flat = true
 icon_alignment = 1
 
 [node name="Chat" type="Control" parent="PhoneSize"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -982,7 +1009,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
-theme_override_styles/hover = ExtResource("24_4o1io")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6l4lb")
 theme_override_styles/pressed = ExtResource("25_a714u")
 icon = ExtResource("15_0cf0y")
 icon_alignment = 1
@@ -1002,7 +1029,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("12_fsmwd")
-theme_override_styles/hover = ExtResource("24_4o1io")
+theme_override_styles/hover = SubResource("StyleBoxFlat_nujam")
 theme_override_styles/pressed = ExtResource("25_a714u")
 icon = ExtResource("17_26q5e")
 icon_alignment = 1
@@ -1012,12 +1039,12 @@ position = Vector2(359, 750)
 scale = Vector2(1.465, 1.465)
 texture = ExtResource("27_adyrh")
 
-[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Chat" to="." method="_on_chat_pressed"]
-[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Camera" to="." method="_on_camera_pressed"]
-[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Video" to="." method="_on_video_pressed"]
-[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Music" to="." method="_on_music_pressed"]
-[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Gaming" to="." method="_on_gaming_pressed"]
-[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/HBoxContainer/Chat" to="." method="_on_chat_pressed"]
+[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/HBoxContainer/Camera" to="." method="_on_camera_pressed"]
+[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/HBoxContainer2/Video" to="." method="_on_video_pressed"]
+[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/HBoxContainer2/Music" to="." method="_on_music_pressed"]
+[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/HBoxContainer3/Gaming" to="." method="_on_gaming_pressed"]
+[connection signal="pressed" from="PhoneSize/Apps/MarginContainer/VBoxContainer/HBoxContainer3/Settings" to="." method="_on_settings_pressed"]
 [connection signal="toggled" from="PhoneSize/Settings/MarginContainer/VBoxContainer2/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="pressed" from="PhoneSize/Settings/MarginContainer/VBoxContainer2/Reset" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="PhoneSize/Settings/MarginContainer/VBoxContainer2/Quit" to="." method="_on_quit_pressed"]
